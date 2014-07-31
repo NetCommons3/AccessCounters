@@ -112,23 +112,6 @@ class AccessCounters extends CakeMigration {
 	);
 
 /**
- * Records keyed by model name.
- *
- * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
- * @var     array $records
- */
-	public $records = array(
-			'Plugin' => array(
-				array(
-					'id' => '5',
-					'folder' => 'access_counters',
-					'type' => '1',
-				),
-			),
-		);
-
-/**
  * Before migration callback
  *
  * @param string $direction up or down direction of migration process
