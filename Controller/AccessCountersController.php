@@ -60,7 +60,7 @@ class AccessCountersController extends AccessCountersAppController {
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
  * @since    NetCommons 3.0.0.0
  * @return   void
- * */
+ */
 	public function beforeFilter() {
 		parent::beforeFilter();
 
