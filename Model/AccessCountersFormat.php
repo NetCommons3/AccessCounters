@@ -74,7 +74,7 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * @return  array
  */
 	public function numberImage($data) {
-		$imgPath = ROOT . DS . 'app' . DS . 'Plugin' . DS . $this->plugin . DS . WEBROOT_DIR . DS . 'img' . DS . '*';
+		$imgPath = APP . DS . 'Plugin' . DS . $this->plugin . DS . WEBROOT_DIR . DS . 'img' . DS . '*';
 		$options = array_map('basename', glob($imgPath, GLOB_ONLYDIR));
 		array_unshift($options, " ");
 
@@ -171,7 +171,7 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * @return  array
  */
 	public function getDefaultNumberImageData() {
-		$imgPath = ROOT . DS . 'app' . DS . 'Plugin' . DS . $this->plugin . DS . WEBROOT_DIR . DS . 'img' . DS . '*';
+		$imgPath = APP . DS . 'Plugin' . DS . $this->plugin . DS . WEBROOT_DIR . DS . 'img' . DS . '*';
 		$options = array_map('basename', glob($imgPath, GLOB_ONLYDIR));
 
 		array_unshift($options, " ");

@@ -106,7 +106,7 @@ class AccessCountersFormatTest extends CakeTestCase {
 		$first = array_shift($mine);
 		$this->assertTrue(isset($first[' ']) && trim($first[' ']) == '');
 
-		$imgPath = ROOT . DS . 'app' . DS . 'Plugin' . DS . 'AccessCounters' . DS . WEBROOT_DIR . DS . 'img';
+		$imgPath = APP . DS . 'Plugin' . DS . 'AccessCounters' . DS . WEBROOT_DIR . DS . 'img';
 		foreach ($mine as $img) {
 			for ($i = 0; $i < 10; $i++) {
 				$this->assertFileExists($imgPath . DS . $img . DS . $i . '.gif');
