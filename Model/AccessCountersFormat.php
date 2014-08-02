@@ -59,7 +59,7 @@ class AccessCountersFormat extends AccessCountersAppModel {
 		),
 		'show_digit_number' => array(
 			'numeric' => array(
-				'rule' => array('range', 1, 10),
+				'rule' => array('range', 1, 11),
 				'message' => 'The input `show_digit_number` must be a number bigger than 10 and less than 1.',
 			),
 		),
