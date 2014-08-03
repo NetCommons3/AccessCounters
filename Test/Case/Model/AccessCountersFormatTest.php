@@ -108,7 +108,7 @@ class AccessCountersFormatTest extends CakeTestCase {
 			unset($first);
 			$first[''] = '';
 		}
-		$this->assertTrue(isset($first['']) && trim($first['']) == '');
+		$this->assertTrue(isset($first['']) && trim($first['']) == '', $first);
 
 		$imgPath = APP . DS . 'Plugin' . DS . 'AccessCounters' . DS . WEBROOT_DIR . DS . 'img';
 		foreach ($mine as $img) {
