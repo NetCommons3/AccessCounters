@@ -11,29 +11,37 @@
  * @package     app.Plugin.AccessCounters.View.Elements.index
  */
 
-$statusHidden[1] = "hidden";
+$statusHidden[1] = 'hidden';
 $statusHidden[2] = 'hidden';
 $statusHidden[3] = 'hidden';
 $statusHidden[4] = 'hidden';
+$allStatusHidden = 'hidden';
 
 //下書き、申請中、差し戻しの状態表示
+
 if (isset($item['AccessCountersFormat']['status_id'])) {
 	$status = $item['AccessCountersFormat']['status_id'];
 	if ($showPublish && $status == Configure::read('AccessCounters.Status.Publish')) {
-		$statusHidden[1] = "";
+		$statusHidden[1] = '';
+		$allStatusHidden = '';
 	}
 	if ($status == Configure::read('AccessCounters.Status.PublishRequest')) {
-		$statusHidden[2] = "";
+		$statusHidden[2] = '';
+		$allStatusHidden = '';
 	}
 	if ($status == Configure::read('AccessCounters.Status.Draft')) {
-		$statusHidden[3] = "";
+		$statusHidden[3] = '';
+		$allStatusHidden = '';
 	}
 	if ($status == Configure::read('AccessCounters.Status.Reject')) {
-		$statusHidden[4] = "";
+		$statusHidden[4] = '';
+		$allStatusHidden = '';
 	}
 }
+
 ?>
-<p id="access-counters-status-labels-<?php echo intval($frameId); ?>">
+<p id="access-counters-status-labels-<?php echo intval($frameId); ?>"
+   class="<?php echo $allStatusHidden; ?>">
 
 <?php if (! $isSetting && $statusHidden[1] == '' || $isSetting) : ?>
 	<span class="label label-info access-counters-status-1 <?php echo $statusHidden[1]; ?>">
