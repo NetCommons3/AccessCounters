@@ -63,6 +63,18 @@ class AccessCountersFormat extends AccessCountersAppModel {
 				'message' => 'The input `show_digit_number` must be a number bigger than 10 and less than 1.',
 			),
 		),
+		'created_user_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				'message' => 'Security Error! Unauthorized input. (created_user_id)',
+			),
+		),
+		'modified_user_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				'message' => 'Security Error! Unauthorized input. (modified_user_id)',
+			),
+		),
 	);
 
 /**
@@ -303,7 +315,8 @@ class AccessCountersFormat extends AccessCountersAppModel {
 		$insertData = array();
 		$insertData[$this->name]['access_counter_id'] = $accessCounter['AccessCounter']['id'];
 		$insertData[$this->name]['block_id'] = $blockId;
-		$insertData[$this->name]['create_user_id'] = $userId;
+		$insertData[$this->name]['created_user_id'] = $userId;
+		$insertData[$this->name]['modified_user_id'] = $userId;
 		$insertData[$this->name]['language_id'] = $data[$this->name]['language_id'];
 		$insertData[$this->name]['status_id'] = $statusId;
 		$insertData[$this->name]['is_original'] = 1;
@@ -386,7 +399,8 @@ class AccessCountersFormat extends AccessCountersAppModel {
 		//AccessCounterデータ作成
 		$data = array();
 		$data['AccessCounter']['block_id'] = $blockId;
-		$data['AccessCounter']['create_user_id'] = $userId;
+		$data['AccessCounter']['created_user_id'] = $userId;
+		$data['AccessCounter']['modified_user_id'] = $userId;
 		$accessCounter = $this->AccessCounter->save($data);
 
 		//AccessCountersCountデータ作成

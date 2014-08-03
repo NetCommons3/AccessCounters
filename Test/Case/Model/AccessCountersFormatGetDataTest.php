@@ -88,9 +88,9 @@ class AccessCountersFormatGetDataTest extends CakeTestCase {
  */
 	public function testGetPublishDataError() {
 		$datum = array(
-			array('blockId' => 9999999999, 'langId' => 2),
+			array('blockId' => 999999999, 'langId' => 2),
 			array('blockId' => null, 'langId' => 2),
-			array('blockId' => 1, 'langId' => 9999999999),
+			array('blockId' => 1, 'langId' => 999999999),
 			array('blockId' => 1, 'langId' => null),
 		);
 
@@ -175,21 +175,21 @@ class AccessCountersFormatGetDataTest extends CakeTestCase {
 			array('blockId' => null, 'langId' => null, 'isSetting' => true),
 			array('blockId' => null, 'langId' => null, 'isSetting' => null),
 
-			array('blockId' => 9999999999, 'langId' => 9999999999, 'isSetting' => false),
-			array('blockId' => 9999999999, 'langId' => 9999999999, 'isSetting' => true),
-			array('blockId' => 9999999999, 'langId' => 9999999999, 'isSetting' => null),
+			array('blockId' => 999999999, 'langId' => 999999999, 'isSetting' => false),
+			array('blockId' => 999999999, 'langId' => 999999999, 'isSetting' => true),
+			array('blockId' => 999999999, 'langId' => 999999999, 'isSetting' => null),
 
-			array('blockId' => 9999999999, 'langId' => 2, 'isSetting' => false),
-			array('blockId' => 9999999999, 'langId' => 2, 'isSetting' => true),
-			array('blockId' => 9999999999, 'langId' => 2, 'isSetting' => null),
+			array('blockId' => 999999999, 'langId' => 2, 'isSetting' => false),
+			array('blockId' => 999999999, 'langId' => 2, 'isSetting' => true),
+			array('blockId' => 999999999, 'langId' => 2, 'isSetting' => null),
 
 			array('blockId' => null, 'langId' => 2, 'isSetting' => false),
 			array('blockId' => null, 'langId' => 2, 'isSetting' => true),
 			array('blockId' => null, 'langId' => 2, 'isSetting' => null),
 
-			array('blockId' => 1, 'langId' => 9999999999, 'isSetting' => false),
-			array('blockId' => 1, 'langId' => 9999999999, 'isSetting' => true),
-			array('blockId' => 1, 'langId' => 9999999999, 'isSetting' => null),
+			array('blockId' => 1, 'langId' => 999999999, 'isSetting' => false),
+			array('blockId' => 1, 'langId' => 999999999, 'isSetting' => true),
+			array('blockId' => 1, 'langId' => 999999999, 'isSetting' => null),
 
 			array('blockId' => 1, 'langId' => null, 'isSetting' => false),
 			array('blockId' => 1, 'langId' => null, 'isSetting' => true),

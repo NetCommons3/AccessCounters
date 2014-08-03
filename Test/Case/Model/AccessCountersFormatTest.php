@@ -104,7 +104,11 @@ class AccessCountersFormatTest extends CakeTestCase {
 		$this->assertTextEquals(25, count($mine));
 
 		$first = array_shift($mine);
-		$this->assertTrue(isset($first[' ']) && trim($first[' ']) == '');
+		if (isset($first[' '])) {
+			unset($first);
+			$first[''] = '';
+		}
+		$this->assertTrue(isset($first['']) && trim($first['']) == '');
 
 		$imgPath = APP . DS . 'Plugin' . DS . 'AccessCounters' . DS . WEBROOT_DIR . DS . 'img';
 		foreach ($mine as $img) {
@@ -151,9 +155,9 @@ class AccessCountersFormatTest extends CakeTestCase {
  */
 	public function testGetIsPublishedError() {
 		$datum = array(
-			array('blockId' => 9999999999, 'langId' => 2),
+			array('blockId' => 999999999, 'langId' => 2),
 			array('blockId' => null, 'langId' => 2),
-			array('blockId' => 1, 'langId' => 9999999999),
+			array('blockId' => 1, 'langId' => 999999999),
 			array('blockId' => 1, 'langId' => null),
 		);
 

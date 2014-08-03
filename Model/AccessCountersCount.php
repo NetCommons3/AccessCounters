@@ -44,40 +44,36 @@ class AccessCountersCount extends AccessCountersAppModel {
 			'numeric' => array(
 				'rule' => array('numeric'),
 				'message' => 'Security Error! Unauthorized input. (access_counter_id)',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'block_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				'message' => 'Security Error! Unauthorized input. (block_id)',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'language_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				'message' => 'Security Error! Unauthorized input. (language_id)',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'access_count' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				'message' => 'Security Error! Unauthorized input. (access_count)',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'created_user_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				'message' => 'Security Error! Unauthorized input. (created_user_id)',
+			),
+		),
+		'modified_user_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				'message' => 'Security Error! Unauthorized input. (modified_user_id)',
 			),
 		),
 	);
@@ -109,6 +105,7 @@ class AccessCountersCount extends AccessCountersAppModel {
 			'className' => 'Language',
 			'foreignKey' => 'language_id',
 			'conditions' => '',
+			'type' => 'inner',
 			'fields' => '',
 			'order' => ''
 		),
@@ -156,6 +153,8 @@ class AccessCountersCount extends AccessCountersAppModel {
 			return null;
 		}
 
+		$userId = intval($userId);
+
 		$data = $this->find('first', array(
 			'conditions' => array(
 				'AccessCountersCount.block_id' => $blockId,
@@ -171,7 +170,6 @@ class AccessCountersCount extends AccessCountersAppModel {
 			$data['AccessCountersCount']['created_user_id'] = $userId;
 		} else {
 			$data['AccessCountersCount']['access_count'] = $data['AccessCountersCount']['access_count'] + 1;
-			$data['AccessCountersCount']['modified'] = 'CURRENT_TIMESTAMP';
 		}
 		$data['AccessCountersCount']['modified_user_id'] = $userId;
 

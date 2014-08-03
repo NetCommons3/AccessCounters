@@ -58,6 +58,7 @@ class AccessCountersFrame extends AppModel {
 		if (! $frameId) {
 			return null;
 		}
+		$frameId = intval($frameId);
 
 		$frame = $this->findById($frameId);
 		if ($frame && $frame[$this->name]['block_id']) {

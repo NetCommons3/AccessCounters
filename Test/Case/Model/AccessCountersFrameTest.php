@@ -74,7 +74,7 @@ class AccessCountersFrameTest extends CakeTestCase {
  * @return void
  */
 	public function testGetBlockIdNoData() {
-		$frameId = 9999999999;
+		$frameId = 999999999;
 		$rtn = $this->AccessCountersFrame->getBlockId($frameId);
 		$this->assertNull($rtn);
 	}

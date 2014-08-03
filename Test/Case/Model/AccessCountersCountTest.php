@@ -85,9 +85,9 @@ class AccessCountersCountTest extends CakeTestCase {
  */
 	public function testGetDataIdIrregular() {
 		$datum = array(
-			array('blockId' => 9999999999, 'langId' => 1),
-			array('blockId' => 9999999999, 'langId' => 2),
-			array('blockId' => 1, 'langId' => 9999999999),
+			array('blockId' => 999999999, 'langId' => 1),
+			array('blockId' => 999999999, 'langId' => 2),
+			array('blockId' => 1, 'langId' => 999999999),
 		);
 
 		foreach ($datum as $data) {
@@ -171,7 +171,7 @@ class AccessCountersCountTest extends CakeTestCase {
  */
 	public function testSaveCountError() {
 		$datum = array(
-			array('blockId' => 9999999999, 'langId' => 2, 'userId' => 1),
+			array('blockId' => 999999999, 'langId' => 2, 'userId' => 1),
 			array('blockId' => null, 'langId' => 2, 'userId' => null),
 			array('blockId' => 1, 'langId' => null, 'userId' => 1),
 		);
@@ -194,7 +194,7 @@ class AccessCountersCountTest extends CakeTestCase {
  */
 	public function testSaveCountIrregular() {
 		$datum = array(
-			array('blockId' => 1, 'langId' => 9999999999, 'userId' => 1),
+			array('blockId' => 1, 'langId' => 999999999, 'userId' => 1),
 		);
 		foreach ($datum as $data) {
 			$blockId = $data['blockId'];
