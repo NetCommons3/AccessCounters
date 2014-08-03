@@ -100,18 +100,14 @@ class AccessCountersFormatTest extends CakeTestCase {
 	public function testGetDefaultNumberImageData() {
 		$mine = $this->AccessCountersFormat->getDefaultNumberImageData();
 
-		$this->assertTrue(is_array($mine));
+		$this->assertTrue(is_array($mine), $mine);
 		$this->assertTextEquals(25, count($mine));
 
-		$first = array_shift($mine);
-		if (isset($first[' '])) {
-			unset($first);
-			$first[''] = '';
-		}
-		$this->assertTrue(isset($first['']) && trim($first['']) == '', $first);
-
 		$imgPath = APP . DS . 'Plugin' . DS . 'AccessCounters' . DS . WEBROOT_DIR . DS . 'img';
-		foreach ($mine as $img) {
+		foreach ($mine as $i => $img) {
+			if ($i == 0) {
+				continue;
+			}
 			for ($i = 0; $i < 10; $i++) {
 				$this->assertFileExists($imgPath . DS . $img . DS . $i . '.gif');
 			}
