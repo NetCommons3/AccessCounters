@@ -112,43 +112,6 @@ class AccessCounters extends CakeMigration {
 	);
 
 /**
- * recodes
- *
- * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
- * @var      array $migration
- */
-	public $records = array(
-			'AccessCountersFormats' => array(
-				array(
-					'id' => 1,
-					'access_counter_id' => 1,
-					'block_id' => 4,
-					'language_id' => 2,
-					'status_id' => 1,
-					'is_original' => 1,
-					'show_number_image' => 'color',
-					'show_digit_number' => 10,
-					'show_format' => '{X-NUMBER-IMAGE}',
-					'created_user_id' => 1,
-					'created' => '2014-07-08 15:34:37',
-					'modified_user_id' => 1,
-					'modified' => '2014-07-08 15:34:37'
-				),
-			),
-			'AccessCounters' => array(
-				array (
-					'id' => 1,
-					'block_id' => 4,
-					'created' => '2014-06-10 23:54:27',
-					'create_user_id' => '1',
-					'modified' => '2014-06-10 23:54:27',
-					'modified_user_id' => '0',
-				),
-			)
-	);
-
-/**
  * Before migration callback
  *
  * @param string $direction up or down direction of migration process
