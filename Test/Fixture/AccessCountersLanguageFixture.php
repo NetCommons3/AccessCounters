@@ -1,6 +1,6 @@
 <?php
 /**
- * AccessCountersBlockFixture
+ * AccessCountersLanguageFixture
  *
  * @author      Noriko Arai <arai@nii.ac.jp>
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -12,7 +12,7 @@
  */
 
 /**
- * AccessCountersBlockFixture
+ * AccessCountersLanguageFixture
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
  * @since       NetCommons 3.0.0.0
@@ -61,13 +61,13 @@ class AccessCountersLanguageFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => '1',
-			'code' => 'eng',
+			'code' => 'en',
 			'weight' => '1',
 			'is_active' => true,
 		),
 		array(
 			'id' => '2',
-			'code' => 'jpn',
+			'code' => 'ja',
 			'weight' => '2',
 			'is_active' => true,
 		),
