@@ -87,19 +87,19 @@ class AccessCountersFormatGetDataTest extends CakeTestCase {
  * @return  void
  */
 	public function testGetPublishDataError() {
-		$datum = array(
+		$data = array(
 			array('blockId' => 999999999, 'langId' => 2),
 			array('blockId' => null, 'langId' => 2),
 			array('blockId' => 1, 'langId' => 999999999),
 			array('blockId' => 1, 'langId' => null),
 		);
 
-		foreach ($datum as $data) {
-			$blockId = $data['blockId'];
-			$langId = $data['langId'];
+		foreach ($data as $datum) {
+			$blockId = $datum['blockId'];
+			$langId = $datum['langId'];
 
 			$mine = $this->AccessCountersFormat->getPublishData($blockId, $langId);
-			$this->assertTrue(empty($mine) && is_array($mine), print_r($data, true));
+			$this->assertTrue(empty($mine) && is_array($mine), print_r($datum, true));
 		}
 	}
 

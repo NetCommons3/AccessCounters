@@ -70,7 +70,7 @@ class AccessCountersFormatSaveDataTest extends CakeTestCase {
  * @return  void
  */
 	public function testSaveDataError() {
-		$datum = array(
+		$data = array(
 			array('frameId' => 999999999, 'userId' => 1, 'roomId' => 1),
 			//array('frameId' => 999999999, 'userId' => 999999999, 'roomId' => 1),
 			array('frameId' => 999999999, 'userId' => null, 'roomId' => 1),
@@ -100,10 +100,10 @@ class AccessCountersFormatSaveDataTest extends CakeTestCase {
 			array('frameId' => 1, 'userId' => null, 'roomId' => 999999999),
 			array('frameId' => 1, 'userId' => null, 'roomId' => null),
 		);
-		foreach ($datum as $data) {
-			$frameId = $data['frameId'];
-			$userId = $data['userId'];
-			$roomId = $data['roomId'];
+		foreach ($data as $datum) {
+			$frameId = $datum['frameId'];
+			$userId = $datum['userId'];
+			$roomId = $datum['roomId'];
 
 			$inputData['AccessCountersFormat']['block_id'] = 1;
 			$inputData['AccessCountersFormat']['frame_id'] = $frameId;
@@ -115,7 +115,7 @@ class AccessCountersFormatSaveDataTest extends CakeTestCase {
 			$inputData['AccessCountersFormat']['status'] = 'Publish';
 
 			$mine = $this->AccessCountersFormat->saveData($inputData, $frameId, $userId, $roomId);
-			$this->assertNull($mine, "inputData\n" . print_r($inputData, true) . "checkData\n" . print_r($data, true));
+			$this->assertNull($mine, "inputData\n" . print_r($inputData, true) . "checkData\n" . print_r($datum, true));
 		}
 	}
 

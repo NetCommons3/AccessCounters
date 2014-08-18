@@ -84,18 +84,18 @@ class AccessCountersCountTest extends CakeTestCase {
  * @return  void
  */
 	public function testGetDataIdIrregular() {
-		$datum = array(
+		$data = array(
 			array('blockId' => 999999999, 'langId' => 1),
 			array('blockId' => 999999999, 'langId' => 2),
 			array('blockId' => 1, 'langId' => 999999999),
 		);
 
-		foreach ($datum as $data) {
-			$blockId = $data['blockId'];
-			$langId = $data['langId'];
+		foreach ($data as $datum) {
+			$blockId = $datum['blockId'];
+			$langId = $datum['langId'];
 
 			$mine = $this->AccessCountersCount->getAccessCount($blockId, $langId);
-			$this->assertTrue(is_numeric($mine) && $mine == 0, print_r($data, true));
+			$this->assertTrue(is_numeric($mine) && $mine == 0, print_r($datum, true));
 		}
 	}
 
@@ -141,22 +141,22 @@ class AccessCountersCountTest extends CakeTestCase {
  * @return  void
  */
 	public function testSaveCountNoUserId() {
-		$datum = array(
+		$data = array(
 			array('blockId' => 1, 'langId' => 2, 'userId' => 0),
 			array('blockId' => 1, 'langId' => 2, 'userId' => null),
 		);
 
 		$count = 2;
-		foreach ($datum as $data) {
-			$blockId = $data['blockId'];
-			$langId = $data['langId'];
-			$userId = $data['userId'];
+		foreach ($data as $datum) {
+			$blockId = $datum['blockId'];
+			$langId = $datum['langId'];
+			$userId = $datum['userId'];
 
 			$mine = $this->AccessCountersCount->saveCountUp($blockId, $langId, $userId);
 
-			$this->assertTrue(is_numeric($mine['AccessCountersCount']['id']), print_r($data, true));
-			$this->assertTextEquals($blockId, $mine['AccessCountersCount']['block_id'], print_r($data, true));
-			$this->assertTextEquals($count, $mine['AccessCountersCount']['access_count'], print_r($data, true));
+			$this->assertTrue(is_numeric($mine['AccessCountersCount']['id']), print_r($datum, true));
+			$this->assertTextEquals($blockId, $mine['AccessCountersCount']['block_id'], print_r($datum, true));
+			$this->assertTextEquals($count, $mine['AccessCountersCount']['access_count'], print_r($datum, true));
 
 			$count++;
 		}
@@ -170,18 +170,18 @@ class AccessCountersCountTest extends CakeTestCase {
  * @return  void
  */
 	public function testSaveCountError() {
-		$datum = array(
+		$data = array(
 			array('blockId' => 999999999, 'langId' => 2, 'userId' => 1),
 			array('blockId' => null, 'langId' => 2, 'userId' => null),
 			array('blockId' => 1, 'langId' => null, 'userId' => 1),
 		);
-		foreach ($datum as $data) {
-			$blockId = $data['blockId'];
-			$langId = $data['langId'];
-			$userId = $data['userId'];
+		foreach ($data as $datum) {
+			$blockId = $datum['blockId'];
+			$langId = $datum['langId'];
+			$userId = $datum['userId'];
 
 			$mine = $this->AccessCountersCount->saveCountUp($blockId, $langId, $userId);
-			$this->assertNull($mine, print_r($data, true));
+			$this->assertNull($mine, print_r($datum, true));
 		}
 	}
 
@@ -193,19 +193,19 @@ class AccessCountersCountTest extends CakeTestCase {
  * @return  void
  */
 	public function testSaveCountIrregular() {
-		$datum = array(
+		$data = array(
 			array('blockId' => 1, 'langId' => 999999999, 'userId' => 1),
 		);
-		foreach ($datum as $data) {
-			$blockId = $data['blockId'];
-			$langId = $data['langId'];
-			$userId = $data['userId'];
+		foreach ($data as $datum) {
+			$blockId = $datum['blockId'];
+			$langId = $datum['langId'];
+			$userId = $datum['userId'];
 
 			$mine = $this->AccessCountersCount->saveCountUp($blockId, $langId, $userId);
 
-			$this->assertTrue(is_numeric($mine['AccessCountersCount']['id']), print_r($data, true));
-			$this->assertTextEquals($blockId, $mine['AccessCountersCount']['block_id'], print_r($data, true));
-			$this->assertTextEquals(1, $mine['AccessCountersCount']['access_count'], print_r($data, true));
+			$this->assertTrue(is_numeric($mine['AccessCountersCount']['id']), print_r($datum, true));
+			$this->assertTextEquals($blockId, $mine['AccessCountersCount']['block_id'], print_r($datum, true));
+			$this->assertTextEquals(1, $mine['AccessCountersCount']['access_count'], print_r($datum, true));
 		}
 	}
 
