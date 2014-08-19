@@ -112,6 +112,15 @@ class AccessCounters extends CakeMigration {
 	);
 
 /**
+ * recodes
+ *
+ * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @since   NetCommons 3.0.0.0
+ * @var      array $records
+ */
+	public $records = array();
+
+/**
  * Before migration callback
  *
  * @param string $direction up or down direction of migration process
