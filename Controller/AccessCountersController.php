@@ -7,7 +7,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Controller
  */
 
@@ -18,7 +17,6 @@ App::uses('AccessCountersAppController', 'AccessCounters.Controller');
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package     app.Plugin.AccessCounters.Controller
- * @since       NetCommons 3.0.0.0
  */
 class AccessCountersController extends AccessCountersAppController {
 
@@ -26,7 +24,6 @@ class AccessCountersController extends AccessCountersAppController {
  * name property
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       string
  */
 	public $name = 'AccessCountersController';
@@ -35,7 +32,6 @@ class AccessCountersController extends AccessCountersAppController {
  * has published
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       bool
  */
 	private $__hasPublished = false;
@@ -44,7 +40,6 @@ class AccessCountersController extends AccessCountersAppController {
  * Model name
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       array
  */
 	public $uses = array(
@@ -58,7 +53,6 @@ class AccessCountersController extends AccessCountersAppController {
  * beforeFilter
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function beforeFilter() {
@@ -92,7 +86,6 @@ class AccessCountersController extends AccessCountersAppController {
  *
  * @param int $frameId frames.id
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   CakeResponse
  */
 	public function index($frameId = 0) {
@@ -139,7 +132,6 @@ class AccessCountersController extends AccessCountersAppController {
  * @param int $frameId frames.id
  * @param int $blockId blocks.id
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   CakeResponse
  */
 	private function __indexNoSetting($frameId, $blockId) {
@@ -168,7 +160,6 @@ class AccessCountersController extends AccessCountersAppController {
  * @param int $frameId frames.id
  * @param int $blockId blocks.id
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   CakeResponse
  */
 	private function __indexNologin($frameId, $blockId) {
@@ -197,7 +188,6 @@ class AccessCountersController extends AccessCountersAppController {
  * @param int $frameId frames.id
  * @param int $blockId blocks.id
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   CakeResponse
  */
 	private function __indexEditor($frameId, $blockId) {
@@ -238,7 +228,6 @@ class AccessCountersController extends AccessCountersAppController {
  *
  * @param int $blockId blocks.id
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   bool
  */
 	private function __getPublished($blockId) {
@@ -253,7 +242,6 @@ class AccessCountersController extends AccessCountersAppController {
  *
  * @param int $blockId blocks.id
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	private function __setAccessCountUp($blockId) {
@@ -275,7 +263,6 @@ class AccessCountersController extends AccessCountersAppController {
  * @param int $count count
  * @param array $format AccessCountersFormat
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   string
  */
 	private function __setDisplayAccessCount($count, $format) {
@@ -311,7 +298,6 @@ class AccessCountersController extends AccessCountersAppController {
  *
  * @param int $frameId frames.id
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   CakeResponse
  */
 	public function get_edit_form($frameId = 0) {

@@ -10,7 +10,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Model
  */
 
@@ -23,7 +22,6 @@ App::uses('AppModel', 'Model');
  * @property Frame $Frame
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Model
  */
 class AccessCountersFrame extends AppModel {
@@ -32,7 +30,6 @@ class AccessCountersFrame extends AppModel {
  * table name
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     string
  */
 	public $useTable = 'frames';
@@ -41,7 +38,6 @@ class AccessCountersFrame extends AppModel {
  * model name
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     string
  */
 	public $name = 'AccessCountersFrame';
@@ -51,7 +47,6 @@ class AccessCountersFrame extends AppModel {
  *
  * @param int $frameId frames.id
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  int blocks.id
  */
 	public function getBlockId($frameId) {

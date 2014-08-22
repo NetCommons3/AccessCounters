@@ -7,7 +7,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Controller
  */
 
@@ -17,7 +16,6 @@ App::uses('AppController', 'Controller');
  * AccessCountersApp Controller
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Controller
  */
 class AccessCountersAppController extends AppController {
@@ -26,7 +24,6 @@ class AccessCountersAppController extends AppController {
  * setting mode
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       bool
  */
 	public $isSetting = false;
@@ -35,7 +32,6 @@ class AccessCountersAppController extends AppController {
  * Judgment result of asynchronous
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       bool
  */
 	public $isAjax = false;
@@ -44,7 +40,6 @@ class AccessCountersAppController extends AppController {
  * Edit authority
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       bool
  */
 	public $isEditor = false;
@@ -53,7 +48,6 @@ class AccessCountersAppController extends AppController {
  * Publish authority
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       bool
  */
 	public $isPublisher = false;
@@ -62,7 +56,6 @@ class AccessCountersAppController extends AppController {
  * Login
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       bool
  */
 	public $isLogin = false;
@@ -71,7 +64,6 @@ class AccessCountersAppController extends AppController {
  * Language ID
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       int
  */
 	public $langId = 2;
@@ -80,7 +72,6 @@ class AccessCountersAppController extends AppController {
  * Lang parameter
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       string
  */
 	public $lang = 'jpn';
@@ -89,7 +80,6 @@ class AccessCountersAppController extends AppController {
  * Languages list
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       array
  */
 	public $langList = array();
@@ -98,7 +88,6 @@ class AccessCountersAppController extends AppController {
  * userId
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       bool
  */
 	protected $_userId = null;
@@ -107,7 +96,6 @@ class AccessCountersAppController extends AppController {
  * roomId
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       bool
  */
 	protected $_roomId = null;
@@ -116,7 +104,6 @@ class AccessCountersAppController extends AppController {
  * Component name
  *
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since     NetCommons 3.0.0.0
  * @var       array
  */
 	public $components = array(
@@ -148,7 +135,6 @@ class AccessCountersAppController extends AppController {
  * Check the editor, to set
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   bool
  */
 	protected function _checkEditor() {
@@ -166,7 +152,6 @@ class AccessCountersAppController extends AppController {
  * Check the publisher, to set
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	protected function _checkPublisher() {
@@ -184,7 +169,6 @@ class AccessCountersAppController extends AppController {
  * Check the author, to set
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	protected function _checkAuthor() {
@@ -195,7 +179,6 @@ class AccessCountersAppController extends AppController {
  * No asynchronous process if the layout settings.
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	protected function _setLayout() {
@@ -208,7 +191,6 @@ class AccessCountersAppController extends AppController {
  * processing asynchronous
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	protected function _checkAjax() {
@@ -221,7 +203,6 @@ class AccessCountersAppController extends AppController {
  * Language settings
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	protected function _setLang() {
@@ -239,7 +220,6 @@ class AccessCountersAppController extends AppController {
  * room_id setting
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	protected function _setRoomtId() {
@@ -251,7 +231,6 @@ class AccessCountersAppController extends AppController {
  * user_id setting
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	protected function _setUserId() {
@@ -269,7 +248,6 @@ class AccessCountersAppController extends AppController {
  * SettingMode settings
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	protected function _setSetting() {
@@ -287,7 +265,6 @@ class AccessCountersAppController extends AppController {
  * @param string $message response message
  * @param array $data response data
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   CakeResponse
  */
 	protected function _setSaveResult($type, $message, $data = array()) {

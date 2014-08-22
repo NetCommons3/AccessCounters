@@ -7,7 +7,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Model.Case
  */
 
@@ -17,7 +16,6 @@ App::uses('AccessCountersFormat', 'AccessCounters.Model');
  * AccessCountersFormat Test Case
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Model.Case
  */
 class AccessCountersFormatSaveDataTest extends CakeTestCase {
@@ -26,7 +24,6 @@ class AccessCountersFormatSaveDataTest extends CakeTestCase {
  * Fixtures
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $fixtures = array(
@@ -42,7 +39,6 @@ class AccessCountersFormatSaveDataTest extends CakeTestCase {
  * setUp method
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function setUp() {
@@ -55,7 +51,6 @@ class AccessCountersFormatSaveDataTest extends CakeTestCase {
  * testIndex
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testIndex() {
@@ -66,7 +61,6 @@ class AccessCountersFormatSaveDataTest extends CakeTestCase {
  * testSaveData "no frameId" or "no userId" or "no roomId"
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testSaveDataError() {
@@ -123,7 +117,6 @@ class AccessCountersFormatSaveDataTest extends CakeTestCase {
  * testSaveData
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testSaveData() {
@@ -140,7 +133,6 @@ class AccessCountersFormatSaveDataTest extends CakeTestCase {
  * testSaveData no access counter data
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testSaveDataNoAccessCounter() {
@@ -162,7 +154,6 @@ class AccessCountersFormatSaveDataTest extends CakeTestCase {
  * @param int $langId languages.id
  * @param int $blockId blocks.id
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	private function __saveData($frameId, $userId, $roomId, $langId, $blockId) {
@@ -188,7 +179,6 @@ class AccessCountersFormatSaveDataTest extends CakeTestCase {
  * tearDown method
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function tearDown() {

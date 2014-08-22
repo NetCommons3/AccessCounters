@@ -7,7 +7,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Controller.Case
  */
 
@@ -17,7 +16,6 @@ App::uses('AccessCountersController', 'AccessCounters.Controller');
  * AccessCountersController Test Case
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Controller.Case
  */
 class AccessCountersControllerTest extends ControllerTestCase {
@@ -26,7 +24,6 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * Fixtures
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $fixtures = array(
@@ -47,7 +44,6 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * setUp
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function setUp() {
@@ -58,7 +54,6 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * tearDown method
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function tearDown() {
@@ -72,7 +67,6 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * index
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testIndex() {
@@ -92,7 +86,6 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * index no frameId
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testIndexNoFrameId() {
@@ -106,7 +99,6 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * index no blockId
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testIndexNoBlockId() {
@@ -121,7 +113,6 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * index "setting on" and "no login"
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testIndexNoLoginSettingOn() {
@@ -144,7 +135,6 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * index "setting on" and "no login" and "no blockId"
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testIndexNoLoginSettingOnNoBlockId() {
@@ -162,7 +152,6 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * index no publish
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testIndexNoPlubish() {

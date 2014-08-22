@@ -7,7 +7,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Model.Case
  */
 
@@ -17,7 +16,6 @@ App::uses('AccessCountersFormat', 'AccessCounters.Model');
  * AccessCountersFormat Test Case
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Model.Case
  */
 class AccessCountersFormatTest extends CakeTestCase {
@@ -26,7 +24,6 @@ class AccessCountersFormatTest extends CakeTestCase {
  * Fixtures
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $fixtures = array(
@@ -42,7 +39,6 @@ class AccessCountersFormatTest extends CakeTestCase {
  * setUp method
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function setUp() {
@@ -55,7 +51,6 @@ class AccessCountersFormatTest extends CakeTestCase {
  * testIndex
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testIndex() {
@@ -66,7 +61,6 @@ class AccessCountersFormatTest extends CakeTestCase {
  * testGetDefaultData
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testGetDefaultData() {
@@ -81,7 +75,6 @@ class AccessCountersFormatTest extends CakeTestCase {
  * testGetDefaultDigitNumberData
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testGetDefaultDigitNumberData() {
@@ -94,7 +87,6 @@ class AccessCountersFormatTest extends CakeTestCase {
  * testGetDefaultDigitNumberData
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testGetDefaultNumberImageData() {
@@ -118,7 +110,6 @@ class AccessCountersFormatTest extends CakeTestCase {
  * testGetIsPublished
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testGetIsPublished() {
@@ -132,7 +123,6 @@ class AccessCountersFormatTest extends CakeTestCase {
  * testGetIsPublished no publish
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testGetIsPublishedNoPublish() {
@@ -146,7 +136,6 @@ class AccessCountersFormatTest extends CakeTestCase {
  * testGetIsPublished error
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testGetIsPublishedError() {
@@ -170,7 +159,6 @@ class AccessCountersFormatTest extends CakeTestCase {
  * tearDown method
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function tearDown() {

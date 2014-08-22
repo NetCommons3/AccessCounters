@@ -9,7 +9,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Model
  */
 
@@ -21,7 +20,6 @@ App::uses('AccessCountersAppModel', 'AccessCounters.Model');
  * @property AccessCountersCount $AccessCountersCount
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Model
  */
 class AccessCountersFormat extends AccessCountersAppModel {
@@ -30,7 +28,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * Validation rules
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $validate = array(
@@ -82,7 +79,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  *
  * @param string $data imagePath
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  array
  */
 	public function numberImage($data) {
@@ -99,7 +95,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * belongsTo associations
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $belongsTo = array(
@@ -116,7 +111,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * Blocks model object (AccessCountersBlock)
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     null
  */
 	private $__AccessCountersBlock = null;
@@ -125,7 +119,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * frames model object (AccessCountersFrame)
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     null
  */
 	private $__AccessCountersFrame = null;
@@ -136,7 +129,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * @param int $blockId blocks.id
  * @param int $langId languages.id
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  array
  */
 	public function getDefaultData($blockId, $langId) {
@@ -162,7 +154,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * get default data(show_digit_number)
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  array
  */
 	public function getDefaultDigitNumberData() {
@@ -179,7 +170,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * get default data(show_number_image)
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  array
  */
 	public function getDefaultNumberImageData() {
@@ -198,7 +188,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * @param int $langId languages.id
  * @param null $isSetting セッティングモードの状態 trueならon
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  array
  */
 	public function getData($blockId, $langId, $isSetting = null) {
@@ -230,7 +219,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * @param int $blockId blocks.id
  * @param int $langId languages.id
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  array
  */
 	public function getPublishData($blockId, $langId) {
@@ -258,7 +246,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * @param int $blockId blocks.id
  * @param int $langId languages.id
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  int
  */
 	public function getIsPublished($blockId, $langId) {
@@ -279,7 +266,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * @param int $userId  users.id
  * @param int $roomId  rooms.id
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  mixed null 失敗  array 成功
  */
 	public function saveData($data, $frameId, $userId, $roomId) {
@@ -339,7 +325,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * @param int $userId  users.id
  * @param int $roomId  rooms.id
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  mixed null error, array Frame
  */
 	private function __getFrame($frameId, $userId, $roomId) {
@@ -371,7 +356,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  *
  * @param array $data post data
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  int
  */
 	private function __getStatusId($data) {
@@ -392,7 +376,6 @@ class AccessCountersFormat extends AccessCountersAppModel {
  * @param int $langId languages.id
  * @param int $userId  users.id
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  int
  */
 	private function __createAccessCounter($blockId, $langId, $userId) {

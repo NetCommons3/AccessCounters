@@ -7,7 +7,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounter.Test.Fixture
  */
 
@@ -15,7 +14,6 @@
  * AccessCountersLanguageFixture
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounter.Test.Case
  */
 class AccessCountersLanguageFixture extends CakeTestFixture {
@@ -24,7 +22,6 @@ class AccessCountersLanguageFixture extends CakeTestFixture {
  * use table
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     bool
  */
 	public $table = 'languages';
@@ -33,7 +30,6 @@ class AccessCountersLanguageFixture extends CakeTestFixture {
  * Fields
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @var      array
  */
 	public $fields = array(
@@ -55,7 +51,6 @@ class AccessCountersLanguageFixture extends CakeTestFixture {
  * Records
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @var      array
  */
 	public $records = array(

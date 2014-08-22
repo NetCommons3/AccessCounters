@@ -7,7 +7,6 @@
  * @link          http://www.netcommons.org NetCommons Project
  * @license       http://www.netcommons.org/license.txt NetCommons License
  * @copyright    Copyright 2014, NetCommons Project
- * @since         NetCommons 3.0.0.0
  * @package       app.Plugin.AccessCounters.Config.Migration
  */
 
@@ -15,7 +14,6 @@
  * AccessCounters CakeMigration
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Config.Migration
  */
 class AccessCounters extends CakeMigration {
@@ -24,7 +22,6 @@ class AccessCounters extends CakeMigration {
  * Migration description
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     string
  */
 	public $description = '';
@@ -33,7 +30,6 @@ class AccessCounters extends CakeMigration {
  * Actions to be performed
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array $migration
  */
 	public $migration = array(
@@ -115,7 +111,6 @@ class AccessCounters extends CakeMigration {
  * recodes
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var      array $records
  */
 	public $records = array();
@@ -125,7 +120,6 @@ class AccessCounters extends CakeMigration {
  *
  * @param string $direction up or down direction of migration process
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return boolean Should process continue
  */
 	public function before($direction) {
@@ -137,7 +131,6 @@ class AccessCounters extends CakeMigration {
  *
  * @param string $direction up or down direction of migration process
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return boolean Should process continue
  */
 	public function after($direction) {
@@ -160,7 +153,6 @@ class AccessCounters extends CakeMigration {
  * @param string $model model name to update
  * @param string $records records to be stored
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  boolean Should process continue
  */
 	public function updateRecords($model, $records) {

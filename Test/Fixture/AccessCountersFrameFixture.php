@@ -7,7 +7,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounter.Test.Fixture
  */
 
@@ -15,7 +14,6 @@
  * AccessCountersFrameFixture
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounter.Test.Case
  */
 class AccessCountersFrameFixture extends CakeTestFixture {
@@ -24,7 +22,6 @@ class AccessCountersFrameFixture extends CakeTestFixture {
  * use table
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     bool
  */
 	public $table = 'frames';
@@ -33,7 +30,6 @@ class AccessCountersFrameFixture extends CakeTestFixture {
  * Fields
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @var      array
  */
 	public $fields = array(
@@ -60,7 +56,6 @@ class AccessCountersFrameFixture extends CakeTestFixture {
  * Records
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @var      array
  */
 	public $records = array(

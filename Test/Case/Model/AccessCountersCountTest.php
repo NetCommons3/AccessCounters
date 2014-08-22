@@ -7,7 +7,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Model.Case
  */
 
@@ -18,7 +17,6 @@ App::uses('AccessCounter', 'AccessCounters.Model');
  * AccessCountersCount Test Case
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Model.Case
  * @SuppressWarnings(PHPMD.TooManyMethods)
  */
@@ -28,7 +26,6 @@ class AccessCountersCountTest extends CakeTestCase {
  * Fixtures
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $fixtures = array(
@@ -42,7 +39,6 @@ class AccessCountersCountTest extends CakeTestCase {
  * setUp method
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function setUp() {
@@ -55,7 +51,6 @@ class AccessCountersCountTest extends CakeTestCase {
  * testIndex
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testIndex() {
@@ -66,7 +61,6 @@ class AccessCountersCountTest extends CakeTestCase {
  * testGetDataId
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testGetDataId() {
@@ -80,7 +74,6 @@ class AccessCountersCountTest extends CakeTestCase {
  * testGetDataId irregular test
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testGetDataIdIrregular() {
@@ -103,7 +96,6 @@ class AccessCountersCountTest extends CakeTestCase {
  * testSaveCount
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testSaveCount() {
@@ -120,7 +112,6 @@ class AccessCountersCountTest extends CakeTestCase {
  * testSaveCount no access_counters_count data
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testSaveCountNoAccessCountersCountData() {
@@ -137,7 +128,6 @@ class AccessCountersCountTest extends CakeTestCase {
  * testSaveCount no userId
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testSaveCountNoUserId() {
@@ -166,7 +156,6 @@ class AccessCountersCountTest extends CakeTestCase {
  * testSaveCount no blocks data
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testSaveCountError() {
@@ -189,7 +178,6 @@ class AccessCountersCountTest extends CakeTestCase {
  * testSaveCount no langId
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function testSaveCountIrregular() {
@@ -213,7 +201,6 @@ class AccessCountersCountTest extends CakeTestCase {
  * tearDown method
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function tearDown() {

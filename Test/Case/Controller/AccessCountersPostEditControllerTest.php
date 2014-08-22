@@ -7,7 +7,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Controller.Case
  */
 
@@ -17,7 +16,6 @@ App::uses('AccessCountersController', 'AccessCounters.Controller');
  * AccessCountersPostEditController Test Case
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Controller.Case
  */
 class AccessCountersPostEditControllerTest extends ControllerTestCase {
@@ -26,7 +24,6 @@ class AccessCountersPostEditControllerTest extends ControllerTestCase {
  * Controller name
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     string
  */
 	public $name = 'AccessCountersControllerTest';
@@ -35,7 +32,6 @@ class AccessCountersPostEditControllerTest extends ControllerTestCase {
  * Fixtures
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $fixtures = array(
@@ -56,7 +52,6 @@ class AccessCountersPostEditControllerTest extends ControllerTestCase {
  * httpXRequestedWith
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $httpXRequestedWith = null;
@@ -65,7 +60,6 @@ class AccessCountersPostEditControllerTest extends ControllerTestCase {
  * setUp
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function setUp() {
@@ -103,7 +97,6 @@ class AccessCountersPostEditControllerTest extends ControllerTestCase {
  *
  * @param type $key
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   mixed
  */
 	public function authUserCallback() {
@@ -118,7 +111,6 @@ class AccessCountersPostEditControllerTest extends ControllerTestCase {
  * tearDown method
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function tearDown() {
@@ -143,7 +135,6 @@ class AccessCountersPostEditControllerTest extends ControllerTestCase {
  * post edit
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testPostEdit() {
@@ -176,7 +167,6 @@ class AccessCountersPostEditControllerTest extends ControllerTestCase {
  * post edit "GET"
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testPostEditMethodError() {
@@ -224,7 +214,6 @@ class AccessCountersPostEditControllerTest extends ControllerTestCase {
  * post edit "GET"
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testPostEditSaveError() {

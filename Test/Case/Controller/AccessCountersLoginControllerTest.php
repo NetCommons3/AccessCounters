@@ -7,7 +7,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Controller.Case
  */
 
@@ -17,7 +16,6 @@ App::uses('AccessCountersController', 'AccessCounters.Controller');
  * AccessCountersLoginController Test Case
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Controller.Case
  * @SuppressWarnings(PHPMD.TooManyMethods)
  */
@@ -27,7 +25,6 @@ class AccessCountersLoginControllerTest extends ControllerTestCase {
  * Controller name
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     string
  */
 	public $name = 'AccessCountersControllerTest';
@@ -36,7 +33,6 @@ class AccessCountersLoginControllerTest extends ControllerTestCase {
  * Fixtures
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $fixtures = array(
@@ -57,7 +53,6 @@ class AccessCountersLoginControllerTest extends ControllerTestCase {
  * setUp
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function setUp() {
@@ -92,7 +87,6 @@ class AccessCountersLoginControllerTest extends ControllerTestCase {
  *
  * @param type $key
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   mixed
  */
 	public function authUserCallback() {
@@ -107,7 +101,6 @@ class AccessCountersLoginControllerTest extends ControllerTestCase {
  * tearDown method
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function tearDown() {
@@ -126,7 +119,6 @@ class AccessCountersLoginControllerTest extends ControllerTestCase {
  * assertAccessCountersLabel
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
@@ -165,7 +157,6 @@ class AccessCountersLoginControllerTest extends ControllerTestCase {
  * assertAccessCountersLabel
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function assertAccessCountersEditBtn($frameId, $isSetting, $isPublish, $isEditor, $message = '') {
@@ -192,7 +183,6 @@ class AccessCountersLoginControllerTest extends ControllerTestCase {
  * index
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testIndex() {
@@ -222,7 +212,6 @@ class AccessCountersLoginControllerTest extends ControllerTestCase {
  * index "no format"
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testIndexNoFormat() {
@@ -237,7 +226,6 @@ class AccessCountersLoginControllerTest extends ControllerTestCase {
  * index "no format" and "setting on"
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testIndexNoFormatIsSetting() {
@@ -267,7 +255,6 @@ class AccessCountersLoginControllerTest extends ControllerTestCase {
  * index status publish status_id test
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testIndexStatus() {
@@ -312,7 +299,6 @@ class AccessCountersLoginControllerTest extends ControllerTestCase {
  * index status publish status_id test
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testIndexStatusSettingOn() {

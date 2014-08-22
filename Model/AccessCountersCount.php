@@ -12,7 +12,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Model
  */
 
@@ -27,7 +26,6 @@ App::uses('AccessCountersAppModel', 'AccessCounters.Model');
  * @property AccessCountersFormat $AccessCountersFormat
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Model
  */
 class AccessCountersCount extends AccessCountersAppModel {
@@ -36,7 +34,6 @@ class AccessCountersCount extends AccessCountersAppModel {
  * Validation rules
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $validate = array(
@@ -82,7 +79,6 @@ class AccessCountersCount extends AccessCountersAppModel {
  * belongsTo associations
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $belongsTo = array(
@@ -117,7 +113,6 @@ class AccessCountersCount extends AccessCountersAppModel {
  * @param int $blockId blocks.id
  * @param int $langId languages.id
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  int
  */
 	public function getAccessCount($blockId, $langId) {
@@ -144,7 +139,6 @@ class AccessCountersCount extends AccessCountersAppModel {
  * @param int $langId languages.id
  * @param int $userId users.id
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  int
  */
 	public function saveCountUp($blockId, $langId, $userId) {

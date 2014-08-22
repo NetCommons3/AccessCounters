@@ -7,7 +7,6 @@
  * @link          http://www.netcommons.org NetCommons Project
  * @license       http://www.netcommons.org/license.txt NetCommons License
  * @copyright    Copyright 2014, NetCommons Project
- * @since         NetCommons 3.0.0.0
  * @package       app.Plugin.AccessCounters.Controller
  */
 
@@ -15,7 +14,6 @@
  * AccessCountersSchema CakeSchema
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Config.Migration
  * @SuppressWarnings(PHPMD.LongVariable)
  */
@@ -25,7 +23,6 @@ class AccessCountersSchema extends CakeSchema {
  * Database connection
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     string
  */
 	public $connection = 'master';
@@ -35,7 +32,6 @@ class AccessCountersSchema extends CakeSchema {
  *
  * @param array $event savent
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  bool
  */
 	public function before($event = array()) {
@@ -47,7 +43,6 @@ class AccessCountersSchema extends CakeSchema {
  *
  * @param array $event event
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function after($event = array()) {
@@ -57,7 +52,6 @@ class AccessCountersSchema extends CakeSchema {
  * access_counters table
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $access_counters = array(
@@ -81,7 +75,6 @@ class AccessCountersSchema extends CakeSchema {
  * access_counters_counts table
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $access_counters_counts = array(
@@ -111,7 +104,6 @@ class AccessCountersSchema extends CakeSchema {
  * access_counters_formats table
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $access_counters_formats = array(

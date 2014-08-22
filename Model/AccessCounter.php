@@ -10,7 +10,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Model
  */
 
@@ -23,7 +22,6 @@ App::uses('AccessCountersAppModel', 'AccessCounters.Model');
  * @property Language $Language
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Model
  */
 class AccessCounter extends AccessCountersAppModel {
@@ -32,7 +30,6 @@ class AccessCounter extends AccessCountersAppModel {
  * Validation rules
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $validate = array(
@@ -60,7 +57,6 @@ class AccessCounter extends AccessCountersAppModel {
  * belongsTo associations
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $belongsTo = array(
@@ -78,7 +74,6 @@ class AccessCounter extends AccessCountersAppModel {
  * hasAndBelongsToMany associations
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	//public $hasAndBelongsToMany = array(

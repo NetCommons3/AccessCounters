@@ -7,7 +7,6 @@
  * @link        http://www.netcommons.org NetCommons Project
  * @license     http://www.netcommons.org/license.txt NetCommons License
  * @copyright   Copyright 2014, NetCommons Project
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Controller.Case
  */
 
@@ -17,7 +16,6 @@ App::uses('AccessCountersController', 'AccessCounters.Controller');
  * AccessCountersGetEditFormController Test Case
  *
  * @author      Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since       NetCommons 3.0.0.0
  * @package     app.Plugin.AccessCounters.Test.Controller.Case
  */
 class AccessCountersGetEditFormControllerTest extends ControllerTestCase {
@@ -26,7 +24,6 @@ class AccessCountersGetEditFormControllerTest extends ControllerTestCase {
  * Controller name
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     string
  */
 	public $name = 'AccessCountersControllerTest';
@@ -35,7 +32,6 @@ class AccessCountersGetEditFormControllerTest extends ControllerTestCase {
  * Fixtures
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $fixtures = array(
@@ -56,7 +52,6 @@ class AccessCountersGetEditFormControllerTest extends ControllerTestCase {
  * httpXRequestedWith
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @var     array
  */
 	public $httpXRequestedWith = null;
@@ -65,7 +60,6 @@ class AccessCountersGetEditFormControllerTest extends ControllerTestCase {
  * setUp
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function setUp() {
@@ -81,7 +75,6 @@ class AccessCountersGetEditFormControllerTest extends ControllerTestCase {
  *
  * @param type $key
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   mixed
  */
 	public function authUserCallback() {
@@ -96,7 +89,6 @@ class AccessCountersGetEditFormControllerTest extends ControllerTestCase {
  * tearDown method
  *
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since   NetCommons 3.0.0.0
  * @return  void
  */
 	public function tearDown() {
@@ -117,7 +109,6 @@ class AccessCountersGetEditFormControllerTest extends ControllerTestCase {
  * get form edit
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testGetEditForm() {
@@ -155,7 +146,6 @@ class AccessCountersGetEditFormControllerTest extends ControllerTestCase {
  * get form edit no login
  *
  * @author   Shohei Nakajima <nakajimashouhei@gmail.com>
- * @since    NetCommons 3.0.0.0
  * @return   void
  */
 	public function testGetEditFormNoLogin() {
