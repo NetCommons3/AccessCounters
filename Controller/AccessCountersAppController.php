@@ -74,7 +74,7 @@ class AccessCountersAppController extends AppController {
  * @author    Shohei Nakajima <nakajimashouhei@gmail.com>
  * @var       string
  */
-	public $lang = 'jpn';
+	public $lang = 'ja';
 
 /**
  * Languages list
@@ -208,10 +208,10 @@ class AccessCountersAppController extends AppController {
 	protected function _setLang() {
 		//TODO言語は本来はDBより取得
 		$this->langList = array(
-			1 => 'eng',
-			2 => 'jpn'
+			1 => 'en',
+			2 => 'ja'
 		);
-		$this->lang = 'jpn';
+		$this->lang = 'ja';
 		$this->langId = 2;
 		$this->set('langId', $this->langId);
 	}
