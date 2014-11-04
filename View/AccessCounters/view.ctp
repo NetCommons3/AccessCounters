@@ -16,12 +16,21 @@
 <div id="nc-access-counters-container-<?php echo (int)$frameId; ?>"
 	 ng-controller="AccessCounters"
 	 ng-init="initialize(
-		<?php echo (int)$frameId; ?>,
-		<?php echo h(json_encode($counter)); ?>)">
-	<div class="row">
-		<?php echo $this->element('AccessCounters/header_button'); ?>
-	</div>
-	<div class="row text-center">
+			<?php echo (int)$frameId; ?>,
+			<?php echo h(json_encode($counter)); ?>)">
+
+	<p class="text-right">
+		<?php if ($contentEditable) : ?>
+			<button class="btn btn-primary"
+					tooltip="<?php echo __d('net_commons', 'Manage'); ?>"
+					ng-click="showManage()">
+
+				<span class="glyphicon glyphicon-cog"></span>
+			</button>
+		<?php endif; ?>
+	</p>
+
+	<div class="text-center">
 		<div class="h5">
 			<span ng-show="counter.AccessCounter.is_started"
 				  class="label label-{{counter.AccessCounterFrameSetting.display_type_label}}"
@@ -33,4 +42,5 @@
 			</span>
 		</div>
 	</div>
+
 </div>
