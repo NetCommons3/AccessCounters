@@ -74,7 +74,7 @@ class AccessCounters extends CakeMigration {
 				'access_counter_frame_settings',
 			),
 			'drop_field' => array(
-				'access_counters' => array('block_key', 'count', 'starting_count', 'created_user', 'modified_user',),
+				'access_counters' => array('block_key', 'count', 'starting_count', 'created_user', 'modified_user'),
 			),
 			'create_field' => array(
 				'access_counters' => array(
@@ -150,7 +150,7 @@ class AccessCounters extends CakeMigration {
 /**
  * Before migration callback
  *
- * @param string $direction, up or down direction of migration process
+ * @param string $direction up or down direction of migration process
  * @return boolean Should process continue
  */
 	public function before($direction) {
@@ -160,7 +160,7 @@ class AccessCounters extends CakeMigration {
 /**
  * After migration callback
  *
- * @param string $direction, up or down direction of migration process
+ * @param string $direction up or down direction of migration process
  * @return boolean Should process continue
  */
 	public function after($direction) {
