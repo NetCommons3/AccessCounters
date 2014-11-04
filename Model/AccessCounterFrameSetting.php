@@ -116,8 +116,7 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 				$AccessCounter['AccessCounter']['count'] = $AccessCounter['AccessCounter']['starting_count'];
 				$AccessCounter = $this->AccessCounter->save($AccessCounter);
 				if (!$AccessCounter) {
-					// return false;
-					throw new ForbiddenException(serialize($this->AccessCounter->validationErrors));
+					 return false;
 				}
 			}
 

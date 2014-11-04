@@ -79,7 +79,7 @@ class AccessCounterEditControllerNoLoginTest extends ControllerTestCase {
  */
 	public function testBeforeFilterByNoSetFrameId() {
 		$this->setExpectedException('ForbiddenException');
-		$this->testAction('/AccessCounters/AccessCounterEdit/index', array('method' => 'get'));
+		$this->testAction('/access_counters/access_counter_edit/index', array('method' => 'get'));
 	}
 
 /**
