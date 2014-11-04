@@ -18,7 +18,7 @@ NetCommonsApp.controller('AccessCounters',
        *
        * @const
        */
-      $scope.PLUGIN_EDIT_URL = '/AccessCounters/AccessCounterEdit/';
+      $scope.PLUGIN_EDIT_URL = '/access_counters/access_counter_edit/';
 
       /**
        * AccessCounter

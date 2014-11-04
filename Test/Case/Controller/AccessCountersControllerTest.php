@@ -49,6 +49,7 @@ class AccessCountersControllerTest extends ControllerTestCase {
 		'plugin.rooms.roles_room',
 		'plugin.rooms.room_role_permission',
 		'plugin.rooms.user',
+		'plugin.pages.page',
 	);
 
 /**
