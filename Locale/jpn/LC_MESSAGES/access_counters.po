@@ -1,0 +1,40 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2014-11-04 01:45+0000\n"
+"PO-Revision-Date: 2014-11-04 10:50+0900\n"
+"Last-Translator: \n"
+"Language-Team:  <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.6.10\n"
+"Language: ja\n"
+
+#: /View/Elements/AccessCounterEdit/edit_form.ctp:16
+msgid "Display Type"
+msgstr "表示タイプ"
+
+#: /View/Elements/AccessCounterEdit/edit_form.ctp:51
+msgid "Display Digit"
+msgstr "表示桁数"
+
+#: /View/Elements/AccessCounterEdit/edit_form.ctp:68
+msgid "Starting Value"
+msgstr "開始値"
+
+#: /View/Elements/AccessCounterEdit/edit_form.ctp:88
+msgid "Please enter in the range from 0 to 999999999."
+msgstr "0から999999999の範囲で入力してください。"
+
+#: /View/Elements/AccessCounterEdit/edit_form.ctp:93
+msgid "Required field."
+msgstr "必須項目です。"
+
+#: /View/Elements/AccessCounterEdit/tab_header.ctp:23
+msgid "Counter Edit"
+msgstr "カウンタ編集"

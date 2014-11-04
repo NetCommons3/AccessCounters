@@ -1,9 +1,9 @@
 <?php
 /**
- * AccessCountersController Test Case
+ * AccessCounterEditControllerNoLogin Test Case
  *
  * @author Noriko Arai <arai@nii.ac.jp>
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
  * @copyright Copyright 2014, NetCommons Project
@@ -15,12 +15,12 @@ App::uses('NetCommonsBlockComponent', 'NetCommons.Controller/Component');
 App::uses('NetCommonsRoomRoleComponent', 'NetCommons.Controller/Component');
 
 /**
- * AccessCountersController Test Case
+ * AccessCounterEditControllerNoLoginTest Test Case
  *
  * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
  * @package NetCommons\AccessCounters\Test\Case\Controller
  */
-class AccessCountersControllerTest extends ControllerTestCase {
+class AccessCounterEditControllerNoLoginTest extends ControllerTestCase {
 
 /**
  * mock controller object
@@ -72,48 +72,22 @@ class AccessCountersControllerTest extends ControllerTestCase {
 	}
 
 /**
- * testBeforeFilterErrorByNoSetFrameId method
+ * testBeforeFilterByNoSetFrameId method
  *
  * @return void
  */
-	public function testBeforeFilterErrorByNoSetFrameId() {
+	public function testBeforeFilterByNoSetFrameId() {
 		$this->setExpectedException('ForbiddenException');
-		$this->testAction('/AccessCounters/AccessCounters/index', array('method' => 'get'));
+		$this->testAction('/AccessCounters/AccessCounterEdit/index', array('method' => 'get'));
 	}
 
 /**
- * testIndex method
+ * testBeforeFilterErrorByNoEditable method
  *
  * @return void
  */
-	public function testIndex() {
-		$this->testAction('/AccessCounters/AccessCounters/index/1', array('method' => 'get'));
-
-		$expected = 'primary';
-		$this->assertTextContains($expected, $this->view);
-	}
-
-/**
- * testIndex method
- *
- * @return void
- */
-	public function testView() {
-		$this->testAction('/AccessCounters/AccessCounters/view/1', array('method' => 'get'));
-
-		$expected = 'primary';
-		$this->assertTextContains($expected, $this->view);
-	}
-
-/**
- * testViewNotStarted method
- *
- * @return void
- */
-	public function testViewNotStarted() {
-		$this->testAction('/AccessCounters/AccessCounters/view/2', array('method' => 'get'));
-
-		$expected = 'primary';
-		$this->assertTextNotContains($expected, $this->view);
+	public function testBeforeFilterErrorByNoEditable() {
+		$this->setExpectedException('ForbiddenException');
+		$this->testAction('/AccessCounters/AccessCounterEdit/index/1', array('method' => 'get'));
 	}
 }

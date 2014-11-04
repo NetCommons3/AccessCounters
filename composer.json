@@ -1,6 +1,6 @@
 {
     "name": "netcommons/access-counters",
-    "description": "AccessCountersPlugin for NetCommons",
+    "description": "AccessCounters for NetCommons Plugin",
     "homepage": "http://www.netcommons.org/",
     "extra": {
         "installer-paths": {
@@ -17,19 +17,21 @@
     "require-dev": {
         "mustangostang/spyc":           "dev-master",
         "satooshi/php-coveralls":       "dev-master",
+        "netcommons/net-commons":       "dev-master",
         "netcommons/frames":            "dev-master",
-		"netcommons/users":            "dev-master"
+        "netcommons/users":             "dev-master"
     },
     "license": "NetCommons License",
     "authors": [
         {
             "name": "NetCommons Community",
-            "homepage": "https://github.com/s-nakajima/AccessCounters/graphs/contributors"
+            "homepage": "https://github.com/NetCommons3/AccessCounters/graphs/contributors"
         }
     ],
     "type":        "cakephp-plugin",
-    "keywords":    ["cakephp", "access_conters"],
+    "keywords":    ["cakephp", "access_counters"],
     "config": {
         "vendor-dir": "vendors"
     }
 }
+
