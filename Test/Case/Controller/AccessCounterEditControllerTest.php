@@ -140,7 +140,7 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testIndex() {
-		$this->testAction('/AccessCounters/AccessCounterEdit/index/1', array('method' => 'get'));
+		$this->testAction('/access_counters/access_counter_edit/index/1', array('method' => 'get'));
 
 		$this->assertTextContains('display_type', $this->view);
 		$this->assertTextContains('display_digit', $this->view);
@@ -153,7 +153,7 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testView() {
-		$this->testAction('/AccessCounters/AccessCounterEdit/view/1', array('method' => 'get'));
+		$this->testAction('/access_counters/access_counter_edit/view/1', array('method' => 'get'));
 
 		$this->assertTextContains('display_type', $this->view);
 		$this->assertTextContains('display_digit', $this->view);
@@ -166,7 +166,7 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testForm() {
-		$this->testAction('/AccessCounters/AccessCounterEdit/form/1', array('method' => 'get'));
+		$this->testAction('/access_counters/access_counter_edit/form/1', array('method' => 'get'));
 
 		$this->assertTextContains('display_type', $this->view);
 		$this->assertTextContains('display_digit', $this->view);
@@ -195,7 +195,7 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
 			)
 		);
 
-		$this->testAction('/AccessCounters/AccessCounterEdit/edit/1.json',
+		$this->testAction('/access_counters/access_counter_edit/edit/1.json',
 			array(
 				'method' => 'post',
 				'data' => $postData
@@ -215,7 +215,7 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
  */
 	public function testEditErrorByRequestGet() {
 		$this->setExpectedException('MethodNotAllowedException');
-		$this->testAction('/AccessCounters/AccessCounterEdit/edit/1', array('method' => 'get'));
+		$this->testAction('/access_counters/access_counter_edit/edit/1', array('method' => 'get'));
 	}
 
 /**
@@ -241,7 +241,7 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
 		);
 
 		$this->setExpectedException('ForbiddenException');
-		$this->testAction('/AccessCounters/AccessCounterEdit/edit/1.json',
+		$this->testAction('/access_counters/access_counter_edit/edit/1.json',
 			array(
 				'method' => 'post',
 				'data' => $postData

@@ -78,7 +78,7 @@ class AccessCountersControllerTest extends ControllerTestCase {
  */
 	public function testBeforeFilterErrorByNoSetFrameId() {
 		$this->setExpectedException('ForbiddenException');
-		$this->testAction('/AccessCounters/AccessCounters/index', array('method' => 'get'));
+		$this->testAction('/access_counters/access_counters/index', array('method' => 'get'));
 	}
 
 /**
@@ -87,7 +87,7 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testIndex() {
-		$this->testAction('/AccessCounters/AccessCounters/index/1', array('method' => 'get'));
+		$this->testAction('/access_counters/access_counters/index/1', array('method' => 'get'));
 
 		$expected = 'primary';
 		$this->assertTextContains($expected, $this->view);
@@ -99,7 +99,7 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testView() {
-		$this->testAction('/AccessCounters/AccessCounters/view/1', array('method' => 'get'));
+		$this->testAction('/access_counters/access_counters/view/1', array('method' => 'get'));
 
 		$expected = 'primary';
 		$this->assertTextContains($expected, $this->view);
@@ -111,7 +111,7 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testViewNotStarted() {
-		$this->testAction('/AccessCounters/AccessCounters/view/2', array('method' => 'get'));
+		$this->testAction('/access_counters/access_counters/view/2', array('method' => 'get'));
 
 		$expected = 'primary';
 		$this->assertTextNotContains($expected, $this->view);

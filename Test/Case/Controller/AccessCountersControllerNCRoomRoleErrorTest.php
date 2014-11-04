@@ -147,6 +147,6 @@ class AccessCountersControllerNCRoomRoleErrorTest extends ControllerTestCase {
  */
 	public function testBeforeFilterErrorByNCRoomRole() {
 		$this->setExpectedException('ForbiddenException');
-		$this->testAction('/AccessCounters/AccessCounters/index/1', array('method' => 'get'));
+		$this->testAction('/access_counters/access_counters/index/1', array('method' => 'get'));
 	}
 }

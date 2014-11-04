@@ -88,6 +88,6 @@ class AccessCounterEditControllerNoLoginTest extends ControllerTestCase {
  */
 	public function testBeforeFilterErrorByNoEditable() {
 		$this->setExpectedException('ForbiddenException');
-		$this->testAction('/AccessCounters/AccessCounterEdit/index/1', array('method' => 'get'));
+		$this->testAction('/access_counters/access_counter_edit/index/1', array('method' => 'get'));
 	}
 }
