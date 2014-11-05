@@ -18,8 +18,7 @@
 	</div>
 	<div id="display_type" class="btn-group">
 
-		<button type="button" data-toggle="dropdown"
-				class="btn btn-default dropdown-toggle">
+		<button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
 
 			<span class="label label-{{displayTypeLabel}}"
 				  ng-repeat="num in formatCount() track by $index"
