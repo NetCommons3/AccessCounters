@@ -134,7 +134,7 @@ class AccessCounterTest extends CakeTestCase {
 				'id' => '1',
 				'block_key' => 'block_1',
 				'count' => '1',
-				'starting_count' => '0',
+				'count_start' => '0',
 				'is_started' => true,
 			),
 			'Block' => array(
@@ -166,7 +166,7 @@ class AccessCounterTest extends CakeTestCase {
 
 		$expected = array(
 			'AccessCounter' => array(
-				'starting_count' => 0,
+				'count_start' => 0,
 				'is_started' => false,
 			),
 			'AccessCounterFrameSetting' => array(
@@ -193,9 +193,9 @@ class AccessCounterTest extends CakeTestCase {
 				array('count' => '0'),
 				array('count' => '1'),
 				array('count' => '2147483647'),
-				array('starting_count' => '0'),
-				array('starting_count' => '1'),
-				array('starting_count' => '999999999'),
+				array('count_start' => '0'),
+				array('count_start' => '1'),
+				array('count_start' => '999999999'),
 			),
 			// 異常系
 			false => array(
@@ -206,11 +206,11 @@ class AccessCounterTest extends CakeTestCase {
 				array('count' => '+1'),
 				array('count' => '1.1'),
 				array('count' => '01'),
-				array('starting_count' => '-1'),
-				array('starting_count' => '1000000000'),
-				array('starting_count' => '+1'),
-				array('starting_count' => '1.1'),
-				array('starting_count' => '01'),
+				array('count_start' => '-1'),
+				array('count_start' => '1000000000'),
+				array('count_start' => '+1'),
+				array('count_start' => '1.1'),
+				array('count_start' => '01'),
 			)
 		);
 

@@ -64,11 +64,11 @@
 		 ng-class="getValidationState(accessCounterEdit.$valid)">
 
 		<?php
-			echo $this->Form->input('AccessCounter.starting_count', array(
+			echo $this->Form->input('AccessCounter.count_start', array(
 				'label' => __d('access_counters', 'Starting Value'),
 				'type' => 'number',
 				'class' => 'form-control',
-				'ng-model' => 'edit.data.AccessCounter.starting_count',
+				'ng-model' => 'edit.data.AccessCounter.count_start',
 				'required' => true,
 				'ng-pattern' => '/^(0|[1-9][0-9]{0,8})$/',
 				'ng-disabled' => 'counter.AccessCounter.is_started'

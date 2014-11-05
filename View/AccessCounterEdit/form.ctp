@@ -17,7 +17,7 @@ echo $this->Form->input('AccessCounter.is_started', array(
 		)
 	);
 
-echo $this->Form->input('AccessCounter.starting_count', array(
+echo $this->Form->input('AccessCounter.count_start', array(
 			'type' => 'number',
 		)
 	);

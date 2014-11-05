@@ -66,7 +66,7 @@ class AccessCounterFrameSettingTest extends CakeTestCase {
 	public function testSaveSettingCreate() {
 		$postData = array(
 			'AccessCounter' => array(
-				'starting_count' => 0,
+				'count_start' => 0,
 				'is_started' => 'false',
 			),
 			'AccessCounterFrameSetting' => array(
@@ -166,7 +166,7 @@ class AccessCounterFrameSettingTest extends CakeTestCase {
 	public function testSaveSettingErrorBySaveCounter() {
 		$postData = array(
 			'AccessCounter' => array(
-				'starting_count' => null, // Error Value
+				'count_start' => null, // Error Value
 				'is_started' => 'false',
 			),
 			'AccessCounterFrameSetting' => array(
@@ -192,7 +192,7 @@ class AccessCounterFrameSettingTest extends CakeTestCase {
 	public function testSaveSettingErrorBySaveSetting() {
 		$postData = array(
 			'AccessCounter' => array(
-				'starting_count' => 0,
+				'count_start' => 0,
 				'is_started' => 'false',
 			),
 			'AccessCounterFrameSetting' => array(

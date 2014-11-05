@@ -78,7 +78,7 @@ class AccessCounter extends AccessCountersAppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'starting_count' => array(
+		'count_start' => array(
 			'naturalNumber' => array(
 				'rule' => array('naturalNumber', true),
 				//'message' => 'Your custom message here',
@@ -99,6 +99,20 @@ class AccessCounter extends AccessCountersAppModel {
 	);
 
 /**
+ * before save
+ *
+ * @param array $options Options passed from Model::save().
+ * @return bool True if the operation should continue, false if it should abort
+ */
+	public function beforeSave($options = array()) {
+		if (! isset($this->data[$this->name]['id']) || empty($this->data[$this->name]['id'])) {
+			$this->data[$this->name]['created_user'] = CakeSession::read('Auth.User.id');
+		}
+		$this->data[$this->name]['modified_user'] = CakeSession::read('Auth.User.id');
+		return true;
+	}
+
+/**
  * get access_counter information
  *
  * @param int $blockKey blocks.key
@@ -109,7 +123,7 @@ class AccessCounter extends AccessCountersAppModel {
 			'AccessCounter.id',
 			'AccessCounter.block_key',
 			'AccessCounter.count',
-			'AccessCounter.starting_count',
+			'AccessCounter.count_start',
 			'Block.id',
 			'Frame.id',
 			'AccessCounterFrameSetting.id',
@@ -159,7 +173,7 @@ class AccessCounter extends AccessCountersAppModel {
 			// カウント開始前の初期情報
 			$counter = array(
 				'AccessCounter' => array(
-					'starting_count' => 0,
+					'count_start' => 0,
 					'is_started' => false, // カウント開始前
 				),
 				'AccessCounterFrameSetting' => array(

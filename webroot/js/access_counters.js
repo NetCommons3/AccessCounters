@@ -141,7 +141,7 @@ NetCommonsApp.controller('AccessCounters.edit',
         _method: 'POST',
         data: {
           AccessCounter: {
-            starting_count: +($scope.counter.AccessCounter.starting_count),
+            count_start: +($scope.counter.AccessCounter.count_start),
             is_started: $scope.counter.AccessCounter.is_started
           },
           AccessCounterFrameSetting: {

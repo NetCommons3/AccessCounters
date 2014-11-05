@@ -145,7 +145,7 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
 
 		$this->assertTextContains('display_type', $this->view);
 		$this->assertTextContains('display_digit', $this->view);
-		$this->assertTextContains('starting_count', $this->view);
+		$this->assertTextContains('count_start', $this->view);
 	}
 
 /**
@@ -158,7 +158,7 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
 
 		$this->assertTextContains('display_type', $this->view);
 		$this->assertTextContains('display_digit', $this->view);
-		$this->assertTextContains('starting_count', $this->view);
+		$this->assertTextContains('count_start', $this->view);
 	}
 
 /**
@@ -171,7 +171,7 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
 
 		$this->assertTextContains('display_type', $this->view);
 		$this->assertTextContains('display_digit', $this->view);
-		$this->assertTextContains('starting_count', $this->view);
+		$this->assertTextContains('count_start', $this->view);
 	}
 
 /**
@@ -183,7 +183,7 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
 		$postData = array(
 			'AccessCounter' => array(
 				'block_key' => 'block_1',
-				'starting_count' => 0,
+				'count_start' => 0,
 				'is_started' => 'true',
 			),
 			'AccessCounterFrameSetting' => array(
@@ -228,7 +228,7 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
 		$postData = array(
 			'AccessCounter' => array(
 				'block_key' => '',
-				'starting_count' => 0,
+				'count_start' => 0,
 				'is_started' => 'false',
 			),
 			'AccessCounterFrameSetting' => array(
