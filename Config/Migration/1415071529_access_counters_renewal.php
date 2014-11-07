@@ -15,7 +15,7 @@
  * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
  * @package NetCommons\AccessCounters\Config\Migration
  */
-class AccessCounters extends CakeMigration {
+class AccessCountersRenewal extends CakeMigration {
 
 /**
  * Migration description

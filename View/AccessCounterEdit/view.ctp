@@ -10,8 +10,9 @@
  */
 ?>
 
-<?php echo $this->element('AccessCounterEdit/tab_header'); ?>
-
+<div class="modal-header">
+	<?php echo $this->element('AccessCounterEdit/tab_header'); ?>
+</div>
 <div class="modal-body">
 	<div class="tab-content">
 		<div id="nc-online-statuses-display-style-<?php echo $frameId; ?>"

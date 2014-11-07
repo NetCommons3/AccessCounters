@@ -102,7 +102,7 @@ class AccessCountersController extends AccessCountersAppController {
 			);
 			$this->AccessCounter->save($AccessCounter);
 
-			// アクセス情報を記録
+			// アクセス情報を記録w
 			$this->Session->write($isAccessed, CakeSession::read('Config.userAgent'));
 		}
 

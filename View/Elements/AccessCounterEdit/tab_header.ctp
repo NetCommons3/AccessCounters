@@ -10,18 +10,16 @@
  */
 ?>
 
-<div class="modal-header">
-	<button class="close" type="button"
-			tooltip="<?php echo __d('net_commons', 'Close'); ?>"
-			ng-click="cancel()">
+<button class="close" type="button"
+		tooltip="<?php echo __d('net_commons', 'Close'); ?>"
+		ng-click="cancel()">
 
-		<span class="glyphicon glyphicon-remove small"></span>
-	</button>
-	<ul class="nav nav-pills">
-		<li class="active">
-			<a href="#" ng-click="showManage();">
-				<?php echo __d('access_counters', 'Counter Edit'); ?>
-			</a>
-		</li>
-	</ul>
-</div>
+	<span class="glyphicon glyphicon-remove small"></span>
+</button>
+<ul class="nav nav-pills">
+	<li class="active">
+		<a href="#" ng-click="showManage();">
+			<?php echo __d('access_counters', 'Counter Edit'); ?>
+		</a>
+	</li>
+</ul>

@@ -15,7 +15,7 @@
  * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
  * @package NetCommons\AccessCounters\Config\Migration
  */
-class AccessCounters extends CakeMigration {
+class AccessCountersModifyColumn extends CakeMigration {
 
 /**
  * Migration description
@@ -95,6 +95,37 @@ class AccessCounters extends CakeMigration {
 	);
 
 /**
+ * recodes
+ *
+ * @var array $migration
+ */
+	public $records = array(
+		'Plugin' => array(
+			array(
+				'language_id' => 2,
+				'key' => 'access_counters',
+				'namespace' => 'netcommons/access_counters',
+				'name' => 'アクセスカウンタ',
+				'type' => 1,
+			),
+		),
+
+		'PluginsRole' => array(
+			array(
+				'role_key' => 'room_administrator',
+				'plugin_key' => 'access_counters'
+			),
+		),
+
+		'PluginsRoom' => array(
+			array(
+				'room_id' => '1',
+				'plugin_key' => 'access_counters'
+			),
+		),
+	);
+
+/**
  * Before migration callback
  *
  * @param string $direction up or down direction of migration process
@@ -111,6 +142,37 @@ class AccessCounters extends CakeMigration {
  * @return boolean Should process continue
  */
 	public function after($direction) {
+		if ($direction === 'down') {
+			return true;
+		}
+
+		foreach ($this->records as $model => $records) {
+			if (!$this->updateRecords($model, $records)) {
+				return false;
+			}
+		}
+
 		return true;
 	}
+
+/**
+ * Update model records
+ *
+ * @param string $model model name to update
+ * @param string $records records to be stored
+ * @param string $scope ?
+ * @return boolean Should process continue
+ */
+	public function updateRecords($model, $records, $scope = null) {
+		$Model = $this->generateModel($model);
+		foreach ($records as $record) {
+			$Model->create();
+			if (!$Model->save($record, false)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }
