@@ -64,8 +64,9 @@
 
 		<?php
 			echo $this->Form->input('AccessCounter.count_start', array(
-				'label' => __d('access_counters', 'Starting Value'),
 				'type' => 'number',
+				'label' => __d('access_counters', 'Starting Value'),
+				'div' => false,
 				'class' => 'form-control',
 				'ng-model' => 'edit.data.AccessCounter.count_start',
 				'required' => true,
@@ -74,25 +75,24 @@
 			));
 		?>
 
-		<div ng-hide="counter.AccessCounter.is_started">
-			<span class="form-control-feedback"
-				  ng-class="accessCounterEdit.$valid ?
-					'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'; ">
-			</span>
+		<span ng-hide="counter.AccessCounter.is_started"
+			  class="form-control-feedback"
+			  ng-class="accessCounterEdit.$valid ?
+				'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'; ">
+		</span>
 
-			<p class="help-block">
-				<span class="error"
-					ng-show="accessCounterEdit.$error.number ||
-						accessCounterEdit.$error.pattern">
-					<?php echo __d('access_counters', 'Please enter in the range from 0 to 999999999.'); ?>
-				</span>
-				<span class="error"
-					ng-show="!accessCounterEdit.$error.number &&
-						accessCounterEdit.$error.required">
-					<?php echo __d('access_counters', 'Required field.'); ?>
-				</span>
-			</p>
-		</div>
+		<p class="help-block">
+			<span class="error"
+				ng-show="accessCounterEdit.$error.number ||
+					accessCounterEdit.$error.pattern">
+				<?php echo __d('access_counters', 'Please enter in the range from 0 to 999999999.'); ?>
+			</span>
+			<span class="error"
+				ng-show="!accessCounterEdit.$error.number &&
+					accessCounterEdit.$error.required">
+				<?php echo __d('access_counters', 'Required field.'); ?>
+			</span>
+		</p>
 
 	</div>
 </div>
