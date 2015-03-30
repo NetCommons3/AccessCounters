@@ -27,6 +27,7 @@ class AccessCountersController extends AccessCountersAppController {
 	public $uses = array(
 		'Frames.Frame',
 		'AccessCounters.AccessCounter',
+		'AccessCounters.AccessCounterFrameSetting',
 	);
 
 /**
@@ -37,42 +38,36 @@ class AccessCountersController extends AccessCountersAppController {
 	public $components = array(
 		'NetCommons.NetCommonsBlock', //use AccessCounter model or view
 		'NetCommons.NetCommonsFrame',
-		'NetCommons.NetCommonsRoomRole',
+		'NetCommons.NetCommonsRoomRole' => array(
+			//コンテンツの権限設定
+			'allowedActions' => array(
+				'contentEditable' => array('edit')
+			),
+		),
+		'Security' => array('validatePost' => false),
 	);
 
 /**
- * beforeFilter
+ * use helpers
+ *
+ * @var array
+ */
+	public $helpers = array(
+		'NetCommons.Token'
+	);
+
+/**
+ * index method
  *
  * @return void
- * @throws ForbiddenException
  */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$this->Auth->allow();
-
-		$frameId = (isset($this->params['pass'][0]) ? (int)$this->params['pass'][0] : 0);
-		//Frameのデータをviewにセット
-		if (! $this->NetCommonsFrame->setView($this, $frameId)) {
-			throw new ForbiddenException('NetCommonsFrame');
-		}
-		//Roleのデータをviewにセット
-		if (! $this->NetCommonsRoomRole->setView($this)) {
-			throw new ForbiddenException('NetCommonsFrame');
-		}
+	public function index() {
+		$this->view = 'AccessCounters/view';
+		$this->view();
 	}
 
 /**
- * index method
- *
- * @param int $frameId frames.id
- * @return CakeResponse A response object containing the rendered view.
- */
-	public function index($frameId = 0) {
-		return $this->view($frameId);
-	}
-
-/**
- * index method
+ * view method
  *
  * @param int $frameId frames.id
  * @return CakeResponse A response object containing the rendered view.
@@ -106,7 +101,40 @@ class AccessCountersController extends AccessCountersAppController {
 			$this->Session->write($isAccessed, CakeSession::read('Config.userAgent'));
 		}
 
-		$this->set('counter', $counter);
+		$results = array(
+			'counter' => $counter
+		);
+		$results = $this->camelizeKeyRecursive($results);
+		$this->set($results);
 		return $this->render('AccessCounters/view');
+	}
+
+/**
+ * edit method
+ *
+ * @param int $frameId frames.id
+ * @return CakeResponse A response object containing the rendered view.
+ */
+	public function edit($frameId = 0) {
+		$counter = $this->AccessCounter->getCounterInfo($this->viewVars['blockKey']);
+		$results = array(
+			'counter' => $counter
+		);
+		$results = $this->camelizeKeyRecursive($results);
+		if ($this->request->isGet()) {
+			CakeSession::write('backUrl', $this->request->referer());
+		}
+
+		$this->set($results);
+		if ($this->request->isPost()) {
+			$this->AccessCounterFrameSetting->saveSetting($this->data);
+			if (!$this->handleValidationError($this->AccessCounter->validationErrors)) {
+				return;
+			}
+			if (!$this->handleValidationError($this->AccessCounterFrameSetting->validationErrors)) {
+				return;
+			}
+			$this->redirectByFrameId();
+		}
 	}
 }
