@@ -38,7 +38,7 @@ class AccessCountersTest extends AccessCountersAppModelTest {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->AccessCounters = ClassRegistry::init('AccessCounters');
+		$this->AccessCounter = ClassRegistry::init('AccessCounters.AccessCounter');
 	}
 
 /**

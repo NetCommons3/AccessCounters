@@ -56,7 +56,6 @@ class AccessCountersAppModelTest extends YACakeTestCase {
 	public function tearDown() {
 		parent::tearDown();
 		unset($this->AccessCounter);
-
 	}
 
 /**
@@ -89,5 +88,6 @@ class AccessCountersAppModelTest extends YACakeTestCase {
  * @return void
  */
 	public function testIndex() {
+		$this->assertTrue(true);
 	}
 }
