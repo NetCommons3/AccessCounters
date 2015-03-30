@@ -53,7 +53,7 @@ e.g.) packagist', 'charset' => 'utf8'),
 		array(
 			'id' => 1,
 			'language_id' => 2,
-			'key' => 'access_counters',
+			'key' => 'announcements',
 			'weight' => 1,
 			'type' => 1,
 		),

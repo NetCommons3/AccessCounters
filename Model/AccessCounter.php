@@ -41,62 +41,53 @@ class AccessCounter extends AccessCountersAppModel {
  *
  * @var array
  */
-	public $validate = array(
-		'block_key' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+	public $validate = array();
+
+/**
+ * Called during validation operations, before validation. Please note that custom
+ * validation rules can be defined in $validate.
+ *
+ * @param array $options Options passed from Model::save().
+ * @return bool True if validate operation should continue, false to abort
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate
+ * @see Model::save()
+ */
+	public function beforeValidate($options = array()) {
+		$this->validate = Hash::merge($this->validate, array(
+			'block_key' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
 			),
-		),
-		'count' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			'count' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
+				'naturalNumber' => array(
+					'rule' => array('naturalNumber', true),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
+				'range' => array(
+					'rule' => array('range', -1, 2147483648),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
 			),
-			'naturalNumber' => array(
-				'rule' => array('naturalNumber', true),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			'count_start' => array(
+				'naturalNumber' => array(
+					'rule' => array('naturalNumber', true),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
+				'range' => array(
+					'rule' => array('range', -1, 1000000000),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
 			),
-			'range' => array(
-				'rule' => array('range', -1, 2147483648),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'count_start' => array(
-			'naturalNumber' => array(
-				'rule' => array('naturalNumber', true),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-			'range' => array(
-				'rule' => array('range', -1, 1000000000),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	);
+		));
+
+		return parent::beforeValidate($options);
+	}
 
 /**
  * get access_counter information
@@ -215,5 +206,17 @@ class AccessCounter extends AccessCountersAppModel {
 			$displayDigitOptions[$digit] = $digit;
 		}
 		return $displayDigitOptions;
+	}
+
+/**
+ * validate AccessCounter
+ *
+ * @param array $data received post data
+ * @return bool True on success, false on error
+ */
+	public function validateAccessCounter($data) {
+		$this->set($data);
+		$this->validates();
+		return $this->validationErrors ? false : true;
 	}
 }

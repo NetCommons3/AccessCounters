@@ -30,109 +30,107 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
  *
  * @var array
  */
-	public $validate = array(
-		'frame_key' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+	public $validate = array();
+
+/**
+ * Called during validation operations, before validation. Please note that custom
+ * validation rules can be defined in $validate.
+ *
+ * @param array $options Options passed from Model::save().
+ * @return bool True if validate operation should continue, false to abort
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate
+ * @see Model::save()
+ */
+	public function beforeValidate($options = array()) {
+		$this->validate = Hash::merge($this->validate, array(
+			'frame_key' => array(
+				'notEmpty' => array(
+					'rule' => array('notEmpty'),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
 			),
-		),
-		'display_type' => array(
-			'naturalNumber' => array(
-				'rule' => array('naturalNumber', true),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			'display_type' => array(
+				'naturalNumber' => array(
+					'rule' => array('naturalNumber', true),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
+				'range' => array(
+					'rule' => array('range', -1, 6),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
 			),
-			'range' => array(
-				'rule' => array('range', -1, 6),
-				//'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			'display_digit' => array(
+				'naturalNumber' => array(
+					'rule' => array('naturalNumber', true),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
+				'numeric' => array(
+					'rule' => array('range', 2, 10),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
 			),
-		),
-		'display_digit' => array(
-			'naturalNumber' => array(
-				'rule' => array('naturalNumber', true),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-			'numeric' => array(
-				'rule' => array('range', 2, 10),
-				//'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	);
+		));
+	}
 
 /**
  * save setting
  *
- * @param array $postData received post data
+ * @param array $data received post data
  * @return string $blockKey blocks.key
- * @throws ForbiddenException
+ * @throws InternalErrorException
  * @SuppressWarnings(PHPMD.LongVariable)
  */
-	public function saveSetting($postData) {
-		$models = array(
+	public function saveSetting($data) {
+		$this->loadModels([
 			'Frame' => 'Frames.Frame',
 			'Block' => 'Blocks.Block',
 			'AccessCounter' => 'AccessCounters.AccessCounter',
-		);
-		foreach ($models as $model => $class) {
-			$this->$model = ClassRegistry::init($class);
-		}
+		]);
 
-		//DBへの登録
+		//トランザクションBegin
 		$dataSource = $this->getDataSource();
 		$dataSource->begin();
 		try {
+			if (!$this->AccessCounter->validateAccessCounter($data)) {
+				return false;
+			}
+
+			if (!$this->validateAccessCounterFrameSetting($data)) {
+				return false;
+			}
+
 			// ブロックの登録処理
-			$frame = $this->__saveBlock($postData['Frame']['id']);
+			$frame = $this->__saveBlock($data['Frame']['id']);
 			$blockKey = $frame['Block']['key'];
 
 			// カウント開始前
-			if ($postData['AccessCounter']['is_started'] === 'false') {
+			if (! $data['AccessCounter']['is_started']) {
+				unset($data['AccessCounter']['is_started']);
 
 				// AccessCounterの新規登録
-				$AccessCounter = array('AccessCounter' => $postData['AccessCounter']);
+				$AccessCounter = array('AccessCounter' => $data['AccessCounter']);
 				$AccessCounter['AccessCounter']['block_key'] = $blockKey;
 				$AccessCounter['AccessCounter']['count'] = $AccessCounter['AccessCounter']['count_start'];
 				$AccessCounter = $this->AccessCounter->save($AccessCounter);
 				if (!$AccessCounter) {
-					return false;
+					throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				}
 			}
 
 			// AccessCounterFrameSettingの新規登録 or 更新
-			$AccessCounterFrameSetting = array('AccessCounterFrameSetting' => $postData['AccessCounterFrameSetting']);
+			$AccessCounterFrameSetting = array('AccessCounterFrameSetting' => $data['AccessCounterFrameSetting']);
 			$AccessCounterFrameSetting['AccessCounterFrameSetting']['frame_key'] = $frame['Frame']['key'];
 			$AccessCounterFrameSetting = $this->save($AccessCounterFrameSetting);
 			if (!$AccessCounterFrameSetting) {
-				return false;
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 
 			$dataSource->commit();
-			return $blockKey;
+			return true;
 		} catch (Exception $ex) {
 			$dataSource->rollback();
-			return false;
+			CakeLog::error($ex);
+			throw $ex;
 		}
 	}
 
@@ -141,7 +139,7 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
  *
  * @param int $frameId frames.id
  * @return array $frame
- * @throws ForbiddenException
+ * @throws InternalErrorException
  */
 	private function __saveBlock($frameId) {
 		$frame = $this->Frame->findById($frameId);
@@ -160,16 +158,28 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 		);
 		$block = $this->Block->save($block);
 		if (! $block) {
-			throw new ForbiddenException(serialize($this->Block->validationErrors));
+			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 
 		//frameの更新
 		$frame['Block'] = $block['Block'];
 		$frame['Frame']['block_id'] = $block['Block']['id'];
 		if (! $this->Frame->save($frame)) {
-			throw new ForbiddenException(serialize($this->Frame->validationErrors));
+			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 
 		return $frame;
+	}
+
+/**
+ * validate AccessCounterFrameSetting
+ *
+ * @param array $data received post data
+ * @return bool True on success, false on error
+ */
+	public function validateAccessCounterFrameSetting($data) {
+		$this->set($data);
+		$this->validates();
+		return $this->validationErrors ? false : true;
 	}
 }

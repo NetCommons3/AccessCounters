@@ -11,36 +11,43 @@
 ?>
 
 <?php echo $this->Html->script('/accessCounters/js/access_counters.js'); ?>
-<?php echo $this->Html->css('/accessCounters/css/access_counters.css'); ?>
 
-<div id="nc-access-counters-container-<?php echo (int)$frameId; ?>"
-	 ng-controller="AccessCounters"
-	 ng-init="initialize(
-			<?php echo (int)$frameId; ?>,
-			<?php echo h(json_encode($counter)); ?>)">
+<p class="text-right">
+	<?php if ($contentEditable) : ?>
+		<span class="nc-tooltip" tooltip="<?php echo __d('net_commons', 'Edit'); ?>">
+			<a href="<?php echo $this->Html->url('/access_counters/access_counters/edit/' . $frameId) ?>" class="btn btn-primary">
+				<span class="glyphicon glyphicon-cog"> </span>
+			</a>
+		</span>
+	<?php endif; ?>
+</p>
 
-	<p class="text-right">
-		<?php if ($contentEditable) : ?>
-			<button class="btn btn-primary"
-					tooltip="<?php echo __d('net_commons', 'Manage'); ?>"
-					ng-click="showManage()">
+<?php if(! $blockKey): ?>
+	<?php echo __d('faqs', 'Currently Access Counter has not been published.'); ?>
+<?php else: ?>
+		<div id="nc-access-counters-container-<?php echo (int)$frameId; ?>"
+			 ng-controller="AccessCounters"
+			 ng-init="init(
+					<?php echo (int)$frameId; ?>,
+					<?php echo h(json_encode($counter)); ?>)">
 
-				<span class="glyphicon glyphicon-cog"></span>
-			</button>
-		<?php endif; ?>
-	</p>
+			<div class="text-center">
+				<div class="h5">
+					<?php
+						$displayCounter = (string)$counter['accessCounter']['count'];
+						if (strlen($counter['accessCounter']['count']) < (int)$counter['accessCounterFrameSetting']['displayDigit']) {
+							$format = '%0' . $counter['accessCounterFrameSetting']['displayDigit'] . 'd';
+							$displayCounter = sprintf($format, $counter['accessCounter']['count']);
+						}
+						$displayCounterLength = strlen($displayCounter);
+					?>
+					<?php for ($i = 0; $i < $displayCounterLength; $i++): ?>
+						<span class="label label-<?php echo $counter['accessCounterFrameSetting']['displayTypeLabel']; ?>">
+							<?php echo $displayCounter[$i]; ?>
+						</span>
+					<?php endfor; ?>
+				</div>
+			</div>
 
-	<div class="text-center">
-		<div class="h5">
-			<span ng-show="counter.AccessCounter.is_started"
-				  class="label label-{{counter.AccessCounterFrameSetting.display_type_label}}"
-				  ng-repeat="num in formatCount(
-					counter.AccessCounter.count,
-					counter.AccessCounterFrameSetting.display_digit) track by $index"
-				  ng-bind="num"
-				  ng-cloak>
-			</span>
 		</div>
-	</div>
-
-</div>
+<?php endif;
