@@ -35,7 +35,7 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'site_setting',
+		'plugin.net_commons.site_setting',
 		'plugin.access_counters.access_counter',
 		'plugin.access_counters.block',
 		'plugin.access_counters.frame',
