@@ -69,10 +69,9 @@ class AccessCountersController extends AccessCountersAppController {
 /**
  * view method
  *
- * @param int $frameId frames.id
  * @return CakeResponse A response object containing the rendered view.
  */
-	public function view($frameId = 0) {
+	public function view() {
 		$blockKey = $this->viewVars['blockKey'];
 		$isAccessed = 'block_key_' . $blockKey;
 
@@ -112,10 +111,9 @@ class AccessCountersController extends AccessCountersAppController {
 /**
  * edit method
  *
- * @param int $frameId frames.id
  * @return CakeResponse A response object containing the rendered view.
  */
-	public function edit($frameId = 0) {
+	public function edit() {
 		$counter = $this->AccessCounter->getCounterInfo($this->viewVars['blockKey']);
 		$results = array(
 			'counter' => $counter

@@ -1,6 +1,6 @@
 <?php
 /**
- * AccessCounterFixture
+ * AccessCounterFrameSettingFixture
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
@@ -10,12 +10,12 @@
  */
 
 /**
- * AccessCountersFixture
+ * AccessCounterFrameSettingFixture
  *
  * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
  * @package NetCommons\AccessCounters\Test\Fixture
  */
-class AccessCounterFixture extends CakeTestFixture {
+class AccessCounterFrameSettingFixture extends CakeTestFixture {
 
 /**
  * Fields
@@ -24,9 +24,9 @@ class AccessCounterFixture extends CakeTestFixture {
  */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary', 'comment' => 'ID |  |  | '),
-		'block_key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'block key | ブロックKey | blocks.key | ', 'charset' => 'utf8'),
-		'count' => array('type' => 'integer', 'null' => false, 'default' => '0', 'comment' => 'Number of counts | カウント数 |  |'),
-		'count_start' => array('type' => 'integer', 'null' => false, 'default' => '0', 'comment' => 'Count start value | カウント開始値 |  |'),
+		'frame_key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'frame key | フレームKey | frames.key | ', 'charset' => 'utf8'),
+		'display_type' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 4, 'comment' => 'display type | 表示タイプ |  |'),
+		'display_digit' => array('type' => 'integer', 'null' => false, 'default' => '3', 'length' => 4, 'comment' => 'display digit | 表示桁数 |  |'),
 		'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'comment' => 'created user | 作成者 | users.id | '),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null, 'comment' => 'created datetime | 作成日時 |  | '),
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'comment' => 'modified user | 更新者 | users.id | '),
@@ -45,23 +45,23 @@ class AccessCounterFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'block_key' => 'block_5',
-			'count' => 1,
-			'count_start' => 0,
+			'frame_key' => 'frame_1',
+			'display_type' => 1,
+			'display_digit' => 1,
 			'created_user' => 1,
-			'created' => '2014-06-18 02:06:22',
+			'created' => '2015-04-04 05:02:46',
 			'modified_user' => 1,
-			'modified' => '2014-06-18 02:06:22'
+			'modified' => '2015-04-04 05:02:46'
 		),
 		array(
 			'id' => 2,
-			'block_key' => 'block_2',
-			'count' => 100,
-			'count_start' => 10,
+			'frame_key' => 'frame_2',
+			'display_type' => 1,
+			'display_digit' => 1,
 			'created_user' => 1,
-			'created' => '2014-06-18 02:06:22',
+			'created' => '2015-04-04 05:02:46',
 			'modified_user' => 1,
-			'modified' => '2014-06-18 02:06:22'
+			'modified' => '2015-04-04 05:02:46'
 		),
 	);
 

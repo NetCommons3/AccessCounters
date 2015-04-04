@@ -119,7 +119,7 @@ class AccessCounters extends CakeMigration {
  *
  * @param string $direction up or down direction of migration process
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @return boolean Should process continue
+ * @return bool Should process continue
  */
 	public function before($direction) {
 		return true;
@@ -130,7 +130,7 @@ class AccessCounters extends CakeMigration {
  *
  * @param string $direction up or down direction of migration process
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @return boolean Should process continue
+ * @return bool Should process continue
  */
 	public function after($direction) {
 		if ($direction === 'down') {
@@ -152,7 +152,7 @@ class AccessCounters extends CakeMigration {
  * @param string $model model name to update
  * @param string $records records to be stored
  * @author  Shohei Nakajima <nakajimashouhei@gmail.com>
- * @return  boolean Should process continue
+ * @return  bool Should process continue
  */
 	public function updateRecords($model, $records) {
 		$Model = $this->generateModel($model);
