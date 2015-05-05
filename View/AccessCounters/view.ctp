@@ -23,7 +23,7 @@
 </p>
 
 <?php if(! $blockKey): ?>
-	<?php echo __d('faqs', 'Currently Access Counter has not been published.'); ?>
+	<?php echo __d('access_counters', 'Currently Access Counter has not been published.'); ?>
 <?php else: ?>
 		<div id="nc-access-counters-container-<?php echo (int)$frameId; ?>"
 			 ng-controller="AccessCounters"

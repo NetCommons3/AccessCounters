@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-11-04 01:45+0000\n"
+"POT-Creation-Date: 2015-05-05 15:13+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,27 +14,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /View/Elements/AccessCounterEdit/edit_form.ctp:16
+#: AccessCounters/View/AccessCounters/edit.ctp:23
+msgid "plugin_name"
+msgstr ""
+
+#: AccessCounters/View/AccessCounters/view.ctp:26
+msgid "Currently Access Counter has not been published."
+msgstr ""
+
+#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:34
 msgid "Display Type"
 msgstr ""
 
-#: /View/Elements/AccessCounterEdit/edit_form.ctp:51
+#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:77
 msgid "Display Digit"
 msgstr ""
 
-#: /View/Elements/AccessCounterEdit/edit_form.ctp:68
+#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:96
 msgid "Starting Value"
-msgstr ""
-
-#: /View/Elements/AccessCounterEdit/edit_form.ctp:88
-msgid "Please enter in the range from 0 to 999999999."
-msgstr ""
-
-#: /View/Elements/AccessCounterEdit/edit_form.ctp:93
-msgid "Required field."
-msgstr ""
-
-#: /View/Elements/AccessCounterEdit/tab_header.ctp:23
-msgid "Counter Edit"
 msgstr ""
 
