@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-05-05 15:13+0000\n"
-"PO-Revision-Date: 2015-05-06 00:48+0900\n"
+"POT-Creation-Date: 2015-05-06 13:38+0000\n"
+"PO-Revision-Date: 2015-05-06 22:41+0900\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -14,22 +14,26 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "X-Generator: Poedit 1.7.5\n"
 
-#: AccessCounters/View/AccessCounters/edit.ctp:23
-msgid "plugin_name"
-msgstr "カウンター"
+#: AccessCounters/View/Blocks/index.ctp:37
+msgid "Count"
+msgstr "カウント数"
 
-#: AccessCounters/View/AccessCounters/view.ctp:26
-msgid "Currently Access Counter has not been published."
-msgstr ""
+#: AccessCounters/View/Blocks/index.ctp:43
+msgid "Access date"
+msgstr "アクセス更新日"
 
-#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:34
-msgid "Display Type"
+#: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:31
+msgid "Display type"
 msgstr "表示タイプ"
 
-#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:77
-msgid "Display Digit"
+#: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:81
+msgid "Display digit"
 msgstr "表示桁数"
 
-#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:96
+#: AccessCounters/View/Elements/AccessCounters/delete_form.ctp:14;25
+msgid "Access counter"
+msgstr "アクセスカウンター"
+
+#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:53
 msgid "Starting Value"
 msgstr "開始値"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-05-05 15:13+0000\n"
+"POT-Creation-Date: 2015-05-06 13:38+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,23 +14,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: AccessCounters/View/AccessCounters/edit.ctp:23
-msgid "plugin_name"
+#: AccessCounters/View/Blocks/index.ctp:37
+msgid "Count"
 msgstr ""
 
-#: AccessCounters/View/AccessCounters/view.ctp:26
-msgid "Currently Access Counter has not been published."
+#: AccessCounters/View/Blocks/index.ctp:43
+msgid "Access date"
 msgstr ""
 
-#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:34
-msgid "Display Type"
+#: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:31
+msgid "Display type"
 msgstr ""
 
-#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:77
-msgid "Display Digit"
+#: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:81
+msgid "Display digit"
 msgstr ""
 
-#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:96
+#: AccessCounters/View/Elements/AccessCounters/delete_form.ctp:14;25
+msgid "Access counter"
+msgstr ""
+
+#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:53
 msgid "Starting Value"
 msgstr ""
 
