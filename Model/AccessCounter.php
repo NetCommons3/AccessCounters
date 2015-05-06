@@ -20,28 +20,28 @@ App::uses('AccessCountersAppModel', 'AccessCounters.Model');
  */
 class AccessCounter extends AccessCountersAppModel {
 
-	const DISPLAY_TYPE_LABEL_0 = 'default';
-
-	const DISPLAY_TYPE_LABEL_1 = 'primary';
-
-	const DISPLAY_TYPE_LABEL_2 = 'success';
-
-	const DISPLAY_TYPE_LABEL_3 = 'info';
-
-	const DISPLAY_TYPE_LABEL_4 = 'warning';
-
-	const DISPLAY_TYPE_LABEL_5 = 'danger';
-
-	const DISPLAY_DIGIT_MIN = 3;
-
-	const DISPLAY_DIGIT_MAX = 9;
-
 /**
  * Validation rules
  *
  * @var array
  */
 	public $validate = array();
+
+	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'Block' => array(
+			'className' => 'Blocks.Block',
+			'foreignKey' => false,
+			'conditions' => 'AccessCounter.block_key = Block.key',
+			'fields' => '',
+		),
+	);
 
 /**
  * Called during validation operations, before validation. Please note that custom
@@ -58,30 +58,22 @@ class AccessCounter extends AccessCountersAppModel {
 				'notEmpty' => array(
 					'rule' => array('notEmpty'),
 					'message' => __d('net_commons', 'Invalid request.'),
+					'required' => true,
+					'on' => 'update', // Limit validation to 'create' or 'update' operations
 				),
 			),
 			'count' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
-					'message' => __d('net_commons', 'Invalid request.'),
-				),
 				'naturalNumber' => array(
 					'rule' => array('naturalNumber', true),
 					'message' => __d('net_commons', 'Invalid request.'),
-				),
-				'range' => array(
-					'rule' => array('range', -1, 2147483648),
-					'message' => __d('net_commons', 'Invalid request.'),
+					'allowEmpty' => true,
 				),
 			),
 			'count_start' => array(
 				'naturalNumber' => array(
 					'rule' => array('naturalNumber', true),
 					'message' => __d('net_commons', 'Invalid request.'),
-				),
-				'range' => array(
-					'rule' => array('range', -1, 1000000000),
-					'message' => __d('net_commons', 'Invalid request.'),
+					'allowEmpty' => true,
 				),
 			),
 		));
@@ -90,133 +82,183 @@ class AccessCounter extends AccessCountersAppModel {
 	}
 
 /**
- * get access_counter information
+ * Get accessCounter
  *
- * @param int $blockKey blocks.key
- * @return array
+ * @param string $blockKey blocks.key
+ * @param int $roomId rooms.id
+ * @return array AccessCounter
  */
-	public function getCounterInfo($blockKey) {
-		$fields = array(
-			'AccessCounter.id',
-			'AccessCounter.block_key',
-			'AccessCounter.count',
-			'AccessCounter.count_start',
-			'Block.id',
-			'Frame.id',
-			'AccessCounterFrameSetting.id',
-			'AccessCounterFrameSetting.frame_key',
-			'AccessCounterFrameSetting.display_type',
-			'AccessCounterFrameSetting.display_digit',
-		);
-		$conditions = array('AccessCounter.block_key' => $blockKey);
-		$joins = array(
-			array(
-				'type' => 'INNER',
-				'table' => 'blocks',
-				'alias' => 'Block',
-				'conditions' => 'AccessCounter.block_key = Block.key',
-			),
-			array(
-				'type' => 'INNER',
-				'table' => 'frames',
-				'alias' => 'Frame',
-				'conditions' => 'Block.id = Frame.block_id',
-			),
-			array(
-				'type' => 'INNER',
-				'table' => 'access_counter_frame_settings',
-				'alias' => 'AccessCounterFrameSetting',
-				'conditions' => 'Frame.key = AccessCounterFrameSetting.frame_key',
-			),
-		);
-		$order = 'AccessCounter.id DESC';
+	public function getAccessCounter($blockKey, $roomId) {
+		$conditions[$this->alias . '.block_key'] = $blockKey;
+		$conditions['Block.room_id'] = $roomId;
 
-		// カウンタ情報取得
-		$counter = $this->find('first', array(
-				'fields' => $fields,
+		$accessCounter = $this->find('first', array(
+				'recursive' => 0,
 				'conditions' => $conditions,
-				'joins' => $joins,
-				'order' => $order
-			));
-
-		if (!empty($counter)) {
-			// カウント開始フラグの付与
-			$counter['AccessCounter']['is_started'] = true; // カウント開始済
-
-			// 表示タイプのラベル名取得
-			$displayType = $counter['AccessCounterFrameSetting']['display_type'];
-			$counter['AccessCounterFrameSetting']['display_type_label'] = $this->getDisplayTypeLabel($displayType);
-		} else {
-			// カウント開始前の初期情報
-			$counter = array(
-				'AccessCounter' => array(
-					'count_start' => 0,
-					'is_started' => false, // カウント開始前
-				),
-				'AccessCounterFrameSetting' => array(
-					'id' => null,
-					'display_type' => '0',
-					'display_digit' => AccessCounter::DISPLAY_DIGIT_MIN,
-					'display_type_label' => AccessCounter::DISPLAY_TYPE_LABEL_0,
-				)
-			);
-		}
-
-		return $counter;
-	}
-
-/**
- * get display_type label
- *
- * @param int $displayType AccessCounterFrameSetting.display_type
- * @return String
- */
-	public static function getDisplayTypeLabel($displayType) {
-		try {
-			return constant("self::DISPLAY_TYPE_LABEL_" . $displayType);
-		} catch (Exception $e) {
-			return self::DISPLAY_TYPE_LABEL_0;
-		}
-	}
-
-/**
- * get display_type options
- *
- * @return array
- */
-	public static function getDisplayTypeOptions() {
-		return array(
-			self::DISPLAY_TYPE_LABEL_0,
-			self::DISPLAY_TYPE_LABEL_1,
-			self::DISPLAY_TYPE_LABEL_2,
-			self::DISPLAY_TYPE_LABEL_3,
-			self::DISPLAY_TYPE_LABEL_4,
-			self::DISPLAY_TYPE_LABEL_5,
+			)
 		);
+
+		return $accessCounter;
 	}
 
 /**
- * get display_digit options
+ * Save block
  *
- * @return array
+ * @param array $data received post data
+ * @return bool True on success, false on validation errors
+ * @throws InternalErrorException
  */
-	public static function getDisplayDigitOptions() {
-		$displayDigitOptions = array();
-		for ($digit = self::DISPLAY_DIGIT_MIN; $digit <= self::DISPLAY_DIGIT_MAX; $digit++) {
-			$displayDigitOptions[$digit] = $digit;
+	public function saveAccessCounter($data) {
+		$this->loadModels([
+			'AccessCounter' => 'AccessCounters.AccessCounter',
+			'AccessCounterFrameSetting' => 'AccessCounters.AccessCounterFrameSetting',
+			'Block' => 'Blocks.Block',
+			'Frame' => 'Frames.Frame',
+		]);
+
+		//トランザクションBegin
+		$this->setDataSource('master');
+		$dataSource = $this->getDataSource();
+		$dataSource->begin();
+
+		try {
+			//バリデーション
+			if (! $this->validateAccessCounter($data, ['counterFrameSetting'])) {
+				return false;
+			}
+
+			//ブロックの登録
+			$block = $this->Block->saveByFrameId($data['Frame']['id']);
+
+			//登録処理
+			$this->data['AccessCounter']['block_key'] = $block['Block']['key'];
+			if (! $this->save(null, false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			if (isset($data['AccessCounterFrameSetting'])) {
+				if (! $this->AccessCounterFrameSetting->save(null, false)) {
+					throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+				}
+			}
+
+			//トランザクションCommit
+			$dataSource->commit();
+
+		} catch (Exception $ex) {
+			//トランザクションRollback
+			$dataSource->rollback();
+			CakeLog::error($ex);
+			throw $ex;
 		}
-		return $displayDigitOptions;
+
+		return true;
 	}
 
 /**
  * validate AccessCounter
  *
  * @param array $data received post data
+ * @param array $contains Optional validate sets
  * @return bool True on success, false on error
  */
-	public function validateAccessCounter($data) {
+	public function validateAccessCounter($data, $contains = []) {
 		$this->set($data);
 		$this->validates();
-		return $this->validationErrors ? false : true;
+		if ($this->validationErrors) {
+			return false;
+		}
+
+		if (! $this->Block->validateBlock($data)) {
+			$this->validationErrors = Hash::merge($this->validationErrors, $this->Block->validationErrors);
+			return false;
+		}
+
+		if (isset($data['AccessCounterFrameSetting']) && in_array('counterFrameSetting', $contains, true)) {
+			if (! $this->AccessCounterFrameSetting->validateAccessCounterFrameSetting($data)) {
+				$this->validationErrors = Hash::merge($this->validationErrors, $this->AccessCounterFrameSetting->validationErrors);
+				return false;
+			}
+		}
+		return true;
 	}
+
+/**
+ * Delete block
+ *
+ * @param array $data received post data
+ * @return mixed On success Model::$data if its not empty or true, false on failure
+ * @throws InternalErrorException
+ */
+	public function deleteAccessCounter($data) {
+		$this->setDataSource('master');
+
+		$this->loadModels([
+			'AccessCounter' => 'AccessCounters.AccessCounter',
+			'Block' => 'Blocks.Block',
+		]);
+
+		//トランザクションBegin
+		$dataSource = $this->getDataSource();
+		$dataSource->begin();
+
+		try {
+			if (! $this->deleteAll(array($this->alias . '.block_key' => $data['Block']['key']), false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			//Blockデータ削除
+			$this->Block->deleteBlock($data['Block']['key']);
+
+			//トランザクションCommit
+			$dataSource->commit();
+
+		} catch (Exception $ex) {
+			//トランザクションRollback
+			$dataSource->rollback();
+			CakeLog::error($ex);
+			throw $ex;
+		}
+
+		return true;
+	}
+
+/**
+ * Save block
+ *
+ * @param array $data received post data
+ * @return bool True on success, false on validation errors
+ * @throws InternalErrorException
+ */
+	public function updateCountUp($data) {
+		$this->loadModels([
+			'AccessCounter' => 'AccessCounters.AccessCounter',
+		]);
+
+		//トランザクションBegin
+		$this->setDataSource('master');
+		$dataSource = $this->getDataSource();
+		$dataSource->begin();
+
+		try {
+			if (! $this->updateAll(
+				array($this->name . '.count' => $this->name . '.count + 1'),
+				array($this->name . '.id' => $data[$this->name]['id'])
+			)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			};
+
+			//トランザクションCommit
+			$dataSource->commit();
+
+		} catch (Exception $ex) {
+			//トランザクションRollback
+			$dataSource->rollback();
+			CakeLog::error($ex);
+			throw $ex;
+		}
+
+		return true;
+	}
+
 }

@@ -36,15 +36,13 @@ class AccessCountersController extends AccessCountersAppController {
  * @var array
  */
 	public $components = array(
-		'NetCommons.NetCommonsBlock', //use AccessCounter model or view
-		'NetCommons.NetCommonsFrame',
+		'NetCommons.NetCommonsBlock',
 		'NetCommons.NetCommonsRoomRole' => array(
 			//コンテンツの権限設定
 			'allowedActions' => array(
-				'contentEditable' => array('edit')
+				'blockEditable' => array('add', 'edit', 'delete')
 			),
 		),
-		'Security' => array('validatePost' => false),
 	);
 
 /**
@@ -57,82 +55,206 @@ class AccessCountersController extends AccessCountersAppController {
 	);
 
 /**
- * index method
+ * index
  *
  * @return void
  */
 	public function index() {
-		$this->view = 'AccessCounters/view';
-		$this->view();
+		$this->setAction('view');
 	}
 
 /**
- * view method
+ * view
  *
- * @return CakeResponse A response object containing the rendered view.
+ * @return void
+ * @throws Exception
  */
 	public function view() {
-		$blockKey = $this->viewVars['blockKey'];
-		$isAccessed = 'block_key_' . $blockKey;
-
-		// blockKeyに紐づくカウンタ情報の取得
-		$counter = $this->AccessCounter->getCounterInfo($blockKey);
-
-		// カウント開始前
-		if (!$counter['AccessCounter']['is_started']) {
-			// アクセス情報をクリア
-			$this->Session->delete($isAccessed);
+		if (! $this->viewVars['blockId']) {
+			$this->autoRender = false;
+			return;
 		}
 
-		// カウント開始済 && アクセス情報なし
-		if ($counter['AccessCounter']['is_started'] &&
-				$this->Session->read($isAccessed) === null) {
+		$isAccessed = 'block_key_' . $this->viewVars['blockKey'];
 
-			// カウントアップ処理
-			$counter['AccessCounter']['count']++;
-			$AccessCounter = array(
-				'id' => $counter['AccessCounter']['id'],
-				'count' => $counter['AccessCounter']['count']
-			);
-			$this->AccessCounter->save($AccessCounter);
+		//AccessCounter共通データ取得
+		$this->initAccessCounter();
 
-			// アクセス情報を記録
-			$this->Session->write($isAccessed, CakeSession::read('Config.userAgent'));
+		//counterデータ取得
+		if (! $accessCounter = $this->AccessCounter->getAccessCounter(
+			$this->viewVars['blockKey'],
+			$this->viewVars['roomId']
+		)) {
+			$accessCounter = $this->AccessCounter->create();
 		}
 
-		$results = array(
-			'counter' => $counter
-		);
-		$results = $this->camelizeKeyRecursive($results);
-		$this->set($results);
-		return $this->render('AccessCounters/view');
+		// カウントアップ処理
+		if (! $this->Session->read($isAccessed)) {
+			try {
+				$this->AccessCounter->updateCountUp($accessCounter);
+				$accessCounter['AccessCounter']['count']++;
+				// アクセス情報を記録
+				$this->Session->write($isAccessed, CakeSession::read('Config.userAgent'));
+
+			} catch (Exception $ex) {
+				CakeLog::error($ex);
+				throw $ex;
+			}
+		}
+
+		$accessCounter = $this->camelizeKeyRecursive($accessCounter);
+		$this->set($accessCounter);
 	}
 
 /**
- * edit method
+ * add
  *
- * @return CakeResponse A response object containing the rendered view.
+ * @return void
  */
-	public function edit() {
-		$counter = $this->AccessCounter->getCounterInfo($this->viewVars['blockKey']);
-		$results = array(
-			'counter' => $counter
+	public function add() {
+		//レイアウトの設定
+		$this->layout = 'NetCommons.setting';
+		$results = $this->camelizeKeyRecursive($this->NetCommonsFrame->data);
+		$this->set($results);
+		$this->view = 'edit';
+
+		//タブの設定
+		$this->initTabs('block_index', 'block_settings');
+
+		//AccessCounter共通データ取得
+		$this->initAccessCounter();
+
+		$this->set('blockId', null);
+		$accessCounter = $this->AccessCounter->create(
+			array(
+				'id' => null,
+				'block_key' => null,
+			)
 		);
-		$results = $this->camelizeKeyRecursive($results);
-		if ($this->request->isGet()) {
-			CakeSession::write('backUrl', $this->request->referer());
+		$block = $this->Block->create(
+			array('id' => null, 'key' => null)
+		);
+		$data = array();
+		if ($this->request->isPost()) {
+			$data = $this->__parseRequestData();
+
+			$this->AccessCounter->saveAccessCounter($data);
+			if ($this->handleValidationError($this->AccessCounter->validationErrors)) {
+				if (! $this->request->is('ajax')) {
+					$this->redirect('/access_counters/blocks/index/' . $this->viewVars['frameId']);
+				}
+				return;
+			}
+
+			$data['Block']['id'] = null;
+			$data['Block']['key'] = null;
 		}
 
+		$results = $this->camelizeKeyRecursive(Hash::merge(
+			$accessCounter, $block, $data
+		));
 		$this->set($results);
-		if ($this->request->isPost()) {
-			$this->AccessCounterFrameSetting->saveSetting($this->data);
-			if (!$this->handleValidationError($this->AccessCounter->validationErrors)) {
-				return;
-			}
-			if (!$this->handleValidationError($this->AccessCounterFrameSetting->validationErrors)) {
-				return;
-			}
-			$this->redirectByFrameId();
-		}
 	}
+
+/**
+ * edit
+ *
+ * @return void
+ */
+	public function edit() {
+		if (! $this->NetCommonsBlock->validateBlockId()) {
+			$this->throwBadRequest();
+			return false;
+		}
+		$this->set('blockId', (int)$this->params['pass'][1]);
+
+		//レイアウトの設定
+		$this->layout = 'NetCommons.setting';
+		$results = $this->camelizeKeyRecursive($this->NetCommonsFrame->data);
+		$this->set($results);
+
+		//タブの設定
+		$this->initTabs('block_index', 'block_settings');
+
+		//AccessCounter共通データ取得
+		$this->initAccessCounter();
+
+		//counterデータ取得
+		if (! $accessCounter = $this->AccessCounter->getAccessCounter(
+			$this->viewVars['blockKey'],
+			$this->viewVars['roomId']
+		)) {
+			$this->throwBadRequest();
+			return false;
+		}
+
+		$data = array();
+		if ($this->request->isPost()) {
+			$data = $this->__parseRequestData();
+
+			$this->AccessCounter->saveAccessCounter($data);
+			if ($this->handleValidationError($this->AccessCounter->validationErrors)) {
+				if (! $this->request->is('ajax')) {
+					$this->redirect('/access_counters/blocks/index/' . $this->viewVars['frameId']);
+				}
+				return;
+			}
+		}
+
+		$results = $this->camelizeKeyRecursive(Hash::merge(
+			$accessCounter, $data
+		));
+		$this->set($results);
+	}
+
+/**
+ * delete
+ *
+ * @return void
+ */
+	public function delete() {
+		if (! $this->NetCommonsBlock->validateBlockId()) {
+			$this->throwBadRequest();
+			return false;
+		}
+		$this->set('blockId', (int)$this->params['pass'][1]);
+
+		$this->initAccessCounter();
+
+		if ($this->request->isDelete()) {
+			if ($this->AccessCounter->deleteAccessCounter($this->data)) {
+				if (! $this->request->is('ajax')) {
+					$this->redirect('/access_counters/blocks/index/' . $this->viewVars['frameId']);
+				}
+				return;
+			}
+		}
+
+		$this->throwBadRequest();
+	}
+
+/**
+ * Parse data from request
+ *
+ * @return array
+ */
+	private function __parseRequestData() {
+		$data = $this->data;
+		if ($data['Block']['public_type'] === Block::TYPE_LIMITED) {
+			//$data['Block']['from'] = implode('-', $data['Block']['from']);
+			//$data['Block']['to'] = implode('-', $data['Block']['to']);
+		} else {
+			unset($data['Block']['from'], $data['Block']['to']);
+		}
+
+		if (isset($data['AccessCounterFrameSetting']['display_type'])) {
+			$data['AccessCounterFrameSetting']['display_type'] = (int)$data['AccessCounterFrameSetting']['display_type'];
+		}
+		if (isset($data['AccessCounter']['count_start'])) {
+			$data['AccessCounter']['count'] = (int)$data['AccessCounter']['count_start'];
+		}
+
+		return $data;
+	}
+
 }

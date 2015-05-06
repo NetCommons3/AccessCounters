@@ -35,19 +35,19 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'plugin.net_commons.site_setting',
 		'plugin.access_counters.access_counter',
 		'plugin.access_counters.access_counter_frame_setting',
-		'plugin.access_counters.plugin',
 		'plugin.blocks.block',
 		'plugin.blocks.block_role_permission',
 		'plugin.boxes.box',
-		'plugin.frames.frame',
 		'plugin.boxes.boxes_page',
 		'plugin.containers.container',
 		'plugin.containers.containers_page',
+		'plugin.frames.frame',
 		'plugin.m17n.language',
 		'plugin.m17n.languages_page',
+		'plugin.net_commons.plugin',
+		'plugin.net_commons.site_setting',
 		'plugin.pages.page',
 		'plugin.pages.space',
 		'plugin.roles.default_role_permission',
@@ -95,7 +95,13 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testIndex() {
-		$this->testAction('/access_counters/access_counters/index/1', array('method' => 'get'));
+		$frameId = '161';
+		$this->testAction('/access_counters/access_counters/index/' . $frameId,
+			array(
+				'method' => 'get',
+				'return' => 'view',
+			)
+		);
 
 		$expected = 'primary';
 		$this->assertTextContains($expected, $this->view);
@@ -107,7 +113,13 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testView() {
-		$this->testAction('/access_counters/access_counters/view/1', array('method' => 'get'));
+		$frameId = '161';
+		$this->testAction('/access_counters/access_counters/view/' . $frameId,
+			array(
+				'method' => 'get',
+				'return' => 'view',
+			)
+		);
 
 		$expected = 'primary';
 		$this->assertTextContains($expected, $this->view);
@@ -119,7 +131,13 @@ class AccessCountersControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testViewNotStarted() {
-		$this->testAction('/access_counters/access_counters/view/2', array('method' => 'get'));
+		$frameId = '162';
+		$this->testAction('/access_counters/access_counters/view/' . $frameId,
+			array(
+				'method' => 'get',
+				'return' => 'view',
+			)
+		);
 
 		$expected = 'primary';
 		$this->assertTextContains($expected, $this->view);

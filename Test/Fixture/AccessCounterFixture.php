@@ -45,7 +45,7 @@ class AccessCounterFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'block_key' => 'block_5',
+			'block_key' => 'block_161',
 			'count' => 1,
 			'count_start' => 0,
 			'created_user' => 1,
@@ -55,7 +55,7 @@ class AccessCounterFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => 2,
-			'block_key' => 'block_2',
+			'block_key' => 'block_162',
 			'count' => 100,
 			'count_start' => 10,
 			'created_user' => 1,

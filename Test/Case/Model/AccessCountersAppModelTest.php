@@ -29,13 +29,13 @@ class AccessCountersAppModelTest extends YACakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'plugin.access_counters.plugin',
-		'plugin.m17n.language',
-		'plugin.rooms.room',
-		'plugin.boxes.box',
 		'plugin.access_counters.access_counter',
 		'plugin.blocks.block',
+		'plugin.boxes.box',
 		'plugin.frames.frame',
+		'plugin.m17n.language',
+		'plugin.net_commons.plugin',
+		'plugin.rooms.room',
 		'plugin.users.user',
 		'plugin.users.user_attributes_user',
 

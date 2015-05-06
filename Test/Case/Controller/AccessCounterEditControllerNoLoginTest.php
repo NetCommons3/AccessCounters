@@ -35,19 +35,19 @@ class AccessCounterEditControllerNoLoginTest extends ControllerTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'plugin.net_commons.site_setting',
 		'plugin.access_counters.access_counter',
 		'plugin.access_counters.access_counter_frame_setting',
-		'plugin.access_counters.plugin',
 		'plugin.blocks.block',
 		'plugin.blocks.block_role_permission',
 		'plugin.boxes.box',
-		'plugin.frames.frame',
 		'plugin.boxes.boxes_page',
 		'plugin.containers.container',
 		'plugin.containers.containers_page',
+		'plugin.frames.frame',
 		'plugin.m17n.language',
 		'plugin.m17n.languages_page',
+		'plugin.net_commons.plugin',
+		'plugin.net_commons.site_setting',
 		'plugin.pages.page',
 		'plugin.pages.space',
 		'plugin.roles.default_role_permission',

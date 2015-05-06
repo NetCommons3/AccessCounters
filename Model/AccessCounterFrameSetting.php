@@ -19,11 +19,44 @@ App::uses('AccessCountersAppModel', 'AccessCounters.Model');
 class AccessCounterFrameSetting extends AccessCountersAppModel {
 
 /**
- * Use database config
+ * Displau type
  *
  * @var string
  */
-	public $useDbConfig = 'master';
+	const DISPLAY_TYPE_LABEL_0 = 'default',
+			DISPLAY_TYPE_LABEL_1 = 'primary',
+			DISPLAY_TYPE_LABEL_2 = 'success',
+			DISPLAY_TYPE_LABEL_3 = 'info',
+			DISPLAY_TYPE_LABEL_4 = 'warning',
+			DISPLAY_TYPE_LABEL_5 = 'danger';
+
+/**
+ * categorySeparatorLine
+ *
+ * @var array
+ */
+	static public $displayTypes = array(
+		'1' => self::DISPLAY_TYPE_LABEL_0,
+		'2' => self::DISPLAY_TYPE_LABEL_1,
+		'3' => self::DISPLAY_TYPE_LABEL_2,
+		'4' => self::DISPLAY_TYPE_LABEL_3,
+		'5' => self::DISPLAY_TYPE_LABEL_4,
+		'6' => self::DISPLAY_TYPE_LABEL_5,
+	);
+
+/**
+ * Min value of displau digit
+ *
+ * @var int
+ */
+	const DISPLAY_DIGIT_MIN = 3;
+
+/**
+ * max value of displau digit
+ *
+ * @var int
+ */
+	const DISPLAY_DIGIT_MAX = 9;
 
 /**
  * Validation rules
@@ -42,6 +75,8 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
  * @see Model::save()
  */
 	public function beforeValidate($options = array()) {
+		$displayTypes = array_keys(self::$displayTypes);
+
 		$this->validate = Hash::merge($this->validate, array(
 			'frame_key' => array(
 				'notEmpty' => array(
@@ -50,14 +85,11 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 				),
 			),
 			'display_type' => array(
-				'naturalNumber' => array(
-					'rule' => array('naturalNumber', true),
+				'inList' => array(
+					'rule' => array('inList', $displayTypes),
 					'message' => __d('net_commons', 'Invalid request.'),
-				),
-				'range' => array(
-					'rule' => array('range', -1, 6),
-					'message' => __d('net_commons', 'Invalid request.'),
-				),
+					'allowEmpty' => true,
+				)
 			),
 			'display_digit' => array(
 				'naturalNumber' => array(
@@ -65,7 +97,7 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 					'message' => __d('net_commons', 'Invalid request.'),
 				),
 				'numeric' => array(
-					'rule' => array('range', 2, 10),
+					'rule' => array('range', self::DISPLAY_DIGIT_MIN - 1, self::DISPLAY_DIGIT_MAX + 1),
 					'message' => __d('net_commons', 'Invalid request.'),
 				),
 			),
@@ -73,102 +105,61 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 	}
 
 /**
- * save setting
+ * Get access counter setting data
+ *
+ * @param string $frameKey frames.key
+ * @return array
+ */
+	public function getAccessCounterFrameSetting($frameKey) {
+		$conditions = array(
+			'frame_key' => $frameKey
+		);
+
+		$counterFrameSetting = $this->find('first', array(
+				'recursive' => -1,
+				'conditions' => $conditions,
+			)
+		);
+
+		return $counterFrameSetting;
+	}
+
+/**
+ * Save access counter settings
  *
  * @param array $data received post data
- * @return string $blockKey blocks.key
+ * @return bool True on success, false on failure
  * @throws InternalErrorException
- * @SuppressWarnings(PHPMD.LongVariable)
  */
-	public function saveSetting($data) {
+	public function saveAccessCounterFrameSetting($data) {
 		$this->loadModels([
-			'Frame' => 'Frames.Frame',
-			'Block' => 'Blocks.Block',
-			'AccessCounter' => 'AccessCounters.AccessCounter',
+			'AccessCounterFrameSetting' => 'AccessCounters.AccessCounterFrameSetting',
 		]);
 
 		//トランザクションBegin
+		$this->setDataSource('master');
 		$dataSource = $this->getDataSource();
 		$dataSource->begin();
+
 		try {
-			if (!$this->AccessCounter->validateAccessCounter($data)) {
+			if (! $this->validateAccessCounterFrameSetting($data)) {
 				return false;
 			}
 
-			if (!$this->validateAccessCounterFrameSetting($data)) {
-				return false;
-			}
-
-			// ブロックの登録処理
-			$frame = $this->__saveBlock($data['Frame']['id']);
-			$blockKey = $frame['Block']['key'];
-
-			// カウント開始前
-			if (! $data['AccessCounter']['is_started']) {
-				unset($data['AccessCounter']['is_started']);
-
-				// AccessCounterの新規登録
-				$AccessCounter = array('AccessCounter' => $data['AccessCounter']);
-				$AccessCounter['AccessCounter']['block_key'] = $blockKey;
-				$AccessCounter['AccessCounter']['count'] = $AccessCounter['AccessCounter']['count_start'];
-				$AccessCounter = $this->AccessCounter->save($AccessCounter);
-				if (!$AccessCounter) {
-					throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-				}
-			}
-
-			// AccessCounterFrameSettingの新規登録 or 更新
-			$AccessCounterFrameSetting = array('AccessCounterFrameSetting' => $data['AccessCounterFrameSetting']);
-			$AccessCounterFrameSetting['AccessCounterFrameSetting']['frame_key'] = $frame['Frame']['key'];
-			$AccessCounterFrameSetting = $this->save($AccessCounterFrameSetting);
-			if (!$AccessCounterFrameSetting) {
+			if (! $this->save(null, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 
+			//トランザクションCommit
 			$dataSource->commit();
-			return true;
 		} catch (Exception $ex) {
+			//トランザクションRollback
 			$dataSource->rollback();
 			CakeLog::error($ex);
 			throw $ex;
 		}
-	}
 
-/**
- * save block
- *
- * @param int $frameId frames.id
- * @return array $frame
- * @throws InternalErrorException
- */
-	private function __saveBlock($frameId) {
-		$frame = $this->Frame->findById($frameId);
-
-		// 紐づくブロックが既に存在する
-		if (isset($frame['Frame']['block_id']) &&
-			$frame['Frame']['block_id'] !== '0') {
-
-			return $frame;
-		}
-
-		//blockの新規登録
-		$block = array(
-			'room_id' => $frame['Frame']['room_id'],
-			'language_id' => $frame['Frame']['language_id'],
-		);
-		$block = $this->Block->save($block);
-		if (! $block) {
-			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-		}
-
-		//frameの更新
-		$frame['Block'] = $block['Block'];
-		$frame['Frame']['block_id'] = $block['Block']['id'];
-		if (! $this->Frame->save($frame)) {
-			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-		}
-
-		return $frame;
+		return true;
 	}
 
 /**
@@ -180,6 +171,9 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 	public function validateAccessCounterFrameSetting($data) {
 		$this->set($data);
 		$this->validates();
-		return $this->validationErrors ? false : true;
+		if ($this->validationErrors) {
+			return false;
+		}
+		return true;
 	}
 }

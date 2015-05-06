@@ -5,23 +5,32 @@
 
 
 /**
- * AccessCounters Javascript
+ * AccessCounterFrameSettings Javascript
  *
  * @param {string} Controller name
- * @param {function(scope)} Controller
+ * @param {function($scope)} Controller
  */
-NetCommonsApp.controller('AccessCounters',
-    function($scope) {
+NetCommonsApp.controller('AccessCounterFrameSettings', function($scope) {
 
-      $scope.counter = {};
+  /**
+   * initialize
+   *
+   * @return {void}
+   */
+  $scope.initialize = function(data) {
+    $scope.counterFrameSetting = data.counterFrameSetting;
+    $scope.frameId = data.frameId;
+    $scope.currentDisplayTypeName = data.currentDisplayTypeName;
+  };
 
-      $scope.init = function(frameId, counter) {
-        $scope.frameId = frameId;
-        $scope.counter = counter;
-      };
+  /**
+   * Select display type
+   *
+   * @return {void}
+   */
+  $scope.selectDisplayType = function(displayType, typeName) {
+    $scope.counterFrameSetting.displayType = displayType + 1;
+    $scope.currentDisplayTypeName = typeName;
+  };
 
-      $scope.selectLabel = function(index, label) {
-        $scope.counter.accessCounterFrameSetting.displayType = index;
-        $scope.counter.accessCounterFrameSetting.displayTypeLabel = label;
-      };
-    });
+});

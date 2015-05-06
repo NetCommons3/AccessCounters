@@ -35,19 +35,19 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'plugin.net_commons.site_setting',
 		'plugin.access_counters.access_counter',
 		'plugin.access_counters.access_counter_frame_setting',
-		'plugin.access_counters.plugin',
 		'plugin.blocks.block',
 		'plugin.blocks.block_role_permission',
 		'plugin.boxes.box',
-		'plugin.frames.frame',
 		'plugin.boxes.boxes_page',
 		'plugin.containers.container',
 		'plugin.containers.containers_page',
+		'plugin.frames.frame',
 		'plugin.m17n.language',
 		'plugin.m17n.languages_page',
+		'plugin.net_commons.plugin',
+		'plugin.net_commons.site_setting',
 		'plugin.pages.page',
 		'plugin.pages.space',
 		'plugin.roles.default_role_permission',
@@ -148,7 +148,13 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testIndex() {
-		$this->testAction('/access_counters/access_counters/edit/1', array('method' => 'get'));
+		$frameId = '161';
+		$blockId = '161';
+		$this->testAction('/access_counters/access_counters/edit/' . $frameId . '/' . $blockId,
+			array(
+				'method' => 'get'
+			)
+		);
 
 		//$this->assertTextContains('display_type', $this->view);
 		//$this->assertTextContains('display_digit', $this->view);
@@ -161,11 +167,12 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testEdit() {
+		$frameId = '161';
+		$blockId = '161';
 		$postData = array(
 			'AccessCounter' => array(
-				'block_key' => 'block_1',
+				'block_key' => 'block_' . $blockId,
 				'count_start' => 0,
-				'is_started' => 'true',
 			),
 			'AccessCounterFrameSetting' => array(
 				'id' => 1,
@@ -173,11 +180,17 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
 				'display_type' => 3,
 			),
 			'Frame' => array(
-				'id' => 1,
+				'id' => $frameId,
+				'key' => '',
+			),
+			'Block' => array(
+				'id' => $blockId,
+				'key' => 'block_' . $blockId,
+				'public_type' => '1'
 			)
 		);
 
-		$this->testAction('/access_counters/access_counters/edit/1.json',
+		$this->testAction('/access_counters/access_counters/edit/' . $frameId . '/' . $blockId . '.json',
 			array(
 				'method' => 'post',
 				'data' => $postData
@@ -196,8 +209,12 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testEditErrorByRequestGet() {
-		//$this->setExpectedException('MethodNotAllowedException');
-		$this->testAction('/access_counters/access_counters/edit/1', array('method' => 'get'));
+		$this->setExpectedException('BadRequestException');
+		$this->testAction('/access_counters/access_counters/edit/1',
+			array(
+				'method' => 'get'
+			)
+		);
 	}
 
 /**
@@ -206,11 +223,12 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testEditErrorBySaveSetting() {
+		$frameId = '161';
+		$blockId = '';
 		$postData = array(
 			'AccessCounter' => array(
 				'block_key' => '',
 				'count_start' => 0,
-				'is_started' => 'false',
 			),
 			'AccessCounterFrameSetting' => array(
 				'id' => 0,
@@ -219,11 +237,17 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
 			),
 			'Frame' => array(
 				'id' => '2',
+				'key' => '',
+			),
+			'Block' => array(
+				'id' => '',
+				'key' => '',
+				'public_type' => '1'
 			)
 		);
 
 		//$this->setExpectedException('ForbiddenException');
-		$this->testAction('/access_counters/access_counters/edit/1.json',
+		$this->testAction('/access_counters/access_counters/add/' . $frameId . '.json',
 			array(
 				'method' => 'post',
 				'data' => $postData
