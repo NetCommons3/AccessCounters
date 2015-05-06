@@ -224,7 +224,6 @@ class AccessCounterEditControllerTest extends ControllerTestCase {
  */
 	public function testEditErrorBySaveSetting() {
 		$frameId = '161';
-		$blockId = '';
 		$postData = array(
 			'AccessCounter' => array(
 				'block_key' => '',
