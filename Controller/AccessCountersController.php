@@ -78,7 +78,7 @@ class AccessCountersController extends AccessCountersAppController {
 		$isAccessed = 'block_key_' . $this->viewVars['blockKey'];
 
 		//AccessCounter共通データ取得
-		$this->initAccessCounter();
+		$this->initAccessCounter(['block']);
 
 		//counterデータ取得
 		if (! $accessCounter = $this->AccessCounter->getAccessCounter(
@@ -177,7 +177,7 @@ class AccessCountersController extends AccessCountersAppController {
 		$this->initTabs('block_index', 'block_settings');
 
 		//AccessCounter共通データ取得
-		$this->initAccessCounter();
+		$this->initAccessCounter(['block']);
 
 		//counterデータ取得
 		if (! $accessCounter = $this->AccessCounter->getAccessCounter(
@@ -219,7 +219,7 @@ class AccessCountersController extends AccessCountersAppController {
 		}
 		$this->set('blockId', (int)$this->params['pass'][1]);
 
-		$this->initAccessCounter();
+		$this->initAccessCounter(['block']);
 
 		if ($this->request->isDelete()) {
 			if ($this->AccessCounter->deleteAccessCounter($this->data)) {
