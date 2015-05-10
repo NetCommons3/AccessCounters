@@ -132,8 +132,13 @@ class AccessCountersController extends AccessCountersAppController {
 			)
 		);
 		$block = $this->Block->create(
-			array('id' => null, 'key' => null)
+			array(
+				'id' => null,
+				'key' => null,
+				'name' => __d('links', 'New Counter %s', date('YmdHis')),
+			)
 		);
+
 		$data = array();
 		if ($this->request->isPost()) {
 			$data = $this->__parseRequestData();

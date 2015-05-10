@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-05-06 13:38+0000\n"
-"PO-Revision-Date: 2015-05-06 22:41+0900\n"
+"POT-Creation-Date: 2015-05-10 00:27+0000\n"
+"PO-Revision-Date: 2015-05-10 09:30+0900\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -15,12 +15,13 @@ msgstr ""
 "X-Generator: Poedit 1.7.5\n"
 
 #: AccessCounters/View/Blocks/index.ctp:37
-msgid "Count"
-msgstr "カウント数"
+#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:50
+msgid "Access counter name"
+msgstr "カウンター名"
 
-#: AccessCounters/View/Blocks/index.ctp:43
-msgid "Access date"
-msgstr "アクセス更新日"
+#: AccessCounters/View/Blocks/index.ctp:40
+msgid "Count number"
+msgstr "カウント数"
 
 #: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:31
 msgid "Display type"

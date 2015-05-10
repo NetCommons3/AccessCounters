@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-05-06 13:38+0000\n"
+"POT-Creation-Date: 2015-05-10 00:27+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -15,11 +15,12 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: AccessCounters/View/Blocks/index.ctp:37
-msgid "Count"
+#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:50
+msgid "Access counter name"
 msgstr ""
 
-#: AccessCounters/View/Blocks/index.ctp:43
-msgid "Access date"
+#: AccessCounters/View/Blocks/index.ctp:40
+msgid "Count number"
 msgstr ""
 
 #: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:31
@@ -34,7 +35,7 @@ msgstr ""
 msgid "Access counter"
 msgstr ""
 
-#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:53
+#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:74
 msgid "Starting Value"
 msgstr ""
 

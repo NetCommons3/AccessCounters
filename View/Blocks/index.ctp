@@ -32,15 +32,15 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>#</th>
+							<th></th>
 							<th>
-								<?php echo $this->Paginator->sort('AccessCounter.count', __d('access_counters', 'Count')); ?>
+								<?php echo $this->Paginator->sort('AccessCounter.count', __d('access_counters', 'Access counter name')); ?>
 							</th>
 							<th>
-								<?php echo $this->Paginator->sort('Block.public_type', __d('blocks', 'Publishing setting')); ?>
+								<?php echo $this->Paginator->sort('AccessCounter.count', __d('access_counters', 'Count number')); ?>
 							</th>
 							<th>
-								<?php echo $this->Paginator->sort('AccessCounter.modified', __d('access_counters', 'Access date')); ?>
+								<?php echo $this->Paginator->sort('AccessCounter.modified', __d('net_commons', 'Created datetime')); ?>
 							</th>
 						</tr>
 					</thead>
@@ -63,20 +63,14 @@
 								</td>
 								<td>
 									<a href="<?php echo $this->Html->url('/access_counters/access_counters/edit/' . $frameId . '/' . (int)$accessCounter['block']['id']); ?>">
-										<?php echo (int)$accessCounter['accessCounter']['count']; ?>
+										<?php echo h($accessCounter['block']['name']); ?>
 									</a>
 								</td>
 								<td>
-									<?php if ($accessCounter['block']['publicType'] === '0') : ?>
-										<?php echo __d('blocks', 'Private'); ?>
-									<?php elseif ($accessCounter['block']['publicType'] === '1') : ?>
-										<?php echo __d('blocks', 'Public'); ?>
-									<?php elseif ($accessCounter['block']['publicType'] === '2') : ?>
-										<?php echo __d('blocks', 'Limited'); ?>
-									<?php endif; ?>
+									<?php echo (int)$accessCounter['accessCounter']['count']; ?>
 								</td>
 								<td>
-									<?php echo $this->Date->dateFormat($accessCounter['accessCounter']['modified']); ?>
+									<?php echo $this->Date->dateFormat($accessCounter['accessCounter']['created']); ?>
 								</td>
 							</tr>
 						<?php endforeach; ?>
