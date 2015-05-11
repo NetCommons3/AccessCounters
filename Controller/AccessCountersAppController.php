@@ -62,16 +62,20 @@ class AccessCountersAppController extends AppController {
 		$settingTabs = array(
 			'tabs' => array(
 				'block_index' => array(
-					'plugin' => $this->params['plugin'],
-					'controller' => 'blocks',
-					'action' => 'index',
-					$this->viewVars['frameId'],
+					'url' => array(
+						'plugin' => $this->params['plugin'],
+						'controller' => 'blocks',
+						'action' => 'index',
+						$this->viewVars['frameId'],
+					)
 				),
 				'frame_settings' => array(
-					'plugin' => $this->params['plugin'],
-					'controller' => 'access_counter_frame_settings',
-					'action' => 'edit',
-					$this->viewVars['frameId'],
+					'url' => array(
+						'plugin' => $this->params['plugin'],
+						'controller' => 'access_counter_frame_settings',
+						'action' => 'edit',
+						$this->viewVars['frameId'],
+					)
 				),
 			),
 			'active' => $mainActiveTab
@@ -81,11 +85,13 @@ class AccessCountersAppController extends AppController {
 		$blockSettingTabs = array(
 			'tabs' => array(
 				'block_settings' => array(
-					'plugin' => $this->params['plugin'],
-					'controller' => 'access_counters',
-					'action' => $this->params['action'],
-					$this->viewVars['frameId'],
-					$this->viewVars['blockId']
+					'url' => array(
+						'plugin' => $this->params['plugin'],
+						'controller' => 'access_counters',
+						'action' => $this->params['action'],
+						$this->viewVars['frameId'],
+						$this->viewVars['blockId']
+					)
 				),
 			),
 			'active' => $blockActiveTab
