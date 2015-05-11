@@ -34,7 +34,7 @@
 						<tr>
 							<th></th>
 							<th>
-								<?php echo $this->Paginator->sort('AccessCounter.count', __d('access_counters', 'Access counter name')); ?>
+								<?php echo $this->Paginator->sort('Block.name', __d('access_counters', 'Access counter name')); ?>
 							</th>
 							<th>
 								<?php echo $this->Paginator->sort('AccessCounter.count', __d('access_counters', 'Count number')); ?>
