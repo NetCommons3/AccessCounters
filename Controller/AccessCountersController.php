@@ -135,7 +135,7 @@ class AccessCountersController extends AccessCountersAppController {
 			array(
 				'id' => null,
 				'key' => null,
-				'name' => __d('links', 'New Counter %s', date('YmdHis')),
+				'name' => __d('access_counters', 'New Counter %s', date('YmdHis')),
 			)
 		);
 
