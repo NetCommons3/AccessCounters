@@ -20,6 +20,13 @@ App::uses('AccessCountersAppController', 'AccessCounters.Controller');
 class BlocksController extends AccessCountersAppController {
 
 /**
+ * layout
+ *
+ * @var array
+ */
+	public $layout = 'NetCommons.setting';
+
+/**
  * use models
  *
  * @var array
@@ -63,7 +70,6 @@ class BlocksController extends AccessCountersAppController {
 		parent::beforeFilter();
 		$this->Auth->deny('index');
 
-		$this->layout = 'NetCommons.setting';
 		$results = $this->camelizeKeyRecursive($this->NetCommonsFrame->data);
 		$this->set($results);
 
