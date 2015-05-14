@@ -20,6 +20,13 @@ App::uses('AccessCountersAppController', 'AccessCounters.Controller');
 class AccessCounterFrameSettingsController extends AccessCountersAppController {
 
 /**
+ * layout
+ *
+ * @var array
+ */
+	public $layout = 'NetCommons.setting';
+
+/**
  * use models
  *
  * @var array
@@ -50,7 +57,6 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 
-		$this->layout = 'NetCommons.setting';
 		$results = $this->camelizeKeyRecursive($this->NetCommonsFrame->data);
 		$this->set($results);
 
