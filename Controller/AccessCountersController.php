@@ -105,8 +105,6 @@ class AccessCountersController extends AccessCountersAppController {
 	public function add() {
 		//レイアウトの設定
 		$this->layout = 'NetCommons.setting';
-		$results = $this->camelizeKeyRecursive($this->NetCommonsFrame->data);
-		$this->set($results);
 		$this->view = 'edit';
 
 		//タブの設定
@@ -166,8 +164,6 @@ class AccessCountersController extends AccessCountersAppController {
 
 		//レイアウトの設定
 		$this->layout = 'NetCommons.setting';
-		$results = $this->camelizeKeyRecursive($this->NetCommonsFrame->data);
-		$this->set($results);
 
 		//タブの設定
 		$this->initTabs('block_index', 'block_settings');

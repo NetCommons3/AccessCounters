@@ -63,7 +63,7 @@
 		]); ?>
 </div>
 
-<?php if (! $frame['blockId']) : ?>
+<?php if (!PageLayoutHelper::$frame['blockId']) : ?>
 	<?php echo $this->element('AccessCounterFrameSettings/edit_form'); ?>
 <?php endif; ?>
 
