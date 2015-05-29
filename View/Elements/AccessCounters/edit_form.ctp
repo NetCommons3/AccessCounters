@@ -1,6 +1,6 @@
 <?php
 /**
- * Blocks edit template
+ * AccessCounterBlocks edit template
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>

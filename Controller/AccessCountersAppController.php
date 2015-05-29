@@ -70,7 +70,7 @@ class AccessCountersAppController extends AppController {
 				'block_index' => array(
 					'url' => array(
 						'plugin' => $this->params['plugin'],
-						'controller' => 'blocks',
+						'controller' => 'access_counter_blocks',
 						'action' => 'index',
 						$this->viewVars['frameId'],
 					)
