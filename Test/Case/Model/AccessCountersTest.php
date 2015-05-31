@@ -12,7 +12,7 @@
  */
 
 App::uses('AccessCounters', 'AccessCounters.Model');
-App::uses('AccessCountersAppModelTest', 'AccessCounters.Test/Case/Model');
+App::uses('AccessCountersModelTestBase', 'AccessCounters.Test/Case/Model');
 
 /**
  * AccessCounters Model Test Case
@@ -20,7 +20,7 @@ App::uses('AccessCountersAppModelTest', 'AccessCounters.Test/Case/Model');
  * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
  * @package NetCommons\AccessCounters\Test\Case\Model
  */
-class AccessCountersTest extends AccessCountersAppModelTest {
+class AccessCountersTest extends AccessCountersModelTestBase {
 
 /**
  * Fixtures
