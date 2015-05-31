@@ -78,7 +78,6 @@ class AccessCounterBlocksController extends AccessCountersAppController {
  * index
  *
  * @return void
- * @throws Exception
  */
 	public function index() {
 		$this->Paginator->settings = array(
@@ -92,18 +91,10 @@ class AccessCounterBlocksController extends AccessCountersAppController {
 				//'limit' => 1
 			)
 		);
-		try {
-			$accessCounters = $this->Paginator->paginate('AccessCounter');
-		} catch (Exception $ex) {
-			if (isset($this->request['paging']) && $this->params['named']) {
-				$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
-				return;
-			}
-			CakeLog::error($ex);
-			throw $ex;
-		}
+
+		$accessCounters = $this->Paginator->paginate('AccessCounter');
 		if (! $accessCounters) {
-			$this->view = 'AccessCounterBlocks/not_found';
+			$this->view = 'not_found';
 			return;
 		}
 
