@@ -1,6 +1,6 @@
 <?php
 /**
- * BlocksController
+ * AccessCounterBlocksController
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -12,12 +12,12 @@
 App::uses('AccessCountersAppController', 'AccessCounters.Controller');
 
 /**
- * BlocksController
+ * AccessCounterBlocksController
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\AccessCounters\Controller
  */
-class BlocksController extends AccessCountersAppController {
+class AccessCounterBlocksController extends AccessCountersAppController {
 
 /**
  * layout
@@ -70,9 +70,6 @@ class BlocksController extends AccessCountersAppController {
 		parent::beforeFilter();
 		$this->Auth->deny('index');
 
-		$results = $this->camelizeKeyRecursive($this->NetCommonsFrame->data);
-		$this->set($results);
-
 		//タブの設定
 		$this->initTabs('block_index', 'block_settings');
 	}
@@ -99,14 +96,14 @@ class BlocksController extends AccessCountersAppController {
 			$accessCounters = $this->Paginator->paginate('AccessCounter');
 		} catch (Exception $ex) {
 			if (isset($this->request['paging']) && $this->params['named']) {
-				$this->redirect('/access_counters/blocks/index/' . $this->viewVars['frameId']);
+				$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
 				return;
 			}
 			CakeLog::error($ex);
 			throw $ex;
 		}
 		if (! $accessCounters) {
-			$this->view = 'Blocks/not_found';
+			$this->view = 'AccessCounterBlocks/not_found';
 			return;
 		}
 

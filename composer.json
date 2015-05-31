@@ -29,6 +29,7 @@
         "netcommons/install":           "dev-master",
         "netcommons/m17n":              "dev-master",
         "netcommons/net-commons":       "dev-master",
+        "netcommons/plugin-manager":    "dev-master",
         "netcommons/roles":             "dev-master",
         "netcommons/rooms":             "dev-master",
         "netcommons/pages":             "dev-master",

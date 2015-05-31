@@ -25,8 +25,9 @@ class AccessCountersAppController extends AppController {
  * @var array
  */
 	public $components = array(
-		'Security',
 		'NetCommons.NetCommonsFrame',
+		'Pages.PageLayout',
+		'Security',
 	);
 
 /**
@@ -38,17 +39,6 @@ class AccessCountersAppController extends AppController {
 		'AccessCounters.AccessCounter',
 		'Blocks.Block',
 	);
-
-/**
- * beforeFilter
- *
- * @return void
- */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$results = $this->camelizeKeyRecursive(['current' => $this->current]);
-		$this->set($results);
-	}
 
 /**
  * initTabs
@@ -70,7 +60,7 @@ class AccessCountersAppController extends AppController {
 				'block_index' => array(
 					'url' => array(
 						'plugin' => $this->params['plugin'],
-						'controller' => 'blocks',
+						'controller' => 'access_counter_blocks',
 						'action' => 'index',
 						$this->viewVars['frameId'],
 					)

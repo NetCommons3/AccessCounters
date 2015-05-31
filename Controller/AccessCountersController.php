@@ -55,15 +55,6 @@ class AccessCountersController extends AccessCountersAppController {
 	);
 
 /**
- * index
- *
- * @return void
- */
-	public function index() {
-		$this->setAction('view');
-	}
-
-/**
  * view
  *
  * @return void
@@ -114,8 +105,6 @@ class AccessCountersController extends AccessCountersAppController {
 	public function add() {
 		//レイアウトの設定
 		$this->layout = 'NetCommons.setting';
-		$results = $this->camelizeKeyRecursive($this->NetCommonsFrame->data);
-		$this->set($results);
 		$this->view = 'edit';
 
 		//タブの設定
@@ -146,7 +135,7 @@ class AccessCountersController extends AccessCountersAppController {
 			$this->AccessCounter->saveAccessCounter($data);
 			if ($this->handleValidationError($this->AccessCounter->validationErrors)) {
 				if (! $this->request->is('ajax')) {
-					$this->redirect('/access_counters/blocks/index/' . $this->viewVars['frameId']);
+					$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
 				}
 				return;
 			}
@@ -175,8 +164,6 @@ class AccessCountersController extends AccessCountersAppController {
 
 		//レイアウトの設定
 		$this->layout = 'NetCommons.setting';
-		$results = $this->camelizeKeyRecursive($this->NetCommonsFrame->data);
-		$this->set($results);
 
 		//タブの設定
 		$this->initTabs('block_index', 'block_settings');
@@ -200,7 +187,7 @@ class AccessCountersController extends AccessCountersAppController {
 			$this->AccessCounter->saveAccessCounter($data);
 			if ($this->handleValidationError($this->AccessCounter->validationErrors)) {
 				if (! $this->request->is('ajax')) {
-					$this->redirect('/access_counters/blocks/index/' . $this->viewVars['frameId']);
+					$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
 				}
 				return;
 			}
@@ -229,7 +216,7 @@ class AccessCountersController extends AccessCountersAppController {
 		if ($this->request->isDelete()) {
 			if ($this->AccessCounter->deleteAccessCounter($this->data)) {
 				if (! $this->request->is('ajax')) {
-					$this->redirect('/access_counters/blocks/index/' . $this->viewVars['frameId']);
+					$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
 				}
 				return;
 			}

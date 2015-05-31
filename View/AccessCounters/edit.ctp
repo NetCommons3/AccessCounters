@@ -29,7 +29,7 @@
 				'controller' => 'AccessCounter',
 				'action' => h($this->request->params['action']) . '/' . $frameId . '/' . $blockId,
 				'callback' => 'AccessCounters.AccessCounters/edit_form',
-				'cancelUrl' => '/access_counters/blocks/index/' . $frameId
+				'cancelUrl' => '/access_counters/access_counter_blocks/index/' . $frameId
 			)); ?>
 
 		<?php if ($this->request->params['action'] === 'edit') : ?>

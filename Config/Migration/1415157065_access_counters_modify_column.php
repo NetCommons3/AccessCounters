@@ -107,6 +107,8 @@ class AccessCountersModifyColumn extends CakeMigration {
 				'namespace' => 'netcommons/access_counters',
 				'name' => 'アクセスカウンタ',
 				'type' => 1,
+				'default_action' => 'access_counters/view',
+				'default_setting_action' => 'access_counter_blocks/index',
 			),
 		),
 

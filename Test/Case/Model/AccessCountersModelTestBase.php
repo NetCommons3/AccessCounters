@@ -21,7 +21,7 @@ App::uses('YACakeTestCase', 'NetCommons.TestSuite');
  * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
  * @package NetCommons\AccessCounters\Test\Case\Model
  */
-class AccessCountersAppModelTest extends YACakeTestCase {
+class AccessCountersModelTestBase extends YACakeTestCase {
 
 /**
  * Fixtures
@@ -34,7 +34,7 @@ class AccessCountersAppModelTest extends YACakeTestCase {
 		'plugin.boxes.box',
 		'plugin.frames.frame',
 		'plugin.m17n.language',
-		'plugin.net_commons.plugin',
+		'plugin.plugin_manager.plugin',
 		'plugin.rooms.room',
 		'plugin.users.user',
 		'plugin.users.user_attributes_user',

@@ -9,10 +9,14 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('AccessCountersController', 'AccessCounters.Controller');
+App::uses('AuthGeneralControllerTest', 'AuthGeneral.Test/Case/Controller');
 App::uses('NetCommonsFrameComponent', 'NetCommons.Controller/Component');
 App::uses('NetCommonsBlockComponent', 'NetCommons.Controller/Component');
 App::uses('NetCommonsRoomRoleComponent', 'NetCommons.Controller/Component');
+App::uses('RolesControllerTest', 'Roles.Test/Case/Controller');
+App::uses('YAControllerTestCase', 'NetCommons.TestSuite');
+
+App::uses('AccessCountersController', 'AccessCounters.Controller');
 
 /**
  * AccessCountersController Test Case
@@ -20,14 +24,7 @@ App::uses('NetCommonsRoomRoleComponent', 'NetCommons.Controller/Component');
  * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
  * @package NetCommons\AccessCounters\Test\Case\Controller
  */
-class AccessCountersControllerTest extends ControllerTestCase {
-
-/**
- * mock controller object
- *
- * @var Controller
- */
-	public $Controller = null;
+class AccessCountersControllerTestBase extends ControllerTestCase {
 
 /**
  * Fixtures
@@ -45,14 +42,15 @@ class AccessCountersControllerTest extends ControllerTestCase {
 		'plugin.containers.containers_page',
 		'plugin.frames.frame',
 		'plugin.m17n.language',
-		'plugin.m17n.languages_page',
-		'plugin.net_commons.plugin',
 		'plugin.net_commons.site_setting',
+		'plugin.pages.languages_page',
 		'plugin.pages.page',
 		'plugin.pages.space',
+		'plugin.plugin_manager.plugin',
 		'plugin.roles.default_role_permission',
-		'plugin.rooms.roles_rooms_user',
+		'plugin.rooms.plugins_room',
 		'plugin.rooms.roles_room',
+		'plugin.rooms.roles_rooms_user',
 		'plugin.rooms.room',
 		'plugin.rooms.room_role_permission',
 		'plugin.users.user',
@@ -67,6 +65,19 @@ class AccessCountersControllerTest extends ControllerTestCase {
 	public function setUp() {
 		parent::setUp();
 		Configure::write('Config.language', 'ja');
+
+		YACakeTestCase::loadTestPlugin($this, 'NetCommons', 'TestPlugin');
+
+		$this->generate(
+			'AccessCounters.AccessCounters',
+			[
+				'components' => [
+					'Auth' => ['user'],
+					'Session',
+					'Security',
+				]
+			]
+		);
 	}
 
 /**
@@ -77,69 +88,5 @@ class AccessCountersControllerTest extends ControllerTestCase {
 	public function tearDown() {
 		Configure::write('Config.language', null);
 		parent::tearDown();
-	}
-
-/**
- * testBeforeFilterErrorByNoSetFrameId method
- *
- * @return void
- */
-	public function testBeforeFilterErrorByNoSetFrameId() {
-		//$this->setExpectedException('ForbiddenException');
-		//$this->testAction('/access_counters/access_counters/index', array('method' => 'get'));
-	}
-
-/**
- * testIndex method
- *
- * @return void
- */
-	public function testIndex() {
-		$frameId = '161';
-		$this->testAction('/access_counters/access_counters/index/' . $frameId,
-			array(
-				'method' => 'get',
-				'return' => 'view',
-			)
-		);
-
-		$expected = 'primary';
-		$this->assertTextContains($expected, $this->view);
-	}
-
-/**
- * testIndex method
- *
- * @return void
- */
-	public function testView() {
-		$frameId = '161';
-		$this->testAction('/access_counters/access_counters/view/' . $frameId,
-			array(
-				'method' => 'get',
-				'return' => 'view',
-			)
-		);
-
-		$expected = 'primary';
-		$this->assertTextContains($expected, $this->view);
-	}
-
-/**
- * testViewNotStarted method
- *
- * @return void
- */
-	public function testViewNotStarted() {
-		$frameId = '162';
-		$this->testAction('/access_counters/access_counters/view/' . $frameId,
-			array(
-				'method' => 'get',
-				'return' => 'view',
-			)
-		);
-
-		$expected = 'primary';
-		$this->assertTextContains($expected, $this->view);
 	}
 }

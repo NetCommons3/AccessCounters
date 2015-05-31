@@ -1,6 +1,6 @@
 <?php
 /**
- * Blocks edit template
+ * AccessCounterBlocks edit template
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -63,7 +63,7 @@
 		]); ?>
 </div>
 
-<?php if (! $frame['blockId']) : ?>
+<?php if (!PageLayoutHelper::$frame['blockId']) : ?>
 	<?php echo $this->element('AccessCounterFrameSettings/edit_form'); ?>
 <?php endif; ?>
 
