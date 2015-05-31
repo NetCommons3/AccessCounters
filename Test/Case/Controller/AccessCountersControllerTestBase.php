@@ -9,15 +9,14 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('YACakeTestCase', 'NetCommons.TestSuite');
-App::uses('YAControllerTestCase', 'NetCommons.TestSuite');
-App::uses('RolesControllerTest', 'Roles.Test/Case/Controller');
 App::uses('AuthGeneralControllerTest', 'AuthGeneral.Test/Case/Controller');
-
-App::uses('AccessCountersController', 'AccessCounters.Controller');
 App::uses('NetCommonsFrameComponent', 'NetCommons.Controller/Component');
 App::uses('NetCommonsBlockComponent', 'NetCommons.Controller/Component');
 App::uses('NetCommonsRoomRoleComponent', 'NetCommons.Controller/Component');
+App::uses('RolesControllerTest', 'Roles.Test/Case/Controller');
+App::uses('YAControllerTestCase', 'NetCommons.TestSuite');
+
+App::uses('AccessCountersController', 'AccessCounters.Controller');
 
 /**
  * AccessCountersController Test Case
