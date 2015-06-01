@@ -5,7 +5,6 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-05-10 00:27+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,12 +13,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: AccessCounters/View/Blocks/index.ctp:37
+#: AccessCounters/Controller/AccessCountersController.php:127
+msgid "New Counter %s"
+msgstr ""
+
+#: AccessCounters/View/AccessCounterBlocks/index.ctp:37
 #: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:50
 msgid "Access counter name"
 msgstr ""
 
-#: AccessCounters/View/Blocks/index.ctp:40
+#: AccessCounters/View/AccessCounterBlocks/index.ctp:40
 msgid "Count number"
 msgstr ""
 
