@@ -10,7 +10,7 @@
  */
 ?>
 
-<p>
+<div>
 	<?php
 		$format = '%0' . (int)$accessCounterFrameSetting['displayDigit'] . 'd';
 		$displayCounter = sprintf($format, $accessCounter['count']);
@@ -21,4 +21,4 @@
 			<?php echo $displayCounter[$i]; ?>
 		</span>
 	<?php endfor; ?>
-</p>
+</div>
