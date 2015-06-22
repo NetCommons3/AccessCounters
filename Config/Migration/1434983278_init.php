@@ -11,7 +11,7 @@
 /**
  * Init migration
  *
- * @package NetCommons\NetCommons\Config\Migration
+ * @package NetCommons\AccessCounters\Config\Migration
  */
 class Init extends CakeMigration {
 
