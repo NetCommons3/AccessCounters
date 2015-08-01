@@ -63,10 +63,16 @@ class PluginRecords extends NetCommonsMigration {
 			),
 		),
 		'PluginsRole' => array(
-			array('role_key' => 'room_administrator'),
+			array(
+				'role_key' => 'room_administrator',
+				'plugin_key' => 'access_counters',
+			),
 		),
 		'PluginsRoom' => array(
-			array('room_id' => '1'),
+			array(
+				'room_id' => '1',
+				'plugin_key' => 'access_counters',
+			),
 		),
 	);
 
