@@ -41,12 +41,26 @@ class PluginRecords extends NetCommonsMigration {
  */
 	public $records = array(
 		'Plugin' => array(
-			'key' => 'access_counters',
-			'namespace' => 'netcommons/access-counters',
-			'name' => 'Access counters',
-			'type' => 1,
-			'default_action' => 'access_counters/view',
-			'default_setting_action' => 'access_counter_blocks/index',
+			//日本語
+			array(
+				'language_id' => '2',
+				'key' => 'access_counters',
+				'namespace' => 'netcommons/access-counters',
+				'name' => 'アクセスカウンター',
+				'type' => 1,
+				'default_action' => 'access_counters/view',
+				'default_setting_action' => 'access_counter_blocks/index',
+			),
+			//英語
+			array(
+				'language_id' => '1',
+				'key' => 'access_counters',
+				'namespace' => 'netcommons/access-counters',
+				'name' => 'Access counters',
+				'type' => 1,
+				'default_action' => 'access_counters/view',
+				'default_setting_action' => 'access_counter_blocks/index',
+			),
 		),
 		'PluginsRole' => array(
 			array('role_key' => 'room_administrator'),
@@ -78,9 +92,14 @@ class PluginRecords extends NetCommonsMigration {
 		]);
 
 		if ($direction === 'down') {
-			$this->Plugin->uninstallPlugin($this->records);
-		} else {
-			$this->Plugin->installPlugin($this->records);
+			$this->Plugin->uninstallPlugin($this->records['Plugin'][0]['key']);
+			return true;
+		}
+
+		foreach ($this->records as $model => $records) {
+			if (!$this->updateRecords($model, $records)) {
+				return false;
+			}
 		}
 		return true;
 	}
