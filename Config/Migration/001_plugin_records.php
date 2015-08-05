@@ -74,6 +74,24 @@ class PluginRecords extends NetCommonsMigration {
 				'plugin_key' => 'access_counters',
 			),
 		),
+		'PluginsSpace' => array(
+			array(
+				'space_id' => '1',
+				'plugin_key' => 'access_counters',
+			),
+			array(
+				'space_id' => '2',
+				'plugin_key' => 'access_counters',
+			),
+			array(
+				'space_id' => '3',
+				'plugin_key' => 'access_counters',
+			),
+			array(
+				'space_id' => '4',
+				'plugin_key' => 'access_counters',
+			),
+		),
 	);
 
 /**
