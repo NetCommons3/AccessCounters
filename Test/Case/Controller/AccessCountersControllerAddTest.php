@@ -21,7 +21,7 @@ App::uses('AccessCountersControllerTestBase', 'AccessCounters.Test/Case/Controll
 class AccessCountersControllerAddTest extends AccessCountersControllerTestBase {
 
 /**
- * A
+ * Add
  *
  * @return void
  */

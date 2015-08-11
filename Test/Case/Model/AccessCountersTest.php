@@ -23,15 +23,6 @@ App::uses('AccessCountersModelTestBase', 'AccessCounters.Test/Case/Model');
 class AccessCountersTest extends AccessCountersModelTestBase {
 
 /**
- * Fixtures
- *
- * @var array
- */
-	public $fixtures = array(
-		'plugin.access_counters.access_counter',
-	);
-
-/**
  * setUp method
  *
  * @return void
