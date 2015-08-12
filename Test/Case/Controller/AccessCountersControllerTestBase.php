@@ -24,7 +24,7 @@ App::uses('AccessCountersController', 'AccessCounters.Controller');
  * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
  * @package NetCommons\AccessCounters\Test\Case\Controller
  */
-class AccessCountersControllerTestBase extends ControllerTestCase {
+class AccessCountersControllerTestBase extends YAControllerTestCase {
 
 /**
  * Fixtures
