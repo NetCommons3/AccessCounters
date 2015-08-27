@@ -19,7 +19,7 @@ App::uses('AccessCountersAppModel', 'AccessCounters.Model');
 class AccessCounterFrameSetting extends AccessCountersAppModel {
 
 /**
- * Displau type
+ * Display type
  *
  * @var string
  */
@@ -108,9 +108,10 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
  * Get access counter setting data
  *
  * @param string $frameKey frames.key
+ * @param bool $created If True, the results of the Model::find() to create it if it was null
  * @return array
  */
-	public function getAccessCounterFrameSetting($frameKey) {
+	public function getAccessCounterFrameSetting($frameKey, $created) {
 		$conditions = array(
 			'frame_key' => $frameKey
 		);
@@ -120,6 +121,13 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 				'conditions' => $conditions,
 			)
 		);
+		if ($created && ! $counterFrameSetting) {
+			$counterFrameSetting = $this->create(array(
+				'id' => null,
+				'display_type' => self::DISPLAY_TYPE_LABEL_0,
+				'frame_key' => $frameKey,
+			));
+		}
 
 		return $counterFrameSetting;
 	}

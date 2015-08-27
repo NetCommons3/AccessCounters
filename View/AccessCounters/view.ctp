@@ -12,12 +12,12 @@
 
 <div>
 	<?php
-		$format = '%0' . (int)$accessCounterFrameSetting['displayDigit'] . 'd';
+		$format = '%0' . (int)$accessCounterFrameSetting['display_digit'] . 'd';
 		$displayCounter = sprintf($format, $accessCounter['count']);
 		$displayCounterLength = strlen($displayCounter);
 	?>
 	<?php for ($i = 0; $i < $displayCounterLength; $i++): ?>
-		<span class="label label-<?php echo AccessCounterFrameSetting::$displayTypes[$accessCounterFrameSetting['displayType']]; ?>">
+		<span class="label label-<?php echo AccessCounterFrameSetting::$displayTypes[$accessCounterFrameSetting['display_type']]; ?>">
 			<?php echo $displayCounter[$i]; ?>
 		</span>
 	<?php endfor; ?>

@@ -46,15 +46,6 @@ class AccessCountersController extends AccessCountersAppController {
 	);
 
 /**
- * use helpers
- *
- * @var array
- */
-	public $helpers = array(
-		'NetCommons.Token'
-	);
-
-/**
  * view
  *
  * @return void
@@ -69,15 +60,14 @@ class AccessCountersController extends AccessCountersAppController {
 		$isAccessed = 'block_key_' . $this->viewVars['blockKey'];
 
 		//AccessCounter共通データ取得
-		$this->initAccessCounter(['block']);
+		$this->__prepare();
 
 		//counterデータ取得
-		if (! $accessCounter = $this->AccessCounter->getAccessCounter(
+		$accessCounter = $this->AccessCounter->getAccessCounter(
 			$this->viewVars['blockKey'],
-			$this->viewVars['roomId']
-		)) {
-			$accessCounter = $this->AccessCounter->create();
-		}
+			$this->viewVars['roomId'],
+			true
+		);
 
 		// カウントアップ処理
 		if (! $this->Session->read($isAccessed)) {
@@ -93,8 +83,8 @@ class AccessCountersController extends AccessCountersAppController {
 			}
 		}
 
-		$accessCounter = $this->camelizeKeyRecursive($accessCounter);
-		$this->set($accessCounter);
+//		$accessCounter = $this->camelizeKeyRecursive($accessCounter);
+		$this->set('accessCounter', $accessCounter['AccessCounter']);
 	}
 
 /**
@@ -110,44 +100,46 @@ class AccessCountersController extends AccessCountersAppController {
 		//タブの設定
 		$this->initTabs('block_index', 'block_settings');
 
-		//AccessCounter共通データ取得
-		$this->initAccessCounter();
+//		//AccessCounter共通データ取得
+//		$this->__prepare();
 
 		$this->set('blockId', null);
-		$accessCounter = $this->AccessCounter->create(
-			array(
-				'id' => null,
-				'block_key' => null,
-			)
-		);
-		$block = $this->Block->create(
-			array(
-				'id' => null,
-				'key' => null,
-				'name' => __d('access_counters', 'New Counter %s', date('YmdHis')),
-			)
-		);
 
-		$data = array();
 		if ($this->request->isPost()) {
 			$data = $this->__parseRequestData();
 
-			$this->AccessCounter->saveAccessCounter($data);
-			if ($this->handleValidationError($this->AccessCounter->validationErrors)) {
+			if ($this->AccessCounter->saveAccessCounter($data)) {
 				if (! $this->request->is('ajax')) {
 					$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
 				}
 				return;
 			}
+			$this->handleValidationError($this->AccessCounter->validationErrors);
 
-			$data['Block']['id'] = null;
-			$data['Block']['key'] = null;
+		} else {
+			$this->request->data = Hash::merge($this->request->data, $this->AccessCounter->create(
+				array(
+					'id' => null,
+					'block_key' => null,
+				)
+			));
+			$this->request->data = Hash::merge($this->request->data, $this->Block->create(
+				array(
+					'id' => null,
+					'key' => null,
+					'name' => __d('access_counters', 'New Counter %s', date('YmdHis')),
+				)
+			));
+			$this->request->data = Hash::merge(
+				$this->request->data,
+				$this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true)
+			);
 		}
 
-		$results = $this->camelizeKeyRecursive(Hash::merge(
-			$accessCounter, $block, $data
-		));
-		$this->set($results);
+//		$results = $this->camelizeKeyRecursive(Hash::merge(
+//			$accessCounter, $block, $data
+//		));
+//		$this->set($results);
 	}
 
 /**
@@ -169,12 +161,13 @@ class AccessCountersController extends AccessCountersAppController {
 		$this->initTabs('block_index', 'block_settings');
 
 		//AccessCounter共通データ取得
-		$this->initAccessCounter(['block']);
+		$this->__prepare();
 
 		//counterデータ取得
 		if (! $accessCounter = $this->AccessCounter->getAccessCounter(
 			$this->viewVars['blockKey'],
-			$this->viewVars['roomId']
+			$this->viewVars['roomId'],
+			false
 		)) {
 			$this->throwBadRequest();
 			return false;
@@ -210,8 +203,7 @@ class AccessCountersController extends AccessCountersAppController {
 			return false;
 		}
 		$this->set('blockId', (int)$this->params['pass'][1]);
-
-		$this->initAccessCounter(['block']);
+		$this->__prepare();
 
 		if ($this->request->isDelete()) {
 			if ($this->AccessCounter->deleteAccessCounter($this->data)) {
@@ -247,6 +239,31 @@ class AccessCountersController extends AccessCountersAppController {
 		}
 
 		return $data;
+	}
+
+/**
+ * initAccessCounter
+ *
+ * @return bool True on success, False on failure
+ */
+	private function __prepare() {
+//		if (in_array('block', $contains, true)) {
+			if (! $block = $this->Block->getBlock($this->viewVars['blockId'], $this->viewVars['roomId'])) {
+				$this->throwBadRequest();
+				return false;
+			}
+//			$block = $this->camelizeKeyRecursive($block);
+			$this->set('block'. $block);
+			$this->set('blockId', (int)$block['Block']['id']);
+			$this->set('blockKey', $block['Block']['key']);
+//		}
+
+		$counterFrameSetting = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true);
+//		$counterFrameSetting = $this->camelizeKeyRecursive($counterFrameSetting);
+		$this->set('counterFrameSetting', $counterFrameSetting['AccessCounterFrameSetting']);
+//		$this->set('userId', (int)$this->Auth->user('id'));
+
+		return true;
 	}
 
 }

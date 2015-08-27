@@ -95,43 +95,4 @@ class AccessCountersAppController extends AppController {
 		$this->set('blockSettingTabs', $blockSettingTabs);
 	}
 
-/**
- * initAccessCounter
- *
- * @param array $contains Optional result sets
- * @return bool True on success, False on failure
- */
-	public function initAccessCounter($contains = []) {
-		if (in_array('block', $contains, true)) {
-			if (! $block = $this->Block->find('first', array(
-				'recursive' => -1,
-				'conditions' => array(
-					'Block.id' => $this->viewVars['blockId'],
-					'Block.room_id' => $this->viewVars['roomId'],
-				)
-			))) {
-				$this->throwBadRequest();
-				return false;
-			}
-			$block = $this->camelizeKeyRecursive($block);
-			$this->set($block);
-			$this->set('blockId', (int)$block['block']['id']);
-			$this->set('blockKey', $block['block']['key']);
-		}
-
-		if (! $counterFrameSetting = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'])) {
-			$counterFrameSetting = $this->AccessCounterFrameSetting->create(array(
-				'id' => null,
-				'display_type' => 1,
-				'frame_key' => $this->viewVars['frameKey'],
-			));
-		}
-		$counterFrameSetting = $this->camelizeKeyRecursive($counterFrameSetting);
-		$this->set($counterFrameSetting);
-
-		$this->set('userId', (int)$this->Auth->user('id'));
-
-		return true;
-	}
-
 }

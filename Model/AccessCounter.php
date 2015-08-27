@@ -86,17 +86,21 @@ class AccessCounter extends AccessCountersAppModel {
  *
  * @param string $blockKey blocks.key
  * @param int $roomId rooms.id
+ * @param bool $created If True, the results of the Model::find() to create it if it was null
  * @return array AccessCounter
  */
-	public function getAccessCounter($blockKey, $roomId) {
+	public function getAccessCounter($blockKey, $roomId, $created) {
 		$conditions[$this->alias . '.block_key'] = $blockKey;
 		$conditions['Block.room_id'] = $roomId;
 
 		$accessCounter = $this->find('first', array(
-				'recursive' => 0,
-				'conditions' => $conditions,
-			)
-		);
+			'recursive' => 0,
+			'conditions' => $conditions,
+		));
+
+		if ($created && ! $accessCounter) {
+			$accessCounter = $this->create();
+		}
 
 		return $accessCounter;
 	}

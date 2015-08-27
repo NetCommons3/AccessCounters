@@ -71,7 +71,8 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
 			$this->throwBadRequest();
 			return false;
 		}
-		$this->initAccessCounter();
+		$counterFrameSetting = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true);
+		$this->set('counterFrameSetting', $counterFrameSetting);
 
 		$data = array();
 		if ($this->request->isPost()) {

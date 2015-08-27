@@ -8,17 +8,20 @@
  * @license http://www.netcommons.org/license.txt NetCommons License
  * @copyright Copyright 2014, NetCommons Project
  */
+
+$camelizeData = NetCommonsAppController::camelizeKeyRecursive(array(
+	'frameId' => $frameId,
+	'counterFrameSetting' => $this->data['AccessCounterFrameSetting'],
+	'currentDisplayTypeName' => AccessCounterFrameSetting::$displayTypes[$this->data['AccessCounterFrameSetting']['display_type']]
+));
+
 ?>
 
 <?php echo $this->Html->script('/access_counters/js/access_counters.js'); ?>
 
 <div class="modal-body"
 	ng-controller="AccessCounterFrameSettings"
-	ng-init="initialize(<?php echo h(json_encode(array(
-		'frameId' => $frameId,
-		'counterFrameSetting' => $accessCounterFrameSetting,
-		'currentDisplayTypeName' => AccessCounterFrameSetting::$displayTypes[$accessCounterFrameSetting['displayType']]
-	))); ?>)">
+	ng-init="initialize(<?php echo h(json_encode($camelizeData)); ?>)">
 
 	<?php echo $this->element('NetCommons.setting_tabs', $settingTabs); ?>
 
@@ -26,7 +29,7 @@
 		<?php echo $this->element('Blocks.setting_tabs', $blockSettingTabs); ?>
 
 		<?php echo $this->element('Blocks.edit_form', array(
-				'controller' => 'AccessCounter',
+				'model' => 'AccessCounter',
 				'action' => h($this->request->params['action']) . '/' . $frameId . '/' . $blockId,
 				'callback' => 'AccessCounters.AccessCounters/edit_form',
 				'cancelUrl' => '/access_counters/access_counter_blocks/index/' . $frameId
@@ -34,7 +37,7 @@
 
 		<?php if ($this->request->params['action'] === 'edit') : ?>
 			<?php echo $this->element('Blocks.delete_form', array(
-					'controller' => 'AccessCounter',
+					'model' => 'AccessCounter',
 					'action' => 'delete/' . $frameId . '/' . $blockId,
 					'callback' => 'AccessCounters.AccessCounters/delete_form'
 				)); ?>

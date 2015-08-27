@@ -46,31 +46,31 @@
 					</thead>
 					<tbody>
 						<?php foreach ($accessCounters as $accessCounter) : ?>
-							<tr<?php echo ($blockId === $accessCounter['block']['id'] ? ' class="active"' : ''); ?>>
+							<tr<?php echo ($blockId === $accessCounter['Block']['id'] ? ' class="active"' : ''); ?>>
 								<td>
 									<?php echo $this->Form->input('Frame.block_id',
 										array(
 											'type' => 'radio',
 											'name' => 'data[Frame][block_id]',
-											'options' => array((int)$accessCounter['block']['id'] => ''),
+											'options' => array((int)$accessCounter['Block']['id'] => ''),
 											'div' => false,
 											'legend' => false,
 											'label' => false,
 											'hiddenField' => false,
-											'checked' => (int)$accessCounter['block']['id'] === (int)$blockId,
+											'checked' => (int)$accessCounter['Block']['id'] === (int)$blockId,
 											'onclick' => 'submit()'
 										)); ?>
 								</td>
 								<td>
-									<a href="<?php echo $this->Html->url('/access_counters/access_counters/edit/' . $frameId . '/' . (int)$accessCounter['block']['id']); ?>">
-										<?php echo h($accessCounter['block']['name']); ?>
+									<a href="<?php echo $this->Html->url('/access_counters/access_counters/edit/' . $frameId . '/' . (int)$accessCounter['Block']['id']); ?>">
+										<?php echo h($accessCounter['Block']['name']); ?>
 									</a>
 								</td>
 								<td>
-									<?php echo (int)$accessCounter['accessCounter']['count']; ?>
+									<?php echo (int)$accessCounter['AccessCounter']['count']; ?>
 								</td>
 								<td>
-									<?php echo $this->Date->dateFormat($accessCounter['accessCounter']['created']); ?>
+									<?php echo $this->Date->dateFormat($accessCounter['AccessCounter']['created']); ?>
 								</td>
 							</tr>
 						<?php endforeach; ?>
@@ -78,14 +78,7 @@
 				</table>
 			<?php echo $this->Form->end(); ?>
 
-			<div class="text-center">
-				<?php echo $this->element('NetCommons.paginator', array(
-						'url' => Hash::merge(
-							array('controller' => 'access_counter_blocks', 'action' => 'index', $frameId),
-							$this->Paginator->params['named']
-						)
-					)); ?>
-			</div>
+			<?php echo $this->element('NetCommons.paginator'); ?>
 		</div>
 	</div>
 </div>
