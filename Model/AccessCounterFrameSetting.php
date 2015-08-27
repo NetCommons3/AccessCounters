@@ -31,17 +31,29 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 			DISPLAY_TYPE_LABEL_5 = 'danger';
 
 /**
+ * Display type value
+ *
+ * @var string
+ */
+	const DISPLAY_TYPE_VALUE_0 = '1',
+			DISPLAY_TYPE_VALUE_1 = '2',
+			DISPLAY_TYPE_VALUE_2 = '3',
+			DISPLAY_TYPE_VALUE_3 = '4',
+			DISPLAY_TYPE_VALUE_4 = '5',
+			DISPLAY_TYPE_VALUE_5 = '6';
+
+/**
  * categorySeparatorLine
  *
  * @var array
  */
 	static public $displayTypes = array(
-		'1' => self::DISPLAY_TYPE_LABEL_0,
-		'2' => self::DISPLAY_TYPE_LABEL_1,
-		'3' => self::DISPLAY_TYPE_LABEL_2,
-		'4' => self::DISPLAY_TYPE_LABEL_3,
-		'5' => self::DISPLAY_TYPE_LABEL_4,
-		'6' => self::DISPLAY_TYPE_LABEL_5,
+		self::DISPLAY_TYPE_VALUE_0 => self::DISPLAY_TYPE_LABEL_0,
+		self::DISPLAY_TYPE_VALUE_1 => self::DISPLAY_TYPE_LABEL_1,
+		self::DISPLAY_TYPE_VALUE_2 => self::DISPLAY_TYPE_LABEL_2,
+		self::DISPLAY_TYPE_VALUE_3 => self::DISPLAY_TYPE_LABEL_3,
+		self::DISPLAY_TYPE_VALUE_4 => self::DISPLAY_TYPE_LABEL_4,
+		self::DISPLAY_TYPE_VALUE_5 => self::DISPLAY_TYPE_LABEL_5,
 	);
 
 /**
@@ -124,7 +136,7 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 		if ($created && ! $counterFrameSetting) {
 			$counterFrameSetting = $this->create(array(
 				'id' => null,
-				'display_type' => self::DISPLAY_TYPE_LABEL_0,
+				'display_type' => self::DISPLAY_TYPE_VALUE_0,
 				'frame_key' => $frameKey,
 			));
 		}

@@ -128,13 +128,21 @@ class AccessCountersController extends AccessCountersAppController {
 					'id' => null,
 					'key' => null,
 					'name' => __d('access_counters', 'New Counter %s', date('YmdHis')),
+					'language_id' => Configure::read('Config.languageId'),
+					'room_id' => $this->viewVars['roomId'],
+					'plugin_key' => $this->params['plugin']
 				)
 			));
 			$this->request->data = Hash::merge(
 				$this->request->data,
 				$this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true)
 			);
+			$this->request->data['Frame'] = array(
+				'id' => $this->viewVars['frameId'],
+				'key' => $this->viewVars['frameKey']
+			);
 		}
+var_dump($this->request->data);
 
 //		$results = $this->camelizeKeyRecursive(Hash::merge(
 //			$accessCounter, $block, $data

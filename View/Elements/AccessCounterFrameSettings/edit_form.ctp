@@ -10,21 +10,13 @@
  */
 ?>
 
-<?php echo $this->Form->hidden('AccessCounterFrameSetting.id', array(
-		'value' => isset($accessCounterFrameSetting['id']) ? (int)$accessCounterFrameSetting['id'] : null,
-	)); ?>
+<?php echo $this->Form->hidden('AccessCounterFrameSetting.id'); ?>
 
-<?php echo $this->Form->hidden('AccessCounterFrameSetting.frame_key', array(
-		'value' => $frameKey,
-	)); ?>
+<?php echo $this->Form->hidden('AccessCounterFrameSetting.frame_key'); ?>
 
-<?php echo $this->Form->hidden('Frame.id', array(
-		'value' => $frameId,
-	)); ?>
+<?php echo $this->Form->hidden('Frame.id'); ?>
 
-<?php echo $this->Form->hidden('Frame.key', array(
-		'value' => $frameKey,
-	)); ?>
+<?php echo $this->Form->hidden('Frame.key'); ?>
 
 <div class='form-group'>
 	<?php echo $this->Form->label('AccessCounterFrameSetting.display_type',
@@ -83,7 +75,7 @@
 			'error' => false,
 			'class' => 'form-control',
 			'options' => $options,
-			'selected' => (int)$accessCounterFrameSetting['displayDigit']
+//			'selected' => (int)$this->data['AccessCounterFrameSetting']['display_digit']
 		)); ?>
 
 	<?php echo $this->element(
