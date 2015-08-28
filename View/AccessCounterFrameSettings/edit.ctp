@@ -11,11 +11,19 @@
 
 echo $this->NetCommonsHtml->script('/access_counters/js/access_counters.js');
 
-$camelizeData = NetCommonsAppController::camelizeKeyRecursive(array(
-	'frameId' => $frameId,
-	'counterFrameSetting' => $this->data['AccessCounterFrameSetting'],
-	'currentDisplayTypeName' => AccessCounterFrameSetting::$displayTypes[$this->data['AccessCounterFrameSetting']['display_type']]
-));
+if (isset($this->data['AccessCounterFrameSetting'])) {
+	$camelizeData = NetCommonsAppController::camelizeKeyRecursive(array(
+		'frameId' => $frameId,
+		'counterFrameSetting' => $this->data['AccessCounterFrameSetting'],
+		'currentDisplayTypeName' => AccessCounterFrameSetting::$displayTypes[$this->data['AccessCounterFrameSetting']['display_type']]
+	));
+} else {
+	$camelizeData = array(
+		'frameId' => $frameId,
+		'counterFrameSetting' => array(),
+		'currentDisplayTypeName' => ''
+	);
+}
 ?>
 
 <article class="block-setting-body"
