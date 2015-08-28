@@ -10,7 +10,7 @@
  */
 ?>
 
-<div class="modal-body">
+<article class="block-setting-body">
 	<?php echo $this->element('NetCommons.setting_tabs', $settingTabs); ?>
 
 	<div class="tab-content">
@@ -24,5 +24,4 @@
 			<?php echo __d('net_commons', 'Not found.'); ?>
 		</div>
 	</div>
-
-</div>
+</article>

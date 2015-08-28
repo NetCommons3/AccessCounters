@@ -10,7 +10,7 @@
  */
 ?>
 
-<div class="modal-body">
+<article class="block-setting-body">
 	<?php echo $this->element('NetCommons.setting_tabs', $settingTabs); ?>
 
 	<div class="tab-content">
@@ -81,7 +81,7 @@
 			<?php echo $this->element('NetCommons.paginator'); ?>
 		</div>
 	</div>
-</div>
+</article>
 
 
 

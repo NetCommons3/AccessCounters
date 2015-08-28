@@ -18,7 +18,7 @@ $camelizeData = NetCommonsAppController::camelizeKeyRecursive(array(
 ));
 ?>
 
-<div class="modal-body"
+<article class="block-setting-body"
 	ng-controller="AccessCounterFrameSettings"
 	ng-init="initialize(<?php echo h(json_encode($camelizeData)); ?>)">
 
@@ -31,4 +31,4 @@ $camelizeData = NetCommonsAppController::camelizeKeyRecursive(array(
 				'cancelUrl' => '/' . $cancelUrl,
 			)); ?>
 	</div>
-</div>
+</article>
