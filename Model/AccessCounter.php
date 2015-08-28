@@ -126,7 +126,7 @@ class AccessCounter extends AccessCountersAppModel {
 
 		try {
 			//バリデーション
-			if (! $this->validateAccessCounter($data, ['counterFrameSetting'])) {
+			if (! $this->validateAccessCounter($data)) {
 				return false;
 			}
 
@@ -162,10 +162,9 @@ class AccessCounter extends AccessCountersAppModel {
  * validate AccessCounter
  *
  * @param array $data received post data
- * @param array $contains Optional validate sets
  * @return bool True on success, false on error
  */
-	public function validateAccessCounter($data, $contains = []) {
+	public function validateAccessCounter($data) {
 		$this->set($data);
 		$this->validates();
 		if ($this->validationErrors) {
@@ -177,11 +176,9 @@ class AccessCounter extends AccessCountersAppModel {
 			return false;
 		}
 
-		if (isset($data['AccessCounterFrameSetting']) && in_array('counterFrameSetting', $contains, true)) {
-			if (! $this->AccessCounterFrameSetting->validateAccessCounterFrameSetting($data)) {
-				$this->validationErrors = Hash::merge($this->validationErrors, $this->AccessCounterFrameSetting->validationErrors);
-				return false;
-			}
+		if (! $this->AccessCounterFrameSetting->validateAccessCounterFrameSetting($data)) {
+			$this->validationErrors = Hash::merge($this->validationErrors, $this->AccessCounterFrameSetting->validationErrors);
+			return false;
 		}
 		return true;
 	}
