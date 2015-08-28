@@ -187,18 +187,17 @@ class AccessCountersController extends AccessCountersAppController {
 				return false;
 			}
 			$this->request->data = Hash::merge($this->request->data, $accessCounter);
+			//--AccessCounterFrameSetting
+			$this->request->data = Hash::merge(
+				$this->request->data,
+				$this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true)
+			);
 			//--Frame
 			$this->request->data['Frame'] = array(
 				'id' => $this->viewVars['frameId'],
 				'key' => $this->viewVars['frameKey']
 			);
 		}
-
-		//AccessCounterFrameSettingデータセット
-		$this->request->data = Hash::merge(
-			$this->request->data,
-			$this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true)
-		);
 	}
 
 /**
