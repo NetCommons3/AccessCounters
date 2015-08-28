@@ -10,17 +10,7 @@
  */
 ?>
 
-<?php echo $this->Form->hidden('Frame.id'); ?>
-
-<?php echo $this->Form->hidden('Block.id'); ?>
-
-<?php echo $this->Form->hidden('Block.key'); ?>
-
-<?php echo $this->Form->hidden('Block.language_id'); ?>
-
-<?php echo $this->Form->hidden('Block.room_id'); ?>
-
-<?php echo $this->Form->hidden('Block.plugin_key'); ?>
+<?php echo $this->element('Blocks.form_hidden'); ?>
 
 <?php echo $this->Form->hidden('AccessCounter.id'); ?>
 
