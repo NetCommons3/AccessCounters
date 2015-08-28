@@ -9,15 +9,14 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
+echo $this->NetCommonsHtml->script('/access_counters/js/access_counters.js');
+
 $camelizeData = NetCommonsAppController::camelizeKeyRecursive(array(
 	'frameId' => $frameId,
 	'counterFrameSetting' => $this->data['AccessCounterFrameSetting'],
 	'currentDisplayTypeName' => AccessCounterFrameSetting::$displayTypes[$this->data['AccessCounterFrameSetting']['display_type']]
 ));
-
 ?>
-
-<?php echo $this->Html->script('/access_counters/js/access_counters.js'); ?>
 
 <div class="modal-body"
 	ng-controller="AccessCounterFrameSettings"
@@ -30,7 +29,6 @@ $camelizeData = NetCommonsAppController::camelizeKeyRecursive(array(
 
 		<?php echo $this->element('Blocks.edit_form', array(
 				'model' => 'AccessCounter',
-				'action' => h($this->request->params['action']) . '/' . $frameId . '/' . $blockId,
 				'callback' => 'AccessCounters.AccessCounters/edit_form',
 				'cancelUrl' => '/access_counters/access_counter_blocks/index/' . $frameId
 			)); ?>

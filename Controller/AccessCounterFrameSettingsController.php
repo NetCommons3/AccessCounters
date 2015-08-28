@@ -67,32 +67,19 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
  * @return void
  */
 	public function edit() {
-		if (! $this->NetCommonsFrame->validateFrameId()) {
-			$this->throwBadRequest();
-			return false;
-		}
-		$counterFrameSetting = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true);
-		$this->set('counterFrameSetting', $counterFrameSetting);
-
-		$data = array();
-		if ($this->request->isPost()) {
+		if ($this->request->isPut()) {
+			//登録(PUT)処理
 			$data = $this->data;
 			$data['AccessCounterFrameSetting']['display_type'] = (int)$data['AccessCounterFrameSetting']['display_type'];
 
-			$this->AccessCounterFrameSetting->saveAccessCounterFrameSetting($data);
-			if ($this->handleValidationError($this->AccessCounterFrameSetting->validationErrors)) {
-				if (! $this->request->is('ajax')) {
-					$this->redirect('/' . $this->viewVars['cancelUrl']);
-				}
-				return;
+			if ($this->AccessCounterFrameSetting->saveAccessCounterFrameSetting($data)) {
+				$this->redirect('/' . $this->viewVars['cancelUrl']);
 			}
-			$data = $this->camelizeKeyRecursive($data);
-		}
+			$this->handleValidationError($this->AccessCounterFrameSetting->validationErrors);
 
-		$results = $this->camelizeKeyRecursive($data);
-		$results = Hash::merge(
-			$this->viewVars, $results
-		);
-		$this->set($results);
+		} else {
+			//初期データセット
+			$this->request->data = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true);
+		}
 	}
 }

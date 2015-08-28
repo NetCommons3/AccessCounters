@@ -56,13 +56,13 @@ class AccessCountersController extends AccessCountersAppController {
 			$this->autoRender = false;
 			return;
 		}
-
 		$isAccessed = 'block_key_' . $this->viewVars['blockKey'];
 
-		//AccessCounter共通データ取得
-		$this->__prepare();
+		//AccessCounterFrameSettingデータ取得
+		$counterFrameSetting = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true);
+		$this->set('accessCounterFrameSetting', $counterFrameSetting['AccessCounterFrameSetting']);
 
-		//counterデータ取得
+		//AccessCounterデータ取得
 		$accessCounter = $this->AccessCounter->getAccessCounter(
 			$this->viewVars['blockKey'],
 			$this->viewVars['roomId'],
@@ -83,7 +83,6 @@ class AccessCountersController extends AccessCountersAppController {
 			}
 		}
 
-//		$accessCounter = $this->camelizeKeyRecursive($accessCounter);
 		$this->set('accessCounter', $accessCounter['AccessCounter']);
 	}
 
@@ -100,29 +99,24 @@ class AccessCountersController extends AccessCountersAppController {
 		//タブの設定
 		$this->initTabs('block_index', 'block_settings');
 
-//		//AccessCounter共通データ取得
-//		$this->__prepare();
-
-		$this->set('blockId', null);
-
 		if ($this->request->isPost()) {
+			//登録(POST)処理
 			$data = $this->__parseRequestData();
-
 			if ($this->AccessCounter->saveAccessCounter($data)) {
-				if (! $this->request->is('ajax')) {
-					$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
-				}
-				return;
+				$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
 			}
 			$this->handleValidationError($this->AccessCounter->validationErrors);
 
 		} else {
+			//初期データセット
+			//--AccessCounter
 			$this->request->data = Hash::merge($this->request->data, $this->AccessCounter->create(
 				array(
 					'id' => null,
 					'block_key' => null,
 				)
 			));
+			//--Block
 			$this->request->data = Hash::merge($this->request->data, $this->Block->create(
 				array(
 					'id' => null,
@@ -133,21 +127,17 @@ class AccessCountersController extends AccessCountersAppController {
 					'plugin_key' => $this->params['plugin']
 				)
 			));
+			//--AccessCounterFrameSetting
 			$this->request->data = Hash::merge(
 				$this->request->data,
 				$this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true)
 			);
+			//--Frame
 			$this->request->data['Frame'] = array(
 				'id' => $this->viewVars['frameId'],
 				'key' => $this->viewVars['frameKey']
 			);
 		}
-var_dump($this->request->data);
-
-//		$results = $this->camelizeKeyRecursive(Hash::merge(
-//			$accessCounter, $block, $data
-//		));
-//		$this->set($results);
 	}
 
 /**
@@ -156,7 +146,7 @@ var_dump($this->request->data);
  * @return void
  */
 	public function edit() {
-		if (! $this->NetCommonsBlock->validateBlockId()) {
+		if (! isset($this->params['pass'][1])) {
 			$this->throwBadRequest();
 			return false;
 		}
@@ -168,36 +158,43 @@ var_dump($this->request->data);
 		//タブの設定
 		$this->initTabs('block_index', 'block_settings');
 
-		//AccessCounter共通データ取得
-		$this->__prepare();
-
-		//counterデータ取得
-		if (! $accessCounter = $this->AccessCounter->getAccessCounter(
-			$this->viewVars['blockKey'],
-			$this->viewVars['roomId'],
-			false
-		)) {
-			$this->throwBadRequest();
-			return false;
-		}
-
-		$data = array();
-		if ($this->request->isPost()) {
+		if ($this->request->isPut()) {
+			//登録(PUT)処理
 			$data = $this->__parseRequestData();
-
-			$this->AccessCounter->saveAccessCounter($data);
-			if ($this->handleValidationError($this->AccessCounter->validationErrors)) {
-				if (! $this->request->is('ajax')) {
-					$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
-				}
-				return;
+			if ($this->AccessCounter->saveAccessCounter($data)) {
+				$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
 			}
-		}
+			$this->handleValidationError($this->AccessCounter->validationErrors);
 
-		$results = $this->camelizeKeyRecursive(Hash::merge(
-			$accessCounter, $data
-		));
-		$this->set($results);
+		} else {
+			//初期データセット
+			//--Block
+			if (! $block = $this->Block->getBlock($this->viewVars['blockId'], $this->viewVars['roomId'])) {
+				$this->throwBadRequest();
+				return false;
+			}
+			$this->request->data = Hash::merge($this->request->data, $block);
+			//--AccessCounter
+			if (! $accessCounter = $this->AccessCounter->getAccessCounter(
+				$block['Block']['key'],
+				$this->viewVars['roomId'],
+				false
+			)) {
+				$this->throwBadRequest();
+				return false;
+			}
+			$this->request->data = Hash::merge($this->request->data, $accessCounter);
+			//--AccessCounterFrameSetting
+			$this->request->data = Hash::merge(
+				$this->request->data,
+				$this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true)
+			);
+			//--Frame
+			$this->request->data['Frame'] = array(
+				'id' => $this->viewVars['frameId'],
+				'key' => $this->viewVars['frameKey']
+			);
+		}
 	}
 
 /**
@@ -206,19 +203,9 @@ var_dump($this->request->data);
  * @return void
  */
 	public function delete() {
-		if (! $this->NetCommonsBlock->validateBlockId()) {
-			$this->throwBadRequest();
-			return false;
-		}
-		$this->set('blockId', (int)$this->params['pass'][1]);
-		$this->__prepare();
-
 		if ($this->request->isDelete()) {
 			if ($this->AccessCounter->deleteAccessCounter($this->data)) {
-				if (! $this->request->is('ajax')) {
-					$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
-				}
-				return;
+				$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
 			}
 		}
 
@@ -247,31 +234,6 @@ var_dump($this->request->data);
 		}
 
 		return $data;
-	}
-
-/**
- * initAccessCounter
- *
- * @return bool True on success, False on failure
- */
-	private function __prepare() {
-//		if (in_array('block', $contains, true)) {
-			if (! $block = $this->Block->getBlock($this->viewVars['blockId'], $this->viewVars['roomId'])) {
-				$this->throwBadRequest();
-				return false;
-			}
-//			$block = $this->camelizeKeyRecursive($block);
-			$this->set('block'. $block);
-			$this->set('blockId', (int)$block['Block']['id']);
-			$this->set('blockKey', $block['Block']['key']);
-//		}
-
-		$counterFrameSetting = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true);
-//		$counterFrameSetting = $this->camelizeKeyRecursive($counterFrameSetting);
-		$this->set('counterFrameSetting', $counterFrameSetting['AccessCounterFrameSetting']);
-//		$this->set('userId', (int)$this->Auth->user('id'));
-
-		return true;
 	}
 
 }

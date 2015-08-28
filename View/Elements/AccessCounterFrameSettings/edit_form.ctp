@@ -1,6 +1,6 @@
 <?php
 /**
- * AccessCounter edit template
+ * AccessCounterFrameSettings edit template
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -61,27 +61,13 @@
 	</div>
 </div>
 
-<div class='form-group'>
-	<?php
-		for ($i = AccessCounterFrameSetting::DISPLAY_DIGIT_MIN; $i <= AccessCounterFrameSetting::DISPLAY_DIGIT_MAX; $i++) {
-			$options[$i] = $i;
-		}
-	?>
+<?php
+	for ($i = AccessCounterFrameSetting::DISPLAY_DIGIT_MIN; $i <= AccessCounterFrameSetting::DISPLAY_DIGIT_MAX; $i++) {
+		$options[$i] = $i;
+	}
 
-	<?php echo $this->Form->input('AccessCounterFrameSetting.display_digit',
-		array(
-			'label' => __d('access_counters', 'Display digit'),
+	echo $this->NetCommonsForm->input('AccessCounterFrameSetting.display_digit', array(
 			'type' => 'select',
-			'error' => false,
-			'class' => 'form-control',
+			'label' => __d('access_counters', 'Display digit'),
 			'options' => $options,
-//			'selected' => (int)$this->data['AccessCounterFrameSetting']['display_digit']
-		)); ?>
-
-	<?php echo $this->element(
-		'NetCommons.errors', [
-			'errors' => $this->validationErrors,
-			'model' => 'AccessCounterFrameSetting',
-			'field' => 'display_digit',
-		]); ?>
-</div>
+		));

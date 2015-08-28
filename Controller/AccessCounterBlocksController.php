@@ -98,10 +98,6 @@ class AccessCounterBlocksController extends AccessCountersAppController {
 			return;
 		}
 
-//		$results = array(
-//			'accessCounters' => $accessCounters
-//		);
-//		$results = $this->camelizeKeyRecursive($results);
 		$this->set('accessCounters', $accessCounters);
 	}
 
