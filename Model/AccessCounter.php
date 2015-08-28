@@ -20,6 +20,15 @@ App::uses('AccessCountersAppModel', 'AccessCounters.Model');
 class AccessCounter extends AccessCountersAppModel {
 
 /**
+ * use behaviors
+ *
+ * @var array
+ */
+	public $actsAs = array(
+		'Blocks.Block'
+	);
+
+/**
  * Validation rules
  *
  * @var array
@@ -116,7 +125,6 @@ class AccessCounter extends AccessCountersAppModel {
 			'AccessCounter' => 'AccessCounters.AccessCounter',
 			'AccessCounterFrameSetting' => 'AccessCounters.AccessCounterFrameSetting',
 			'Block' => 'Blocks.Block',
-			'Frame' => 'Frames.Frame',
 		]);
 
 		//トランザクションBegin
@@ -124,18 +132,14 @@ class AccessCounter extends AccessCountersAppModel {
 		$dataSource = $this->getDataSource();
 		$dataSource->begin();
 
+		//バリデーション
+		if (! $this->validateAccessCounter($data)) {
+			return false;
+		}
+
 		try {
-			//バリデーション
-			if (! $this->validateAccessCounter($data)) {
-				return false;
-			}
-
-			//ブロックの登録
-			$block = $this->Block->saveByFrameId($data['Frame']['id']);
-
 			//登録処理
-			$this->data['AccessCounter']['block_key'] = $block['Block']['key'];
-			if (! $this->save(null, false)) {
+			if (! $this->data = $this->save(null, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 
@@ -165,14 +169,16 @@ class AccessCounter extends AccessCountersAppModel {
  * @return bool True on success, false on error
  */
 	public function validateAccessCounter($data) {
+		$this->Block->validate['name'] = array(
+			'notBlank' => array(
+				'rule' => array('notBlank'),
+				'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('access_counters', 'Access counter name')),
+			),
+		);
+
 		$this->set($data);
 		$this->validates();
 		if ($this->validationErrors) {
-			return false;
-		}
-
-		if (! $this->Block->validateBlock($data)) {
-			$this->validationErrors = Hash::merge($this->validationErrors, $this->Block->validationErrors);
 			return false;
 		}
 
@@ -180,6 +186,7 @@ class AccessCounter extends AccessCountersAppModel {
 			$this->validationErrors = Hash::merge($this->validationErrors, $this->AccessCounterFrameSetting->validationErrors);
 			return false;
 		}
+
 		return true;
 	}
 
@@ -191,14 +198,12 @@ class AccessCounter extends AccessCountersAppModel {
  * @throws InternalErrorException
  */
 	public function deleteAccessCounter($data) {
-		$this->setDataSource('master');
-
 		$this->loadModels([
 			'AccessCounter' => 'AccessCounters.AccessCounter',
-			'Block' => 'Blocks.Block',
 		]);
 
 		//トランザクションBegin
+		$this->setDataSource('master');
 		$dataSource = $this->getDataSource();
 		$dataSource->begin();
 
@@ -208,7 +213,7 @@ class AccessCounter extends AccessCountersAppModel {
 			}
 
 			//Blockデータ削除
-			$this->Block->deleteBlock($data['Block']['key']);
+			$this->deleteBlock($data['Block']['key']);
 
 			//トランザクションCommit
 			$dataSource->commit();

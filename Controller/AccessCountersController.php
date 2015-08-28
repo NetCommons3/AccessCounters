@@ -101,7 +101,7 @@ class AccessCountersController extends AccessCountersAppController {
 
 		if ($this->request->isPost()) {
 			//登録(POST)処理
-			$data = $this->__parseRequestData();
+			$data = $this->__parseRequestData($this->data);
 			if ($this->AccessCounter->saveAccessCounter($data)) {
 				$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
 			}
@@ -160,7 +160,10 @@ class AccessCountersController extends AccessCountersAppController {
 
 		if ($this->request->isPut()) {
 			//登録(PUT)処理
-			$data = $this->__parseRequestData();
+			$data = $this->data;
+			unset($data['AccessCounter']['count_start']);
+
+			$data = $this->__parseRequestData($data);
 			if ($this->AccessCounter->saveAccessCounter($data)) {
 				$this->redirect('/access_counters/access_counter_blocks/index/' . $this->viewVars['frameId']);
 			}
@@ -169,7 +172,7 @@ class AccessCountersController extends AccessCountersAppController {
 		} else {
 			//初期データセット
 			//--Block
-			if (! $block = $this->Block->getBlock($this->viewVars['blockId'], $this->viewVars['roomId'])) {
+			if (! $block = $this->AccessCounter->getBlock($this->viewVars['blockId'], $this->viewVars['roomId'])) {
 				$this->throwBadRequest();
 				return false;
 			}
@@ -184,17 +187,18 @@ class AccessCountersController extends AccessCountersAppController {
 				return false;
 			}
 			$this->request->data = Hash::merge($this->request->data, $accessCounter);
-			//--AccessCounterFrameSetting
-			$this->request->data = Hash::merge(
-				$this->request->data,
-				$this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true)
-			);
 			//--Frame
 			$this->request->data['Frame'] = array(
 				'id' => $this->viewVars['frameId'],
 				'key' => $this->viewVars['frameKey']
 			);
 		}
+
+		//AccessCounterFrameSettingデータセット
+		$this->request->data = Hash::merge(
+			$this->request->data,
+			$this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true)
+		);
 	}
 
 /**
@@ -215,10 +219,10 @@ class AccessCountersController extends AccessCountersAppController {
 /**
  * Parse data from request
  *
+ * @param array $data received post data
  * @return array
  */
-	private function __parseRequestData() {
-		$data = $this->data;
+	private function __parseRequestData($data) {
 		if ($data['Block']['public_type'] === Block::TYPE_LIMITED) {
 			//$data['Block']['from'] = implode('-', $data['Block']['from']);
 			//$data['Block']['to'] = implode('-', $data['Block']['to']);

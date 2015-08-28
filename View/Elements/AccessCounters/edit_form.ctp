@@ -29,7 +29,7 @@
 <?php echo $this->NetCommonsForm->input('AccessCounter.count_start', array(
 		'type' => 'number',
 		'label' => __d('access_counters', 'Starting Value'),
-		'disabled' => (bool)$this->data['AccessCounter']['id']
+		'readonly' => (bool)$this->data['AccessCounter']['id']
 	)); ?>
 
 <?php echo $this->element('Blocks.public_type');
