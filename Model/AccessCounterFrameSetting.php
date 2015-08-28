@@ -117,6 +117,8 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 				),
 			),
 		));
+
+		return parent::beforeValidate($options);
 	}
 
 /**
@@ -132,10 +134,10 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 		);
 
 		$counterFrameSetting = $this->find('first', array(
-				'recursive' => -1,
-				'conditions' => $conditions,
-			)
-		);
+			'recursive' => -1,
+			'conditions' => $conditions,
+		));
+
 		if ($created && ! $counterFrameSetting) {
 			$counterFrameSetting = $this->create(array(
 				'id' => null,
