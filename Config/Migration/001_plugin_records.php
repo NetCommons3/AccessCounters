@@ -13,7 +13,7 @@ App::uses('NetCommonsMigration', 'NetCommons.Config/Migration');
 /**
  * Add plugin migration
  *
- * @package NetCommons\PluginManager\Config\Migration
+ * @package NetCommons\AccessCounters\Config\Migration
  */
 class PluginRecords extends NetCommonsMigration {
 

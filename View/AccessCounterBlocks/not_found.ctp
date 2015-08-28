@@ -1,6 +1,6 @@
 <?php
 /**
- * AccessCounterBlocks view for editor template
+ * AccessCounterBlocks not found template
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>

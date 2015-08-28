@@ -15,7 +15,7 @@ App::uses('AccessCountersControllerTestBase', 'AccessCounters.Test/Case/Controll
 /**
  * AccessCounteController->edit() Test Case
  *
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\AccessCounters\Test\Case\Controller
  */
 class AccessCountersControllerEditTest extends AccessCountersControllerTestBase {

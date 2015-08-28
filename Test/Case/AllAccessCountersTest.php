@@ -2,7 +2,7 @@
 /**
  * AccessCounters All Test Suite
  *
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
  * @copyright Copyright 2014, NetCommons Project
@@ -11,7 +11,7 @@
 /**
  * AccessCounters All Test Suite
  *
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\AccessCounters\Test\Case
  * @codeCoverageIgnore
  */

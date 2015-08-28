@@ -3,7 +3,7 @@
  * AccessCountersController Test Case
  *
  * @author Noriko Arai <arai@nii.ac.jp>
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
  * @copyright Copyright 2014, NetCommons Project
@@ -21,7 +21,7 @@ App::uses('AccessCountersController', 'AccessCounters.Controller');
 /**
  * AccessCountersController Test Case
  *
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\AccessCounters\Test\Case\Controller
  */
 class AccessCountersControllerTestBase extends YAControllerTestCase {

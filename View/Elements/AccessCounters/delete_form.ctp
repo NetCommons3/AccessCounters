@@ -1,6 +1,6 @@
 <?php
 /**
- * AccessCounter delete template
+ * AccessCounters delete form template
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>

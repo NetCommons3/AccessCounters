@@ -1,6 +1,6 @@
 /**
  * @fileoverview AccessCounters Javascript
- * @author ozawa.ryo@withone.co.jp (Ryo Ozawa)
+ * @author nakajimashouhei@gmail.com (Shohei Nakajima)
  */
 
 
