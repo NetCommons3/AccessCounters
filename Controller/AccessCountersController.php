@@ -116,14 +116,11 @@ class AccessCountersController extends AccessCountersAppController {
 				)
 			));
 			//--Block
-			$this->request->data = Hash::merge($this->request->data, $this->Block->create(
-				array(
-					'id' => null,
-					'key' => null,
+			$this->request->data = Hash::merge(
+				$this->request->data,
+				$this->AccessCounter->createBlock(array(
 					'name' => __d('access_counters', 'New Counter %s', date('YmdHis')),
-					'language_id' => Configure::read('Config.languageId'),
 					'room_id' => $this->viewVars['roomId'],
-					'plugin_key' => $this->params['plugin']
 				)
 			));
 			//--AccessCounterFrameSetting
