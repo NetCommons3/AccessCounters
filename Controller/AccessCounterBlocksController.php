@@ -27,16 +27,6 @@ class AccessCounterBlocksController extends AccessCountersAppController {
 	public $layout = 'NetCommons.setting';
 
 /**
- * use models
- *
- * @var array
- */
-	public $uses = array(
-		'Blocks.Block',
-		'Frames.Frame',
-	);
-
-/**
  * use components
  *
  * @var array
