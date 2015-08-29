@@ -98,6 +98,9 @@ class AccessCounterBlocksController extends AccessCountersAppController {
 			return;
 		}
 
+		$this->request->data['Frame']['block_id'] = $this->viewVars['blockId'];
+		$this->request->data['Frame']['id'] = $this->viewVars['frameId'];
+
 		$this->set('accessCounters', $accessCounters);
 	}
 
