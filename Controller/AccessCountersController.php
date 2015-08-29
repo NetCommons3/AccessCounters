@@ -25,7 +25,6 @@ class AccessCountersController extends AccessCountersAppController {
  * @var array
  */
 	public $uses = array(
-		'Frames.Frame',
 		'AccessCounters.AccessCounter',
 		'AccessCounters.AccessCounterFrameSetting',
 	);
