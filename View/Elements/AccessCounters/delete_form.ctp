@@ -10,7 +10,7 @@
  */
 ?>
 
-<div class="inline-block">
+<div class="pull-left">
 	<?php echo sprintf(__d('net_commons', 'Delete all data associated with the %s.'), __d('access_counters', 'Access counter')); ?>
 </div>
 
