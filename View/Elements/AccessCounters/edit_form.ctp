@@ -22,7 +22,7 @@
 		'required' => true
 	)); ?>
 
-<?php if (! PageLayoutHelper::$frame['block_id']) : ?>
+<?php if (! CurrentUtility::read('Frame.block_id')) : ?>
 	<?php echo $this->element('AccessCounterFrameSettings/edit_form'); ?>
 <?php endif; ?>
 
