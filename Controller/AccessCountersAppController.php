@@ -25,7 +25,6 @@ class AccessCountersAppController extends AppController {
  * @var array
  */
 	public $components = array(
-		'NetCommons.NetCommonsFrame',
 		'Pages.PageLayout',
 		'Security',
 	);
@@ -37,7 +36,6 @@ class AccessCountersAppController extends AppController {
  */
 	public $uses = array(
 		'AccessCounters.AccessCounter',
-		'Blocks.Block',
 	);
 
 /**
@@ -62,7 +60,7 @@ class AccessCountersAppController extends AppController {
 						'plugin' => $this->params['plugin'],
 						'controller' => 'access_counter_blocks',
 						'action' => 'index',
-						$this->viewVars['frameId'],
+						Current::read('Frame.id'),
 					)
 				),
 				'frame_settings' => array(
@@ -70,7 +68,7 @@ class AccessCountersAppController extends AppController {
 						'plugin' => $this->params['plugin'],
 						'controller' => 'access_counter_frame_settings',
 						'action' => 'edit',
-						$this->viewVars['frameId'],
+						Current::read('Frame.id'),
 					)
 				),
 			),
@@ -85,7 +83,7 @@ class AccessCountersAppController extends AppController {
 						'plugin' => $this->params['plugin'],
 						'controller' => 'access_counters',
 						'action' => $this->params['action'],
-						$this->viewVars['frameId'],
+						Current::read('Frame.id'),
 						$blockId
 					)
 				),

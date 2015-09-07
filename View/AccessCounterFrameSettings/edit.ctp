@@ -13,13 +13,13 @@ echo $this->NetCommonsHtml->script('/access_counters/js/access_counters.js');
 
 if (isset($this->data['AccessCounterFrameSetting'])) {
 	$camelizeData = NetCommonsAppController::camelizeKeyRecursive(array(
-		'frameId' => $frameId,
+		'frameId' => $this->data['Frame']['id'],
 		'counterFrameSetting' => $this->data['AccessCounterFrameSetting'],
 		'currentDisplayTypeName' => AccessCounterFrameSetting::$displayTypes[$this->data['AccessCounterFrameSetting']['display_type']]
 	));
 } else {
 	$camelizeData = array(
-		'frameId' => $frameId,
+		'frameId' => $this->data['Frame']['id'],
 		'counterFrameSetting' => array(),
 		'currentDisplayTypeName' => ''
 	);
@@ -36,7 +36,7 @@ if (isset($this->data['AccessCounterFrameSetting'])) {
 		<?php echo $this->element('Blocks.edit_form', array(
 				'model' => 'AccessCounterFrameSetting',
 				'callback' => 'AccessCounters.AccessCounterFrameSettings/edit_form',
-				'cancelUrl' => '/' . $cancelUrl,
+				'cancelUrl' => Current::backToPageUrl(),
 			)); ?>
 	</div>
 </article>

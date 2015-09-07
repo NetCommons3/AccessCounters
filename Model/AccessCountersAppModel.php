@@ -21,12 +21,4 @@ App::uses('AppModel', 'Model');
  */
 class AccessCountersAppModel extends AppModel {
 
-/**
- * use component
- *
- * @var array
- */
-	public $components = array(
-		'Security',
-	);
 }

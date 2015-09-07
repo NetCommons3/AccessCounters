@@ -13,13 +13,13 @@ echo $this->NetCommonsHtml->script('/access_counters/js/access_counters.js');
 
 if (isset($this->data['AccessCounterFrameSetting'])) {
 	$camelizeData = NetCommonsAppController::camelizeKeyRecursive(array(
-		'frameId' => $frameId,
+		'frameId' => $this->data['Frame']['id'],
 		'counterFrameSetting' => $this->data['AccessCounterFrameSetting'],
 		'currentDisplayTypeName' => AccessCounterFrameSetting::$displayTypes[$this->data['AccessCounterFrameSetting']['display_type']]
 	));
 } else {
 	$camelizeData = array(
-		'frameId' => $frameId,
+		'frameId' => $this->data['Frame']['id'],
 		'counterFrameSetting' => array(),
 		'currentDisplayTypeName' => ''
 	);
@@ -38,13 +38,13 @@ if (isset($this->data['AccessCounterFrameSetting'])) {
 		<?php echo $this->element('Blocks.edit_form', array(
 				'model' => 'AccessCounter',
 				'callback' => 'AccessCounters.AccessCounters/edit_form',
-				'cancelUrl' => '/access_counters/access_counter_blocks/index/' . $frameId
+				'cancelUrl' => Current::backToIndexUrl('default_setting_action'),
 			)); ?>
 
 		<?php if ($this->request->params['action'] === 'edit') : ?>
 			<?php echo $this->element('Blocks.delete_form', array(
 					'model' => 'AccessCounter',
-					'action' => 'delete/' . $frameId . '/' . $blockId,
+					'action' => 'delete/' . $this->data['Frame']['id'] . '/' . $blockId,
 					'callback' => 'AccessCounters.AccessCounters/delete_form'
 				)); ?>
 		<?php endif; ?>

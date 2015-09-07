@@ -41,10 +41,10 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
  * @var array
  */
 	public $components = array(
-		'NetCommons.NetCommonsRoomRole' => array(
-			//コンテンツの権限設定
-			'allowedActions' => array(
-				'pageEditable' => array('edit')
+		'NetCommons.Permission' => array(
+			//アクセスの権限
+			'allow' => array(
+				'edit' => 'page_editable',
 			),
 		),
 	);
@@ -73,13 +73,14 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
 			$data['AccessCounterFrameSetting']['display_type'] = (int)$data['AccessCounterFrameSetting']['display_type'];
 
 			if ($this->AccessCounterFrameSetting->saveAccessCounterFrameSetting($data)) {
-				$this->redirect('/' . $this->viewVars['cancelUrl']);
+				$this->redirect(Current::backToIndexUrl());
 			}
 			$this->handleValidationError($this->AccessCounterFrameSetting->validationErrors);
 
 		} else {
 			//初期データセット
-			$this->request->data = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting($this->viewVars['frameKey'], true);
+			$this->request->data = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting(true);
+			$this->request->data['Frame'] = Current::read('Frame');
 		}
 	}
 }

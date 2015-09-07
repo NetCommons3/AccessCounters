@@ -97,9 +97,9 @@ class AccessCounter extends AccessCountersAppModel {
  * @param bool $created If True, the results of the Model::find() to create it if it was null
  * @return array AccessCounter
  */
-	public function getAccessCounter($blockKey, $roomId, $created) {
-		$conditions[$this->alias . '.block_key'] = $blockKey;
-		$conditions['Block.room_id'] = $roomId;
+	public function getAccessCounter($created) {
+		$conditions[$this->alias . '.block_key'] = Current::read('Block.key');
+		$conditions['Block.room_id'] = Current::read('Block.room_id');
 
 		$accessCounter = $this->find('first', array(
 			'recursive' => 0,
@@ -128,12 +128,11 @@ class AccessCounter extends AccessCountersAppModel {
 		]);
 
 		//トランザクションBegin
-		$this->setDataSource('master');
-		$dataSource = $this->getDataSource();
-		$dataSource->begin();
+		$this->begin();
 
 		//バリデーション
 		if (! $this->validateAccessCounter($data)) {
+			$this->rollback();
 			return false;
 		}
 
@@ -150,13 +149,11 @@ class AccessCounter extends AccessCountersAppModel {
 			}
 
 			//トランザクションCommit
-			$dataSource->commit();
+			$this->commit();
 
 		} catch (Exception $ex) {
 			//トランザクションRollback
-			$dataSource->rollback();
-			CakeLog::error($ex);
-			throw $ex;
+			$this->rollback($ex);
 		}
 
 		return true;
@@ -177,12 +174,12 @@ class AccessCounter extends AccessCountersAppModel {
 		);
 
 		$this->set($data);
-		$this->validates();
-		if ($this->validationErrors) {
+		if (! $this->validates()) {
 			return false;
 		}
 
-		if (! $this->AccessCounterFrameSetting->validateAccessCounterFrameSetting($data)) {
+		$this->AccessCounterFrameSetting->set($data);
+		if (! $this->AccessCounterFrameSetting->validates()) {
 			$this->validationErrors = Hash::merge($this->validationErrors, $this->AccessCounterFrameSetting->validationErrors);
 			return false;
 		}
@@ -203,9 +200,7 @@ class AccessCounter extends AccessCountersAppModel {
 		]);
 
 		//トランザクションBegin
-		$this->setDataSource('master');
-		$dataSource = $this->getDataSource();
-		$dataSource->begin();
+		$this->begin();
 
 		try {
 			if (! $this->deleteAll(array($this->alias . '.block_key' => $data['Block']['key']), false)) {
@@ -216,13 +211,11 @@ class AccessCounter extends AccessCountersAppModel {
 			$this->deleteBlock($data['Block']['key']);
 
 			//トランザクションCommit
-			$dataSource->commit();
+			$this->commit();
 
 		} catch (Exception $ex) {
 			//トランザクションRollback
-			$dataSource->rollback();
-			CakeLog::error($ex);
-			throw $ex;
+			$this->rollback($ex);
 		}
 
 		return true;
@@ -241,26 +234,22 @@ class AccessCounter extends AccessCountersAppModel {
 		]);
 
 		//トランザクションBegin
-		$this->setDataSource('master');
-		$dataSource = $this->getDataSource();
-		$dataSource->begin();
+		$this->begin();
 
 		try {
 			if (! $this->updateAll(
-				array($this->name . '.count' => $this->name . '.count + 1'),
-				array($this->name . '.id' => $data[$this->name]['id'])
+				array($this->alias . '.count' => $this->alias . '.count + 1'),
+				array($this->alias . '.id' => $data[$this->alias]['id'])
 			)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			};
 
 			//トランザクションCommit
-			$dataSource->commit();
+			$this->commit();
 
 		} catch (Exception $ex) {
 			//トランザクションRollback
-			$dataSource->rollback();
-			CakeLog::error($ex);
-			throw $ex;
+			$this->rollback($ex);
 		}
 
 		return true;

@@ -128,9 +128,9 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
  * @param bool $created If True, the results of the Model::find() to create it if it was null
  * @return array
  */
-	public function getAccessCounterFrameSetting($frameKey, $created) {
+	public function getAccessCounterFrameSetting($created) {
 		$conditions = array(
-			'frame_key' => $frameKey
+			'frame_key' => Current::read('Frame.key')
 		);
 
 		$counterFrameSetting = $this->find('first', array(
@@ -142,7 +142,7 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 			$counterFrameSetting = $this->create(array(
 				'id' => null,
 				'display_type' => self::DISPLAY_TYPE_VALUE_0,
-				'frame_key' => $frameKey,
+				'frame_key' => Current::read('Frame.key'),
 			));
 		}
 
@@ -162,43 +162,28 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 		]);
 
 		//トランザクションBegin
-		$this->setDataSource('master');
-		$dataSource = $this->getDataSource();
-		$dataSource->begin();
+		$this->begin();
+
+		//バリデーション
+		$this->set($data);
+		if (! $this->validates()) {
+			$this->rollback();
+			return false;
+		}
 
 		try {
-			if (! $this->validateAccessCounterFrameSetting($data)) {
-				return false;
-			}
-
 			if (! $this->save(null, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 
 			//トランザクションCommit
-			$dataSource->commit();
+			$this->commit();
+
 		} catch (Exception $ex) {
 			//トランザクションRollback
-			$dataSource->rollback();
-			CakeLog::error($ex);
-			throw $ex;
+			$this->rollback($ex);
 		}
 
-		return true;
-	}
-
-/**
- * validate AccessCounterFrameSetting
- *
- * @param array $data received post data
- * @return bool True on success, false on error
- */
-	public function validateAccessCounterFrameSetting($data) {
-		$this->set($data);
-		$this->validates();
-		if ($this->validationErrors) {
-			return false;
-		}
 		return true;
 	}
 }

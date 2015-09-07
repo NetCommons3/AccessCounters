@@ -14,13 +14,9 @@
 	<?php echo $this->element('NetCommons.setting_tabs', $settingTabs); ?>
 
 	<div class="tab-content">
-		<div class="text-right">
-			<a class="btn btn-success" href="<?php echo $this->Html->url('/access_counters/access_counters/add/' . $frameId);?>">
-				<span class="glyphicon glyphicon-plus"> </span>
-			</a>
-		</div>
+		<?php echo $this->NetCommonsForm->addLink(); ?>
 
-		<?php echo $this->Form->create('', array('url' => '/frames/frames/edit/' . $frameId)); ?>
+		<?php echo $this->Form->create('', array('url' => '/frames/frames/edit/' . $this->data['Frame']['id'])); ?>
 
 			<?php echo $this->Form->hidden('Frame.id'); ?>
 
@@ -41,7 +37,7 @@
 				</thead>
 				<tbody>
 					<?php foreach ($accessCounters as $accessCounter) : ?>
-						<tr<?php echo ($blockId === $accessCounter['Block']['id'] ? ' class="active"' : ''); ?>>
+						<tr<?php echo ($this->data['Frame']['block_id'] === $accessCounter['Block']['id'] ? ' class="active"' : ''); ?>>
 							<td>
 								<?php echo $this->NetCommonsForm->radio('Frame.block_id', array($accessCounter['Block']['id'] => ''), array(
 										'onclick' => 'submit()',
@@ -50,7 +46,7 @@
 									)); ?>
 							</td>
 							<td>
-								<a href="<?php echo $this->Html->url('/access_counters/access_counters/edit/' . $frameId . '/' . (int)$accessCounter['Block']['id']); ?>">
+								<a href="<?php echo $this->Html->url('/access_counters/access_counters/edit/' . $this->data['Frame']['id'] . '/' . (int)$accessCounter['Block']['id']); ?>">
 									<?php echo h($accessCounter['Block']['name']); ?>
 								</a>
 							</td>

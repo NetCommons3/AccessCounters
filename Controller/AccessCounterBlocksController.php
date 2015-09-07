@@ -32,23 +32,13 @@ class AccessCounterBlocksController extends AccessCountersAppController {
  * @var array
  */
 	public $components = array(
-		'NetCommons.NetCommonsBlock',
-		'NetCommons.NetCommonsRoomRole' => array(
-			//コンテンツの権限設定
-			'allowedActions' => array(
-				'blockEditable' => array('index', 'add', 'edit', 'delete')
+		'NetCommons.Permission' => array(
+			//アクセスの権限
+			'allow' => array(
+				'index,add,edit,delete' => 'block_editable',
 			),
 		),
 		'Paginator',
-	);
-
-/**
- * use helpers
- *
- * @var array
- */
-	public $helpers = array(
-		'NetCommons.Date',
 	);
 
 /**
@@ -58,8 +48,6 @@ class AccessCounterBlocksController extends AccessCountersAppController {
  */
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->deny('index');
-
 		//タブの設定
 		$this->initTabs('block_index', 'block_settings');
 	}
@@ -70,28 +58,23 @@ class AccessCounterBlocksController extends AccessCountersAppController {
  * @return void
  */
 	public function index() {
+		$this->set('addActionController', 'access_counters');
+
 		$this->Paginator->settings = array(
 			'AccessCounter' => array(
 				'order' => array('Block.id' => 'desc'),
-				'conditions' => array(
-					'Block.language_id' => $this->viewVars['languageId'],
-					'Block.room_id' => $this->viewVars['roomId'],
-					'Block.plugin_key ' => $this->params['plugin'],
-				),
+				'conditions' => $this->AccessCounter->getBlockConditions(),
 				//'limit' => 1
 			)
 		);
-
 		$accessCounters = $this->Paginator->paginate('AccessCounter');
 		if (! $accessCounters) {
-			$this->view = 'not_found';
+			$this->view = 'Blocks.Blocks/not_found';
 			return;
 		}
-
-		$this->request->data['Frame']['block_id'] = $this->viewVars['blockId'];
-		$this->request->data['Frame']['id'] = $this->viewVars['frameId'];
-
 		$this->set('accessCounters', $accessCounters);
+
+		$this->request->data['Frame'] = Current::read('Frame');
 	}
 
 }
