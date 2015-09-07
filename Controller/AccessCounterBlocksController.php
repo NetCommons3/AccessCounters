@@ -59,6 +59,7 @@ class AccessCounterBlocksController extends AccessCountersAppController {
  */
 	public function index() {
 		$this->set('addActionController', 'access_counters');
+		$this->set('editActionController', 'access_counters');
 
 		$this->Paginator->settings = array(
 			'AccessCounter' => array(

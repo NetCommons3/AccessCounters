@@ -46,9 +46,7 @@
 									)); ?>
 							</td>
 							<td>
-								<a href="<?php echo $this->Html->url('/access_counters/access_counters/edit/' . $this->data['Frame']['id'] . '/' . (int)$accessCounter['Block']['id']); ?>">
-									<?php echo h($accessCounter['Block']['name']); ?>
-								</a>
+								<?php echo $this->NetCommonsForm->editLink($accessCounter['Block']['id'], $accessCounter['Block']['name']); ?>
 							</td>
 							<td>
 								<?php echo (int)$accessCounter['AccessCounter']['count']; ?>
