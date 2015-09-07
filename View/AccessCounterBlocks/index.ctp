@@ -14,7 +14,9 @@
 	<?php echo $this->element('NetCommons.setting_tabs', $settingTabs); ?>
 
 	<div class="tab-content">
-		<?php echo $this->NetCommonsForm->addLink(); ?>
+		<div class="text-right">
+			<?php echo $this->NetCommonsForm->addLink(); ?>
+		</div>
 
 		<?php echo $this->Form->create('', array('url' => '/frames/frames/edit/' . $this->data['Frame']['id'])); ?>
 
