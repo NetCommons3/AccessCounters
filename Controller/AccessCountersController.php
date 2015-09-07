@@ -185,12 +185,12 @@ class AccessCountersController extends AccessCountersAppController {
  * @return void
  */
 	public function delete() {
-		if (! $this->request->isDelete()) {
-			$this->throwBadRequest();
+		if ($this->request->isDelete()) {
+			if ($this->AccessCounter->deleteAccessCounter($this->data)) {
+				$this->redirect(Current::backToIndexUrl('default_setting_action'));
+			}
 		}
-		if ($this->AccessCounter->deleteAccessCounter($this->data)) {
-			$this->redirect(Current::backToIndexUrl('default_setting_action'));
-		}
+		$this->throwBadRequest();
 	}
 
 /**
