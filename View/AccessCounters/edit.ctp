@@ -44,7 +44,7 @@ if (isset($this->data['AccessCounterFrameSetting'])) {
 		<?php if ($this->request->params['action'] === 'edit') : ?>
 			<?php echo $this->element('Blocks.delete_form', array(
 					'model' => 'AccessCounter',
-					'action' => 'delete/' . $this->data['Frame']['id'] . '/' . $blockId,
+					'action' => 'delete/' . $this->data['Frame']['id'] . '/' . Current::read('Block.id'),
 					'callback' => 'AccessCounters.AccessCounters/delete_form'
 				)); ?>
 		<?php endif; ?>

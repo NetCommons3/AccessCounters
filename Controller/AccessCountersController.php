@@ -133,12 +133,6 @@ class AccessCountersController extends AccessCountersAppController {
  * @return void
  */
 	public function edit() {
-		if (! isset($this->params['pass'][1])) {
-			$this->throwBadRequest();
-			return false;
-		}
-		$this->set('blockId', (int)$this->params['pass'][1]);
-
 		//レイアウトの設定
 		$this->layout = 'NetCommons.setting';
 
@@ -158,6 +152,8 @@ class AccessCountersController extends AccessCountersAppController {
 
 		} else {
 			//初期データセット
+			CurrentFrame::setBlock($this->request->params['pass'][1]);
+
 			//--Block
 			if (! $this->request->data['Block'] = Current::read('Block')) {
 				$this->throwBadRequest();
@@ -200,20 +196,12 @@ class AccessCountersController extends AccessCountersAppController {
  * @return array
  */
 	private function __parseRequestData($data) {
-		if ($data['Block']['public_type'] === Block::TYPE_LIMITED) {
-			//$data['Block']['from'] = implode('-', $data['Block']['from']);
-			//$data['Block']['to'] = implode('-', $data['Block']['to']);
-		} else {
-			unset($data['Block']['from'], $data['Block']['to']);
-		}
-
 		if (isset($data['AccessCounterFrameSetting']['display_type'])) {
 			$data['AccessCounterFrameSetting']['display_type'] = (int)$data['AccessCounterFrameSetting']['display_type'];
 		}
 		if (isset($data['AccessCounter']['count_start'])) {
 			$data['AccessCounter']['count'] = (int)$data['AccessCounter']['count_start'];
 		}
-
 		return $data;
 	}
 

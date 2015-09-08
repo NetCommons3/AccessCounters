@@ -15,7 +15,7 @@
 
 	<div class="tab-content">
 		<div class="text-right">
-			<?php echo $this->NetCommonsForm->addLink(); ?>
+			<?php echo $this->Button->addLink(); ?>
 		</div>
 
 		<?php echo $this->Form->create('', array('url' => '/frames/frames/edit/' . $this->data['Frame']['id'])); ?>
