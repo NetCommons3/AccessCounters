@@ -47,7 +47,7 @@ class AccessCountersController extends AccessCountersAppController {
 		$isAccessed = 'block_key_' . Current::read('Block.key');
 
 		//AccessCounterFrameSettingデータ取得
-		$counterFrameSetting = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting(Current::read('Frame.key'), true);
+		$counterFrameSetting = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting(true);
 		$this->set('accessCounterFrameSetting', $counterFrameSetting['AccessCounterFrameSetting']);
 
 		//AccessCounterデータ取得

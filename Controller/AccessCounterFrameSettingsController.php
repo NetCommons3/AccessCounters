@@ -58,13 +58,13 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
  * @return void
  */
 	public function edit() {
-		if ($this->request->isPut()) {
+		if ($this->request->isPut() || $this->request->isPost()) {
 			//登録(PUT)処理
 			$data = $this->data;
 			$data['AccessCounterFrameSetting']['display_type'] = (int)$data['AccessCounterFrameSetting']['display_type'];
 
 			if ($this->AccessCounterFrameSetting->saveAccessCounterFrameSetting($data)) {
-				$this->redirect(Current::backToIndexUrl());
+				$this->redirect(Current::backToPageUrl());
 			}
 			$this->handleValidationError($this->AccessCounterFrameSetting->validationErrors);
 
