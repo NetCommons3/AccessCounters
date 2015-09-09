@@ -27,15 +27,6 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
 	public $layout = 'NetCommons.setting';
 
 /**
- * use models
- *
- * @var array
- */
-	public $uses = array(
-		'AccessCounters.AccessCounterFrameSetting'
-	);
-
-/**
  * use components
  *
  * @var array

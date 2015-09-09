@@ -36,6 +36,7 @@ class AccessCountersAppController extends AppController {
  */
 	public $uses = array(
 		'AccessCounters.AccessCounter',
+		'AccessCounters.AccessCounterFrameSetting',
 	);
 
 /**

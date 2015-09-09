@@ -20,16 +20,6 @@ App::uses('AccessCountersAppController', 'AccessCounters.Controller');
 class AccessCountersController extends AccessCountersAppController {
 
 /**
- * use model
- *
- * @var array
- */
-	public $uses = array(
-		'AccessCounters.AccessCounter',
-		'AccessCounters.AccessCounterFrameSetting',
-	);
-
-/**
  * use component
  *
  * @var array
