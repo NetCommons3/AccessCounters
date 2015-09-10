@@ -142,7 +142,6 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 			$counterFrameSetting = $this->create(array(
 				'id' => null,
 				'display_type' => self::DISPLAY_TYPE_VALUE_0,
-				'frame_key' => Current::read('Frame.key'),
 			));
 		}
 

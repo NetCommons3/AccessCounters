@@ -42,6 +42,15 @@ class AccessCounterBlocksController extends AccessCountersAppController {
 	);
 
 /**
+ * use helpers
+ *
+ * @var array
+ */
+	public $helpers = array(
+		'Blocks.BlockForm',
+	);
+
+/**
  * beforeFilter
  *
  * @return void

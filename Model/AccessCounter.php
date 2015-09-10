@@ -173,6 +173,7 @@ class AccessCounter extends AccessCountersAppModel {
 			),
 		);
 
+		//バリデーション
 		$this->set($data);
 		if (! $this->validates()) {
 			return false;

@@ -102,8 +102,6 @@ class AccessCountersController extends AccessCountersAppController {
 					),
 					'Block' => array(
 						'name' => __d('access_counters', 'New Counter %s', date('YmdHis')),
-						'room_id' => Current::read('Room.id'),
-						'language_id' => Current::read('Language.id'),
 					),
 				))
 			);
