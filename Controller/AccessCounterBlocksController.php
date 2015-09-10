@@ -51,14 +51,14 @@ class AccessCounterBlocksController extends AccessCountersAppController {
 	);
 
 /**
- * beforeFilter
+ * beforeRender
  *
  * @return void
  */
-	public function beforeFilter() {
-		parent::beforeFilter();
+	public function beforeRender() {
 		//タブの設定
 		$this->initTabs('block_index', 'block_settings');
+		parent::beforeRender();
 	}
 
 /**

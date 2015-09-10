@@ -41,15 +41,14 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
 	);
 
 /**
- * beforeFilter
+ * beforeRender
  *
  * @return void
  */
-	public function beforeFilter() {
-		parent::beforeFilter();
-
+	public function beforeRender() {
 		//タブの設定
 		$this->initTabs('frame_settings', '');
+		parent::beforeRender();
 	}
 
 /**
@@ -67,7 +66,7 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
 				$this->redirect(Current::backToPageUrl());
 				return;
 			}
-			$this->handleValidationError($this->AccessCounterFrameSetting->validationErrors);
+			$this->NetCommons->handleValidationError($this->AccessCounterFrameSetting->validationErrors);
 
 		} else {
 			//初期データセット

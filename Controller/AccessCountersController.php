@@ -90,7 +90,7 @@ class AccessCountersController extends AccessCountersAppController {
 				$this->redirect(Current::backToIndexUrl('default_setting_action'));
 				return;
 			}
-			$this->handleValidationError($this->AccessCounter->validationErrors);
+			$this->NetCommons->handleValidationError($this->AccessCounter->validationErrors);
 
 		} else {
 			//初期データセット
@@ -125,9 +125,6 @@ class AccessCountersController extends AccessCountersAppController {
 		//レイアウトの設定
 		$this->layout = 'NetCommons.setting';
 
-		//タブの設定
-		$this->initTabs('block_index', 'block_settings');
-
 		if ($this->request->isPut()) {
 			//登録(PUT)処理
 			$data = $this->data;
@@ -138,7 +135,7 @@ class AccessCountersController extends AccessCountersAppController {
 				$this->redirect(Current::backToIndexUrl('default_setting_action'));
 				return;
 			}
-			$this->handleValidationError($this->AccessCounter->validationErrors);
+			$this->NetCommons->handleValidationError($this->AccessCounter->validationErrors);
 
 		} else {
 			//初期データセット
@@ -163,6 +160,9 @@ class AccessCountersController extends AccessCountersAppController {
 			//--Frame
 			$this->request->data['Frame'] = Current::read('Frame');
 		}
+
+		//タブの設定
+		$this->initTabs('block_index', 'block_settings');
 	}
 
 /**
