@@ -88,6 +88,7 @@ class AccessCountersController extends AccessCountersAppController {
 			$data = $this->__parseRequestData($this->data);
 			if ($this->AccessCounter->saveAccessCounter($data)) {
 				$this->redirect(Current::backToIndexUrl('default_setting_action'));
+				return;
 			}
 			$this->handleValidationError($this->AccessCounter->validationErrors);
 
@@ -135,6 +136,7 @@ class AccessCountersController extends AccessCountersAppController {
 			$data = $this->__parseRequestData($data);
 			if ($this->AccessCounter->saveAccessCounter($data)) {
 				$this->redirect(Current::backToIndexUrl('default_setting_action'));
+				return;
 			}
 			$this->handleValidationError($this->AccessCounter->validationErrors);
 
@@ -172,6 +174,7 @@ class AccessCountersController extends AccessCountersAppController {
 		if ($this->request->isDelete()) {
 			if ($this->AccessCounter->deleteAccessCounter($this->data)) {
 				$this->redirect(Current::backToIndexUrl('default_setting_action'));
+				return;
 			}
 		}
 		$this->throwBadRequest();

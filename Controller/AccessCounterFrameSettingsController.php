@@ -65,6 +65,7 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
 
 			if ($this->AccessCounterFrameSetting->saveAccessCounterFrameSetting($data)) {
 				$this->redirect(Current::backToPageUrl());
+				return;
 			}
 			$this->handleValidationError($this->AccessCounterFrameSetting->validationErrors);
 
