@@ -47,30 +47,18 @@ class AccessCountersAppController extends AppController {
  * @return void
  */
 	public function initTabs($mainActiveTab, $blockActiveTab) {
-		if (isset($this->params['pass'][1])) {
-			$blockId = (int)$this->params['pass'][1];
-		} else {
-			$blockId = null;
-		}
-
 		//タブの設定
 		$settingTabs = array(
 			'tabs' => array(
 				'block_index' => array(
-					'url' => array(
-						'plugin' => $this->params['plugin'],
-						'controller' => 'access_counter_blocks',
-						'action' => 'index',
-						Current::read('Frame.id'),
-					)
+					'url' => NetCommonsUrl::backToIndexUrl('default_setting_action')
 				),
 				'frame_settings' => array(
-					'url' => array(
-						'plugin' => $this->params['plugin'],
+					'url' => NetCommonsUrl::actionUrl(array(
 						'controller' => 'access_counter_frame_settings',
 						'action' => 'edit',
-						Current::read('Frame.id'),
-					)
+						'frame_id' => Current::read('Frame.id'),
+					))
 				),
 			),
 			'active' => $mainActiveTab
@@ -80,13 +68,12 @@ class AccessCountersAppController extends AppController {
 		$blockSettingTabs = array(
 			'tabs' => array(
 				'block_settings' => array(
-					'url' => array(
-						'plugin' => $this->params['plugin'],
+					'url' => NetCommonsUrl::actionUrl(array(
 						'controller' => 'access_counters',
 						'action' => $this->params['action'],
-						Current::read('Frame.id'),
-						$blockId
-					)
+						'frame_id' => Current::read('Frame.id'),
+						'block_id' => Current::read('Block.id'),
+					))
 				),
 			),
 			'active' => $blockActiveTab

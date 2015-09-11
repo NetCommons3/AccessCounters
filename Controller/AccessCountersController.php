@@ -80,14 +80,11 @@ class AccessCountersController extends AccessCountersAppController {
 		$this->layout = 'NetCommons.setting';
 		$this->view = 'edit';
 
-		//タブの設定
-		$this->initTabs('block_index', 'block_settings');
-
 		if ($this->request->isPost()) {
 			//登録(POST)処理
-			$data = $this->__parseRequestData($this->data);
+			$data = $this->data;
 			if ($this->AccessCounter->saveAccessCounter($data)) {
-				$this->redirect(Current::backToIndexUrl('default_setting_action'));
+				$this->redirect(NetCommonsUrl::backToIndexUrl('default_setting_action'));
 				return;
 			}
 			$this->NetCommons->handleValidationError($this->AccessCounter->validationErrors);
@@ -114,6 +111,9 @@ class AccessCountersController extends AccessCountersAppController {
 			//--Frame
 			$this->request->data['Frame'] = Current::read('Frame');
 		}
+
+		//タブの設定
+		$this->initTabs('block_index', 'block_settings');
 	}
 
 /**
@@ -130,9 +130,8 @@ class AccessCountersController extends AccessCountersAppController {
 			$data = $this->data;
 			unset($data['AccessCounter']['count_start']);
 
-			$data = $this->__parseRequestData($data);
 			if ($this->AccessCounter->saveAccessCounter($data)) {
-				$this->redirect(Current::backToIndexUrl('default_setting_action'));
+				$this->redirect(NetCommonsUrl::backToIndexUrl('default_setting_action'));
 				return;
 			}
 			$this->NetCommons->handleValidationError($this->AccessCounter->validationErrors);
@@ -173,27 +172,10 @@ class AccessCountersController extends AccessCountersAppController {
 	public function delete() {
 		if ($this->request->isDelete()) {
 			if ($this->AccessCounter->deleteAccessCounter($this->data)) {
-				$this->redirect(Current::backToIndexUrl('default_setting_action'));
+				$this->redirect(NetCommonsUrl::backToIndexUrl('default_setting_action'));
 				return;
 			}
 		}
 		$this->throwBadRequest();
 	}
-
-/**
- * Parse data from request
- *
- * @param array $data received post data
- * @return array
- */
-	private function __parseRequestData($data) {
-		if (isset($data['AccessCounterFrameSetting']['display_type'])) {
-			$data['AccessCounterFrameSetting']['display_type'] = (int)$data['AccessCounterFrameSetting']['display_type'];
-		}
-		if (isset($data['AccessCounter']['count_start'])) {
-			$data['AccessCounter']['count'] = (int)$data['AccessCounter']['count_start'];
-		}
-		return $data;
-	}
-
 }

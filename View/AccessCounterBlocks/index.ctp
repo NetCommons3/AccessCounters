@@ -18,7 +18,9 @@
 			<?php echo $this->Button->addLink(); ?>
 		</div>
 
-		<?php echo $this->Form->create('', array('url' => '/frames/frames/edit/' . $this->data['Frame']['id'])); ?>
+		<?php echo $this->Form->create('', array(
+				'url' => NetCommonsUrl::actionUrl(array('plugin' => 'frames', 'controller' => 'frames', 'action' => 'edit'))
+			)); ?>
 
 			<?php echo $this->Form->hidden('Frame.id'); ?>
 
@@ -44,7 +46,7 @@
 								<?php echo $this->BlockForm->displayFrame('Frame.block_id', $accessCounter['Block']['id']); ?>
 							</td>
 							<td>
-								<?php echo $this->NetCommonsForm->editLink($accessCounter['Block']['id'], $accessCounter['Block']['name']); ?>
+								<?php echo $this->NetCommonsForm->editLink($accessCounter['Block']['name'], array('block_id' => $accessCounter['Block']['id'])); ?>
 							</td>
 							<td>
 								<?php echo (int)$accessCounter['AccessCounter']['count']; ?>

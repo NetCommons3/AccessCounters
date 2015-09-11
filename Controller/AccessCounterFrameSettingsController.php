@@ -63,7 +63,7 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
 			$data['AccessCounterFrameSetting']['display_type'] = (int)$data['AccessCounterFrameSetting']['display_type'];
 
 			if ($this->AccessCounterFrameSetting->saveAccessCounterFrameSetting($data)) {
-				$this->redirect(Current::backToPageUrl());
+				$this->redirect(NetCommonsUrl::backToPageUrl());
 				return;
 			}
 			$this->NetCommons->handleValidationError($this->AccessCounterFrameSetting->validationErrors);
