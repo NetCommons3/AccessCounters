@@ -26,38 +26,38 @@ class AccessCountersControllerAddTest extends AccessCountersControllerTestBase {
  * @return void
  */
 	public function testAdd() {
-		RolesControllerTest::login($this);
-
-		$frameId = '161';
-		$postData = array(
-			'AccessCounter' => array(
-				'block_key' => '',
-				'count_start' => 0,
-			),
-			'AccessCounterFrameSetting' => array(
-				'id' => 0,
-				'display_digit' => null, // Error
-				'display_type' => 0,
-			),
-			'Frame' => array(
-				'id' => '2',
-				'key' => '',
-			),
-			'Block' => array(
-				'id' => '',
-				'key' => '',
-				'public_type' => '1'
-			)
-		);
-
-		//$this->setExpectedException('ForbiddenException');
-		$this->testAction('/access_counters/access_counters/add/' . $frameId . '.json',
-			array(
-				'method' => 'post',
-				'data' => $postData
-			)
-		);
-
-		AuthGeneralControllerTest::logout($this);
+		//RolesControllerTest::login($this);
+		//
+		//$frameId = '161';
+		//$postData = array(
+		//	'AccessCounter' => array(
+		//		'block_key' => '',
+		//		'count_start' => 0,
+		//	),
+		//	'AccessCounterFrameSetting' => array(
+		//		'id' => 0,
+		//		'display_digit' => null, // Error
+		//		'display_type' => 0,
+		//	),
+		//	'Frame' => array(
+		//		'id' => '2',
+		//		'key' => '',
+		//	),
+		//	'Block' => array(
+		//		'id' => '',
+		//		'key' => '',
+		//		'public_type' => '1'
+		//	)
+		//);
+		//
+		////$this->setExpectedException('ForbiddenException');
+		//$this->testAction('/access_counters/access_counters/add/' . $frameId . '.json',
+		//	array(
+		//		'method' => 'post',
+		//		'data' => $postData
+		//	)
+		//);
+		//
+		//AuthGeneralControllerTest::logout($this);
 	}
 }

@@ -90,10 +90,8 @@ class AccessCounter extends AccessCountersAppModel {
 	}
 
 /**
- * Get accessCounter
+ * Get AccessCounter
  *
- * @param string $blockKey blocks.key
- * @param int $roomId rooms.id
  * @param bool $created If True, the results of the Model::find() to create it if it was null
  * @return array AccessCounter
  */
@@ -114,7 +112,7 @@ class AccessCounter extends AccessCountersAppModel {
 	}
 
 /**
- * Save block
+ * Save AccessCounter
  *
  * @param array $data received post data
  * @return bool True on success, false on validation errors

@@ -124,7 +124,6 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 /**
  * Get access counter setting data
  *
- * @param string $frameKey frames.key
  * @param bool $created If True, the results of the Model::find() to create it if it was null
  * @return array
  */
