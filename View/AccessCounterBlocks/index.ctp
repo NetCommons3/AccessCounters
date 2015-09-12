@@ -46,7 +46,7 @@
 								<?php echo $this->BlockForm->displayFrame('Frame.block_id', $accessCounter['Block']['id']); ?>
 							</td>
 							<td>
-								<?php echo $this->NetCommonsForm->editLink($accessCounter['Block']['name'], array('block_id' => $accessCounter['Block']['id'])); ?>
+								<?php echo $this->NetCommonsHtml->editLink($accessCounter['Block']['name'], array('block_id' => $accessCounter['Block']['id'])); ?>
 							</td>
 							<td>
 								<?php echo (int)$accessCounter['AccessCounter']['count']; ?>
