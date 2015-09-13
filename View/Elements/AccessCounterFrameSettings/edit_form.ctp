@@ -1,6 +1,6 @@
 <?php
 /**
- * AccessCounter edit template
+ * AccessCounterFrameSettings edit form template
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -10,21 +10,13 @@
  */
 ?>
 
-<?php echo $this->Form->hidden('AccessCounterFrameSetting.id', array(
-		'value' => isset($accessCounterFrameSetting['id']) ? (int)$accessCounterFrameSetting['id'] : null,
-	)); ?>
+<?php echo $this->Form->hidden('AccessCounterFrameSetting.id'); ?>
 
-<?php echo $this->Form->hidden('AccessCounterFrameSetting.frame_key', array(
-		'value' => $frameKey,
-	)); ?>
+<?php echo $this->Form->hidden('AccessCounterFrameSetting.frame_key'); ?>
 
-<?php echo $this->Form->hidden('Frame.id', array(
-		'value' => $frameId,
-	)); ?>
+<?php echo $this->Form->hidden('Frame.id'); ?>
 
-<?php echo $this->Form->hidden('Frame.key', array(
-		'value' => $frameKey,
-	)); ?>
+<?php echo $this->Form->hidden('Frame.key'); ?>
 
 <div class='form-group'>
 	<?php echo $this->Form->label('AccessCounterFrameSetting.display_type',
@@ -69,27 +61,13 @@
 	</div>
 </div>
 
-<div class='form-group'>
-	<?php
-		for ($i = AccessCounterFrameSetting::DISPLAY_DIGIT_MIN; $i <= AccessCounterFrameSetting::DISPLAY_DIGIT_MAX; $i++) {
-			$options[$i] = $i;
-		}
-	?>
+<?php
+	for ($i = AccessCounterFrameSetting::DISPLAY_DIGIT_MIN; $i <= AccessCounterFrameSetting::DISPLAY_DIGIT_MAX; $i++) {
+		$options[$i] = $i;
+	}
 
-	<?php echo $this->Form->input('AccessCounterFrameSetting.display_digit',
-		array(
-			'label' => __d('access_counters', 'Display digit'),
+	echo $this->NetCommonsForm->input('AccessCounterFrameSetting.display_digit', array(
 			'type' => 'select',
-			'error' => false,
-			'class' => 'form-control',
+			'label' => __d('access_counters', 'Display digit'),
 			'options' => $options,
-			'selected' => (int)$accessCounterFrameSetting['displayDigit']
-		)); ?>
-
-	<?php echo $this->element(
-		'NetCommons.errors', [
-			'errors' => $this->validationErrors,
-			'model' => 'AccessCounterFrameSetting',
-			'field' => 'display_digit',
-		]); ?>
-</div>
+		));

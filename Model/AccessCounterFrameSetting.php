@@ -5,7 +5,7 @@
  * @property AccessCounters $AccessCounters
  *
  * @author Noriko Arai <arai@nii.ac.jp>
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
  * @copyright Copyright 2014, NetCommons Project
@@ -15,11 +15,14 @@ App::uses('AccessCountersAppModel', 'AccessCounters.Model');
 
 /**
  * AccessCounterFrameSetting Model
+ *
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @package NetCommons\AccessCounters\Model
  */
 class AccessCounterFrameSetting extends AccessCountersAppModel {
 
 /**
- * Displau type
+ * Display type
  *
  * @var string
  */
@@ -31,17 +34,29 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 			DISPLAY_TYPE_LABEL_5 = 'danger';
 
 /**
+ * Display type value
+ *
+ * @var string
+ */
+	const DISPLAY_TYPE_VALUE_0 = '1',
+			DISPLAY_TYPE_VALUE_1 = '2',
+			DISPLAY_TYPE_VALUE_2 = '3',
+			DISPLAY_TYPE_VALUE_3 = '4',
+			DISPLAY_TYPE_VALUE_4 = '5',
+			DISPLAY_TYPE_VALUE_5 = '6';
+
+/**
  * categorySeparatorLine
  *
  * @var array
  */
 	static public $displayTypes = array(
-		'1' => self::DISPLAY_TYPE_LABEL_0,
-		'2' => self::DISPLAY_TYPE_LABEL_1,
-		'3' => self::DISPLAY_TYPE_LABEL_2,
-		'4' => self::DISPLAY_TYPE_LABEL_3,
-		'5' => self::DISPLAY_TYPE_LABEL_4,
-		'6' => self::DISPLAY_TYPE_LABEL_5,
+		self::DISPLAY_TYPE_VALUE_0 => self::DISPLAY_TYPE_LABEL_0,
+		self::DISPLAY_TYPE_VALUE_1 => self::DISPLAY_TYPE_LABEL_1,
+		self::DISPLAY_TYPE_VALUE_2 => self::DISPLAY_TYPE_LABEL_2,
+		self::DISPLAY_TYPE_VALUE_3 => self::DISPLAY_TYPE_LABEL_3,
+		self::DISPLAY_TYPE_VALUE_4 => self::DISPLAY_TYPE_LABEL_4,
+		self::DISPLAY_TYPE_VALUE_5 => self::DISPLAY_TYPE_LABEL_5,
 	);
 
 /**
@@ -79,8 +94,8 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 
 		$this->validate = Hash::merge($this->validate, array(
 			'frame_key' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
+				'notBlank' => array(
+					'rule' => array('notBlank'),
 					'message' => __d('net_commons', 'Invalid request.'),
 				),
 			),
@@ -102,24 +117,32 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 				),
 			),
 		));
+
+		return parent::beforeValidate($options);
 	}
 
 /**
  * Get access counter setting data
  *
- * @param string $frameKey frames.key
+ * @param bool $created If True, the results of the Model::find() to create it if it was null
  * @return array
  */
-	public function getAccessCounterFrameSetting($frameKey) {
+	public function getAccessCounterFrameSetting($created) {
 		$conditions = array(
-			'frame_key' => $frameKey
+			'frame_key' => Current::read('Frame.key')
 		);
 
 		$counterFrameSetting = $this->find('first', array(
-				'recursive' => -1,
-				'conditions' => $conditions,
-			)
-		);
+			'recursive' => -1,
+			'conditions' => $conditions,
+		));
+
+		if ($created && ! $counterFrameSetting) {
+			$counterFrameSetting = $this->create(array(
+				'id' => null,
+				'display_type' => self::DISPLAY_TYPE_VALUE_0,
+			));
+		}
 
 		return $counterFrameSetting;
 	}
@@ -137,43 +160,28 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 		]);
 
 		//トランザクションBegin
-		$this->setDataSource('master');
-		$dataSource = $this->getDataSource();
-		$dataSource->begin();
+		$this->begin();
+
+		//バリデーション
+		$this->set($data);
+		if (! $this->validates()) {
+			$this->rollback();
+			return false;
+		}
 
 		try {
-			if (! $this->validateAccessCounterFrameSetting($data)) {
-				return false;
-			}
-
 			if (! $this->save(null, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 
 			//トランザクションCommit
-			$dataSource->commit();
+			$this->commit();
+
 		} catch (Exception $ex) {
 			//トランザクションRollback
-			$dataSource->rollback();
-			CakeLog::error($ex);
-			throw $ex;
+			$this->rollback($ex);
 		}
 
-		return true;
-	}
-
-/**
- * validate AccessCounterFrameSetting
- *
- * @param array $data received post data
- * @return bool True on success, false on error
- */
-	public function validateAccessCounterFrameSetting($data) {
-		$this->set($data);
-		$this->validates();
-		if ($this->validationErrors) {
-			return false;
-		}
 		return true;
 	}
 }

@@ -1,24 +1,34 @@
 <?php
 /**
- * AccessCounter edit view template
+ * AccessCounter edit template
  *
  * @author Noriko Arai <arai@nii.ac.jp>
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
  * @copyright Copyright 2014, NetCommons Project
  */
+
+echo $this->NetCommonsHtml->script('/access_counters/js/access_counters.js');
+
+if (isset($this->data['AccessCounterFrameSetting'])) {
+	$camelizeData = NetCommonsAppController::camelizeKeyRecursive(array(
+		'frameId' => $this->data['Frame']['id'],
+		'counterFrameSetting' => $this->data['AccessCounterFrameSetting'],
+		'currentDisplayTypeName' => AccessCounterFrameSetting::$displayTypes[$this->data['AccessCounterFrameSetting']['display_type']]
+	));
+} else {
+	$camelizeData = array(
+		'frameId' => $this->data['Frame']['id'],
+		'counterFrameSetting' => array(),
+		'currentDisplayTypeName' => ''
+	);
+}
 ?>
 
-<?php echo $this->Html->script('/access_counters/js/access_counters.js'); ?>
-
-<div class="modal-body"
+<article class="block-setting-body"
 	ng-controller="AccessCounterFrameSettings"
-	ng-init="initialize(<?php echo h(json_encode(array(
-		'frameId' => $frameId,
-		'counterFrameSetting' => $accessCounterFrameSetting,
-		'currentDisplayTypeName' => AccessCounterFrameSetting::$displayTypes[$accessCounterFrameSetting['displayType']]
-	))); ?>)">
+	ng-init="initialize(<?php echo h(json_encode($camelizeData)); ?>)">
 
 	<?php echo $this->element('NetCommons.setting_tabs', $settingTabs); ?>
 
@@ -26,18 +36,17 @@
 		<?php echo $this->element('Blocks.setting_tabs', $blockSettingTabs); ?>
 
 		<?php echo $this->element('Blocks.edit_form', array(
-				'controller' => 'AccessCounter',
-				'action' => h($this->request->params['action']) . '/' . $frameId . '/' . $blockId,
+				'model' => 'AccessCounter',
 				'callback' => 'AccessCounters.AccessCounters/edit_form',
-				'cancelUrl' => '/access_counters/access_counter_blocks/index/' . $frameId
+				'cancelUrl' => NetCommonsUrl::backToIndexUrl('default_setting_action'),
 			)); ?>
 
 		<?php if ($this->request->params['action'] === 'edit') : ?>
 			<?php echo $this->element('Blocks.delete_form', array(
-					'controller' => 'AccessCounter',
-					'action' => 'delete/' . $frameId . '/' . $blockId,
+					'model' => 'AccessCounter',
+					'action' => 'delete/' . $this->data['Frame']['id'] . '/' . Current::read('Block.id'),
 					'callback' => 'AccessCounters.AccessCounters/delete_form'
 				)); ?>
 		<?php endif; ?>
 	</div>
-</div>
+</article>

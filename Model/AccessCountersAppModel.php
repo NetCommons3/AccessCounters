@@ -16,17 +16,9 @@ App::uses('AppModel', 'Model');
 /**
  * AccessCounter App Model
  *
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\AccessCounters\Model
  */
 class AccessCountersAppModel extends AppModel {
 
-/**
- * use component
- *
- * @var array
- */
-	public $components = array(
-		'Security',
-	);
 }

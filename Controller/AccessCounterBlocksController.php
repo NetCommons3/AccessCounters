@@ -27,26 +27,15 @@ class AccessCounterBlocksController extends AccessCountersAppController {
 	public $layout = 'NetCommons.setting';
 
 /**
- * use models
- *
- * @var array
- */
-	public $uses = array(
-		'Blocks.Block',
-		'Frames.Frame',
-	);
-
-/**
  * use components
  *
  * @var array
  */
 	public $components = array(
-		'NetCommons.NetCommonsBlock',
-		'NetCommons.NetCommonsRoomRole' => array(
-			//コンテンツの権限設定
-			'allowedActions' => array(
-				'blockEditable' => array('index', 'add', 'edit', 'delete')
+		'NetCommons.Permission' => array(
+			//アクセスの権限
+			'allow' => array(
+				'index,add,edit,delete' => 'block_editable',
 			),
 		),
 		'Paginator',
@@ -58,20 +47,18 @@ class AccessCounterBlocksController extends AccessCountersAppController {
  * @var array
  */
 	public $helpers = array(
-		'NetCommons.Date',
+		'Blocks.BlockForm',
 	);
 
 /**
- * beforeFilter
+ * beforeRender
  *
  * @return void
  */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$this->Auth->deny('index');
-
+	public function beforeRender() {
 		//タブの設定
 		$this->initTabs('block_index', 'block_settings');
+		parent::beforeRender();
 	}
 
 /**
@@ -80,29 +67,23 @@ class AccessCounterBlocksController extends AccessCountersAppController {
  * @return void
  */
 	public function index() {
+		$this->set('addActionController', 'access_counters');
+		$this->set('editActionController', 'access_counters');
+
 		$this->Paginator->settings = array(
 			'AccessCounter' => array(
 				'order' => array('Block.id' => 'desc'),
-				'conditions' => array(
-					'Block.language_id' => $this->viewVars['languageId'],
-					'Block.room_id' => $this->viewVars['roomId'],
-					'Block.plugin_key ' => $this->params['plugin'],
-				),
-				//'limit' => 1
+				'conditions' => $this->AccessCounter->getBlockConditions(),
 			)
 		);
-
 		$accessCounters = $this->Paginator->paginate('AccessCounter');
 		if (! $accessCounters) {
-			$this->view = 'not_found';
+			$this->view = 'Blocks.Blocks/not_found';
 			return;
 		}
+		$this->set('accessCounters', $accessCounters);
 
-		$results = array(
-			'accessCounters' => $accessCounters
-		);
-		$results = $this->camelizeKeyRecursive($results);
-		$this->set($results);
+		$this->request->data['Frame'] = Current::read('Frame');
 	}
 
 }

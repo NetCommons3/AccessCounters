@@ -1,6 +1,6 @@
 <?php
 /**
- * AccessCounterBlocks edit template
+ * AccessCounters edit form template
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -10,81 +10,26 @@
  */
 ?>
 
-<?php echo $this->Form->hidden('Frame.id', array(
-		'value' => $frameId,
+<?php echo $this->element('Blocks.form_hidden'); ?>
+
+<?php echo $this->Form->hidden('AccessCounter.id'); ?>
+
+<?php echo $this->Form->hidden('AccessCounter.block_key'); ?>
+
+<?php echo $this->NetCommonsForm->input('Block.name', array(
+		'type' => 'text',
+		'label' => __d('access_counters', 'Access counter name'),
+		'required' => true
 	)); ?>
 
-<?php echo $this->Form->hidden('Block.id', array(
-		'value' => $block['id'],
-	)); ?>
-
-<?php echo $this->Form->hidden('Block.key', array(
-		'value' => $block['key'],
-	)); ?>
-
-<?php echo $this->Form->hidden('Block.language_id', array(
-		'value' => $languageId,
-	)); ?>
-
-<?php echo $this->Form->hidden('Block.room_id', array(
-		'value' => $roomId,
-	)); ?>
-
-<?php echo $this->Form->hidden('Block.plugin_key', array(
-		'value' => $this->params['plugin'],
-	)); ?>
-
-<?php echo $this->Form->hidden('AccessCounter.id', array(
-		'value' => $accessCounter['id'],
-	)); ?>
-
-<?php echo $this->Form->hidden('AccessCounter.block_key', array(
-		'value' => $block['key'],
-	)); ?>
-
-
-<div class="form-group">
-	<?php echo $this->Form->input(
-			'Block.name', array(
-				'type' => 'text',
-				'label' => __d('access_counters', 'Access counter name') . $this->element('NetCommons.required'),
-				'error' => false,
-				'class' => 'form-control',
-				'autofocus' => true,
-				'value' => (isset($block['name']) ? $block['name'] : '')
-			)
-		); ?>
-
-	<?php echo $this->element(
-		'NetCommons.errors', [
-			'errors' => $this->validationErrors,
-			'model' => 'Block',
-			'field' => 'name',
-		]); ?>
-</div>
-
-<?php if (!PageLayoutHelper::$frame['blockId']) : ?>
+<?php if (! Current::read('Frame.block_id')) : ?>
 	<?php echo $this->element('AccessCounterFrameSettings/edit_form'); ?>
 <?php endif; ?>
 
-<div class='form-group'>
-	<?php
-		echo $this->Form->input('AccessCounter.count_start', array(
-			'type' => 'number',
-			'label' => __d('access_counters', 'Starting Value'),
-			'error' => false,
-			'class' => 'form-control',
-			'min' => 0,
-			'value' => $accessCounter['countStart'],
-			'readonly' => (bool)$accessCounter['id']
-		));
-	?>
-	<?php echo $this->element(
-		'NetCommons.errors', [
-			'errors' => $this->validationErrors,
-			'model' => 'AccessCounter',
-			'field' => 'count_start',
-		]) ?>
-</div>
+<?php echo $this->NetCommonsForm->input('AccessCounter.count_start', array(
+		'type' => 'number',
+		'label' => __d('access_counters', 'Starting Value'),
+		'readonly' => (bool)$this->data['AccessCounter']['id']
+	)); ?>
 
 <?php echo $this->element('Blocks.public_type');

@@ -5,7 +5,7 @@
  * @property AccessCounters $AccessCounters
  *
  * @author Noriko Arai <arai@nii.ac.jp>
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
  * @copyright Copyright 2014, NetCommons Project
@@ -17,7 +17,7 @@ App::uses('AccessCountersModelTestBase', 'AccessCounters.Test/Case/Model');
 /**
  * AccessCounters Model Test Case
  *
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\AccessCounters\Test\Case\Model
  */
 class AccessCountersTest extends AccessCountersModelTestBase {

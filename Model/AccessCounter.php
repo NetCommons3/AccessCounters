@@ -2,9 +2,8 @@
 /**
  * AccessCounter Model
  *
- *
  * @author Noriko Arai <arai@nii.ac.jp>
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
  * @copyright Copyright 2014, NetCommons Project
@@ -15,10 +14,19 @@ App::uses('AccessCountersAppModel', 'AccessCounters.Model');
 /**
  * AccessCounter Model
  *
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\AccessCounters\Model
  */
 class AccessCounter extends AccessCountersAppModel {
+
+/**
+ * use behaviors
+ *
+ * @var array
+ */
+	public $actsAs = array(
+		'Blocks.Block'
+	);
 
 /**
  * Validation rules
@@ -55,8 +63,8 @@ class AccessCounter extends AccessCountersAppModel {
 	public function beforeValidate($options = array()) {
 		$this->validate = Hash::merge($this->validate, array(
 			'block_key' => array(
-				'notEmpty' => array(
-					'rule' => array('notEmpty'),
+				'notBlank' => array(
+					'rule' => array('notBlank'),
 					'message' => __d('net_commons', 'Invalid request.'),
 					'required' => true,
 					'on' => 'update', // Limit validation to 'create' or 'update' operations
@@ -82,27 +90,29 @@ class AccessCounter extends AccessCountersAppModel {
 	}
 
 /**
- * Get accessCounter
+ * Get AccessCounter
  *
- * @param string $blockKey blocks.key
- * @param int $roomId rooms.id
+ * @param bool $created If True, the results of the Model::find() to create it if it was null
  * @return array AccessCounter
  */
-	public function getAccessCounter($blockKey, $roomId) {
-		$conditions[$this->alias . '.block_key'] = $blockKey;
-		$conditions['Block.room_id'] = $roomId;
+	public function getAccessCounter($created) {
+		$conditions[$this->alias . '.block_key'] = Current::read('Block.key');
+		$conditions['Block.room_id'] = Current::read('Block.room_id');
 
 		$accessCounter = $this->find('first', array(
-				'recursive' => 0,
-				'conditions' => $conditions,
-			)
-		);
+			'recursive' => 0,
+			'conditions' => $conditions,
+		));
+
+		if ($created && ! $accessCounter) {
+			$accessCounter = $this->create();
+		}
 
 		return $accessCounter;
 	}
 
 /**
- * Save block
+ * Save AccessCounter
  *
  * @param array $data received post data
  * @return bool True on success, false on validation errors
@@ -113,26 +123,20 @@ class AccessCounter extends AccessCountersAppModel {
 			'AccessCounter' => 'AccessCounters.AccessCounter',
 			'AccessCounterFrameSetting' => 'AccessCounters.AccessCounterFrameSetting',
 			'Block' => 'Blocks.Block',
-			'Frame' => 'Frames.Frame',
 		]);
 
 		//トランザクションBegin
-		$this->setDataSource('master');
-		$dataSource = $this->getDataSource();
-		$dataSource->begin();
+		$this->begin();
+
+		//バリデーション
+		if (! $this->validateAccessCounter($data)) {
+			$this->rollback();
+			return false;
+		}
 
 		try {
-			//バリデーション
-			if (! $this->validateAccessCounter($data, ['counterFrameSetting'])) {
-				return false;
-			}
-
-			//ブロックの登録
-			$block = $this->Block->saveByFrameId($data['Frame']['id']);
-
 			//登録処理
-			$this->data['AccessCounter']['block_key'] = $block['Block']['key'];
-			if (! $this->save(null, false)) {
+			if (! $this->data = $this->save(null, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 
@@ -143,13 +147,11 @@ class AccessCounter extends AccessCountersAppModel {
 			}
 
 			//トランザクションCommit
-			$dataSource->commit();
+			$this->commit();
 
 		} catch (Exception $ex) {
 			//トランザクションRollback
-			$dataSource->rollback();
-			CakeLog::error($ex);
-			throw $ex;
+			$this->rollback($ex);
 		}
 
 		return true;
@@ -159,27 +161,28 @@ class AccessCounter extends AccessCountersAppModel {
  * validate AccessCounter
  *
  * @param array $data received post data
- * @param array $contains Optional validate sets
  * @return bool True on success, false on error
  */
-	public function validateAccessCounter($data, $contains = []) {
+	public function validateAccessCounter($data) {
+		$this->Block->validate['name'] = array(
+			'notBlank' => array(
+				'rule' => array('notBlank'),
+				'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('access_counters', 'Access counter name')),
+			),
+		);
+
+		//バリデーション
 		$this->set($data);
-		$this->validates();
-		if ($this->validationErrors) {
+		if (! $this->validates()) {
 			return false;
 		}
 
-		if (! $this->Block->validateBlock($data)) {
-			$this->validationErrors = Hash::merge($this->validationErrors, $this->Block->validationErrors);
+		$this->AccessCounterFrameSetting->set($data);
+		if (! $this->AccessCounterFrameSetting->validates()) {
+			$this->validationErrors = Hash::merge($this->validationErrors, $this->AccessCounterFrameSetting->validationErrors);
 			return false;
 		}
 
-		if (isset($data['AccessCounterFrameSetting']) && in_array('counterFrameSetting', $contains, true)) {
-			if (! $this->AccessCounterFrameSetting->validateAccessCounterFrameSetting($data)) {
-				$this->validationErrors = Hash::merge($this->validationErrors, $this->AccessCounterFrameSetting->validationErrors);
-				return false;
-			}
-		}
 		return true;
 	}
 
@@ -191,16 +194,12 @@ class AccessCounter extends AccessCountersAppModel {
  * @throws InternalErrorException
  */
 	public function deleteAccessCounter($data) {
-		$this->setDataSource('master');
-
 		$this->loadModels([
 			'AccessCounter' => 'AccessCounters.AccessCounter',
-			'Block' => 'Blocks.Block',
 		]);
 
 		//トランザクションBegin
-		$dataSource = $this->getDataSource();
-		$dataSource->begin();
+		$this->begin();
 
 		try {
 			if (! $this->deleteAll(array($this->alias . '.block_key' => $data['Block']['key']), false)) {
@@ -208,16 +207,14 @@ class AccessCounter extends AccessCountersAppModel {
 			}
 
 			//Blockデータ削除
-			$this->Block->deleteBlock($data['Block']['key']);
+			$this->deleteBlock($data['Block']['key']);
 
 			//トランザクションCommit
-			$dataSource->commit();
+			$this->commit();
 
 		} catch (Exception $ex) {
 			//トランザクションRollback
-			$dataSource->rollback();
-			CakeLog::error($ex);
-			throw $ex;
+			$this->rollback($ex);
 		}
 
 		return true;
@@ -236,26 +233,22 @@ class AccessCounter extends AccessCountersAppModel {
 		]);
 
 		//トランザクションBegin
-		$this->setDataSource('master');
-		$dataSource = $this->getDataSource();
-		$dataSource->begin();
+		$this->begin();
 
 		try {
 			if (! $this->updateAll(
-				array($this->name . '.count' => $this->name . '.count + 1'),
-				array($this->name . '.id' => $data[$this->name]['id'])
+				array($this->alias . '.count' => $this->alias . '.count + 1'),
+				array($this->alias . '.id' => $data[$this->alias]['id'])
 			)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			};
 
 			//トランザクションCommit
-			$dataSource->commit();
+			$this->commit();
 
 		} catch (Exception $ex) {
 			//トランザクションRollback
-			$dataSource->rollback();
-			CakeLog::error($ex);
-			throw $ex;
+			$this->rollback($ex);
 		}
 
 		return true;
