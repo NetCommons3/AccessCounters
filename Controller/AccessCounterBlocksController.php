@@ -32,6 +32,10 @@ class AccessCounterBlocksController extends AccessCountersAppController {
  * @var array
  */
 	public $components = array(
+		'Blocks.BlockTabs' => array(
+			'mainTabs' => array('block_index', 'frame_settings'),
+			'blockTabs' => array('block_settings'),
+		),
 		'NetCommons.Permission' => array(
 			//アクセスの権限
 			'allow' => array(
@@ -49,17 +53,6 @@ class AccessCounterBlocksController extends AccessCountersAppController {
 	public $helpers = array(
 		'Blocks.BlockForm',
 	);
-
-/**
- * beforeRender
- *
- * @return void
- */
-	public function beforeRender() {
-		//タブの設定
-		$this->initTabs('block_index', 'block_settings');
-		parent::beforeRender();
-	}
 
 /**
  * index

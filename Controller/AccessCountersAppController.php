@@ -39,46 +39,4 @@ class AccessCountersAppController extends AppController {
 		'AccessCounters.AccessCounterFrameSetting',
 	);
 
-/**
- * initTabs
- *
- * @param string $mainActiveTab Main active tab
- * @param string $blockActiveTab Block active tab
- * @return void
- */
-	public function initTabs($mainActiveTab, $blockActiveTab) {
-		//タブの設定
-		$settingTabs = array(
-			'tabs' => array(
-				'block_index' => array(
-					'url' => NetCommonsUrl::backToIndexUrl('default_setting_action')
-				),
-				'frame_settings' => array(
-					'url' => NetCommonsUrl::actionUrl(array(
-						'controller' => 'access_counter_frame_settings',
-						'action' => 'edit',
-						'frame_id' => Current::read('Frame.id'),
-					))
-				),
-			),
-			'active' => $mainActiveTab
-		);
-		$this->set('settingTabs', $settingTabs);
-
-		$blockSettingTabs = array(
-			'tabs' => array(
-				'block_settings' => array(
-					'url' => NetCommonsUrl::actionUrl(array(
-						'controller' => 'access_counters',
-						'action' => $this->params['action'],
-						'frame_id' => Current::read('Frame.id'),
-						'block_id' => Current::read('Block.id'),
-					))
-				),
-			),
-			'active' => $blockActiveTab
-		);
-		$this->set('blockSettingTabs', $blockSettingTabs);
-	}
-
 }
