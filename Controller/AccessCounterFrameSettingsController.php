@@ -32,6 +32,10 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
  * @var array
  */
 	public $components = array(
+		'Blocks.BlockTabs' => array(
+			'mainTabs' => array('block_index', 'frame_settings'),
+			'blockTabs' => array('block_settings'),
+		),
 		'NetCommons.Permission' => array(
 			//アクセスの権限
 			'allow' => array(
@@ -39,17 +43,6 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
 			),
 		),
 	);
-
-/**
- * beforeRender
- *
- * @return void
- */
-	public function beforeRender() {
-		//タブの設定
-		$this->initTabs('frame_settings', '');
-		parent::beforeRender();
-	}
 
 /**
  * edit

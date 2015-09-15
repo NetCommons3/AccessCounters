@@ -25,6 +25,10 @@ class AccessCountersController extends AccessCountersAppController {
  * @var array
  */
 	public $components = array(
+		'Blocks.BlockTabs' => array(
+			'mainTabs' => array('block_index', 'frame_settings'),
+			'blockTabs' => array('block_settings'),
+		),
 		'NetCommons.Permission' => array(
 			//アクセスの権限
 			'allow' => array(
@@ -111,9 +115,6 @@ class AccessCountersController extends AccessCountersAppController {
 			//--Frame
 			$this->request->data['Frame'] = Current::read('Frame');
 		}
-
-		//タブの設定
-		$this->initTabs('block_index', 'block_settings');
 	}
 
 /**
@@ -159,9 +160,6 @@ class AccessCountersController extends AccessCountersAppController {
 			//--Frame
 			$this->request->data['Frame'] = Current::read('Frame');
 		}
-
-		//タブの設定
-		$this->initTabs('block_index', 'block_settings');
 	}
 
 /**
