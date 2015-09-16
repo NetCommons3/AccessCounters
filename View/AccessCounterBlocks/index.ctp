@@ -18,7 +18,7 @@
 			<?php echo $this->Button->addLink(); ?>
 		</div>
 
-		<?php echo $this->Form->create('', array(
+		<?php echo $this->NetCommonsForm->create('', array(
 				'url' => NetCommonsUrl::actionUrl(array('plugin' => 'frames', 'controller' => 'frames', 'action' => 'edit'))
 			)); ?>
 
