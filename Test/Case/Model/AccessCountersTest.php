@@ -38,7 +38,7 @@ class AccessCountersTest extends AccessCountersModelTestBase {
  * @return void
  */
 	public function testGetAccessCounter() {
-		// Run Test
+		// Run Test1
 		$this->assertTrue(true);
 	}
 }
