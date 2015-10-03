@@ -87,6 +87,7 @@ class AccessCountersController extends AccessCountersAppController {
 		if ($this->request->isPost()) {
 			//登録(POST)処理
 			$data = $this->data;
+			$data['AccessCounter']['count'] = $data['AccessCounter']['count_start'];
 			if ($this->AccessCounter->saveAccessCounter($data)) {
 				$this->redirect(NetCommonsUrl::backToIndexUrl('default_setting_action'));
 				return;
@@ -138,9 +139,6 @@ class AccessCountersController extends AccessCountersAppController {
 			$this->NetCommons->handleValidationError($this->AccessCounter->validationErrors);
 
 		} else {
-			//初期データセット
-			CurrentFrame::setBlock($this->request->params['pass'][1]);
-
 			//--Block
 			if (! $this->request->data['Block'] = Current::read('Block')) {
 				$this->throwBadRequest();
