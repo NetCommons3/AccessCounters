@@ -27,7 +27,9 @@ class AccessCountersController extends AccessCountersAppController {
 	public $components = array(
 		'Blocks.BlockTabs' => array(
 			'mainTabs' => array('block_index', 'frame_settings'),
-			'blockTabs' => array('block_settings'),
+			'blockTabs' => array(
+				'block_settings' => array('url' => array('controller' => 'access_counters'))
+			),
 		),
 		'NetCommons.Permission' => array(
 			//アクセスの権限
