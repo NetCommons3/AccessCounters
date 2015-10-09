@@ -12,9 +12,9 @@
 
 <?php echo $this->element('Blocks.form_hidden'); ?>
 
-<?php echo $this->Form->hidden('AccessCounter.id'); ?>
+<?php echo $this->NetCommonsForm->hidden('AccessCounter.id'); ?>
 
-<?php echo $this->Form->hidden('AccessCounter.block_key'); ?>
+<?php echo $this->NetCommonsForm->hidden('AccessCounter.block_key'); ?>
 
 <?php echo $this->NetCommonsForm->input('Block.name', array(
 		'type' => 'text',

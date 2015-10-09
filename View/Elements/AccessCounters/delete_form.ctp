@@ -14,8 +14,8 @@
 	<?php echo sprintf(__d('net_commons', 'Delete all data associated with the %s.'), __d('access_counters', 'Access counter')); ?>
 </div>
 
-<?php echo $this->Form->hidden('Block.id'); ?>
-<?php echo $this->Form->hidden('Block.key'); ?>
+<?php echo $this->NetCommonsForm->hidden('Block.id'); ?>
+<?php echo $this->NetCommonsForm->hidden('Block.key'); ?>
 
 <?php echo $this->Button->delete(
 		__d('net_commons', 'Delete'),

@@ -10,23 +10,23 @@
  */
 ?>
 
-<?php echo $this->Form->hidden('AccessCounterFrameSetting.id'); ?>
+<?php echo $this->NetCommonsForm->hidden('AccessCounterFrameSetting.id'); ?>
 
-<?php echo $this->Form->hidden('AccessCounterFrameSetting.frame_key'); ?>
+<?php echo $this->NetCommonsForm->hidden('AccessCounterFrameSetting.frame_key'); ?>
 
-<?php echo $this->Form->hidden('Frame.id'); ?>
+<?php echo $this->NetCommonsForm->hidden('Frame.id'); ?>
 
-<?php echo $this->Form->hidden('Frame.key'); ?>
+<?php echo $this->NetCommonsForm->hidden('Frame.key'); ?>
 
 <div class='form-group'>
-	<?php echo $this->Form->label('AccessCounterFrameSetting.display_type',
+	<?php echo $this->NetCommonsForm->label('AccessCounterFrameSetting.display_type',
 			__d('access_counters', 'Display type')
 		); ?>
 
-	<?php echo $this->Form->hidden('AccessCounterFrameSetting.display_type', array(
+	<?php echo $this->NetCommonsForm->hidden('AccessCounterFrameSetting.display_type', array(
 			'ng-value' => 'counterFrameSetting.displayType'
 		)); ?>
-	<?php $this->Form->unlockField('AccessCounterFrameSetting.display_type'); ?>
+	<?php $this->NetCommonsForm->unlockField('AccessCounterFrameSetting.display_type'); ?>
 
 	<div class="btn-group nc-input-dropdown">
 		<button type="button" class="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">

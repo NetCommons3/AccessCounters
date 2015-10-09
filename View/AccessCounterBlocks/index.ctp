@@ -11,7 +11,7 @@
 ?>
 
 <article class="block-setting-body">
-	<?php echo $this->Block->mainTabs(BlockTabsComponent::MAIN_TAB_BLOCK_INDEX); ?>
+	<?php echo $this->BlockTabs->main(BlockTabsComponent::MAIN_TAB_BLOCK_INDEX); ?>
 
 	<div class="tab-content">
 		<div class="text-right">
@@ -22,7 +22,7 @@
 				'url' => NetCommonsUrl::actionUrl(array('plugin' => 'frames', 'controller' => 'frames', 'action' => 'edit'))
 			)); ?>
 
-			<?php echo $this->Form->hidden('Frame.id'); ?>
+			<?php echo $this->NetCommonsForm->hidden('Frame.id'); ?>
 
 			<table class="table table-hover">
 				<thead>
@@ -58,7 +58,7 @@
 					<?php endforeach; ?>
 				</tbody>
 			</table>
-		<?php echo $this->Form->end(); ?>
+		<?php echo $this->NetCommonsForm->end(); ?>
 
 		<?php echo $this->element('NetCommons.paginator'); ?>
 	</div>
