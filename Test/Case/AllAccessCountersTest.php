@@ -8,6 +8,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
+App::uses('NetCommonsTestSuite', 'NetCommons.TestSuite');
 /**
  * AccessCounters All Test Suite
  *
@@ -15,7 +16,7 @@
  * @package NetCommons\AccessCounters\Test\Case
  * @codeCoverageIgnore
  */
-class AllAccessCountersTest extends CakeTestSuite {
+class AllAccessCountersTest extends NetCommonsTestSuite {
 
 /**
  * All test suite
