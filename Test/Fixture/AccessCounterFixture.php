@@ -65,4 +65,21 @@ class AccessCounterFixture extends CakeTestFixture {
 		),
 	);
 
+/**
+ * Initialize the fixture.
+ *
+ * @return void
+ */
+	public function init() {
+		for ($i = 101; $i <= 200; $i++) {
+			$this->records[$i] = array(
+				'id' => $i,
+				'block_key' => 'accesscounter_' . $i,
+				'count' => $i,
+				'count_start' => $i,
+			);
+		}
+		parent::init();
+	}
+
 }
