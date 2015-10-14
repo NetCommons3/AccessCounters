@@ -12,8 +12,8 @@
  */
 
 App::uses('AccessCounters', 'AccessCounters.Model');
+App::uses('AccessCounterFrameSetting', 'AccessCounters.Model');
 App::uses('NetCommonsGetTest', 'NetCommons.TestSuite');
-//App::uses('AccessCounterTestBase', 'AccessCounters.Test/Case/Model/AccessCounter);
 
 /**
  * AccessCounter::getAccessCounter()のテスト
@@ -24,57 +24,56 @@ App::uses('NetCommonsGetTest', 'NetCommons.TestSuite');
 class AccessCounterGetAccessCounterTest extends NetCommonsGetTest {
 
 /**
- * Plugin name
- *
- * @var array
- */
-	public $plugin = 'access_counters';
-
-/**
  * Fixtures
  *
  * @var array
  */
 	public $fixtures = array(
 		'plugin.access_counters.access_counter',
+		'plugin.access_counters.access_counter_frame_setting',
 	);
 
 /**
- * AccessCounter::GetAccessCounterのテスト
- * $createdがtrue
+ * Getのテスト
+ *
+ * @param array 
+ * @dataProvider dataProviderGet
  * @return void
  */
-	public function testGetAccessCounterCreatedTrue() {
-		//事前データセット
-		$created = true;
+	public function testGet($created, $exist, $expected) {
+		//事前準備
+		$testCurrentData = Hash::expand($exist);
+		Current::$current = Hash::merge(Current::$current, $testCurrentData);
 
-		//期待値
-		$expected = $this->AccessCounter->create();
-
-		//テスト実施
-		$result = $this->AccessCounter->getAccessCounter( $created );
-
-		//チェック
-		$this->assertEquals($result, $expected);
+		//テスト実行
+		$result = $this->AccessCounter->getAccessCounter($created);
+		if (empty($result)) {//Createしないとき
+			$this->assertEquals($result, $expected);
+		} else {
+			foreach ($expected as $key => $val) {
+				$this->assertEquals($result['AccessCounter'][$key], $val);
+			}
+		}
 	}
 
 /**
- * AccessCounter::GetAccessCounterのテスト
- * $createdがfalse
+ * getのDataProvider
+ *
+ * ### 戻り値
+ *  - data 取得データ
+ *
  * @return void
  */
-	public function testGetAccessCounterCreatedFalse() {
-		//事前データセット
-		$created = false;
+	public function dataProviderGet() {
+		$existData = array('Block.key' => 'block_1', 'Block.room_id' => '1'); // データあり
+		$notExistData = array('Block.key' => 'block_xxx', 'Block.room_id' => '4'); // データなし
 
-		//期待値
-		$expected = array();
-
-		//テスト実施
-		$result = $this->AccessCounter->getAccessCounter( $created );
-
-		//チェック
-		$this->assertEquals($result, $expected);
+		return array(
+			array(true, $existData, array( 'id' => '1' )),
+			array(false, $existData, array( 'id' => '1' )),
+			array(true, $notExistData, array( 'block_key' => 'block_xxx' )),
+			array(false, $notExistData, array()),
+		);
 	}
 
 }

@@ -60,6 +60,7 @@ class AccessCounterSaveAccessCounterTest extends NetCommonsSaveTest {
  * @var array
  */
 	private $__data = array(
+	/*
 		'Frame' => array(
 			'id' => '6'
 		),
@@ -84,6 +85,32 @@ class AccessCounterSaveAccessCounterTest extends NetCommonsSaveTest {
 				'display_type' => 2,
 				'display_digit' => 5,
 		),
+	*/
+		'Frame' => array(
+			'id' => '6'
+		),
+		'Block' => array(
+			'id' => '1',
+			'key' => 'block_2',
+			'language_id' => '2',
+			'room_id' => '1',
+			'plugin_key' => 'access_counters',
+			'key' => 'block_2',
+			'public_type' => '1',
+		),
+		'AccessCounter' => array(
+			'id' => '1',
+			'block_key' => 'block_2',
+			'count' => '2',
+			'count_start' => '0',
+		),
+		'AccessCounterFrameSetting' => array(
+				'id' => 2,
+				'frame_key' => 'frame_2',
+				'display_type' => 2,
+				'display_digit' => 5,
+		),
+
 	);
 
 /**
@@ -129,6 +156,7 @@ class AccessCounterSaveAccessCounterTest extends NetCommonsSaveTest {
 	public function dataProviderSaveOnValidationError() {
 		return array(
 			array($this->__data, 'AccessCounters.AccessCounter'),
+			array($this->__data, 'AccessCounters.AccessCounterFrameSetting'),
 		);
 	}
 
@@ -146,6 +174,8 @@ class AccessCounterSaveAccessCounterTest extends NetCommonsSaveTest {
 	public function dataProviderValidationError() {
 		return array(
 			array($this->__data, 'count', '-1',
+				__d('net_commons', 'Invalid request.')),
+			array($this->__data, 'count_start', '-1',
 				__d('net_commons', 'Invalid request.')),
 			array($this->__data, 'block_key', '',
 				__d('net_commons', 'Invalid request.')),
