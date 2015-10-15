@@ -34,24 +34,44 @@ class AccessCounterGetAccessCounterTest extends NetCommonsGetTest {
 	);
 
 /**
+ * Model name
+ *
+ * @var array
+ */
+	protected $_modelName = 'AccessCounter';
+
+/**
+ * Method name
+ *
+ * @var array
+ */
+	protected $_methodName = 'getAccessCounter';
+
+/**
  * Getのテスト
  *
- * @param array 
+ * @param bool  $created 生成フラグ
+ * @param array $exist 取得するキー情報
+ * @param array $expected 期待値（取得したキー情報）
  * @dataProvider dataProviderGet
+ *
  * @return void
  */
 	public function testGet($created, $exist, $expected) {
+		$model = $this->_modelName;
+		$method = $this->_methodName;
+
 		//事前準備
 		$testCurrentData = Hash::expand($exist);
 		Current::$current = Hash::merge(Current::$current, $testCurrentData);
 
 		//テスト実行
-		$result = $this->AccessCounter->getAccessCounter($created);
+		$result = $this->$model->$method($created);
 		if (empty($result)) {//Createしないとき
 			$this->assertEquals($result, $expected);
 		} else {
 			foreach ($expected as $key => $val) {
-				$this->assertEquals($result['AccessCounter'][$key], $val);
+				$this->assertEquals($result[$model][$key], $val);
 			}
 		}
 	}
@@ -60,9 +80,11 @@ class AccessCounterGetAccessCounterTest extends NetCommonsGetTest {
  * getのDataProvider
  *
  * ### 戻り値
- *  - data 取得データ
+ *  - bool  生成フラグ($created)
+ *  - array 取得するキー情報
+ *  - array 期待値 （取得したキー情報）
  *
- * @return void
+ * @return array
  */
 	public function dataProviderGet() {
 		$existData = array('Block.key' => 'block_1', 'Block.room_id' => '1'); // データあり
