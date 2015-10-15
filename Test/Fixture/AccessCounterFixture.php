@@ -63,6 +63,9 @@ class AccessCounterFixture extends CakeTestFixture {
 			'modified_user' => 1,
 			'modified' => '2014-06-18 02:06:22'
 		),
+
+		//101-200まで、ページ遷移のためのテスト
+
 	);
 
 /**
@@ -74,7 +77,7 @@ class AccessCounterFixture extends CakeTestFixture {
 		for ($i = 101; $i <= 200; $i++) {
 			$this->records[$i] = array(
 				'id' => $i,
-				'block_key' => 'accesscounter_' . $i,
+				'block_key' => 'block_' . $i,
 				'count' => $i,
 				'count_start' => $i,
 			);

@@ -30,7 +30,6 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
  */
 	public $fixtures = array(
 		'plugin.access_counters.access_counter',
-		'plugin.access_counters.access_counter_frame_setting',
 	);
 
 /**
@@ -73,24 +72,23 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
 	public function testupdateCountUp($data) {
 		$model = $this->_modelName;
 
-		//テスト実行前のチェック
-		$accessCounterBef = $this->$model->find('first', array(
+		//テスト実行前
+		$CounterBef = $this->$model->find('first', array(
 			'recursive' => -1,
 			'conditions' => array('block_key' => $data[$this->$model->alias]['block_key']),
 		));
 
 		//テスト実行
-		$result = $this->AccessCounter->updateCountUp($data);
+		$result = $this->$model->updateCountUp($data);
 
 		//チェック
-		$accessCounterAft = $this->$model->find('first', array(
+		$CounterAft = $this->$model->find('first', array(
 				'recursive' => -1,
 				'conditions' => array('block_key' => $data[$this->$model->alias]['block_key']),
 			));
 
-		if ($result == true){//カウントアップ
-			$this->assertEquals($accessCounterBef['AccessCounter']['count'] + 1, $accessCounterAft['AccessCounter']['count']);
-		}
+		$this->assertTrue($result);
+		$this->assertEquals($CounterBef[$model]['count'] + 1, $CounterAft[$model]['count']);
 	}
 
 /**
@@ -99,7 +97,7 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
  * ### 戻り値
  *  - data 取得データ
  *
- * @return void
+ * @return array
  */
 	public function dataProviderupdateCountUp() {
 		return array(
@@ -113,7 +111,7 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
  * @param array $data 登録データ
  * @param string $mockModel Mockのモデル
  * @param string $mockMethod Mockのメソッド
- * @dataProvider dataProviderSaveOnExceptionError
+ * @dataProvider dataProviderupdateCountUpOnExceptionError
  * @return void
  */
 	public function testupdateCountUpOnExceptionError($data, $mockModel, $mockMethod) {
@@ -134,9 +132,9 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
  *  - mockModel Mockのモデル
  *  - mockMethod Mockのメソッド
  *
- * @return void
+ * @return array
  */
-	public function dataProviderSaveOnExceptionError() {
+	public function dataProviderupdateCountUpOnExceptionError() {
 		return array(
 			array($this->__data, 'AccessCounters.AccessCounter', 'updateAll'),
 		);
