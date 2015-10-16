@@ -60,32 +60,6 @@ class AccessCounterSaveAccessCounterTest extends NetCommonsSaveTest {
  * @var array
  */
 	private $__data = array(
-	/*
-		'Frame' => array(
-			'id' => '6'
-		),
-		'Block' => array(
-			'id' => '161',
-			'key' => 'block_161',
-			'language_id' => '2',
-			'room_id' => '4',
-			'plugin_key' => 'access_counters',
-			'key' => 'block_161',
-			'public_type' => '1',
-		),
-		'AccessCounter' => array(
-			'id' => '1',
-			'block_key' => 'block_161',
-			'count' => '2',
-			'count_start' => '0',
-		),
-		'AccessCounterFrameSetting' => array(
-				'id' => 1,
-				'frame_key' => 'frame_161',
-				'display_type' => 2,
-				'display_digit' => 5,
-		),
-	*/
 		'Frame' => array(
 			'id' => '6'
 		),

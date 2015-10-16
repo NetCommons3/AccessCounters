@@ -65,30 +65,35 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
 /**
  * UpdateCountUpのテスト
  *
- * @param array 
+ * @param array
  * @dataProvider dataProviderupdateCountUp
  * @return void
  */
-	public function testupdateCountUp($data) {
+	public function testupdateCountUp($data, $expected) {
 		$model = $this->_modelName;
+		$method = $this->_methodName;
 
-		//テスト実行前
 		$CounterBef = $this->$model->find('first', array(
 			'recursive' => -1,
-			'conditions' => array('block_key' => $data[$this->$model->alias]['block_key']),
+			'conditions' => $data
 		));
 
 		//テスト実行
-		$result = $this->$model->updateCountUp($data);
+		$result = $this->$model->$method($CounterBef);
 
 		//チェック
 		$CounterAft = $this->$model->find('first', array(
-				'recursive' => -1,
-				'conditions' => array('block_key' => $data[$this->$model->alias]['block_key']),
-			));
+			'recursive' => -1,
+			'conditions' => $data
+		));
+
+		$CounterAft = Hash::flatten($CounterAft);
 
 		$this->assertTrue($result);
-		$this->assertEquals($CounterBef[$model]['count'] + 1, $CounterAft[$model]['count']);
+
+		foreach($expected as $key => $val){
+			$this->assertEquals($expected[$key], $CounterAft[$key]);
+		}
 	}
 
 /**
@@ -100,14 +105,18 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
  * @return array
  */
 	public function dataProviderupdateCountUp() {
+		$data1 = array('AccessCounter.id' => '2');
+		$expected1 = array('AccessCounter.count' => 101);
+
 		return array(
-			array($this->__data),
+			array( $data1, $expected1),
 		);
 	}
 
 /**
  * updateCountUpのExceptionErrorテスト
- *
+ * （☆お知らせ事項）NetCommonsSaveTestを継承してExceptionError関数を使おうかと思いましたが、
+ *                 dataProvidexxxValidation does not Existになりましたので、 ここにコピーして実装しています。
  * @param array $data 登録データ
  * @param string $mockModel Mockのモデル
  * @param string $mockMethod Mockのメソッド
@@ -134,10 +143,13 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
  *
  * @return array
  */
+
 	public function dataProviderupdateCountUpOnExceptionError() {
 		return array(
 			array($this->__data, 'AccessCounters.AccessCounter', 'updateAll'),
 		);
 	}
+
+
 
 }

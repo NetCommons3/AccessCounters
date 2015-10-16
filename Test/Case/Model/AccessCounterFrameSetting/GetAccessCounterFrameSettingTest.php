@@ -33,25 +33,46 @@ class AccessCounterFrameSettingGetAccessCounterFrameSettingTest extends NetCommo
 		'plugin.access_counters.access_counter_frame_setting',
 	);
 
+
 /**
- * Getのテスト(GetAccessCounterTestと同じ)
+ * Model name
  *
- * @param array 
+ * @var array
+ */
+	protected $_modelName = 'AccessCounterFrameSetting';
+
+/**
+ * Method name
+ *
+ * @var array
+ */
+	protected $_methodName = 'getAccessCounterFrameSetting';
+
+/**
+ * Getのテスト
+ *
+ * @param bool  $created 生成フラグ
+ * @param array $exist 取得するキー情報
+ * @param array $expected 期待値（取得したキー情報）
  * @dataProvider dataProviderGet
+ *
  * @return void
  */
 	public function testGet($created, $exist, $expected) {
+		$model = $this->_modelName;
+		$method = $this->_methodName;
+
 		//事前準備
 		$testCurrentData = Hash::expand($exist);
 		Current::$current = Hash::merge(Current::$current, $testCurrentData);
 
 		//テスト実行
-		$result = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting($created);
+		$result = $this->$model->$method($created);
 		if (empty($result)) {//Createしないとき
 			$this->assertEquals($result, $expected);
 		} else {
 			foreach ($expected as $key => $val) {
-				$this->assertEquals($result['AccessCounterFrameSetting'][$key], $val);
+				$this->assertEquals($result[$model][$key], $val);
 			}
 		}
 	}
