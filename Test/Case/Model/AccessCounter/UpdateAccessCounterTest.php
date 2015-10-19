@@ -91,15 +91,15 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
 
 		$this->assertTrue($result);
 
-		foreach($expected as $key => $val){
-			$this->assertEquals($expected[$key], $CounterAft[$key]);
+		foreach ($expected as $key => $val) {
+			$this->assertEquals($val, $CounterAft[$key]);
 		}
 	}
 
 /**
  * updateCountUpのDataProvider
  *
- * ### 戻り値
+ * #### 戻り値
  *  - data 取得データ
  *
  * @return array
@@ -136,7 +136,7 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
 /**
  * updateCountUpのExceptionErrorのDataProvider
  *
- * ### 戻り値
+ * #### 戻り値
  *  - data 登録データ
  *  - mockModel Mockのモデル
  *  - mockMethod Mockのメソッド
@@ -149,7 +149,5 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
 			array($this->__data, 'AccessCounters.AccessCounter', 'updateAll'),
 		);
 	}
-
-
 
 }

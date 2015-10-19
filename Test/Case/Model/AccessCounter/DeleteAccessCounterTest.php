@@ -104,7 +104,7 @@ class AccessCounterDeleteAccessCounterTest extends NetCommonsDeleteTest {
 /**
  * DeleteのDataProvider
  *
- * ### 戻り値
+ * #### 戻り値
  *  - data: 削除データ
  *  - associationModels: 削除確認の関連モデル array(model => conditions)
  *
@@ -119,7 +119,7 @@ class AccessCounterDeleteAccessCounterTest extends NetCommonsDeleteTest {
 /**
  * ExceptionErrorのDataProvider
  *
- * ### 戻り値
+ * #### 戻り値
  *  - data 登録データ
  *  - mockModel Mockのモデル
  *  - mockMethod Mockのメソッド

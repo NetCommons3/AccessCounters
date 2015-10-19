@@ -79,7 +79,7 @@ class AccessCounterGetAccessCounterTest extends NetCommonsGetTest {
 /**
  * getのDataProvider
  *
- * ### 戻り値
+ * #### 戻り値
  *  - bool  生成フラグ($created)
  *  - array 取得するキー情報
  *  - array 期待値 （取得したキー情報）

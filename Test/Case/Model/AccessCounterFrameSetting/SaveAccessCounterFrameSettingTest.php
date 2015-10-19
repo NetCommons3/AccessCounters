@@ -90,7 +90,7 @@ class AccessCounterFrameSettingSaveAccessCounterFrameSettingTest extends NetComm
 /**
  * SaveのDataProvider
  *
- * ### 戻り値
+ * #### 戻り値
  *  - data 登録データ
  *
  * @return void
@@ -104,7 +104,7 @@ class AccessCounterFrameSettingSaveAccessCounterFrameSettingTest extends NetComm
 /**
  * SaveのExceptionErrorのDataProvider
  *
- * ### 戻り値
+ * #### 戻り値
  *  - data 登録データ
  *  - mockModel Mockのモデル
  *  - mockMethod Mockのメソッド
@@ -120,7 +120,7 @@ class AccessCounterFrameSettingSaveAccessCounterFrameSettingTest extends NetComm
 /**
  * SaveのValidationErrorのDataProvider
  *
- * ### 戻り値
+ * #### 戻り値
  *  - data 登録データ
  *  - mockModel Mockのモデル
  *
@@ -135,7 +135,7 @@ class AccessCounterFrameSettingSaveAccessCounterFrameSettingTest extends NetComm
 /**
  * ValidationErrorのDataProvider
  *
- * ### 戻り値
+ * #### 戻り値
  *  - field フィールド名
  *  - value セットする値
  *  - message エラーメッセージ
@@ -145,12 +145,17 @@ class AccessCounterFrameSettingSaveAccessCounterFrameSettingTest extends NetComm
  */
 	public function dataProviderValidationError() {
 		return array(
-			array($this->__data, 'display_digit', 'a',
+			array($this->__data, 'frame_key', '',
 				__d('net_commons', 'Invalid request.')),
 			array($this->__data, 'display_type', '10',
 				__d('net_commons', 'Invalid request.')),
-			array($this->__data, 'frame_key', '',
+			array($this->__data, 'display_digit', 'a',
 				__d('net_commons', 'Invalid request.')),
+			array($this->__data, 'display_digit', '2',
+				__d('net_commons', 'Invalid request.')),
+			array($this->__data, 'display_digit', '11',
+				__d('net_commons', 'Invalid request.')),
+
 		);
 	}
 

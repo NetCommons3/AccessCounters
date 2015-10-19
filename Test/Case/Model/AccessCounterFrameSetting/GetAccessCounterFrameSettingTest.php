@@ -33,7 +33,6 @@ class AccessCounterFrameSettingGetAccessCounterFrameSettingTest extends NetCommo
 		'plugin.access_counters.access_counter_frame_setting',
 	);
 
-
 /**
  * Model name
  *
@@ -80,7 +79,7 @@ class AccessCounterFrameSettingGetAccessCounterFrameSettingTest extends NetCommo
 /**
  * getのDataProvider
  *
- * ### 戻り値
+ * #### 戻り値
  *  - bool  生成フラグ($created)
  *  - array 取得するキー情報
  *  - array 期待値 （取得したキー情報）
