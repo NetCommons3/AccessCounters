@@ -83,6 +83,10 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 				'count' => '2',
 				'count_start' => '0',
 			),
+			//'AccessCounterFrameSetting' => array(
+			//	'id' => 1,
+			//	'display_type' => '0',
+			//),
 		);
 
 		return $data;
@@ -156,12 +160,9 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 			$this->setExpectedException($exception);
 			//if($urlOptions['block_id'] == 0 ){
 			if (!isset( $urlOptions['block_id'])) {
-				//処理なし
+				//
 			} else {
-				$Mock = $this->getMockForModel('AccessCounters.AccessCounter', array('getAccessCounter'));
-				$Mock->expects($this->once())
-				->method('getAccessCounter')
-				->will($this->returnValue(false));
+				$this->_mockForReturnFalse('AccessCounters.AccessCounter', 'getAccessCounter');
 			}
 		}
 
@@ -208,11 +209,12 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 			'exception' => 'BadRequestException'
 		);
 
-		//Error(Blockなし)  PENDING Current::read('Block')をnullにする方法が分からないです
+		//Error(Blockなし)PENDING Current::read('Block')をnullにする方法が分からないです
 		$data2 = $this->__getData();
 		$data2['Frame']['id'] = 16;
 		$data2['Block']['id'] = 0;
 		$data2['AccessCounter']['id'] = 0;
+
 		$results[2] = array(
 		//	'urlOptions' => array('frame_id' => $data2['Frame']['id'], 'block_id' => $data2['Block']['id'], 'key' => $data2['AccessCounter']['id']),
 			'urlOptions' => array('frame_id' => $data2['Frame']['id'], 'key' => $data2['AccessCounter']['id']),
@@ -277,24 +279,10 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 				'urlOptions' => array('frame_id' => $data['Frame']['id'], 'block_id' => $data['Block']['id'], 'key' => $data['AccessCounter']['id']),
 				'exception' => 'ForbiddenException'
 			),
-			//作成権限のみ
+			//正常
 			array(
-				'data' => $data, 'role' => Role::ROOM_ROLE_KEY_GENERAL_USER,
+				'data' => $data, 'role' => Role::ROOM_ROLE_KEY_ROOM_ADMINISTRATOR,
 				'urlOptions' => array('frame_id' => $data['Frame']['id'], 'block_id' => $data['Block']['id'], 'key' => $data['AccessCounter']['id']),
-				'exception' => 'ForbiddenException'
-			),
-			//編集権限あり
-			//--コンテンツあり
-			array(
-				'data' => $data, 'role' => Role::ROOM_ROLE_KEY_EDITOR,
-				'urlOptions' => array('frame_id' => $data['Frame']['id'], 'block_id' => $data['Block']['id'], 'key' => $data['AccessCounter']['id']),
-				'exception' => 'ForbiddenException'
-			),
-			//--コンテンツなし
-			array(
-				'data' => $data, 'role' => Role::ROOM_ROLE_KEY_EDITOR,
-				'urlOptions' => array('frame_id' => '14', 'block_id' => null, 'key' => null),
-				'exception' => 'ForbiddenException'
 			),
 			//フレームID指定なしテスト
 			array(
@@ -348,10 +336,7 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 				'validationError' => array(
 					'field' => 'AccessCounter.count',
 					'value' => '-1',
-					//'message' => __d('net_commons', 'Invalid request.'),
-					//PENDING Failになりました↑1) AccessCountersControllerEditTest::testEditValidationError with data
-					//set #0 (array(array('6'), array('1', 'block_2', '2', '1', 'access_counters', '1'), array('1', 'block_2', '2', '0')), array('6', '1', '1'),
-					//array('AccessCounter.count', '-1', '入力値が不正です。'))Failed asserting that ' ・・・
+					//'message' => __d('net_commons', 'Invalid request.'), //PENDING Fail「Failed asserting that---' contains "入力値が不正です。".」
 					'message' => 'AccessCounter' //Dummy
 				)
 			)),

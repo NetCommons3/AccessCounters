@@ -42,6 +42,6 @@ class AccessCounterBlocksControllerIndexTest extends BlocksControllerTest {
  *
  * @var string
  */
- 	protected $_editController = 'access_counters';
+	protected $_editController = 'access_counters';
 
 }

@@ -140,10 +140,6 @@ class AccessCountersControllerDeleteTest extends NetCommonsControllerTestCase {
 			'urlOptions' => array('frame_id' => $data['Frame']['id'], 'block_id' => $data['Block']['id'], 'key' => $data['AccessCounter']['id']),
 			'assert' => null, 'exception' => 'ForbiddenException'
 		);
-		$results[1] = array('role' => null,
-			'urlOptions' => array('frame_id' => $data['Frame']['id'], 'block_id' => $data['Block']['id'], 'key' => $data['AccessCounter']['id']),
-			'assert' => null, 'exception' => 'ForbiddenException'
-		);
 
 		return $results;
 	}
