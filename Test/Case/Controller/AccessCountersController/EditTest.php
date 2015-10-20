@@ -190,32 +190,32 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
  * @return array
  */
 	public function dataProviderEditGetByPublishable() {
-		$data1 = $this->__getData();
+		$data0 = $this->__getData();
 		$results = array();
 
 		//ログインあり
 		$results[0] = array(
-			'urlOptions' => array('frame_id' => $data1['Frame']['id'], 'block_id' => $data1['Block']['id'], 'key' => $data1['AccessCounter']['id']),
+			'urlOptions' => array('frame_id' => $data0['Frame']['id'], 'block_id' => $data0['Block']['id'], 'key' => $data0['AccessCounter']['id']),
 			'assert' => null
 		);
 
 		//Error（AccessCounter取得できない）PENDING $this->throwBadRequest()の後の[return false;]のルート(カバレッジ)が通らない？？
-		$data2 = $this->__getData();
-		$data2['AccessCounter']['id'] = 0;
+		$data1 = $this->__getData();
+		$data1['AccessCounter']['id'] = 0;
 		$results[1] = array(
-			'urlOptions' => array('frame_id' => $data2['Frame']['id'], 'block_id' => $data2['Block']['id'], 'key' => $data2['AccessCounter']['id']),
+			'urlOptions' => array('frame_id' => $data1['Frame']['id'], 'block_id' => $data1['Block']['id'], 'key' => $data1['AccessCounter']['id']),
 			'assert' => array('method' => 'assertNotEmpty'),
 			'exception' => 'BadRequestException'
 		);
 
 		//Error(Blockなし)  PENDING Current::read('Block')をnullにする方法が分からないです
-		$data3 = $this->__getData();
-		$data3['Frame']['id'] = 16;
-		$data3['Block']['id'] = 0;
-		$data3['AccessCounter']['id'] = 0;
+		$data2 = $this->__getData();
+		$data2['Frame']['id'] = 16;
+		$data2['Block']['id'] = 0;
+		$data2['AccessCounter']['id'] = 0;
 		$results[2] = array(
-		//	'urlOptions' => array('frame_id' => $data3['Frame']['id'], 'block_id' => $data3['Block']['id'], 'key' => $data3['AccessCounter']['id']),
-			'urlOptions' => array('frame_id' => $data3['Frame']['id'], 'key' => $data3['AccessCounter']['id']),
+		//	'urlOptions' => array('frame_id' => $data2['Frame']['id'], 'block_id' => $data2['Block']['id'], 'key' => $data2['AccessCounter']['id']),
+			'urlOptions' => array('frame_id' => $data2['Frame']['id'], 'key' => $data2['AccessCounter']['id']),
 			'assert' => array('method' => 'assertNotEmpty'),
 			'exception' => 'BadRequestException'
 		);
@@ -316,6 +316,7 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 	public function testEditValidationError($data, $urlOptions, $validationError = null) {
 		//ログイン
 		TestAuthGeneral::login($this);
+
 		//テスト実施
 		$this->_testActionOnValidationError('put', $data, Hash::merge(array('action' => 'edit'), $urlOptions), $validationError);
 
