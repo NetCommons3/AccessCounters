@@ -83,10 +83,6 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 				'count' => '2',
 				'count_start' => '0',
 			),
-			//'AccessCounterFrameSetting' => array(
-			//	'id' => 1,
-			//	'display_type' => '0',
-			//),
 		);
 
 		return $data;
@@ -149,6 +145,7 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
  * @param string|null $exception Exception
  * @param string $return testActionの実行後の結果
  * @dataProvider dataProviderEditGetByPublishable
+ *
  * @return void
  */
 	public function testEditGetByPublishable($urlOptions, $assert, $exception = null, $return = 'view') {
@@ -160,7 +157,32 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 			$this->setExpectedException($exception);
 			//if($urlOptions['block_id'] == 0 ){
 			if (!isset( $urlOptions['block_id'])) {
-				//
+				$class = $this->getMockClass(
+					'Current',
+					array('read')
+				);
+				$class::staticExpects($this->any())
+				//$class::staticExpects($this->at(0))
+				//$class::staticexpects($this->any())
+				//$class::expects($this->any())
+				//$class::Expects($this->any())
+					->method('read')
+					->will($this->returnValue(null)); //ここの引数を変えて試す
+				//	->will($this->returnValue(array())); //とおらない
+				//	->will($this->returnValue(false));//とおらない
+				//	->will($this->returnValue(''));//とおらない
+
+				/* 試
+				Current::$current = Hash::remove(Current::$current, 'Block');
+				Current::$current = null;
+				print_r(__CLASS__);
+				print_r(Current::$current);
+				print_r(__CLASS__);
+				print_r(Current::read('Block')); // ※ここでもnullは返ってこない
+				print_r(__CLASS__);
+				print_r(Current::read(''));
+				*/
+				//Current::$current['Block'] = null;
 			} else {
 				$this->_mockForReturnFalse('AccessCounters.AccessCounter', 'getAccessCounter');
 			}
@@ -200,7 +222,7 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 			'assert' => null
 		);
 
-		//Error（AccessCounter取得できない）PENDING $this->throwBadRequest()の後の[return false;]のルート(カバレッジ)が通らない？？
+		//Error（AccessCounter取得できない）PENDING $this->throwBadRequest()の後の[return false;]のルート(カバレッジ)が通らない？？※あとでreturnが不要か試してみる
 		$data1 = $this->__getData();
 		$data1['AccessCounter']['id'] = 0;
 		$results[1] = array(
@@ -334,10 +356,9 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 			//バリデーションエラー
 			Hash::merge($result, array(
 				'validationError' => array(
-					'field' => 'AccessCounter.count',
-					'value' => '-1',
-					//'message' => __d('net_commons', 'Invalid request.'), //PENDING Fail「Failed asserting that---' contains "入力値が不正です。".」
-					'message' => 'AccessCounter' //Dummy
+					'field' => 'Block.name', //AccessCounter変数では、バリデーションエラーでメッセージ出力がない（Block.nameでtest）
+					'value' => '',
+					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('access_counters', 'Access counter name')),
 				)
 			)),
 		);

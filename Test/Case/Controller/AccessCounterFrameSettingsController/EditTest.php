@@ -309,10 +309,11 @@ class AccessCounterFrameSettingsControllerEditTest extends NetCommonsControllerT
 			//バリデーションエラー
 			Hash::merge($result, array(
 				'validationError' => array(
-					'field' => 'AccessCounterFrameSetting.frame_key',
-					'value' => '',
-					//'message' => __d('net_commons', 'Invalid request.'), //PENDING Fail「Failed asserting that---' contains "入力値が不正です。".」
-					'message' => 'AccessCounter' //Dummy
+					//'field' => 'AccessCounterFrameSetting.display_type',
+					//'value' => '99',※ユーザーの入力ミスでは発生しないケースなのですが、display_type(99)の場合、edit.ctpの18行目で不正参照エラーになりました。
+					'field' => 'AccessCounterFrameSetting.display_digit',
+					'value' => '99',
+					'message' => __d('net_commons', 'Invalid request.'),
 				)
 			)),
 		);
