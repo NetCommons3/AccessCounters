@@ -247,11 +247,6 @@ class AccessCountersControllerDeleteTest extends NetCommonsControllerTestCase {
 			array(
 				'mockModel' => 'AccessCounters.AccessCounter', 'mockMethod' => 'deleteAccessCounter', 'data' => $data,
 				'urlOptions' => array('frame_id' => $data['Frame']['id'], 'block_id' => $data['Block']['id'], 'key' => $data['AccessCounter']['id']),
-				'exception' => 'BadRequestException'
-			),
-			array(
-				'mockModel' => 'AccessCounters.AccessCounter', 'mockMethod' => 'deleteAccessCounter', 'data' => $data,
-				'urlOptions' => array('frame_id' => $data['Frame']['id'], 'block_id' => $data['Block']['id'], 'key' => $data['AccessCounter']['id']),
 				'exception' => 'BadRequestException', 'return' => 'json'
 			),
 		);

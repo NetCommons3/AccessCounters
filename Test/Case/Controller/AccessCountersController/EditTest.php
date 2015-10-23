@@ -154,36 +154,7 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 
 		//Exception
 		if ($exception) {
-			$this->setExpectedException($exception);
-			//if($urlOptions['block_id'] == 0 ){
-			if (!isset( $urlOptions['block_id'])) {
-				$class = $this->getMockClass(
-					'Current',
-					array('read')
-				);
-				$class::staticExpects($this->any())
-				//$class::staticExpects($this->at(0))
-				//$class::staticexpects($this->any())
-				//$class::expects($this->any())
-				//$class::Expects($this->any())
-					->method('read')
-					->will($this->returnValue(null)); //ここの引数を変えて試す
-				//	->will($this->returnValue(array())); //とおらない
-				//	->will($this->returnValue(false));//とおらない
-				//	->will($this->returnValue(''));//とおらない
-
-				/* 試
-				Current::$current = Hash::remove(Current::$current, 'Block');
-				Current::$current = null;
-				print_r(__CLASS__);
-				print_r(Current::$current);
-				print_r(__CLASS__);
-				print_r(Current::read('Block')); // ※ここでもnullは返ってこない
-				print_r(__CLASS__);
-				print_r(Current::read(''));
-				*/
-				//Current::$current['Block'] = null;
-			} else {
+			if (isset( $urlOptions['block_id'])) {
 				$this->_mockForReturnFalse('AccessCounters.AccessCounter', 'getAccessCounter');
 			}
 		}
@@ -222,26 +193,26 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 			'assert' => null
 		);
 
-		//Error（AccessCounter取得できない）PENDING $this->throwBadRequest()の後の[return false;]のルート(カバレッジ)が通らない？？※あとでreturnが不要か試してみる
+		//ExceptionError(AccessCounterなし)
 		$data1 = $this->__getData();
 		$data1['AccessCounter']['id'] = 0;
 		$results[1] = array(
 			'urlOptions' => array('frame_id' => $data1['Frame']['id'], 'block_id' => $data1['Block']['id'], 'key' => $data1['AccessCounter']['id']),
 			'assert' => array('method' => 'assertNotEmpty'),
-			'exception' => 'BadRequestException'
+			'exception' => 'BadRequestException',
+			'return' => 'json'
 		);
 
-		//Error(Blockなし)PENDING Current::read('Block')をnullにする方法が分からないです
+		//ExceptionError(Blockなし)
 		$data2 = $this->__getData();
 		$data2['Frame']['id'] = 16;
 		$data2['Block']['id'] = 0;
 		$data2['AccessCounter']['id'] = 0;
-
 		$results[2] = array(
-		//	'urlOptions' => array('frame_id' => $data2['Frame']['id'], 'block_id' => $data2['Block']['id'], 'key' => $data2['AccessCounter']['id']),
 			'urlOptions' => array('frame_id' => $data2['Frame']['id'], 'key' => $data2['AccessCounter']['id']),
 			'assert' => array('method' => 'assertNotEmpty'),
-			'exception' => 'BadRequestException'
+			'exception' => 'BadRequestException',
+			'return' => 'json'
 		);
 
 		return $results;
