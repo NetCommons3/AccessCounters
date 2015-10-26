@@ -157,6 +157,13 @@ class AccessCounterFrameSettingsControllerEditTest extends NetCommonsControllerT
 		//ログイン
 		TestAuthGeneral::login($this, Role::ROOM_ROLE_KEY_ROOM_ADMINISTRATOR);
 
+		if (!isset($urlOptions['key'])) {
+			$mock = $this->getMockForModel('AccessCounters.AccessCounterFrameSetting', array('getAccessCounterFrameSetting'));
+			$mock->expects($this->once())
+				->method('getAccessCounterFrameSetting')
+				->will($this->returnValue(false));
+		}
+
 		//テスト実施
 		$url = Hash::merge(array(
 			'plugin' => $this->plugin,
@@ -191,7 +198,11 @@ class AccessCounterFrameSettingsControllerEditTest extends NetCommonsControllerT
 			'assert' => null
 		);
 
-		//PENDING viewのcoverage（isset($this->data['AccessCounterFrameSetting'])がfalseのパターン）通せない？
+		//フレームセッティングが存在しない（viewのcoverageのため、getAccessCounterFrameSettingで疑似的にnullを返す）
+		$results[1] = array(
+			'urlOptions' => array('frame_id' => $data0['Frame']['id'], 'block_id' => '2'),
+			'assert' => null,
+		);
 
 		return $results;
 	}
