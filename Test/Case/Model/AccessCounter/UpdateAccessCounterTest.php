@@ -63,13 +63,13 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
 	);
 
 /**
- * UpdateCountUpのテスト
+ * updateCountUpのテスト
  *
  * @param array
- * @dataProvider dataProviderupdateCountUp
+ * @dataProvider dataProviderUpdateCountUp
  * @return void
  */
-	public function testupdateCountUp($data, $expected) {
+	public function testUpdateCountUp($data, $expected) {
 		$model = $this->_modelName;
 		$method = $this->_methodName;
 
@@ -101,10 +101,11 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
  *
  * #### 戻り値
  *  - data 取得データ
+ *  - expected 期待値
  *
  * @return array
  */
-	public function dataProviderupdateCountUp() {
+	public function dataProviderUpdateCountUp() {
 		$data1 = array('AccessCounter.id' => '2');
 		$expected1 = array('AccessCounter.count' => 101);
 
@@ -120,10 +121,10 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
  * @param array $data 登録データ
  * @param string $mockModel Mockのモデル
  * @param string $mockMethod Mockのメソッド
- * @dataProvider dataProviderupdateCountUpOnExceptionError
+ * @dataProvider dataProviderUpdateCountUpOnExceptionError
  * @return void
  */
-	public function testupdateCountUpOnExceptionError($data, $mockModel, $mockMethod) {
+	public function testUpdateCountUpOnExceptionError($data, $mockModel, $mockMethod) {
 		$model = $this->_modelName;
 		$method = $this->_methodName;
 
@@ -144,7 +145,7 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
  * @return array
  */
 
-	public function dataProviderupdateCountUpOnExceptionError() {
+	public function dataProviderUpdateCountUpOnExceptionError() {
 		return array(
 			array($this->__data, 'AccessCounters.AccessCounter', 'updateAll'),
 		);
