@@ -14,6 +14,7 @@
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\AccessCounters\Test\Fixture
+ * @codeCoverageIgnore
  */
 class AccessCounterFixture extends CakeTestFixture {
 
@@ -45,7 +46,7 @@ class AccessCounterFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'block_key' => 'block_161',
+			'block_key' => 'block_1',
 			'count' => 1,
 			'count_start' => 0,
 			'created_user' => 1,
@@ -55,7 +56,7 @@ class AccessCounterFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => 2,
-			'block_key' => 'block_162',
+			'block_key' => 'block_2',
 			'count' => 100,
 			'count_start' => 10,
 			'created_user' => 1,
@@ -63,6 +64,26 @@ class AccessCounterFixture extends CakeTestFixture {
 			'modified_user' => 1,
 			'modified' => '2014-06-18 02:06:22'
 		),
+
+		//101-200まで、ページ遷移のためのテスト
+
 	);
+
+/**
+ * Initialize the fixture.
+ *
+ * @return void
+ */
+	public function init() {
+		for ($i = 101; $i <= 200; $i++) {
+			$this->records[$i] = array(
+				'id' => $i,
+				'block_key' => 'block_' . $i,
+				'count' => $i,
+				'count_start' => $i,
+			);
+		}
+		parent::init();
+	}
 
 }

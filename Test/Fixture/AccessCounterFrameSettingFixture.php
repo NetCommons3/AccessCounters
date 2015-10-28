@@ -45,7 +45,7 @@ class AccessCounterFrameSettingFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'frame_key' => 'frame_161',
+			'frame_key' => 'frame_1',
 			'display_type' => 2,
 			'display_digit' => 1,
 			'created_user' => 1,
@@ -55,7 +55,7 @@ class AccessCounterFrameSettingFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => 2,
-			'frame_key' => 'frame_162',
+			'frame_key' => 'frame_2',
 			'display_type' => 2,
 			'display_digit' => 1,
 			'created_user' => 1,

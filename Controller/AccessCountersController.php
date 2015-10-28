@@ -142,7 +142,8 @@ class AccessCountersController extends AccessCountersAppController {
 
 		} else {
 			//--Block
-			if (! $this->request->data['Block'] = Current::read('Block')) {
+			$this->request->data['Block'] = Current::read('Block');
+			if (! $this->request->data['Block']['key']) {
 				$this->throwBadRequest();
 				return false;
 			}
