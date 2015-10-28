@@ -14,6 +14,7 @@
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\AccessCounters\Test\Fixture
+ * @codeCoverageIgnore
  */
 class AccessCounterFixture extends CakeTestFixture {
 
