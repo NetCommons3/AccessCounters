@@ -65,7 +65,8 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
 /**
  * updateCountUpのテスト
  *
- * @param array
+ * @param array $data 取得する情報
+ * @param array $expected 期待値
  * @dataProvider dataProviderUpdateCountUp
  * @return void
  */
