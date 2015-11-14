@@ -2,9 +2,10 @@
 <phpunit bootstrap="vendors/autoload.php">
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">app/Plugin/AccessCounters</directory>
             <directory suffix=".ctp">app/Plugin/AccessCounters</directory>
+            <directory suffix=".php">app/Plugin/AccessCounters</directory>
 			<exclude>
+				<directory suffix=".php">app/Plugin/AccessCounters/Config</directory>
 				<directory suffix="Test.php">app/Plugin/AccessCounters</directory>
 			</exclude>
         </whitelist>
