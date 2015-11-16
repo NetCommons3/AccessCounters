@@ -4,12 +4,12 @@
         <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".ctp">app/Plugin/AccessCounters</directory>
             <directory suffix=".php">app/Plugin/AccessCounters</directory>
-			<exclude>
-				<directory suffix=".php">app/Plugin/AccessCounters/Config/Migration</directory>
-				<directory suffix=".php">app/Plugin/AccessCounters/Config/Schema</directory>
-				<directory suffix=".php">app/Plugin/AccessCounters/Test/Case</directory>
-				<directory suffix=".php">app/Plugin/AccessCounters/Test/Fixture</directory>
-			</exclude>
+            <exclude>
+                <directory suffix=".php">app/Plugin/AccessCounters/Config/Migration</directory>
+                <directory suffix=".php">app/Plugin/AccessCounters/Config/Schema</directory>
+                <directory suffix=".php">app/Plugin/AccessCounters/Test/Case</directory>
+                <directory suffix=".php">app/Plugin/AccessCounters/Test/Fixture</directory>
+            </exclude>
         </whitelist>
     </filter>
     <logging>
