@@ -11,8 +11,6 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('AccessCounters', 'AccessCounters.Model');
-App::uses('AccessCounterFrameSetting', 'AccessCounters.Model');
 App::uses('NetCommonsGetTest', 'NetCommons.TestSuite');
 
 /**
@@ -22,6 +20,13 @@ App::uses('NetCommonsGetTest', 'NetCommons.TestSuite');
  * @package NetCommons\AccessCounters\Test\Case\Model\AccessCounter
  */
 class AccessCounterGetAccessCounterTest extends NetCommonsGetTest {
+
+/**
+ * Plugin name
+ *
+ * @var array
+ */
+	public $plugin = 'access_counters';
 
 /**
  * Fixtures
@@ -46,6 +51,28 @@ class AccessCounterGetAccessCounterTest extends NetCommonsGetTest {
  * @var array
  */
 	protected $_methodName = 'getAccessCounter';
+
+/**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		$model = $this->_modelName;
+		$this->$model = ClassRegistry::init(Inflector::camelize($this->plugin) . '.' . $model);
+		parent::setUp();
+	}
+
+/**
+ * tearDown method
+ *
+ * @return void
+ */
+	public function tearDown() {
+		$model = $this->_modelName;
+		unset($this->$model);
+		parent::tearDown();
+	}
 
 /**
  * Getのテスト

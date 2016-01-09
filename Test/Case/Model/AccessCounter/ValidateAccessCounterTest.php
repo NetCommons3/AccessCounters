@@ -11,7 +11,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('NetCommonsSaveTest', 'NetCommons.TestSuite');
+App::uses('NetCommonsValidateTest', 'NetCommons.TestSuite');
 
 /**
  * AccessCounter::saveAccessCounter()のテスト
@@ -19,7 +19,7 @@ App::uses('NetCommonsSaveTest', 'NetCommons.TestSuite');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\AccessCounters\Test\Case\Model\AccessCounter
  */
-class AccessCounterSaveAccessCounterTest extends NetCommonsSaveTest {
+class AccessCounterValidateAccessCounterTest extends NetCommonsValidateTest {
 
 /**
  * Plugin name
@@ -107,49 +107,24 @@ class AccessCounterSaveAccessCounterTest extends NetCommonsSaveTest {
 	}
 
 /**
- * SaveのDataProvider
+ * ValidationErrorのDataProvider
  *
  * #### 戻り値
- *  - data 登録データ
+ *  - field フィールド名
+ *  - value セットする値
+ *  - message エラーメッセージ
+ *  - overwrite 上書きするデータ
  *
  * @return void
  */
-	public function dataProviderSave() {
+	public function dataProviderValidationError() {
 		return array(
-			array($this->__data),
-		);
-	}
-
-/**
- * SaveのExceptionErrorのDataProvider
- *
- * #### 戻り値
- *  - data 登録データ
- *  - mockModel Mockのモデル
- *  - mockMethod Mockのメソッド
- *
- * @return void
- */
-	public function dataProviderSaveOnExceptionError() {
-		return array(
-			array($this->__data, 'AccessCounters.AccessCounter', 'save'),
-			array($this->__data, 'AccessCounters.AccessCounterFrameSetting', 'save'),
-		);
-	}
-
-/**
- * SaveのValidationErrorのDataProvider
- *
- * #### 戻り値
- *  - data 登録データ
- *  - mockModel Mockのモデル
- *
- * @return void
- */
-	public function dataProviderSaveOnValidationError() {
-		return array(
-			array($this->__data, 'AccessCounters.AccessCounter'),
-			array($this->__data, 'AccessCounters.AccessCounterFrameSetting'),
+			array($this->__data, 'count', '-1',
+				__d('net_commons', 'Invalid request.')),
+			array($this->__data, 'count_start', '-1',
+				__d('net_commons', 'Invalid request.')),
+			array($this->__data, 'block_key', '',
+				__d('net_commons', 'Invalid request.')),
 		);
 	}
 

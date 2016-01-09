@@ -1,6 +1,6 @@
 <?php
 /**
- * AccessCounter::saveAccessCounter()のテスト
+ * AccessCounterFrameSetting::saveAccessCounterFrameSetting()のテスト
  *
  * @property AccessCounter $AccessCounter
  *
@@ -11,15 +11,15 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('NetCommonsSaveTest', 'NetCommons.TestSuite');
+App::uses('NetCommonsValidateTest', 'NetCommons.TestSuite');
 
 /**
- * AccessCounter::saveAccessCounter()のテスト
+ * AccessCounterFrameSetting::saveAccessCounterFrameSetting()のテスト
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\AccessCounters\Test\Case\Model\AccessCounter
  */
-class AccessCounterSaveAccessCounterTest extends NetCommonsSaveTest {
+class AccessCounterFrameSettingValidateAccessCounterFrameSettingTest extends NetCommonsValidateTest {
 
 /**
  * Plugin name
@@ -43,14 +43,14 @@ class AccessCounterSaveAccessCounterTest extends NetCommonsSaveTest {
  *
  * @var array
  */
-	protected $_modelName = 'AccessCounter';
+	protected $_modelName = 'AccessCounterFrameSetting';
 
 /**
  * Method name
  *
  * @var array
  */
-	protected $_methodName = 'saveAccessCounter';
+	protected $_methodName = 'saveAccessCounterFrameSetting';
 
 /**
  * data
@@ -107,49 +107,29 @@ class AccessCounterSaveAccessCounterTest extends NetCommonsSaveTest {
 	}
 
 /**
- * SaveのDataProvider
+ * ValidationErrorのDataProvider
  *
  * #### 戻り値
- *  - data 登録データ
+ *  - field フィールド名
+ *  - value セットする値
+ *  - message エラーメッセージ
+ *  - overwrite 上書きするデータ
  *
- * @return void
+ * @return array
  */
-	public function dataProviderSave() {
+	public function dataProviderValidationError() {
 		return array(
-			array($this->__data),
-		);
-	}
+			array($this->__data, 'frame_key', '',
+				__d('net_commons', 'Invalid request.')),
+			array($this->__data, 'display_type', '10',
+				__d('net_commons', 'Invalid request.')),
+			array($this->__data, 'display_digit', 'a',
+				__d('net_commons', 'Invalid request.')),
+			array($this->__data, 'display_digit', '2',
+				__d('net_commons', 'Invalid request.')),
+			array($this->__data, 'display_digit', '11',
+				__d('net_commons', 'Invalid request.')),
 
-/**
- * SaveのExceptionErrorのDataProvider
- *
- * #### 戻り値
- *  - data 登録データ
- *  - mockModel Mockのモデル
- *  - mockMethod Mockのメソッド
- *
- * @return void
- */
-	public function dataProviderSaveOnExceptionError() {
-		return array(
-			array($this->__data, 'AccessCounters.AccessCounter', 'save'),
-			array($this->__data, 'AccessCounters.AccessCounterFrameSetting', 'save'),
-		);
-	}
-
-/**
- * SaveのValidationErrorのDataProvider
- *
- * #### 戻り値
- *  - data 登録データ
- *  - mockModel Mockのモデル
- *
- * @return void
- */
-	public function dataProviderSaveOnValidationError() {
-		return array(
-			array($this->__data, 'AccessCounters.AccessCounter'),
-			array($this->__data, 'AccessCounters.AccessCounterFrameSetting'),
 		);
 	}
 

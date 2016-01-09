@@ -21,16 +21,6 @@ App::uses('NetCommonsControllerTestCase', 'NetCommons.TestSuite');
 class AccessCounterFrameSettingsControllerEditTest extends NetCommonsControllerTestCase {
 
 /**
- * setUp method
- *
- * @return void
- */
-	public function setUp() {
-		parent::setUp();
-		$this->generateNc(Inflector::camelize($this->_controller));
-	}
-
-/**
  * Fixtures
  *
  * @var array
@@ -53,6 +43,16 @@ class AccessCounterFrameSettingsControllerEditTest extends NetCommonsControllerT
  * @var string
  */
 	protected $_controller = 'access_counter_frame_settings';
+
+/**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		parent::setUp();
+		$this->generateNc(Inflector::camelize($this->_controller));
+	}
 
 /**
  * テストDataの取得
