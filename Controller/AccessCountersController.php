@@ -86,7 +86,7 @@ class AccessCountersController extends AccessCountersAppController {
 		$this->layout = 'NetCommons.setting';
 		$this->view = 'edit';
 
-		if ($this->request->isPost()) {
+		if ($this->request->is('post')) {
 			//登録(POST)処理
 			$data = $this->data;
 			$data['AccessCounter']['count'] = $data['AccessCounter']['count_start'];
@@ -129,7 +129,7 @@ class AccessCountersController extends AccessCountersAppController {
 		//レイアウトの設定
 		$this->layout = 'NetCommons.setting';
 
-		if ($this->request->isPut()) {
+		if ($this->request->is('put')) {
 			//登録(PUT)処理
 			$data = $this->data;
 			unset($data['AccessCounter']['count_start']);
@@ -169,7 +169,7 @@ class AccessCountersController extends AccessCountersAppController {
  * @return void
  */
 	public function delete() {
-		if ($this->request->isDelete()) {
+		if ($this->request->is('delete')) {
 			if ($this->AccessCounter->deleteAccessCounter($this->data)) {
 				$this->redirect(NetCommonsUrl::backToIndexUrl('default_setting_action'));
 				return;
