@@ -44,16 +44,6 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 	protected $_controller = 'access_counters';
 
 /**
- * setUp method
- *
- * @return void
- */
-	public function setUp() {
-		parent::setUp();
-		$this->generateNc(Inflector::camelize($this->_controller));
-	}
-
-/**
  * テストDataの取得
  *
  * @return array

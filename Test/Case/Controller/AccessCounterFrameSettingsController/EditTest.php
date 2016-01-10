@@ -45,16 +45,6 @@ class AccessCounterFrameSettingsControllerEditTest extends NetCommonsControllerT
 	protected $_controller = 'access_counter_frame_settings';
 
 /**
- * setUp method
- *
- * @return void
- */
-	public function setUp() {
-		parent::setUp();
-		$this->generateNc(Inflector::camelize($this->_controller));
-	}
-
-/**
  * テストDataの取得
  *
  * @return array

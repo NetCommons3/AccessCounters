@@ -68,28 +68,6 @@ class AccessCounterUpdateAccessCounterTest extends NetCommonsModelTestCase {
 	);
 
 /**
- * setUp method
- *
- * @return void
- */
-	public function setUp() {
-		$model = $this->_modelName;
-		$this->$model = ClassRegistry::init(Inflector::camelize($this->plugin) . '.' . $model);
-		parent::setUp();
-	}
-
-/**
- * tearDown method
- *
- * @return void
- */
-	public function tearDown() {
-		$model = $this->_modelName;
-		unset($this->$model);
-		parent::tearDown();
-	}
-
-/**
  * updateCountUpのテスト
  *
  * @param array $data 取得する情報
