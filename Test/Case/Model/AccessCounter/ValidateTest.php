@@ -1,6 +1,6 @@
 <?php
 /**
- * AccessCounterFrameSetting::saveAccessCounterFrameSetting()のテスト
+ * AccessCounter::validates()のテスト
  *
  * @property AccessCounter $AccessCounter
  *
@@ -14,12 +14,12 @@
 App::uses('NetCommonsValidateTest', 'NetCommons.TestSuite');
 
 /**
- * AccessCounterFrameSetting::saveAccessCounterFrameSetting()のテスト
+ * AccessCounter::validates()のテスト
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\AccessCounters\Test\Case\Model\AccessCounter
  */
-class AccessCounterFrameSettingValidateAccessCounterFrameSettingTest extends NetCommonsValidateTest {
+class AccessCounterValidateTest extends NetCommonsValidateTest {
 
 /**
  * Plugin name
@@ -43,14 +43,14 @@ class AccessCounterFrameSettingValidateAccessCounterFrameSettingTest extends Net
  *
  * @var array
  */
-	protected $_modelName = 'AccessCounterFrameSetting';
+	protected $_modelName = 'AccessCounter';
 
 /**
  * Method name
  *
  * @var array
  */
-	protected $_methodName = 'saveAccessCounterFrameSetting';
+	protected $_methodName = 'saveAccessCounter';
 
 /**
  * data
@@ -115,21 +115,16 @@ class AccessCounterFrameSettingValidateAccessCounterFrameSettingTest extends Net
  *  - message エラーメッセージ
  *  - overwrite 上書きするデータ
  *
- * @return array
+ * @return void
  */
 	public function dataProviderValidationError() {
 		return array(
-			array($this->__data, 'frame_key', '',
+			array($this->__data, 'count', '-1',
 				__d('net_commons', 'Invalid request.')),
-			array($this->__data, 'display_type', '10',
+			array($this->__data, 'count_start', '-1',
 				__d('net_commons', 'Invalid request.')),
-			array($this->__data, 'display_digit', 'a',
+			array($this->__data, 'block_key', '',
 				__d('net_commons', 'Invalid request.')),
-			array($this->__data, 'display_digit', '2',
-				__d('net_commons', 'Invalid request.')),
-			array($this->__data, 'display_digit', '11',
-				__d('net_commons', 'Invalid request.')),
-
 		);
 	}
 
