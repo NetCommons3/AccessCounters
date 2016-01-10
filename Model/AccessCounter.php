@@ -238,7 +238,7 @@ class AccessCounter extends AccessCountersAppModel {
 	}
 
 /**
- * Save block
+ * カウントの更新
  *
  * @param array $data received post data
  * @return bool True on success, false on validation errors
