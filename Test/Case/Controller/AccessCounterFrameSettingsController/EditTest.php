@@ -21,16 +21,6 @@ App::uses('NetCommonsControllerTestCase', 'NetCommons.TestSuite');
 class AccessCounterFrameSettingsControllerEditTest extends NetCommonsControllerTestCase {
 
 /**
- * setUp method
- *
- * @return void
- */
-	public function setUp() {
-		parent::setUp();
-		$this->generateNc(Inflector::camelize($this->_controller));
-	}
-
-/**
  * Fixtures
  *
  * @var array

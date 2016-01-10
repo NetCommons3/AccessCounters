@@ -11,8 +11,6 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('AccessCounters', 'AccessCounters.Model');
-App::uses('AccessCounterFrameSetting', 'AccessCounters.Model');
 App::uses('NetCommonsGetTest', 'NetCommons.TestSuite');
 
 /**
@@ -22,6 +20,13 @@ App::uses('NetCommonsGetTest', 'NetCommons.TestSuite');
  * @package NetCommons\AccessCounters\Test\Case\Model\AccessCounter
  */
 class AccessCounterFrameSettingGetAccessCounterFrameSettingTest extends NetCommonsGetTest {
+
+/**
+ * Plugin name
+ *
+ * @var array
+ */
+	public $plugin = 'access_counters';
 
 /**
  * Fixtures

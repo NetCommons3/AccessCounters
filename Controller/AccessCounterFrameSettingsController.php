@@ -50,7 +50,7 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
  * @return void
  */
 	public function edit() {
-		if ($this->request->isPut() || $this->request->isPost()) {
+		if ($this->request->is('put') || $this->request->is('post')) {
 			//登録(PUT)処理
 			$data = $this->data;
 			$data['AccessCounterFrameSetting']['display_type'] = (int)$data['AccessCounterFrameSetting']['display_type'];

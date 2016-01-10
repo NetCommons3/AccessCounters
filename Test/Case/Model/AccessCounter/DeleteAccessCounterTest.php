@@ -11,8 +11,6 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('AccessCounters', 'AccessCounters.Model');
-App::uses('AccessCounterFrameSetting', 'AccessCounters.Model');
 App::uses('NetCommonsDeleteTest', 'NetCommons.TestSuite');
 
 /**

@@ -1,6 +1,6 @@
 <?php
 /**
- * AccessCounterBlocksController Test Case
+ * FaqBlocksController Test Case
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -9,15 +9,15 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('BlocksControllerTest', 'Blocks.TestSuite');
+App::uses('BlocksControllerPaginatorTest', 'Blocks.TestSuite');
 
 /**
- * AccessCounterBlocksController Test Case
+ * FaqBlocksController Test Case
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
- * @package NetCommons\AccessCounters\Test\Case\Controller
+ * @package NetCommons\AccessCounter\Test\Case\Controller
  */
-class AccessCounterBlocksControllerIndexTest extends BlocksControllerTest {
+class AccessCounterBlocksControllerIndexPaginatorTest extends BlocksControllerPaginatorTest {
 
 /**
  * Plugin name
@@ -32,7 +32,7 @@ class AccessCounterBlocksControllerIndexTest extends BlocksControllerTest {
  * @var array
  */
 	public $fixtures = array(
-		'plugin.access_counters.access_counter',
+		'plugin.access_counters.access_counter4paginator',
 		'plugin.access_counters.access_counter_frame_setting',
 	);
 

@@ -11,8 +11,6 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('AccessCounters', 'AccessCounters.Model');
-App::uses('AccessCounterFrameSetting', 'AccessCounters.Model');
 App::uses('NetCommonsSaveTest', 'NetCommons.TestSuite');
 
 /**
@@ -84,7 +82,6 @@ class AccessCounterFrameSettingSaveAccessCounterFrameSettingTest extends NetComm
 				'display_type' => 2,
 				'display_digit' => 5,
 		),
-
 	);
 
 /**
@@ -129,33 +126,6 @@ class AccessCounterFrameSettingSaveAccessCounterFrameSettingTest extends NetComm
 	public function dataProviderSaveOnValidationError() {
 		return array(
 			array($this->__data, 'AccessCounters.AccessCounterFrameSetting'),
-		);
-	}
-
-/**
- * ValidationErrorのDataProvider
- *
- * #### 戻り値
- *  - field フィールド名
- *  - value セットする値
- *  - message エラーメッセージ
- *  - overwrite 上書きするデータ
- *
- * @return array
- */
-	public function dataProviderValidationError() {
-		return array(
-			array($this->__data, 'frame_key', '',
-				__d('net_commons', 'Invalid request.')),
-			array($this->__data, 'display_type', '10',
-				__d('net_commons', 'Invalid request.')),
-			array($this->__data, 'display_digit', 'a',
-				__d('net_commons', 'Invalid request.')),
-			array($this->__data, 'display_digit', '2',
-				__d('net_commons', 'Invalid request.')),
-			array($this->__data, 'display_digit', '11',
-				__d('net_commons', 'Invalid request.')),
-
 		);
 	}
 
