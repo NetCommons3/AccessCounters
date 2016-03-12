@@ -30,7 +30,7 @@ if (isset($this->data['AccessCounterFrameSetting'])) {
 	ng-controller="AccessCounterFrameSettings"
 	ng-init="initialize(<?php echo h(json_encode($camelizeData)); ?>)">
 
-	<?php echo $this->BlockTabs->main(BlockTabsComponent::MAIN_TAB_FRAME_SETTING); ?>
+	<?php echo $this->BlockTabs->main(BlockTabsHelper::MAIN_TAB_FRAME_SETTING); ?>
 
 	<div class="tab-content">
 		<?php echo $this->element('Blocks.edit_form', array(
