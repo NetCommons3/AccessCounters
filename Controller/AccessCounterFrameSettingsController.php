@@ -32,15 +32,22 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
  * @var array
  */
 	public $components = array(
-		'Blocks.BlockTabs' => array(
-			'mainTabs' => array('block_index', 'frame_settings'),
-			'blockTabs' => array('block_settings'),
-		),
 		'NetCommons.Permission' => array(
-			//アクセスの権限
 			'allow' => array(
 				'edit' => 'page_editable',
 			),
+		),
+	);
+
+/**
+ * use helpers
+ *
+ * @var array
+ */
+	public $helpers = array(
+		'Blocks.BlockTabs' => array(
+			'mainTabs' => array('block_index', 'frame_settings'),
+			'blockTabs' => array('block_settings'),
 		),
 	);
 

@@ -25,16 +25,23 @@ class AccessCountersController extends AccessCountersAppController {
  * @var array
  */
 	public $components = array(
+		'NetCommons.Permission' => array(
+			'allow' => array(
+				'add,edit,delete' => 'block_editable',
+			),
+		),
+	);
+
+/**
+ * use helpers
+ *
+ * @var array
+ */
+	public $helpers = array(
 		'Blocks.BlockTabs' => array(
 			'mainTabs' => array('block_index', 'frame_settings'),
 			'blockTabs' => array(
 				'block_settings' => array('url' => array('controller' => 'access_counters'))
-			),
-		),
-		'NetCommons.Permission' => array(
-			//アクセスの権限
-			'allow' => array(
-				'add,edit,delete' => 'block_editable',
 			),
 		),
 	);
