@@ -184,7 +184,9 @@ class AccessCounter extends AccessCountersAppModel {
 		$this->Block->validate['name'] = array(
 			'notBlank' => array(
 				'rule' => array('notBlank'),
-				'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('access_counters', 'Access counter name')),
+				'message' => sprintf(
+					__d('net_commons', 'Please input %s.'), __d('access_counters', 'Access counter name')
+				),
 			),
 		);
 
@@ -196,7 +198,9 @@ class AccessCounter extends AccessCountersAppModel {
 
 		$this->AccessCounterFrameSetting->set($data);
 		if (! $this->AccessCounterFrameSetting->validates()) {
-			$this->validationErrors = Hash::merge($this->validationErrors, $this->AccessCounterFrameSetting->validationErrors);
+			$this->validationErrors = Hash::merge(
+				$this->validationErrors, $this->AccessCounterFrameSetting->validationErrors
+			);
 			return false;
 		}
 
