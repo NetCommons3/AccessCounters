@@ -60,8 +60,6 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
 		if ($this->request->is('put') || $this->request->is('post')) {
 			//登録(PUT)処理
 			$data = $this->data;
-			$data['AccessCounterFrameSetting']['display_type'] = (int)$data['AccessCounterFrameSetting']['display_type'];
-
 			if ($this->AccessCounterFrameSetting->saveAccessCounterFrameSetting($data)) {
 				$this->redirect(NetCommonsUrl::backToPageUrl());
 				return;
