@@ -7,7 +7,14 @@ php:
   - 7.0
 
 env:
-  - NETCOMMONS_VERSION=master DB=mysql
+  matrix:
+    - NETCOMMONS_VERSION=master DB=mysql
+  global:
+    - secure: "PuEpJWVAx2BUVfp/lOEiuC5h3Ry1IckM0C+sKOJRRc/VcsPQYBQKTwiYBiVEbIA/1nMR+13+si57Ycb0p+Tagzyyn5SrNMScFM6jrUkk/5xiMDcH+h2Rc/fLlPapMtUSAeA37KZ+9fBN3sqw6KdT73N3ydfBrqOXFVURJhToNY8="
+    - GIT_COMMITTER_NAME=s-nakajima
+    - GIT_COMMITTER_EMAIL=nakajimashouhei@gmail.com
+    - GIT_AUTHOR_NAME=s-nakajima
+    - GIT_AUTHOR_EMAIL=nakajimashouhei@gmail.com
 
 before_script:
   - export NETCOMMONS_BUILD_DIR=`dirname $TRAVIS_BUILD_DIR`/NetCommons3
