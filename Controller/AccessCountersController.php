@@ -38,6 +38,7 @@ class AccessCountersController extends AccessCountersAppController {
  * @var array
  */
 	public $helpers = array(
+		'Blocks.BlockForm',
 		'Blocks.BlockTabs' => array(
 			'mainTabs' => array('block_index', 'frame_settings'),
 			'blockTabs' => array(
