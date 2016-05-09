@@ -103,21 +103,7 @@ class AccessCounter extends AccessCountersAppModel {
 		$conditions['Block.room_id'] = Current::read('Block.room_id');
 
 		$accessCounter = $this->find('first', array(
-			'recursive' => -1,
-			'fields' => array(
-				$this->alias . '.*',
-				$this->Block->alias . '.*'
-			),
-			'joins' => array(
-				array(
-					'table' => $this->Block->table,
-					'alias' => $this->Block->alias,
-					'type' => 'LEFT',
-					'conditions' => array(
-						'AccessCounter.block_key = Block.key'
-					),
-				)
-			),
+			'recursive' => 0,
 			'conditions' => $conditions,
 		));
 
