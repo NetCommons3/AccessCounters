@@ -10,7 +10,7 @@
  * @param {string} Controller name
  * @param {function($scope)} Controller
  */
-NetCommonsApp.controller('AccessCounterFrameSettings', function($scope) {
+NetCommonsApp.controller('AccessCounterFrameSettings', ['$scope', function($scope) {
 
   /**
    * initialize
@@ -33,4 +33,4 @@ NetCommonsApp.controller('AccessCounterFrameSettings', function($scope) {
     $scope.currentDisplayTypeName = typeName;
   };
 
-});
+}]);
