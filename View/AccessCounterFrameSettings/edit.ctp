@@ -36,7 +36,7 @@ if (isset($this->data['AccessCounterFrameSetting'])) {
 		<?php echo $this->element('Blocks.edit_form', array(
 				'model' => 'AccessCounterFrameSetting',
 				'callback' => 'AccessCounters.AccessCounterFrameSettings/edit_form',
-				'cancelUrl' => NetCommonsUrl::backToPageUrl(),
+				'cancelUrl' => NetCommonsUrl::backToPageUrl(true),
 			)); ?>
 	</div>
 </article>

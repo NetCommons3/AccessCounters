@@ -61,7 +61,7 @@ class AccessCounterFrameSettingsController extends AccessCountersAppController {
 			//登録(PUT)処理
 			$data = $this->data;
 			if ($this->AccessCounterFrameSetting->saveAccessCounterFrameSetting($data)) {
-				$this->redirect(NetCommonsUrl::backToPageUrl());
+				$this->redirect(NetCommonsUrl::backToPageUrl(true));
 				return;
 			}
 			$this->NetCommons->handleValidationError($this->AccessCounterFrameSetting->validationErrors);
