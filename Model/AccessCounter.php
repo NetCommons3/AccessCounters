@@ -20,6 +20,13 @@ App::uses('AccessCountersAppModel', 'AccessCounters.Model');
 class AccessCounter extends AccessCountersAppModel {
 
 /**
+ * 初期値のMax
+ *
+ * @var const
+ */
+	const MAX_VALUE = 9999999;
+
+/**
  * use behaviors
  *
  * @var array
@@ -81,6 +88,15 @@ class AccessCounter extends AccessCountersAppModel {
 				'naturalNumber' => array(
 					'rule' => array('naturalNumber', true),
 					'message' => __d('net_commons', 'Invalid request.'),
+					'allowEmpty' => true,
+				),
+				'range' => array(
+					'rule' => array('range', -1, self::MAX_VALUE + 1),
+					'message' => __d(
+						'net_commons',
+						'The input %s must be a number bigger than %d and less than %d.',
+						array(__d('access_counters', 'Starting Value'), 0, self::MAX_VALUE)
+					),
 					'allowEmpty' => true,
 				),
 			),

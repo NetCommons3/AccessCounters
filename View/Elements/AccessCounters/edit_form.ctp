@@ -29,7 +29,8 @@
 <?php echo $this->NetCommonsForm->input('AccessCounter.count_start', array(
 		'type' => 'number',
 		'label' => __d('access_counters', 'Starting Value'),
-		'readonly' => (bool)$this->data['AccessCounter']['id']
+		'readonly' => (bool)$this->data['AccessCounter']['id'],
+		'max' => AccessCounter::MAX_VALUE
 	)); ?>
 
 <?php echo $this->element('Blocks.public_type');
