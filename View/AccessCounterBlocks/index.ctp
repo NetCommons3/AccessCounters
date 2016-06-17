@@ -33,6 +33,10 @@
 								'AccessCounter.count', __d('access_counters', 'Count number'),
 								array('sort' => true, 'type' => 'numeric')
 							); ?>
+							<?php echo $this->BlockIndex->tableHeader(
+									'Block.public_type', __d('blocks', 'Publishing setting'),
+									array('sort' => true)
+								); ?>
 						<?php echo $this->BlockIndex->tableHeader(
 								'TrackableUpdater.handlename', __d('net_commons', 'Modified user'),
 								array('sort' => true, 'type' => 'handle')
@@ -56,6 +60,9 @@
 							<?php echo $this->BlockIndex->tableData(
 									'AccessCounter.count', $accessCounter['AccessCounter']['count'],
 									array('type' => 'numeric')
+								); ?>
+							<?php echo $this->BlockIndex->tableData(
+									'Block.public_type', $accessCounter
 								); ?>
 							<?php echo $this->BlockIndex->tableData(
 									'TrackableUpdater', $accessCounter,
