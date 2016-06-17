@@ -64,10 +64,7 @@ class AccessCounterBlocksController extends AccessCountersAppController {
 		$this->set('editActionController', 'access_counters');
 
 		$this->Paginator->settings = array(
-			'AccessCounter' => array(
-				'order' => array('Block.id' => 'desc'),
-				'conditions' => $this->AccessCounter->getBlockConditions(),
-			)
+			'AccessCounter' => $this->AccessCounter->getBlockIndexSettings()
 		);
 		$accessCounters = $this->Paginator->paginate('AccessCounter');
 		if (! $accessCounters) {

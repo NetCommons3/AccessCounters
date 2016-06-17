@@ -27,18 +27,22 @@
 							); ?>
 						<?php echo $this->BlockIndex->tableHeader(
 								'Block.name', __d('access_counters', 'Access counter name'),
-								array('sort' => true)
+								array('sort' => true, 'editUrl' => true)
 							); ?>
 						<?php echo $this->BlockIndex->tableHeader(
 								'AccessCounter.count', __d('access_counters', 'Count number'),
 								array('sort' => true, 'type' => 'numeric')
 							); ?>
+							<?php echo $this->BlockIndex->tableHeader(
+									'Block.public_type', __d('blocks', 'Publishing setting'),
+									array('sort' => true)
+								); ?>
 						<?php echo $this->BlockIndex->tableHeader(
-								'TrackableCreator.handlename', __d('net_commons', 'Created user'),
+								'TrackableUpdater.handlename', __d('net_commons', 'Modified user'),
 								array('sort' => true, 'type' => 'handle')
 							); ?>
 						<?php echo $this->BlockIndex->tableHeader(
-								'Block.created', __d('net_commons', 'Created datetime'),
+								'Block.modified', __d('net_commons', 'Modified datetime'),
 								array('sort' => true, 'type' => 'datetime')
 							); ?>
 					</tr>
@@ -58,11 +62,14 @@
 									array('type' => 'numeric')
 								); ?>
 							<?php echo $this->BlockIndex->tableData(
-									'TrackableCreator', $accessCounter,
+									'Block.public_type', $accessCounter
+								); ?>
+							<?php echo $this->BlockIndex->tableData(
+									'TrackableUpdater', $accessCounter,
 									array('type' => 'handle')
 								); ?>
 							<?php echo $this->BlockIndex->tableData(
-									'Block.modified', $accessCounter['Block']['created'],
+									'Block.modified', $accessCounter['Block']['modified'],
 									array('type' => 'datetime')
 								); ?>
 						<?php echo $this->BlockIndex->endTableRow(); ?>
