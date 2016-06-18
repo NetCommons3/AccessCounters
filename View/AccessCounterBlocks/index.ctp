@@ -33,7 +33,7 @@
 								'AccessCounter.count', __d('access_counters', 'Count number'),
 								array('sort' => true, 'type' => 'numeric')
 							); ?>
-							<?php echo $this->BlockIndex->tableHeader(
+						<?php echo $this->BlockIndex->tableHeader(
 									'Block.public_type', __d('blocks', 'Publishing setting'),
 									array('sort' => true)
 								); ?>
