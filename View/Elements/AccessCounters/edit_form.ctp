@@ -22,10 +22,6 @@
 		'required' => true
 	)); ?>
 
-<?php if (! Current::read('Frame.block_id')) : ?>
-	<?php echo $this->element('AccessCounterFrameSettings/edit_form'); ?>
-<?php endif; ?>
-
 <?php echo $this->NetCommonsForm->input('AccessCounter.count_start', array(
 		'type' => 'number',
 		'label' => __d('access_counters', 'Starting Value'),
