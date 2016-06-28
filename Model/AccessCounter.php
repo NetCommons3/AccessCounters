@@ -80,16 +80,11 @@ class AccessCounter extends AccessCountersAppModel {
 			'count' => array(
 				'naturalNumber' => array(
 					'rule' => array('naturalNumber', true),
-					'message' => __d('net_commons', 'Invalid request.'),
+					'message' =>__d('net_commons', 'Invalid request.'),
 					'allowEmpty' => true,
 				),
 			),
 			'count_start' => array(
-				'naturalNumber' => array(
-					'rule' => array('naturalNumber', true),
-					'message' => __d('net_commons', 'Invalid request.'),
-					'allowEmpty' => true,
-				),
 				'range' => array(
 					'rule' => array('range', -1, self::MAX_VALUE + 1),
 					'message' => __d(
