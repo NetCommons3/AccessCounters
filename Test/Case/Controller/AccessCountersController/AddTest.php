@@ -10,6 +10,7 @@
  */
 
 App::uses('NetCommonsControllerTestCase', 'NetCommons.TestSuite');
+App::uses('AccessCounter', 'AccessCounters.Model');
 
 /**
  * AccessCountersController Test Case
