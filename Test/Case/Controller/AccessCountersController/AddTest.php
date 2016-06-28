@@ -281,7 +281,8 @@ class AccessCountersControllerAddTest extends NetCommonsControllerTestCase {
 				'validationError' => array(
 					'field' => 'AccessCounter.count_start',
 					'value' => 'a',
-					'message' => __d('net_commons', 'Invalid request.'),
+					'message' => __d('net_commons', 'The input %s must be a number bigger than %d and less than %d.',
+								array(__d('access_counters', 'Starting Value'), 0, AccessCounter::MAX_VALUE)),
 				)
 			)),
 		);

@@ -12,6 +12,7 @@
  */
 
 App::uses('NetCommonsValidateTest', 'NetCommons.TestSuite');
+App::uses('AccessCounter', 'AccessCounters.Model');
 
 /**
  * AccessCounter::validates()のテスト
@@ -100,7 +101,9 @@ class AccessCounterValidateTest extends NetCommonsValidateTest {
 			array($this->__data, 'count', '-1',
 				__d('net_commons', 'Invalid request.')),
 			array($this->__data, 'count_start', '-1',
-				__d('net_commons', 'Invalid request.')),
+				__d('net_commons', 'The input %s must be a number bigger than %d and less than %d.',
+					array(__d('access_counters', 'Starting Value'), 0, AccessCounter::MAX_VALUE))
+				),
 			array($this->__data, 'block_key', '',
 				__d('net_commons', 'Invalid request.')),
 		);
