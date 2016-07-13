@@ -144,7 +144,6 @@ class AccessCounter extends AccessCountersAppModel {
 
 		//バリデーション
 		if (! $this->validateAccessCounter($data)) {
-			$this->rollback();
 			return false;
 		}
 
