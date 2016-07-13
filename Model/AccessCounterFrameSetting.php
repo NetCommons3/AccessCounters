@@ -165,7 +165,6 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 		//バリデーション
 		$this->set($data);
 		if (! $this->validates()) {
-			$this->rollback();
 			return false;
 		}
 
