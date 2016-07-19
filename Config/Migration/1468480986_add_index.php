@@ -1,4 +1,13 @@
 <?php
+/**
+ * AddIndex Class
+ *
+ */
+
+/**
+ * AddIndex Class
+ *
+ */
 class AddIndex extends CakeMigration {
 
 /**
@@ -6,7 +15,7 @@ class AddIndex extends CakeMigration {
  *
  * @var string
  */
-	public $description = 'AddIndex';
+	public $description = 'add_index';
 
 /**
  * Actions to be performed
