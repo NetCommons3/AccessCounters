@@ -19,7 +19,7 @@
     "authors": [
         {
             "name": "NetCommons Community",
-            "homepage": "https://github.com/NetCommons3/Announcements/graphs/contributors"
+            "homepage": "http://www.netcommons.org"
         }
     ],
     "keywords":    ["cakephp", "access_counters"],
