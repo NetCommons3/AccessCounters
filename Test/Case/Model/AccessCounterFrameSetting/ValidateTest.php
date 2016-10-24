@@ -65,7 +65,7 @@ class AccessCounterFrameSettingValidateTest extends NetCommonsValidateTest {
 			'id' => '1',
 			'key' => 'block_2',
 			'language_id' => '2',
-			'room_id' => '1',
+			'room_id' => '2',
 			'plugin_key' => 'access_counters',
 			'key' => 'block_2',
 			'public_type' => '1',
