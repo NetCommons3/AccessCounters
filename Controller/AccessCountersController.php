@@ -33,6 +33,15 @@ class AccessCountersController extends AccessCountersAppController {
 	);
 
 /**
+ * use models
+ *
+ * @var array
+ */
+	public $uses = array(
+		'Blocks.Block',
+	);
+
+/**
  * use helpers
  *
  * @var array
@@ -93,6 +102,7 @@ class AccessCountersController extends AccessCountersAppController {
 		//レイアウトの設定
 		$this->layout = 'NetCommons.setting';
 		$this->view = 'edit';
+		Current::write('Block', $this->Block->create()['Block']);
 
 		if ($this->request->is('post')) {
 			//登録(POST)処理
