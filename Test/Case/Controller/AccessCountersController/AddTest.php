@@ -66,6 +66,7 @@ class AccessCountersControllerAddTest extends NetCommonsControllerTestCase {
 				'room_id' => '2',
 				'plugin_key' => $this->plugin,
 				'public_type' => '1',
+				'name' => 'Counter name',
 			),
 			'AccessCounter' => array(
 				'id' => $accesscounterId,
