@@ -11,7 +11,9 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
+//@codeCoverageIgnoreStart
 App::uses('AppModel', 'Model');
+//@codeCoverageIgnoreEnd
 
 /**
  * AccessCounter App Model
