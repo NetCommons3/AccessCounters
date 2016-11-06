@@ -92,8 +92,8 @@ class AccessCounterGetAccessCounterTest extends NetCommonsGetTest {
  * @return array
  */
 	public function dataProviderGet() {
-		$existData = array('Block.key' => 'block_1', 'Block.room_id' => '1'); // データあり
-		$notExistData = array('Block.key' => 'block_xxx', 'Block.room_id' => '4'); // データなし
+		$existData = array('Block.key' => 'block_1', 'Block.room_id' => '2'); // データあり
+		$notExistData = array('Block.key' => 'block_xxx', 'Block.room_id' => '5'); // データなし
 
 		return array(
 			array(true, $existData, array( 'id' => '1' )),
