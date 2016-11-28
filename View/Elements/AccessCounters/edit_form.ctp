@@ -16,7 +16,7 @@
 
 <?php echo $this->NetCommonsForm->hidden('AccessCounter.block_key'); ?>
 
-<?php echo $this->NetCommonsForm->input('Block.name', array(
+<?php echo $this->NetCommonsForm->input('BlocksLanguage.name', array(
 		'type' => 'text',
 		'label' => __d('access_counters', 'Access counter name'),
 		'required' => true

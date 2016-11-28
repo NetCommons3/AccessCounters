@@ -62,10 +62,13 @@ class AccessCountersControllerAddTest extends NetCommonsControllerTestCase {
 			'Block' => array(
 				'id' => $blockId,
 				'key' => $blockKey,
-				'language_id' => '2',
 				'room_id' => '2',
 				'plugin_key' => $this->plugin,
 				'public_type' => '1',
+			),
+			'BlocksLanguage' => array(
+				'block_id' => $blockId,
+				'language_id' => '2',
 				'name' => 'Counter name',
 			),
 			'AccessCounter' => array(
