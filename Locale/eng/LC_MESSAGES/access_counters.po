@@ -13,36 +13,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: AccessCounters/Config/Migration/001_plugin_records.ctp
-msgid "Access counters"
-msgstr ""
-
-#: AccessCounters/Controller/AccessCountersController.php:127
+#: AccessCounters/Controller/AccessCountersController.php:130
 msgid "New Counter %s"
 msgstr ""
 
-#: AccessCounters/View/AccessCounterBlocks/index.ctp:37
-#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:50
+#: AccessCounters/Model/AccessCounter.php:93
+#: AccessCounters/Test/Case/Controller/AccessCountersController/AddTest.php:290
+#: AccessCounters/Test/Case/Model/AccessCounter/ValidateTest.php:105
+#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:27
+msgid "Starting Value"
+msgstr ""
+
+#: AccessCounters/Model/AccessCounter.php:187
+#: AccessCounters/Test/Case/Controller/AccessCountersController/EditTest.php:325
+#: AccessCounters/View/AccessCounterBlocks/index.ctp:29
+#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:21
 msgid "Access counter name"
 msgstr ""
 
-#: AccessCounters/View/AccessCounterBlocks/index.ctp:40
+#: AccessCounters/View/AccessCounterBlocks/index.ctp:33
 msgid "Count number"
 msgstr ""
 
-#: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:31
+#: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:23
 msgid "Display type"
 msgstr ""
 
-#: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:81
+#: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:71
 msgid "Display digit"
 msgstr ""
 
-#: AccessCounters/View/Elements/AccessCounters/delete_form.ctp:14;25
+#: AccessCounters/View/Elements/AccessCounters/delete_form.ctp:14;22
 msgid "Access counter"
-msgstr ""
-
-#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:74
-msgid "Starting Value"
 msgstr ""
 
