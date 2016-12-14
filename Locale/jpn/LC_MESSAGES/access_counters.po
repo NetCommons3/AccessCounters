@@ -15,35 +15,37 @@ msgstr ""
 "Language: ja\n"
 "X-Generator: Poedit 1.8.1\n"
 
-#: AccessCounters/Config/Migration/001_plugin_records.ctp
-msgid "Access counters"
-msgstr "アクセスカウンター"
-
-#: AccessCounters/Controller/AccessCountersController.php:127
+#: AccessCounters/Controller/AccessCountersController.php:130
 msgid "New Counter %s"
 msgstr "新しいアクセスカウンター %s"
 
-#: AccessCounters/View/AccessCounterBlocks/index.ctp:37
-#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:50
+#: AccessCounters/Model/AccessCounter.php:93
+#: AccessCounters/Test/Case/Controller/AccessCountersController/AddTest.php:290
+#: AccessCounters/Test/Case/Model/AccessCounter/ValidateTest.php:105
+#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:27
+msgid "Starting Value"
+msgstr "開始値"
+
+#: AccessCounters/Model/AccessCounter.php:187
+#: AccessCounters/Test/Case/Controller/AccessCountersController/EditTest.php:325
+#: AccessCounters/View/AccessCounterBlocks/index.ctp:29
+#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:21
 msgid "Access counter name"
 msgstr "カウンター名"
 
-#: AccessCounters/View/AccessCounterBlocks/index.ctp:40
+#: AccessCounters/View/AccessCounterBlocks/index.ctp:33
 msgid "Count number"
 msgstr "カウント数"
 
-#: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:31
+#: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:23
 msgid "Display type"
 msgstr "表示タイプ"
 
-#: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:81
+#: AccessCounters/View/Elements/AccessCounterFrameSettings/edit_form.ctp:71
 msgid "Display digit"
 msgstr "表示桁数"
 
-#: AccessCounters/View/Elements/AccessCounters/delete_form.ctp:14;25
+#: AccessCounters/View/Elements/AccessCounters/delete_form.ctp:14;22
 msgid "Access counter"
 msgstr "アクセスカウンター"
 
-#: AccessCounters/View/Elements/AccessCounters/edit_form.ctp:74
-msgid "Starting Value"
-msgstr "開始値"
