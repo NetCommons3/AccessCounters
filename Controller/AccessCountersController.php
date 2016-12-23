@@ -39,6 +39,7 @@ class AccessCountersController extends AccessCountersAppController {
  */
 	public $uses = array(
 		'Blocks.Block',
+		'Blocks.BlocksLanguage',
 	);
 
 /**
@@ -103,6 +104,7 @@ class AccessCountersController extends AccessCountersAppController {
 		$this->layout = 'NetCommons.setting';
 		$this->view = 'edit';
 		Current::write('Block', $this->Block->create()['Block']);
+		Current::write('BlocksLanguage', $this->BlocksLanguage->create()['BlocksLanguage']);
 
 		if ($this->request->is('post')) {
 			//登録(POST)処理
@@ -123,7 +125,8 @@ class AccessCountersController extends AccessCountersAppController {
 					'AccessCounter' => array(
 						'id' => null,
 					),
-					'Block' => array(
+					'BlocksLanguage' => array(
+						'language_id' => Current::read('Language.id'),
 						'name' => __d('access_counters', 'New Counter %s', date('YmdHis')),
 					),
 				))
@@ -161,6 +164,7 @@ class AccessCountersController extends AccessCountersAppController {
 		} else {
 			//--Block
 			$this->request->data['Block'] = Current::read('Block');
+			$this->request->data['BlocksLanguage'] = Current::read('BlocksLanguage');
 			if (! $this->request->data['Block']['key']) {
 				$this->throwBadRequest();
 				return false;

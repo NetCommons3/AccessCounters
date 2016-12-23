@@ -177,7 +177,10 @@ class AccessCounter extends AccessCountersAppModel {
  * @return bool True on success, false on error
  */
 	public function validateAccessCounter($data) {
-		$this->Block->validate['name'] = array(
+		$this->loadModels([
+			'BlocksLanguage' => 'Blocks.BlocksLanguage',
+		]);
+		$this->BlocksLanguage->validate['name'] = array(
 			'notBlank' => array(
 				'rule' => array('notBlank'),
 				'message' => sprintf(
@@ -191,6 +194,15 @@ class AccessCounter extends AccessCountersAppModel {
 		if (! $this->validates()) {
 			return false;
 		}
+
+		$this->BlocksLanguage->set($data);
+		if (! $this->BlocksLanguage->validates()) {
+			$this->validationErrors = Hash::merge(
+				$this->validationErrors, $this->BlocksLanguage->validationErrors
+			);
+			return false;
+		}
+		$this->data = Hash::merge($this->data, $this->BlocksLanguage->data);
 
 		$this->AccessCounterFrameSetting->set($data);
 		if (! $this->AccessCounterFrameSetting->validates()) {

@@ -61,10 +61,13 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 			'Block' => array(
 				'id' => $blockId,
 				'key' => $blockKey,
-				'language_id' => '2',
 				'room_id' => '2',
 				'plugin_key' => $this->plugin,
 				'public_type' => '1',
+			),
+			'BlocksLanguage' => array(
+				'block_id' => $blockId,
+				'language_id' => '2',
 				'name' => 'Counter name',
 			),
 			'AccessCounter' => array(
@@ -317,7 +320,7 @@ class AccessCountersControllerEditTest extends NetCommonsControllerTestCase {
 			//バリデーションエラー
 			Hash::merge($result, array(
 				'validationError' => array(
-					'field' => 'Block.name', //AccessCounter変数では、バリデーションエラーでメッセージ出力がない（Block.nameでtest）
+					'field' => 'BlocksLanguage.name', //AccessCounter変数では、バリデーションエラーでメッセージ出力がない（Block.nameでtest）
 					'value' => '',
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('access_counters', 'Access counter name')),
 				)
