@@ -10,6 +10,7 @@
 
 App::uses('NetCommonsMigration', 'NetCommons.Config/Migration');
 App::uses('Space', 'Rooms.Model');
+class_exists('Space');
 
 /**
  * Add plugin migration
