@@ -274,6 +274,8 @@ class AccessCounter extends AccessCountersAppModel {
 
 			//トランザクションCommit
 			$this->commit();
+			$this->setSlaveDataSource();
+			$this->getDataSource();
 
 		} catch (Exception $ex) {
 			//トランザクションRollback
