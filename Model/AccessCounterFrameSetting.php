@@ -92,7 +92,7 @@ class AccessCounterFrameSetting extends AccessCountersAppModel {
 	public function beforeValidate($options = array()) {
 		$displayTypes = array_keys(self::$displayTypes);
 
-		$this->validate = Hash::merge($this->validate, array(
+		$this->validate = array_merge($this->validate, array(
 			'frame_key' => array(
 				'notBlank' => array(
 					'rule' => array('notBlank'),
