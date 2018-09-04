@@ -119,23 +119,17 @@ class AccessCountersController extends AccessCountersAppController {
 		} else {
 			//初期データセット
 			//--AccessCounter
-			$this->request->data = Hash::merge(
-				$this->request->data,
-				$this->AccessCounter->createAll(array(
-					'AccessCounter' => array(
-						'id' => null,
-					),
-					'BlocksLanguage' => array(
-						'language_id' => Current::read('Language.id'),
-						'name' => __d('access_counters', 'New Counter %s', date('YmdHis')),
-					),
-				))
-			);
+			$this->request->data += $this->AccessCounter->createAll([
+				'AccessCounter' => [
+					'id' => null,
+				],
+				'BlocksLanguage' => [
+					'language_id' => Current::read('Language.id'),
+					'name' => __d('access_counters', 'New Counter %s', date('YmdHis')),
+				],
+			]);
 			//--AccessCounterFrameSetting
-			$this->request->data = Hash::merge(
-				$this->request->data,
-				$this->AccessCounterFrameSetting->getAccessCounterFrameSetting(true)
-			);
+			$this->request->data += $this->AccessCounterFrameSetting->getAccessCounterFrameSetting(true);
 			//--Frame
 			$this->request->data['Frame'] = Current::read('Frame');
 		}
@@ -163,9 +157,7 @@ class AccessCountersController extends AccessCountersAppController {
 
 		} else {
 			//--Block
-			$this->request->data['Block'] = Current::read('Block');
-			$this->request->data['BlocksLanguage'] = Current::read('BlocksLanguage');
-			if (! $this->request->data['Block']['key']) {
+			if (! Current::read('Block.key')) {
 				$this->throwBadRequest();
 				return false;
 			}
@@ -174,13 +166,11 @@ class AccessCountersController extends AccessCountersAppController {
 				$this->throwBadRequest();
 				return false;
 			}
-			$this->request->data = Hash::merge($this->request->data, $accessCounter);
+			$this->request->data += $accessCounter;
 			//--AccessCounterFrameSetting
-			$this->request->data = Hash::merge(
-				$this->request->data,
-				$this->AccessCounterFrameSetting->getAccessCounterFrameSetting(true)
-			);
+			$this->request->data += $this->AccessCounterFrameSetting->getAccessCounterFrameSetting(true);
 			//--Frame
+			$this->request->data['BlocksLanguage'] = Current::read('BlocksLanguage');
 			$this->request->data['Frame'] = Current::read('Frame');
 		}
 	}

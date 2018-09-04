@@ -68,7 +68,7 @@ class AccessCounter extends AccessCountersAppModel {
  * @see Model::save()
  */
 	public function beforeValidate($options = array()) {
-		$this->validate = Hash::merge($this->validate, array(
+		$this->validate = array_merge($this->validate, array(
 			'block_key' => array(
 				'notBlank' => array(
 					'rule' => array('notBlank'),
@@ -197,16 +197,16 @@ class AccessCounter extends AccessCountersAppModel {
 
 		$this->BlocksLanguage->set($data);
 		if (! $this->BlocksLanguage->validates()) {
-			$this->validationErrors = Hash::merge(
+			$this->validationErrors = array_merge(
 				$this->validationErrors, $this->BlocksLanguage->validationErrors
 			);
 			return false;
 		}
-		$this->data = Hash::merge($this->data, $this->BlocksLanguage->data);
+		$this->data = $this->data + $this->BlocksLanguage->data;
 
 		$this->AccessCounterFrameSetting->set($data);
 		if (! $this->AccessCounterFrameSetting->validates()) {
-			$this->validationErrors = Hash::merge(
+			$this->validationErrors = array_merge(
 				$this->validationErrors, $this->AccessCounterFrameSetting->validationErrors
 			);
 			return false;
