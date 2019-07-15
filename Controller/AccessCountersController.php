@@ -101,7 +101,7 @@ class AccessCountersController extends AccessCountersAppController {
  */
 	private function __isUptimeRobot() {
 		$userAgent = env('HTTP_USER_AGENT');
-		return (bool)strpos($userAgent, 'UptimeRobot/2.0');
+		return (bool)strpos((string)$userAgent, 'UptimeRobot/2.0');
 	}
 
 /**
