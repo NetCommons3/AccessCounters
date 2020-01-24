@@ -4,6 +4,7 @@
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @author Kazunori Sakamoto <exkazuu@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
  * @copyright Copyright 2014, NetCommons Project
@@ -15,6 +16,7 @@ App::uses('AccessCountersAppModel', 'AccessCounters.Model');
  * AccessCounter Model
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @author Kazunori Sakamoto <exkazuu@gmail.com>
  * @package NetCommons\AccessCounters\Model
  */
 class AccessCounter extends AccessCountersAppModel {
@@ -257,6 +259,8 @@ class AccessCounter extends AccessCountersAppModel {
  * @throws InternalErrorException
  */
 	public function updateCountUp($data) {
+		$this->invalidateCDN = false;
+
 		$this->loadModels([
 			'AccessCounter' => 'AccessCounters.AccessCounter',
 		]);
@@ -282,6 +286,7 @@ class AccessCounter extends AccessCountersAppModel {
 			$this->rollback($ex);
 		}
 
+		$this->invalidateCDN = true;
 		return true;
 	}
 

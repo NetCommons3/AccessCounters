@@ -4,6 +4,7 @@
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @author Kazunori Sakamoto <exkazuu@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
  * @copyright Copyright 2014, NetCommons Project
@@ -15,6 +16,7 @@ App::uses('AccessCountersAppController', 'AccessCounters.Controller');
  * AccessCounters Controller
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @author Kazunori Sakamoto <exkazuu@gmail.com>
  * @package NetCommons\AccessCounters\Controller
  */
 class AccessCountersController extends AccessCountersAppController {
@@ -65,33 +67,47 @@ class AccessCountersController extends AccessCountersAppController {
  */
 	public function view() {
 		if (! Current::read('Block.id')) {
-			$this->autoRender = false;
-			return;
-		}
-		$isAccessed = 'block_key_' . Current::read('Block.key');
+			if (! $this->request->is('ajax')) {
+				$this->autoRender = false;
+				return;
+			}
 
-		//AccessCounterFrameSettingデータ取得
-		$counterFrameSetting = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting(true);
-		$this->set('accessCounterFrameSetting', $counterFrameSetting['AccessCounterFrameSetting']);
+			// AccessCounterデータ取得
+			$accessCounter = $this->AccessCounter->getAccessCounter(false);
+		} else {
+			// AccessCounterデータ取得
+			$accessCounter = $this->AccessCounter->getAccessCounter(true);
 
-		//AccessCounterデータ取得
-		$accessCounter = $this->AccessCounter->getAccessCounter(true);
+			// カウントアップ処理
+			$isAccessed = 'block_key_' . Current::read('Block.key');
+			if (! $this->Session->read($isAccessed) && ! $this->__isUptimeRobot()) {
+				try {
+					$this->AccessCounter->updateCountUp($accessCounter);
+					$accessCounter['AccessCounter']['count']++;
+					// アクセス情報を記録
+					$this->Session->write($isAccessed, CakeSession::read('Config.userAgent'));
 
-		// カウントアップ処理
-		if (! $this->Session->read($isAccessed) && ! $this->__isUptimeRobot()) {
-			try {
-				$this->AccessCounter->updateCountUp($accessCounter);
-				$accessCounter['AccessCounter']['count']++;
-				// アクセス情報を記録
-				$this->Session->write($isAccessed, CakeSession::read('Config.userAgent'));
-
-			} catch (Exception $ex) {
-				CakeLog::error($ex);
-				throw $ex;
+				} catch (Exception $ex) {
+					CakeLog::error($ex);
+					throw $ex;
+				}
 			}
 		}
 
-		$this->set('accessCounter', $accessCounter['AccessCounter']);
+		if ($this->request->is('ajax')) {
+			$this->response->header('Pragma', 'no-cache');
+			$this->set('_serialize', ['counterText']);
+		}
+
+		// AccessCounterFrameSettingデータ取得
+		$counterFrameSetting = $this->AccessCounterFrameSetting->getAccessCounterFrameSetting(true);
+		$this->set('accessCounterFrameSetting', $counterFrameSetting['AccessCounterFrameSetting']);
+
+		$type = $counterFrameSetting['AccessCounterFrameSetting']['display_type'];
+		$this->set('displayType', AccessCounterFrameSetting::$displayTypes[$type]);
+
+		$format = '%0' . (int)$counterFrameSetting['AccessCounterFrameSetting']['display_digit'] . 'd';
+		$this->set('counterText', sprintf($format, $accessCounter['AccessCounter']['count']));
 	}
 
 /**
