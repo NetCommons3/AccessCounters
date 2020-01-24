@@ -13,7 +13,7 @@
 echo $this->NetCommonsHtml->script('/access_counters/js/access_counters.js');
 ?>
 
-<div ng-controller="AccessCounters" ng-init="initialize(<?php echo h(Current::read('Frame.id')) . ', ' . h($counterText); ?>)">
+<div ng-controller="AccessCounters" ng-init="initialize(<?php echo h(Current::read('Frame.id')) . ', ' . h(json_encode($counterText)); ?>)">
 	<span class="label label-<?php echo $displayType; ?>" ng-repeat="counterChar in counterText track by $index">
 		{{counterChar}}
 	</span>
