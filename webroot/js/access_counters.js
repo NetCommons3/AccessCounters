@@ -9,9 +9,9 @@
  * AccessCounters Controller Javascript
  *
  * @param {string} Controller name
- * @param {function($scope, NC3_URL)} Controller
+ * @param {function($scope, $http, NC3_URL)} Controller
  */
-NetCommonsApp.controller('AccessCounters', ['$scope', 'NC3_URL', function($scope, NC3_URL) {
+NetCommonsApp.controller('AccessCounters', ['$scope', '$http', 'NC3_URL', function($scope, $http, NC3_URL) {
 
   /**
    * initialize
@@ -20,15 +20,13 @@ NetCommonsApp.controller('AccessCounters', ['$scope', 'NC3_URL', function($scope
    */
   $scope.initialize = function(frameId, counterText) {
     $scope.counterText = counterText;
-    $.ajax({
-      url: NC3_URL + '/access_counters/access_counters/view.json?frame_id=' + frameId,
-      cache: false,
-      success: function (data) {
-        $scope.$apply(function() {
-          $scope.counterText = data.counterText;
+    $http.get(NC3_URL + '/access_counters/access_counters/view.json?frame_id=' + frameId)
+      .then(
+        function(response) {
+          $scope.counterText = response.data.counterText;
+        },
+        function() {
         });
-      }
-    });
   };
 }]);
 
