@@ -80,7 +80,7 @@ class AccessCountersController extends AccessCountersAppController {
 
 			// カウントアップ処理
 			$isAccessed = 'block_key_' . Current::read('Block.key');
-			if (! $this->Session->read($isAccessed)) {
+			if (! $this->Session->read($isAccessed) && ! $this->__isUptimeRobot()) {
 				try {
 					$this->AccessCounter->updateCountUp($accessCounter);
 					$accessCounter['AccessCounter']['count']++;
@@ -108,6 +108,16 @@ class AccessCountersController extends AccessCountersAppController {
 
 		$format = '%0' . (int)$counterFrameSetting['AccessCounterFrameSetting']['display_digit'] . 'd';
 		$this->set('counterText', sprintf($format, $accessCounter['AccessCounter']['count']));
+	}
+
+/**
+ * UptimeRobotのアクセスか否か
+ *
+ * @return bool
+ */
+	private function __isUptimeRobot() {
+		$userAgent = env('HTTP_USER_AGENT');
+		return (bool)strpos((string)$userAgent, 'UptimeRobot/2.0');
 	}
 
 /**

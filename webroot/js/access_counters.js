@@ -11,7 +11,7 @@
  * @param {string} Controller name
  * @param {function($scope, $http, NC3_URL)} Controller
  */
-NetCommonsApp.controller('AccessCounters', ['$scope', '$http', 'NC3_URL', function($scope, $http, NC3_URL) {
+NetCommonsApp.controller('AccessCounters', ['$scope', 'NC3_URL', function($scope, NC3_URL) {
 
   /**
    * initialize
