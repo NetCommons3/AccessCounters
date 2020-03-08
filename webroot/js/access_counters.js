@@ -22,12 +22,12 @@ NetCommonsApp.controller('AccessCounters',
       $scope.initialize = function(frameId, counterText) {
         $scope.counterText = counterText;
         $http.get(NC3_URL + '/access_counters/access_counters/view.json?frame_id=' + frameId)
-          .then(
-            function(response) {
-              $scope.counterText = response.data.counterText;
-            },
-            function() {
-            });
+            .then(
+              function(response) {
+                $scope.counterText = response.data.counterText;
+              },
+              function() {
+              });
       };
     }]);
 
