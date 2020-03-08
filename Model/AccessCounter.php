@@ -259,8 +259,6 @@ class AccessCounter extends AccessCountersAppModel {
  * @throws InternalErrorException
  */
 	public function updateCountUp($data) {
-		$this->invalidateCDN = false;
-
 		$this->loadModels([
 			'AccessCounter' => 'AccessCounters.AccessCounter',
 		]);
@@ -277,7 +275,9 @@ class AccessCounter extends AccessCountersAppModel {
 			};
 
 			//トランザクションCommit
+			$this->invalidateCDN = false;
 			$this->commit();
+			$this->invalidateCDN = true;
 			$this->setSlaveDataSource();
 			$this->getDataSource();
 
@@ -286,7 +286,6 @@ class AccessCounter extends AccessCountersAppModel {
 			$this->rollback($ex);
 		}
 
-		$this->invalidateCDN = true;
 		return true;
 	}
 

@@ -95,7 +95,6 @@ class AccessCountersController extends AccessCountersAppController {
 		}
 
 		if ($this->request->is('ajax')) {
-			$this->response->header('Pragma', 'no-cache');
 			$this->set('_serialize', ['counterText']);
 		}
 
