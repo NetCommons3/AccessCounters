@@ -1,0 +1,93 @@
+on: [ push, pull_request ]
+
+name: test
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        php: [ '7.2' ]
+
+    env:
+        NC3_BUILD_DIR: "/opt/nc3"
+        NC3_GIT_URL: "git://github.com/NetCommons3/NetCommons3"
+        NC3_GIT_BRANCH: "master"
+        PLUGIN_BUILD_DIR: ${GITHUB_WORKSPACE}
+        PHP_VERSION: ${{ matrix.php }}
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: cakephp_test
+
+    steps:
+      - name: docker-compose install
+        shell: bash
+        run: |
+          curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
+          docker-compose --version
+
+      - name: wget docker-compose.yml
+        uses: wei/wget@v1
+        with:
+          args: https://gist.githubusercontent.com/s-nakajima/b1b961174b136afe55500c0e8cfbf741/raw/4217fe6a5287824fa42fa024c28f33221e8c3fc1/docker-compose.yml
+
+      - name: environment variable
+        shell: bash
+        run: |
+          echo ${GITHUB_WORKSPACE}
+          echo ${PLUGIN_BUILD_DIR}
+          echo ${PHP_VERSION}
+
+      - name: nc3app docker up
+        shell: bash
+        run: |
+          export PLUGIN_BUILD_DIR=${PLUGIN_BUILD_DIR}
+          docker-compose rm -f
+          docker-compose up -d
+          docker-compose run nc3app bash /opt/scripts/start-on-docker.sh
+          docker-compose exec nc3app ls -l /opt/
+
+#      - name: nc3app docker started
+#        shell: bash
+#        run: |
+#          docker-compose exec nc3app bash /opt/scripts/start-on-docker.sh
+
+#      - name: nc3app app build
+#        shell: bash
+#        run: |
+#          docker-compose exec nc3app bash /opt/scripts/app-build.sh
+#
+#      - name: phpcs
+#        shell: bash
+#        run: |
+#          docker-compose exec nc3app bash /opt/scripts/phpcs.sh
+#
+#      - name: phpmd
+#        shell: bash
+#        run: |
+#          docker-compose exec nc3app bash /opt/scripts/phpmd.sh
+#
+#      - name: phpcpd
+#        shell: bash
+#        run: |
+#          docker-compose exec nc3app bash /opt/scripts/phpcpd.sh
+#
+#      - name: gjslint
+#        shell: bash
+#        run: |
+#          docker-compose exec nc3app bash /opt/scripts/gjslint.sh
+#
+#      - name: phpdoc
+#        shell: bash
+#        run: |
+#          docker-compose exec nc3app bash /opt/scripts/phpdoc.sh
+#
+#      - name: phpunit
+#        shell: bash
+#        run: |
+#          docker-compose exec nc3app bash /opt/scripts/phpunit.sh
+#
+#      - name: nc3app docker rm
+#        run: |
+#          docker-compose rm -f
