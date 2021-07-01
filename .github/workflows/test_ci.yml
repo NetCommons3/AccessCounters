@@ -18,6 +18,7 @@ jobs:
         PHP_VERSION: ${{ matrix.php }}
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: cakephp_test
+        COMPOSE_INTERACTIVE_NO_CLI: 1
 
     steps:
       - name: docker-compose install
@@ -31,7 +32,7 @@ jobs:
       - name: wget docker-compose.yml
         uses: wei/wget@v1
         with:
-          args: https://gist.githubusercontent.com/s-nakajima/b1b961174b136afe55500c0e8cfbf741/raw/774d4ec246640bdda463d5eeeb6797f66bcbdeb6/docker-compose.yml
+          args: https://gist.githubusercontent.com/s-nakajima/b1b961174b136afe55500c0e8cfbf741/raw/d4d739a5ef3106ae8e512e34d797955f39480912/docker-compose.yml
 
       - name: environment variable
         shell: bash
@@ -46,6 +47,7 @@ jobs:
 
       - run: |
           docker-compose start
+          docker ps
           docker-compose ps
 
       - run: docker-compose exec nc3app bash /opt/scripts/start-on-docker.sh
