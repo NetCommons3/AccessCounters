@@ -44,7 +44,9 @@ jobs:
 
       - run: docker-compose up -d
 
-      - run: docker-compose start
+      - run: |
+          docker-compose start
+          docker ps
 
       - run: docker-compose exec nc3app bash /opt/scripts/start-on-docker.sh
 
