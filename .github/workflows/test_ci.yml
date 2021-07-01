@@ -31,7 +31,7 @@ jobs:
       - name: wget docker-compose.yml
         uses: wei/wget@v1
         with:
-          args: https://gist.githubusercontent.com/s-nakajima/b1b961174b136afe55500c0e8cfbf741/raw/4217fe6a5287824fa42fa024c28f33221e8c3fc1/docker-compose.yml
+          args: https://gist.githubusercontent.com/s-nakajima/b1b961174b136afe55500c0e8cfbf741/raw/fc65bf3a1d77c2b6fe8230fe6aa910dab2260dab/docker-compose.yml
 
       - name: environment variable
         shell: bash
@@ -43,7 +43,7 @@ jobs:
       - name: nc3app docker up
         shell: bash
         run: |
-          export PLUGIN_BUILD_DIR=${PLUGIN_BUILD_DIR}
+          #export PLUGIN_BUILD_DIR=${PLUGIN_BUILD_DIR}
           docker-compose rm -f
           docker-compose up -d
           docker-compose run nc3app bash /opt/scripts/start-on-docker.sh
