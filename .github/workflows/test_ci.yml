@@ -50,11 +50,11 @@ jobs:
           docker ps
           docker-compose ps
 
-      - run: docker-compose exec nc3app bash /opt/scripts/start-on-docker.sh
+      - run: docker-compose exec -T nc3app bash /opt/scripts/start-on-docker.sh
 
-      - run: docker-compose exec nc3app touch /opt/test
+      - run: docker-compose exec -T nc3app touch /opt/test
 
-      - run: docker-compose exec nc3app ls -l /opt/
+      - run: docker-compose exec -T nc3app ls -l /opt/
 
 #      - name: nc3app docker started
 #        shell: bash
