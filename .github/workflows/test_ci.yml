@@ -14,7 +14,7 @@ jobs:
         NC3_BUILD_DIR: "/opt/nc3"
         NC3_GIT_URL: "git://github.com/NetCommons3/NetCommons3"
         NC3_GIT_BRANCH: "master"
-        PLUGIN_BUILD_DIR: ${GITHUB_WORKSPACE}
+        PLUGIN_BUILD_DIR: ${{ github.workspace }}
         PHP_VERSION: ${{ matrix.php }}
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: cakephp_test
@@ -31,7 +31,7 @@ jobs:
       - name: wget docker-compose.yml
         uses: wei/wget@v1
         with:
-          args: https://gist.githubusercontent.com/s-nakajima/b1b961174b136afe55500c0e8cfbf741/raw/2ad04096ad533d6b0064b9abe7129a0c06d33d86/docker-compose.yml
+          args: https://gist.githubusercontent.com/s-nakajima/b1b961174b136afe55500c0e8cfbf741/raw/39cd3c72c06e3cdec03c1870f238829808936d65/docker-compose.yml
 
       - name: environment variable
         shell: bash
@@ -46,7 +46,7 @@ jobs:
 
       - run: docker-compose run nc3app bash /opt/scripts/start-on-docker.sh
 
-      - run: docker-compose run nc3app ls -l /opt/
+      - run: docker-compose exec nc3app ls -l /opt/
 
 #      - name: nc3app docker started
 #        shell: bash
