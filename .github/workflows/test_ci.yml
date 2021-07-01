@@ -40,14 +40,13 @@ jobs:
           echo ${PLUGIN_BUILD_DIR}
           echo ${PHP_VERSION}
 
-      - name: nc3app docker up
-        shell: bash
-        run: |
-          export PLUGIN_BUILD_DIR=${PLUGIN_BUILD_DIR}
-          docker-compose rm -f
-          docker-compose up -d
-          docker-compose run nc3app bash /opt/scripts/start-on-docker.sh
-          docker-compose exec nc3app ls -l /opt/
+      - run: docker-compose rm -a -f
+
+      - run: docker-compose up -d
+
+      - run: docker-compose run nc3app bash /opt/scripts/start-on-docker.sh
+
+      - run: docker-compose exec nc3app ls -l /opt/
 
 #      - name: nc3app docker started
 #        shell: bash
@@ -89,6 +88,4 @@ jobs:
 #        run: |
 #          docker-compose exec nc3app bash /opt/scripts/phpunit.sh
 #
-#      - name: nc3app docker rm
-#        run: |
-#          docker-compose rm -f
+      - run: docker-compose rm -a -f
