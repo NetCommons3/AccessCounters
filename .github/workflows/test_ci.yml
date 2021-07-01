@@ -31,7 +31,7 @@ jobs:
       - name: wget docker-compose.yml
         uses: wei/wget@v1
         with:
-          args: https://gist.githubusercontent.com/s-nakajima/b1b961174b136afe55500c0e8cfbf741/raw/39cd3c72c06e3cdec03c1870f238829808936d65/docker-compose.yml
+          args: https://gist.githubusercontent.com/s-nakajima/b1b961174b136afe55500c0e8cfbf741/raw/774d4ec246640bdda463d5eeeb6797f66bcbdeb6/docker-compose.yml
 
       - name: environment variable
         shell: bash
@@ -44,7 +44,11 @@ jobs:
 
       - run: docker-compose up -d
 
-      - run: docker-compose run nc3app bash /opt/scripts/start-on-docker.sh
+      - run: docker-compose start
+
+      - run: docker-compose exec nc3app bash /opt/scripts/start-on-docker.sh
+
+      - run: docker-compose exec nc3app touch /opt/test
 
       - run: docker-compose exec nc3app ls -l /opt/
 
