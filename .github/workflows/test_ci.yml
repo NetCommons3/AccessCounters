@@ -43,7 +43,7 @@ jobs:
       - name: nc3app docker up
         shell: bash
         run: |
-          #export PLUGIN_BUILD_DIR=${PLUGIN_BUILD_DIR}
+          export PLUGIN_BUILD_DIR=${PLUGIN_BUILD_DIR}
           docker-compose rm -f
           docker-compose up -d
           docker-compose run nc3app bash /opt/scripts/start-on-docker.sh
