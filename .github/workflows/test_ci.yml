@@ -50,50 +50,42 @@ jobs:
           docker ps
           docker-compose ps
 
-      - run: docker-compose exec -T nc3app touch /opt/test
+      - run: docker-compose exec -T nc3app touch /opt/dummy
 
       - run: docker-compose exec -T nc3app ls -l /opt/
 
       - run: docker-compose exec -T nc3app bash /opt/scripts/start-on-docker.sh
 
-#      - name: nc3app docker started
-#        shell: bash
-#        run: |
-#          docker-compose exec nc3app bash /opt/scripts/start-on-docker.sh
+      - run: docker-compose exec -T nc3app bash /opt/scripts/app-build.sh
 
-#      - name: nc3app app build
+#      - name: phpcs (PHP CodeSniffer)
 #        shell: bash
 #        run: |
-#          docker-compose exec nc3app bash /opt/scripts/app-build.sh
+#          docker-compose exec -T nc3app bash /opt/scripts/phpcs.sh
 #
-#      - name: phpcs
+#      - name: phpmd (PHP Mess Detector)
 #        shell: bash
 #        run: |
-#          docker-compose exec nc3app bash /opt/scripts/phpcs.sh
+#          docker-compose exec -T nc3app bash /opt/scripts/phpmd.sh
 #
-#      - name: phpmd
+#      - name: phpcpd (PHP Copy/Paste Detector)
 #        shell: bash
 #        run: |
-#          docker-compose exec nc3app bash /opt/scripts/phpmd.sh
+#          docker-compose exec -T nc3app bash /opt/scripts/phpcpd.sh
 #
-#      - name: phpcpd
+#      - name: gjslint (JavaScript Style Check)
 #        shell: bash
 #        run: |
-#          docker-compose exec nc3app bash /opt/scripts/phpcpd.sh
+#          docker-compose exec -T nc3app bash /opt/scripts/gjslint.sh
 #
-#      - name: gjslint
+#      - name: phpdoc (PHP Documentor)
 #        shell: bash
 #        run: |
-#          docker-compose exec nc3app bash /opt/scripts/gjslint.sh
+#          docker-compose exec -T nc3app bash /opt/scripts/phpdoc.sh
 #
-#      - name: phpdoc
+#      - name: phpunit (PHP UnitTest)
 #        shell: bash
 #        run: |
-#          docker-compose exec nc3app bash /opt/scripts/phpdoc.sh
-#
-#      - name: phpunit
-#        shell: bash
-#        run: |
-#          docker-compose exec nc3app bash /opt/scripts/phpunit.sh
-#
+#          docker-compose exec -T nc3app bash /opt/scripts/phpunit.sh
+
       - run: docker-compose rm -a -f
