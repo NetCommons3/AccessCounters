@@ -32,7 +32,7 @@ jobs:
       - name: wget docker-compose.yml
         uses: wei/wget@v1
         with:
-          args: https://gist.githubusercontent.com/s-nakajima/b1b961174b136afe55500c0e8cfbf741/raw/1fc18133201f19956b3613009f2c5bc5a9d657a7/docker-compose.yml
+          args: https://gist.githubusercontent.com/s-nakajima/b1b961174b136afe55500c0e8cfbf741/raw/76542726f13a9d3f3dfcd62e4333b5d42e3ac03f/docker-compose.yml
 
       - name: environment variable
         shell: bash
