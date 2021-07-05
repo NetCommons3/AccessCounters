@@ -42,20 +42,16 @@ jobs:
           echo ${PHP_VERSION}
 
       - run: docker-compose rm -a -f
-
       - run: docker-compose up -d
-
-      - run: |
-          docker-compose start
-          docker ps
-          docker-compose ps
+      - run: docker-compose start
+      - run: docker ps
+      - run: docker-compose ps
 
       - run: docker-compose exec -T nc3app touch /opt/dummy
-
       - run: docker-compose exec -T nc3app ls -l /opt/
+      - run: docker-compose exec -T nc3app ls -l /opt/plugin
 
       - run: docker-compose exec -T nc3app bash /opt/scripts/start-on-docker.sh
-
       - run: docker-compose exec -T nc3app bash /opt/scripts/app-build.sh
 
 #      - name: phpcs (PHP CodeSniffer)
