@@ -49,7 +49,7 @@ jobs:
 
       - run: docker ps
 
-      - name: docker starting check
+      - name: check libraries
         run: docker-compose exec -T nc3app bash /opt/scripts/start-on-docker.sh
 
       - name: nc3 build
