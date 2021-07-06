@@ -21,6 +21,8 @@ jobs:
         COMPOSE_INTERACTIVE_NO_CLI: 1
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: environment variable
         shell: bash
         run: |
