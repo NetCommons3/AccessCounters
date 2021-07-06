@@ -21,6 +21,14 @@ jobs:
         COMPOSE_INTERACTIVE_NO_CLI: 1
 
     steps:
+      - name: environment variable
+        shell: bash
+        run: |
+          echo ${GITHUB_WORKSPACE}
+          echo ${PLUGIN_BUILD_DIR}
+          echo ${PHP_VERSION}
+          ls -l ${PLUGIN_BUILD_DIR}
+
       - name: docker-compose install
         shell: bash
         run: |
@@ -34,12 +42,7 @@ jobs:
         with:
           args: https://gist.githubusercontent.com/s-nakajima/b1b961174b136afe55500c0e8cfbf741/raw/76542726f13a9d3f3dfcd62e4333b5d42e3ac03f/docker-compose.yml
 
-      - name: environment variable
-        shell: bash
-        run: |
-          echo ${GITHUB_WORKSPACE}
-          echo ${PLUGIN_BUILD_DIR}
-          echo ${PHP_VERSION}
+      - run: ls -l ${PLUGIN_BUILD_DIR}
 
       - run: docker-compose rm -a -f
       - run: docker-compose up -d
