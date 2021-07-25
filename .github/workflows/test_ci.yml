@@ -30,6 +30,7 @@ jobs:
           echo ${PHP_VERSION}
           ls -al ${PLUGIN_BUILD_DIR}
           mkdir -p /opt/coveralls
+          ls -l /opt/
 
       - name: docker-compose install
         run: |
