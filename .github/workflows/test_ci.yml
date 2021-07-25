@@ -72,6 +72,8 @@ jobs:
         run: docker-compose exec -T nc3app bash /opt/scripts/phpdoc.sh
 
       - name: phpunit (PHP UnitTest)
-        run: docker-compose exec -T nc3app bash /opt/scripts/phpunit.sh
+        run: |
+          docker-compose exec -T nc3app bash /opt/scripts/phpunit.sh
+          ls -l /opt/coveralls
 
       - run: docker-compose rm -f
