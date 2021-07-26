@@ -19,7 +19,7 @@ jobs:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: cakephp_test
         COMPOSE_INTERACTIVE_NO_CLI: 1
-        COVERALLS_REPO_TOKEN: ${{ secrets.GH_TOKEN }}
+#        COVERALLS_REPO_TOKEN: ${{ secrets.GH_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
@@ -76,10 +76,12 @@ jobs:
       - name: phpunit (PHP UnitTest)
         run: |
           docker-compose exec -T nc3app bash /opt/scripts/phpunit.sh
+          docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
           ls -l /opt/coveralls
 
-      - name: push coveralls
-        run: |
-          docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
+#      - name: push coveralls
+#        run: |
+#          docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
+#          ls -l /opt/coveralls
 
       - run: docker-compose rm -f
