@@ -79,11 +79,6 @@ jobs:
           docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
           ls -l /opt/coveralls
 
-#      - name: push coveralls
-#        run: |
-#          docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
-#          ls -l /opt/coveralls
-
        - name: Upload coverage results to Coveralls
          run: |
            composer global require php-coveralls/php-coveralls
