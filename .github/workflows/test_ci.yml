@@ -79,9 +79,9 @@ jobs:
           docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
           ls -l /opt/coveralls
 
-       - name: Upload coverage results to Coveralls
-         run: |
-           composer global require php-coveralls/php-coveralls
-           php-coveralls --coverage_clover=/opt/coveralls/clover.xml -v
+      - name: Upload coverage results to Coveralls
+        run: |
+          composer global require php-coveralls/php-coveralls
+          php-coveralls --coverage_clover=/opt/coveralls/clover.xml -v
 
       - run: docker-compose rm -f
