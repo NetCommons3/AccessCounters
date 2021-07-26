@@ -19,15 +19,17 @@ jobs:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: cakephp_test
         COMPOSE_INTERACTIVE_NO_CLI: 1
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
 
       - name: environment
         run: |
-          echo ${GITHUB_WORKSPACE}
-          echo ${PLUGIN_BUILD_DIR}
-          echo ${PHP_VERSION}
+          echo "GITHUB_WORKSPACE=${GITHUB_WORKSPACE}"
+          echo "PLUGIN_BUILD_DIR=${PLUGIN_BUILD_DIR}"
+          echo "PHP_VERSION=${PHP_VERSION}"
+          echo "GH_TOKEN=${GH_TOKEN}"
           ls -al ${PLUGIN_BUILD_DIR}
           mkdir -p /opt/coveralls
 
