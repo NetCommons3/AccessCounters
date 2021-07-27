@@ -45,6 +45,9 @@ jobs:
         with:
           args: https://raw.githubusercontent.com/NetCommons3/nc3app-docker/main/docker-compose.yml
 
+      - name: git clone nc3
+        run: git clone -b ${NC3_GIT_BRANCH} ${NC3_GIT_URL} ${NC3_BUILD_DIR}
+
       - name: docker-compose start
         run: |
           docker-compose up -d
