@@ -82,7 +82,7 @@ jobs:
         run: |
           docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
           ls -l /opt/coveralls
-          composer global require php-coveralls/php-coveralls:~1.0@stable
+          composer global require php-coveralls/php-coveralls:~1.1@stable
           ~/.composer/vendor/bin/coveralls \
                --coverage_clover=/opt/coveralls/clover.xml \
                --json_path=/opt/coveralls/coveralls-upload.json -vvv
