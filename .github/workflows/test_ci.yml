@@ -79,9 +79,11 @@ jobs:
           docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
           ls -l /opt/coveralls
 
-      - name: Upload coverage results to Coveralls
-        run: |
-          composer global require php-coveralls/php-coveralls
-          php-coveralls --coverage_clover=/opt/coveralls/clover.xml -v
+      - name: push coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          flag-name: ${{ matrix.php }}
+          path-to-lcov: /opt/coveralls/coverage.cov
 
       - run: docker-compose rm -f
