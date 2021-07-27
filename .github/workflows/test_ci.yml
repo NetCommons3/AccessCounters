@@ -87,7 +87,7 @@ jobs:
           docker-compose exec -T nc3app cp -pf ${NC3_BUILD_DIR}/.coveralls.yml /opt/coveralls/
           ls -la /opt/coveralls
           composer global require php-coveralls/php-coveralls:~1.0@stable
-          sudo -s ~/.composer/vendor/bin/coveralls --root_dir /opt/coveralls -vvv
+          sudo -s cd /opt/coveralls && sudo -s ~/.composer/vendor/bin/coveralls --root_dir . -vvv
 
       #- name: push coveralls
       #  uses: coverallsapp/github-action@master
