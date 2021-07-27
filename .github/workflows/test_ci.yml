@@ -78,14 +78,11 @@ jobs:
           docker-compose exec -T nc3app bash /opt/scripts/phpunit.sh
           #docker-compose exec -T nc3app ls -al ${NC3_BUILD_DIR}/build/logs/
 
-      - run: |
-          #docker-compose exec -T nc3app cp -pf ${NC3_BUILD_DIR}/build/logs/* /opt/coveralls/
-          docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
-          ls -l /opt/coveralls
-
       - name: push coveralls
         run: |
-          composer global require php-coveralls/php-coveralls
+          docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
+          ls -l /opt/coveralls
+          composer global require php-coveralls/php-coveralls:~1.0@stable
           ~/.composer/vendor/bin/php-coveralls --coverage_clover=/opt/coveralls/clover.xml -v
 
       #- name: push coveralls
