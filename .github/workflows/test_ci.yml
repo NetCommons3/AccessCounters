@@ -76,7 +76,11 @@ jobs:
       - name: phpunit (PHP UnitTest)
         run: |
           docker-compose exec -T nc3app bash /opt/scripts/phpunit.sh
-          docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
+          docker-compose exec -T nc3app ls -al ${NC3_BUILD_DIR}/build/logs/
+
+      - run: |
+          docker-compose exec -T nc3app cp -pf ${NC3_BUILD_DIR}/build/logs/* /opt/coveralls/
+          #docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
           ls -l /opt/coveralls
 
       - name: push coveralls
