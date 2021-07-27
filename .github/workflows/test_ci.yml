@@ -86,9 +86,7 @@ jobs:
       - name: push coveralls
         run: |
           composer global require php-coveralls/php-coveralls
-          ls -al ~/
-          ls -al ~/.composer/vendor/bin/
-          ls -al ~/.config/composer/vendor/bin/
+          ~/.composer/vendor/bin/php-coveralls --coverage_clover=/opt/coveralls/clover.xml -v
 
       #- name: push coveralls
       #  uses: coverallsapp/github-action@master
