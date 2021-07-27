@@ -84,6 +84,6 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           flag-name: ${{ matrix.php }}
-          path-to-lcov: /opt/coveralls/coverage.cov
+          path-to-lcov: /opt/coveralls/clover.cov
 
       - run: docker-compose rm -f
