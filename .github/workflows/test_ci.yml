@@ -84,10 +84,17 @@ jobs:
           ls -l /opt/coveralls
 
       - name: push coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GH_TOKEN }}
-          flag-name: ${{ matrix.php }}
-          path-to-lcov: /opt/coveralls/clover.cov
+        run: |
+          composer global require php-coveralls/php-coveralls
+          ls -al ~/
+          ls -al ~/.composer/vendor/bin/
+          ls -al ~/.config/composer/vendor/bin/
+
+      #- name: push coveralls
+      #  uses: coverallsapp/github-action@master
+      #  with:
+      #    github-token: ${{ secrets.GH_TOKEN }}
+      #    flag-name: ${{ matrix.php }}
+      #    path-to-lcov: /opt/coveralls/clover.cov
 
       - run: docker-compose rm -f
