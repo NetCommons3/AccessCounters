@@ -12,6 +12,7 @@ jobs:
 
     env:
         NC3_BUILD_DIR: "/opt/nc3"
+        NC3_DOCKER_DIR: "/opt/docker"
         NC3_GIT_URL: "git://github.com/s-nakajima/NetCommons3"
         NC3_GIT_BRANCH: "master"
         PLUGIN_BUILD_DIR: ${{ github.workspace }}
@@ -38,44 +39,58 @@ jobs:
           sudo mv ~/docker-compose /usr/local/bin/docker-compose
           docker-compose --version
 
-      - name: wget docker-compose.yml
-        uses: wei/wget@v1
-        with:
-          args: https://raw.githubusercontent.com/NetCommons3/nc3app-docker/main/docker-compose.yml
-
       - name: git clone nc3
         run: git clone -b ${NC3_GIT_BRANCH} ${NC3_GIT_URL} ${NC3_BUILD_DIR}
 
+      - name: git clone nc3_docker
+        run: git clone -b https://github.com/NetCommons3/nc3app-docker.git ${NC3_DOCKER_DIR}
+
       - name: docker-compose start
         run: |
+          cd ${NC3_DOCKER_DIR}
           docker-compose up -d
           docker-compose start
 
       - run: docker ps
 
       - name: check libraries
-        run: docker-compose exec -T nc3app bash /opt/scripts/start-on-docker.sh
+        run: |
+          cd ${NC3_DOCKER_DIR}
+          docker-compose exec -T nc3app bash /opt/scripts/start-on-docker.sh
 
       - name: nc3 build
-        run: docker-compose exec -T nc3app bash /opt/scripts/app-build.sh
+        run: |
+          cd ${NC3_DOCKER_DIR}
+          docker-compose exec -T nc3app bash /opt/scripts/app-build.sh
 
       - name: phpcs (PHP CodeSniffer)
-        run: docker-compose exec -T nc3app bash /opt/scripts/phpcs.sh
+        run: |
+          cd ${NC3_DOCKER_DIR}
+          docker-compose exec -T nc3app bash /opt/scripts/phpcs.sh
 
       - name: phpmd (PHP Mess Detector)
-        run: docker-compose exec -T nc3app bash /opt/scripts/phpmd.sh
+        run: |
+          cd ${NC3_DOCKER_DIR}
+          docker-compose exec -T nc3app bash /opt/scripts/phpmd.sh
 
       - name: phpcpd (PHP Copy/Paste Detector)
-        run: docker-compose exec -T nc3app bash /opt/scripts/phpcpd.sh
+        run: |
+          cd ${NC3_DOCKER_DIR}
+          docker-compose exec -T nc3app bash /opt/scripts/phpcpd.sh
 
       - name: gjslint (JavaScript Style Check)
-        run: docker-compose exec -T nc3app bash /opt/scripts/gjslint.sh
+        run: |
+          cd ${NC3_DOCKER_DIR}
+          docker-compose exec -T nc3app bash /opt/scripts/gjslint.sh
 
       - name: phpdoc (PHP Documentor)
-        run: docker-compose exec -T nc3app bash /opt/scripts/phpdoc.sh
+        run: |
+          cd ${NC3_DOCKER_DIR}
+          docker-compose exec -T nc3app bash /opt/scripts/phpdoc.sh
 
       - name: phpunit (PHP UnitTest)
         run: |
+          cd ${NC3_DOCKER_DIR}
           docker-compose exec -T nc3app bash /opt/scripts/phpunit.sh
           sudo -s chmod a+w -R ${NC3_BUILD_DIR}/build
 
