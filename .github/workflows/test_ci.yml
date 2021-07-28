@@ -43,7 +43,7 @@ jobs:
         run: git clone -b ${NC3_GIT_BRANCH} ${NC3_GIT_URL} ${NC3_BUILD_DIR}
 
       - name: git clone nc3_docker
-        run: git clone -b https://github.com/NetCommons3/nc3app-docker.git ${NC3_DOCKER_DIR}
+        run: git clone https://github.com/NetCommons3/nc3app-docker.git ${NC3_DOCKER_DIR}
 
       - name: docker-compose start
         run: |
