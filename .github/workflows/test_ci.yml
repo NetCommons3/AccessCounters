@@ -95,7 +95,7 @@ jobs:
           sudo -s chmod a+w -R ${NC3_BUILD_DIR}/build
           ls -la ${NC3_BUILD_DIR}
           #composer global require php-coveralls/php-coveralls:~1.0@stable
-          php vendors/bin/coveralls --root_dir . -vvv || exit $?
+          vendors/bin/coveralls --root_dir . -vvv || exit $?
 
       #- name: push coveralls
       #  uses: coverallsapp/github-action@master
