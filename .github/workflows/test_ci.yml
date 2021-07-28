@@ -77,8 +77,11 @@ jobs:
       - name: phpunit (PHP UnitTest)
         run: |
           docker-compose exec -T nc3app bash /opt/scripts/phpunit.sh
+          sudo -s chmod a+w -R ${NC3_BUILD_DIR}/build
 
       - run: cat ${NC3_BUILD_DIR}/phpunit.xml.dist
+
+      - run: cat ${NC3_BUILD_DIR}/build/logs/clover.xml
 
       - name: push coveralls
         env:
@@ -86,7 +89,6 @@ jobs:
           COVERALLS_FLAG_NAME: ${{ matrix.php }}
         run: |
           cd ${NC3_BUILD_DIR}
-          sudo -s chmod a+w -R ${NC3_BUILD_DIR}/build
           ls -la ${NC3_BUILD_DIR}
           vendors/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
 
