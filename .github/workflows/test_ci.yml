@@ -92,7 +92,7 @@ jobs:
           #docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
           #docker-compose exec -T nc3app cp -Rpf ${NC3_BUILD_DIR}/build /opt/coveralls/
           #docker-compose exec -T nc3app cp -pf ${NC3_BUILD_DIR}/.coveralls.yml /opt/coveralls/
-          chmod a+w -R ${NC3_BUILD_DIR}/build
+          sudo -s chmod a+w -R ${NC3_BUILD_DIR}/build
           ls -la ${NC3_BUILD_DIR}
           #composer global require php-coveralls/php-coveralls:~1.0@stable
           php vendors/bin/coveralls --root_dir . -vvv || exit $?
