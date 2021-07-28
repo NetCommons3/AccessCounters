@@ -30,7 +30,6 @@ jobs:
           echo "PHP_VERSION=${PHP_VERSION}"
           ls -al ${PLUGIN_BUILD_DIR}
           mkdir -p /opt/coveralls
-          #mkdir -p ${NC3_BUILD_DIR}
 
       - name: docker-compose install
         run: |
@@ -78,32 +77,17 @@ jobs:
       - name: phpunit (PHP UnitTest)
         run: |
           docker-compose exec -T nc3app bash /opt/scripts/phpunit.sh
-          #docker-compose exec -T nc3app ls -al ${NC3_BUILD_DIR}/build/logs/
+
+      - run: cat ${NC3_BUILD_DIR}/phpunit.xml.dist
 
       - name: push coveralls
         env:
-          #COVERALLS_RUN_LOCALLY: 1
-          #COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: ${{ matrix.php }}
         run: |
           cd ${NC3_BUILD_DIR}
-          #docker-compose exec -T nc3app \
-          #  "cd ${NC3_BUILD_DIR} && php vendors/bin/coveralls --root_dir . -vvv"
-          #docker-compose exec -T nc3app bash /opt/scripts/coveralls.sh
-          #docker-compose exec -T nc3app cp -Rpf ${NC3_BUILD_DIR}/build /opt/coveralls/
-          #docker-compose exec -T nc3app cp -pf ${NC3_BUILD_DIR}/.coveralls.yml /opt/coveralls/
           sudo -s chmod a+w -R ${NC3_BUILD_DIR}/build
           ls -la ${NC3_BUILD_DIR}
-          #composer global require php-coveralls/php-coveralls:~1.0@stable
-          #vendors/bin/coveralls --root_dir . -vvv || exit $?
           vendors/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
-
-      #- name: push coveralls
-      #  uses: coverallsapp/github-action@master
-      #  with:
-      #    github-token: ${{ secrets.GH_TOKEN }}
-      #    flag-name: ${{ matrix.php }}
-      #    path-to-lcov: /opt/coveralls/clover.cov
 
       - run: docker-compose rm -f
