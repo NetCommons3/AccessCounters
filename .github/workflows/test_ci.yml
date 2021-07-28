@@ -1,4 +1,14 @@
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - main
+      - master
+      - availability
+  pull_request:
+    branches:
+      - main
+      - master
+      - availability
 
 name: tests
 
@@ -19,7 +29,6 @@ jobs:
         PHP_VERSION: ${{ matrix.php }}
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: cakephp_test
-        COMPOSE_INTERACTIVE_NO_CLI: 1
 
     steps:
       - uses: actions/checkout@v2
@@ -93,10 +102,6 @@ jobs:
           cd ${NC3_DOCKER_DIR}
           docker-compose exec -T nc3app bash /opt/scripts/phpunit.sh
           sudo -s chmod a+w -R ${NC3_BUILD_DIR}/build
-
-      - run: cat ${NC3_BUILD_DIR}/phpunit.xml.dist
-
-      - run: cat ${NC3_BUILD_DIR}/build/logs/clover.xml
 
       - name: push coveralls
         env:
