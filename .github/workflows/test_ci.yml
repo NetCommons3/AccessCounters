@@ -107,4 +107,7 @@ jobs:
           ls -la ${NC3_BUILD_DIR}
           vendors/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
 
-      - run: docker-compose rm -f
+      - name: docker-compose remove
+        run: |
+          cd ${NC3_DOCKER_DIR}
+          docker-compose rm -f
