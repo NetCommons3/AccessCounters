@@ -82,10 +82,10 @@ jobs:
 
       - name: push coveralls
         env:
-          COVERALLS_RUN_LOCALLY: 1
+          #COVERALLS_RUN_LOCALLY: 1
           #COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COVERALLS_FLAG_NAME: ${PHP_VERSION}
+          COVERALLS_FLAG_NAME: ${{ matrix.php }}
         run: |
           cd ${NC3_BUILD_DIR}
           #docker-compose exec -T nc3app \
