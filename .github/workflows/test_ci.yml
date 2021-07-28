@@ -20,7 +20,6 @@ jobs:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: cakephp_test
         COMPOSE_INTERACTIVE_NO_CLI: 1
-        XDEBUG_MODE: coverage
 
     steps:
       - uses: actions/checkout@v2
