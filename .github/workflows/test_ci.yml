@@ -12,7 +12,7 @@ jobs:
 
     env:
         NC3_BUILD_DIR: "/opt/nc3"
-        NC3_GIT_URL: "git://github.com/NetCommons3/NetCommons3"
+        NC3_GIT_URL: "git://github.com/s-nakajima/NetCommons3"
         NC3_GIT_BRANCH: "master"
         PLUGIN_BUILD_DIR: ${{ github.workspace }}
         PHP_VERSION: ${{ matrix.php }}
@@ -34,7 +34,7 @@ jobs:
           echo "COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN}"
           ls -al ${PLUGIN_BUILD_DIR}
           mkdir -p /opt/coveralls
-          mkdir -p ${NC3_BUILD_DIR}
+          #mkdir -p ${NC3_BUILD_DIR}
 
       - name: docker-compose install
         run: |
@@ -48,8 +48,8 @@ jobs:
         with:
           args: https://raw.githubusercontent.com/NetCommons3/nc3app-docker/main/docker-compose.yml
 
-      #- name: git clone nc3
-      #  run: git clone -b ${NC3_GIT_BRANCH} ${NC3_GIT_URL} ${NC3_BUILD_DIR}
+      - name: git clone nc3
+        run: git clone -b ${NC3_GIT_BRANCH} ${NC3_GIT_URL} ${NC3_BUILD_DIR}
 
       - name: docker-compose start
         run: |
@@ -95,7 +95,8 @@ jobs:
           sudo -s chmod a+w -R ${NC3_BUILD_DIR}/build
           ls -la ${NC3_BUILD_DIR}
           #composer global require php-coveralls/php-coveralls:~1.0@stable
-          vendors/bin/coveralls --root_dir . -vvv || exit $?
+          #vendors/bin/coveralls --root_dir . -vvv || exit $?
+          vendors/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
 
       #- name: push coveralls
       #  uses: coverallsapp/github-action@master
