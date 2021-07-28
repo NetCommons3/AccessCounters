@@ -4,7 +4,7 @@
         <ini name="memory_limit" value="-1"/>
     </php>
     <php>
-        <ini name="xdebug.mode" value="coverage"/>
+        <ini name="error_reporting" value="0"/>
     </php>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
