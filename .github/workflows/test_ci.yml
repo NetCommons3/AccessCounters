@@ -19,7 +19,9 @@ jobs:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: cakephp_test
         COMPOSE_INTERACTIVE_NO_CLI: 1
-        COVERALLS_REPO_TOKEN: ${{ secrets.GH_TOKEN }}
+        COVERALLS_RUN_LOCALLY: 1
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+        COVERALLS_FLAG_NAME: ${{ matrix.php }}
 
     steps:
       - uses: actions/checkout@v2
@@ -32,6 +34,7 @@ jobs:
           echo "COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN}"
           ls -al ${PLUGIN_BUILD_DIR}
           mkdir -p /opt/coveralls
+          mkdir -p ${NC3_BUILD_DIR}
 
       - name: docker-compose install
         run: |
@@ -45,8 +48,8 @@ jobs:
         with:
           args: https://raw.githubusercontent.com/NetCommons3/nc3app-docker/main/docker-compose.yml
 
-      - name: git clone nc3
-        run: git clone -b ${NC3_GIT_BRANCH} ${NC3_GIT_URL} ${NC3_BUILD_DIR}
+      #- name: git clone nc3
+      #  run: git clone -b ${NC3_GIT_BRANCH} ${NC3_GIT_URL} ${NC3_BUILD_DIR}
 
       - name: docker-compose start
         run: |
