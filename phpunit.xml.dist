@@ -3,6 +3,9 @@
     <php>
         <ini name="memory_limit" value="-1"/>
     </php>
+    <php>
+        <ini name="xdebug.mode" value="coverage"/>
+    </php>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".ctp">app/Plugin/AccessCounters</directory>
