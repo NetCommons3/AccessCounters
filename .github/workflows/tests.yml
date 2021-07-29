@@ -124,7 +124,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_CHANNEL: notify-netcommons3
-          SLACK_TITLE: "${{ github.repository }}(${{ matrix.php }}) Test Success"
+          SLACK_TITLE: "${{ github.repository }}(${{ matrix.php }})"
           SLACK_COLOR: good
 
       # テスト失敗時はこちらのステップが実行される
@@ -134,5 +134,5 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_CHANNEL: notify-netcommons3
-          SLACK_TITLE: "${{ github.repository }}(${{ matrix.php }}) Test Failure"
+          SLACK_TITLE: "${{ github.repository }}(${{ matrix.php }})"
           SLACK_COLOR: danger
