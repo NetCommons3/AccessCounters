@@ -18,12 +18,12 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        php: [ '7.1', '7.2' ]
+        php: [ '7.1', '7.2', '7.3', '7.4' ]
 
     env:
         NC3_BUILD_DIR: "/opt/nc3"
         NC3_DOCKER_DIR: "/opt/docker"
-        NC3_GIT_URL: "git://github.com/s-nakajima/NetCommons3"
+        NC3_GIT_URL: "git://github.com/NetCommons3/NetCommons3.git"
         NC3_GIT_BRANCH: "master"
         PLUGIN_BUILD_DIR: ${{ github.workspace }}
         PHP_VERSION: ${{ matrix.php }}
