@@ -116,3 +116,23 @@ jobs:
         run: |
           cd ${NC3_DOCKER_DIR}
           docker-compose rm -f
+
+      # テスト成功時はこちらのステップが実行される
+      - name: Slack Notification on Success
+        if: success()
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: notify-netcommons3
+          SLACK_TITLE: "${GITHUB_REPOSITORY} Test Success"
+          SLACK_COLOR: good
+
+      # テスト失敗時はこちらのステップが実行される
+      - name: Slack Notification on Failure
+        uses: rtCamp/action-slack-notify@v2.2.0
+        if: failure()
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: notify-netcommons3
+          SLACK_TITLE: "${GITHUB_REPOSITORY} Test Failure"
+          SLACK_COLOR: danger
