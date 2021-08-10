@@ -13,8 +13,20 @@ on:
 name: tests
 
 jobs:
+  setup:
+    name: setup
+    steps:
+      - name: Slack Notification on Start
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TESTS }}
+          SLACK_CHANNEL: notify-nc3-tests
+          SLACK_TITLE: "${{ github.repository }}"
+          SLACK_COLOR: "#f0ad4e"
+
   tests:
     name: tests
+    needs: setup
     runs-on: ubuntu-18.04
     strategy:
       matrix:
@@ -127,16 +139,6 @@ jobs:
           cd ${NC3_DOCKER_DIR}
           docker-compose rm -f
 
-      # テスト成功時はこちらのステップが実行される
-      - name: Slack Notification on Success
-        if: success()
-        uses: rtCamp/action-slack-notify@v2.2.0
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TESTS }}
-          SLACK_CHANNEL: notify-nc3-tests
-          SLACK_TITLE: "${{ github.repository }}(php${{ matrix.php }}, mysql${{ matrix.mysql }})"
-          SLACK_COLOR: good
-
       # テスト失敗時はこちらのステップが実行される
       - name: Slack Notification on Failure
         uses: rtCamp/action-slack-notify@v2.2.0
@@ -146,3 +148,17 @@ jobs:
           SLACK_CHANNEL: notify-nc3-tests
           SLACK_TITLE: "${{ github.repository }}(php${{ matrix.php }}, mysql${{ matrix.mysql }})"
           SLACK_COLOR: danger
+
+  teardown:
+    name: teardown
+    needs: tests
+    steps:
+      # テスト成功時はこちらのステップが実行される
+      - name: Slack Notification on Success
+        if: success()
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TESTS }}
+          SLACK_CHANNEL: notify-nc3-tests
+          SLACK_TITLE: "${{ github.repository }}"
+          SLACK_COLOR: good
