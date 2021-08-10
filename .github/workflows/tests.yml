@@ -33,6 +33,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Slack Notification on Start
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TESTS }}
+          SLACK_CHANNEL: notify-nc3-tests
+          SLACK_TITLE: "${{ github.repository }}(${{ matrix.php }})"
+          SLACK_COLOR: "#f0ad4e"
+
       - name: environment
         run: |
           echo "GITHUB_WORKSPACE=${GITHUB_WORKSPACE}"
