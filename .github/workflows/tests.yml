@@ -15,6 +15,7 @@ name: tests
 jobs:
   setup:
     name: setup
+    runs-on: ubuntu-18.04
     steps:
       - name: Slack Notification on Start
         uses: rtCamp/action-slack-notify@v2.2.0
@@ -151,6 +152,7 @@ jobs:
 
   teardown:
     name: teardown
+    runs-on: ubuntu-18.04
     needs: tests
     steps:
       # テスト成功時はこちらのステップが実行される
