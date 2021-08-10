@@ -20,7 +20,7 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_RELEASE }}
           SLACK_CHANNEL: notify-nc3-release
           SLACK_TITLE: "${{ github.repository }}"
-          SLACK_COLOR: "#f58220"
+          SLACK_COLOR: "#f0ad4e"
 
       - name: Create Release
         id: create_release
