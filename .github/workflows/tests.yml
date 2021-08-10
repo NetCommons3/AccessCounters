@@ -14,7 +14,7 @@ name: tests
 
 jobs:
   tests:
-    name: tests
+    name: Tests
     runs-on: ubuntu-18.04
     strategy:
       matrix:
@@ -121,8 +121,8 @@ jobs:
         if: success()
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_CHANNEL: notify-netcommons3
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TESTS }}
+          SLACK_CHANNEL: notify-nc3-tests
           SLACK_TITLE: "${{ github.repository }}(${{ matrix.php }})"
           SLACK_COLOR: good
 
@@ -131,7 +131,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2.2.0
         if: failure()
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_CHANNEL: notify-netcommons3
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TESTS }}
+          SLACK_CHANNEL: notify-nc3-tests
           SLACK_TITLE: "${{ github.repository }}(${{ matrix.php }})"
           SLACK_COLOR: danger

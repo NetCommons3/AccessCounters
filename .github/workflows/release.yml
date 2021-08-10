@@ -4,7 +4,7 @@ on:
     tags:
       - '3*'
 
-name: Create Release
+name: create_release
 
 jobs:
   build:
@@ -13,6 +13,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Slack Notification on Start
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_RELEASE }}
+          SLACK_CHANNEL: notify-nc3-release
+          SLACK_TITLE: "${{ github.repository }}"
+          SLACK_COLOR: #f0ad4e
 
       - name: Create Release
         id: create_release
@@ -26,3 +34,11 @@ jobs:
             NetCommons ${{ github.ref }} released.
           draft: false
           prerelease: false
+
+      - name: Slack Notification on Finish
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_RELEASE }}
+          SLACK_CHANNEL: notify-nc3-release
+          SLACK_TITLE: "${{ github.repository }}"
+          SLACK_COLOR: good
