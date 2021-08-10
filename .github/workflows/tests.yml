@@ -14,7 +14,7 @@ name: tests
 
 jobs:
   tests:
-    name: Tests
+    name: tests
     runs-on: ubuntu-18.04
     strategy:
       matrix:
