@@ -8,7 +8,7 @@ name: create_release
 
 jobs:
   build:
-    name: Create Release
+    name: create_release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,7 +20,7 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_RELEASE }}
           SLACK_CHANNEL: notify-nc3-release
           SLACK_TITLE: "${{ github.repository }}"
-          SLACK_COLOR: #f0ad4e
+          SLACK_COLOR: "#f58220"
 
       - name: Create Release
         id: create_release
